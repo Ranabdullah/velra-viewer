@@ -10,40 +10,41 @@
   
   <style>
     
+    
     :root {
-      --bg-abstract: url('/backgrounds/bg_abstract_luxury.jpg');
+      --bg-dynamic: url('/backgrounds/bg_dynamic_glass.jpg');
       --bg-bokeh: url('/backgrounds/bg_gold_bokeh.jpg');
       --bg-marble: url('/backgrounds/bg_marble_veining.jpg');
       --bg-gradient: url('/backgrounds/bg_soft_gradient.jpg');
       
-      /* Pure Optical Glassmorphism - Dark Luxury & Luminous Gold */
-      --glass-bg: rgba(255, 255, 255, 0.07);
-      --glass-bg-card: rgba(24, 20, 32, 0.58);
-      --glass-bg-hover: rgba(38, 32, 50, 0.72);
-      --glass-bg-subtle: rgba(255, 255, 255, 0.05);
-      --glass-bg-solid: rgba(20, 17, 28, 0.88);
-      --glass-bg-floating: rgba(18, 15, 26, 0.75);
+      /* Pure Optical Dynamic Glassmorphism - Bright Iridescent & Frosted Crystal */
+      --glass-bg: rgba(255, 255, 255, 0.38);
+      --glass-bg-card: rgba(255, 255, 255, 0.48);
+      --glass-bg-hover: rgba(255, 255, 255, 0.68);
+      --glass-bg-subtle: rgba(255, 255, 255, 0.25);
+      --glass-bg-solid: rgba(255, 255, 255, 0.82);
+      --glass-bg-floating: rgba(255, 255, 255, 0.55);
       
-      --glass-border: rgba(255, 255, 255, 0.16);
-      --glass-border-top: rgba(255, 255, 255, 0.35);
-      --glass-border-gold: rgba(212, 175, 55, 0.45);
-      --glass-border-hover: rgba(245, 208, 120, 0.75);
+      --glass-border: rgba(255, 255, 255, 0.85);
+      --glass-border-top: rgba(255, 255, 255, 0.98);
+      --glass-border-gold: rgba(212, 175, 55, 0.6);
+      --glass-border-hover: rgba(212, 175, 55, 0.95);
       
-      --glass-shine: inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.35), inset 0 -1px 2px 0 rgba(0, 0, 0, 0.3);
-      --glass-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.65), 0 10px 25px -5px rgba(0, 0, 0, 0.4);
-      --glass-shadow-hover: 0 30px 60px -8px rgba(0, 0, 0, 0.75), 0 0 30px rgba(212, 175, 55, 0.22), inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.45);
-      --glass-blur: blur(24px) saturate(180%);
+      --glass-shine: inset 0 2px 3px 0 rgba(255, 255, 255, 0.98), inset 0 -1.5px 2px 0 rgba(147, 197, 253, 0.3);
+      --glass-shadow: 0 20px 50px -10px rgba(99, 102, 241, 0.14), 0 8px 25px -4px rgba(0, 0, 0, 0.05);
+      --glass-shadow-hover: 0 30px 65px -8px rgba(99, 102, 241, 0.25), 0 0 30px rgba(212, 175, 55, 0.3), inset 0 2px 3px 0 rgba(255, 255, 255, 1);
+      --glass-blur: blur(28px) saturate(200%);
       
-      --gold-primary: #d4af37;
-      --gold-dark: #b8860b;
-      --gold-light: #fbe69e;
+      --gold-primary: #b8860b;
+      --gold-dark: #784c00;
+      --gold-light: #fef08a;
       --gold-soft: rgba(212, 175, 55, 0.18);
-      --gold-border: rgba(212, 175, 55, 0.4);
+      --gold-border: rgba(184, 134, 11, 0.5);
       
-      --text-main: #f8fafc;
-      --text-muted: #cbd5e1;
-      --text-dim: #94a3b8;
-      --border-subtle: rgba(255, 255, 255, 0.14);
+      --text-main: #0c1024;
+      --text-muted: #334155;
+      --text-dim: #64748b;
+      --border-subtle: rgba(255, 255, 255, 0.7);
       
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -53,8 +54,8 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      background-color: #0d0b12;
-      background-image: var(--bg-abstract);
+      background-color: #f1f3fa;
+      background-image: var(--bg-dynamic);
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center top;
@@ -68,31 +69,31 @@
       position: relative;
     }
 
-    /* Ambient Floating Refraction Orbs */
+    /* Dynamic Floating 3D Pastel & Gold Refraction Orbs */
     .glass-orb {
       position: fixed;
       border-radius: 50%;
-      filter: blur(100px);
+      filter: blur(75px);
       pointer-events: none;
       z-index: 0;
-      opacity: 0.55;
+      opacity: 0.65;
       animation: floatOrb 22s ease-in-out infinite alternate;
     }
-    .orb-1 { width: 650px; height: 650px; top: -120px; left: -100px; background: radial-gradient(circle, rgba(245, 175, 45, 0.45) 0%, rgba(212, 160, 23, 0.15) 70%, transparent 100%); }
-    .orb-2 { width: 750px; height: 750px; top: 25%; right: -180px; background: radial-gradient(circle, rgba(217, 119, 6, 0.35) 0%, rgba(180, 83, 9, 0.15) 60%, transparent 100%); animation-delay: -6s; }
-    .orb-3 { width: 600px; height: 600px; bottom: 15%; left: 5%; background: radial-gradient(circle, rgba(234, 179, 8, 0.3) 0%, rgba(161, 98, 7, 0.15) 65%, transparent 100%); animation-delay: -12s; }
-    .orb-4 { width: 550px; height: 550px; bottom: -80px; right: 15%; background: radial-gradient(circle, rgba(245, 158, 11, 0.35) 0%, rgba(120, 53, 15, 0.12) 70%, transparent 100%); animation-delay: -18s; }
+    .orb-1 { width: 650px; height: 650px; top: -100px; left: -100px; background: radial-gradient(circle, rgba(236, 72, 153, 0.35) 0%, rgba(168, 85, 247, 0.2) 60%, transparent 100%); }
+    .orb-2 { width: 750px; height: 750px; top: 25%; right: -180px; background: radial-gradient(circle, rgba(99, 102, 241, 0.3) 0%, rgba(212, 175, 55, 0.25) 60%, transparent 100%); animation-delay: -6s; }
+    .orb-3 { width: 600px; height: 600px; bottom: 15%; left: 5%; background: radial-gradient(circle, rgba(56, 189, 248, 0.32) 0%, rgba(236, 72, 153, 0.18) 65%, transparent 100%); animation-delay: -12s; }
+    .orb-4 { width: 550px; height: 550px; bottom: -80px; right: 15%; background: radial-gradient(circle, rgba(251, 191, 36, 0.38) 0%, rgba(245, 158, 11, 0.2) 70%, transparent 100%); animation-delay: -18s; }
 
     @keyframes floatOrb {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(50px, 35px) scale(1.1); }
-      100% { transform: translate(-40px, 60px) scale(0.92); }
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      50% { transform: translate(45px, 30px) scale(1.08) rotate(5deg); }
+      100% { transform: translate(-35px, 50px) scale(0.94) rotate(-5deg); }
     }
 
     /* Scrollbar */
     ::-webkit-scrollbar { width: 9px; height: 9px; }
-    ::-webkit-scrollbar-track { background: rgba(15, 12, 22, 0.7); backdrop-filter: blur(12px); }
-    ::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.45); border-radius: 6px; border: 2px solid rgba(25, 20, 35, 0.8); }
+    ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(12px); }
+    ::-webkit-scrollbar-thumb { background: rgba(184, 134, 11, 0.5); border-radius: 6px; border: 2px solid rgba(255, 255, 255, 0.8); }
     ::-webkit-scrollbar-thumb:hover { background: var(--gold-primary); }
 
     /* Glassmorphic Navigation Header */
@@ -101,8 +102,8 @@
       background: var(--glass-bg-floating);
       backdrop-filter: var(--glass-blur);
       -webkit-backdrop-filter: var(--glass-blur);
-      border-bottom: 1px solid var(--glass-border);
-      box-shadow: var(--glass-shine), 0 15px 40px rgba(0, 0, 0, 0.5);
+      border-bottom: 1.5px solid var(--glass-border);
+      box-shadow: var(--glass-shine), 0 12px 35px rgba(99, 102, 241, 0.08);
       z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 14px 36px;
@@ -114,21 +115,21 @@
       font-size: 26px;
       font-weight: 700;
       letter-spacing: 0.14em;
-      color: #ffffff;
+      color: var(--gold-dark);
       text-transform: uppercase;
       text-decoration: none;
-      text-shadow: 0 0 20px rgba(212, 175, 55, 0.45);
+      text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
     }
-    .brand-logo-text span { color: var(--gold-light); }
+    .brand-logo-text span { color: var(--gold-primary); }
     .handover-badge {
       font-family: var(--font-mono);
       font-size: 10.5px;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--gold-light);
-      background: rgba(212, 175, 55, 0.14);
-      border: 1px solid var(--glass-border-gold);
+      color: var(--gold-dark);
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--glass-border);
       box-shadow: var(--glass-shine);
       padding: 4px 12px;
       border-radius: 20px;
@@ -136,31 +137,30 @@
 
     .nav-menu { display: flex; align-items: center; gap: 14px; list-style: none; }
     .nav-link {
-      color: #e2e8f0;
+      color: #1e293b;
       text-decoration: none;
       font-size: 13px;
       font-weight: 600;
       transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       padding: 6px 14px;
       border-radius: 20px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.6);
     }
     .nav-link:hover {
-      color: #ffffff;
-      background: rgba(212, 175, 55, 0.18);
+      color: var(--gold-dark);
+      background: rgba(255, 255, 255, 0.85);
       border-color: var(--glass-border-gold);
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.25), var(--glass-shine);
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2), var(--glass-shine);
       transform: translateY(-1px);
     }
 
     .nav-actions { display: flex; align-items: center; gap: 12px; }
     .btn-pdf {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid var(--glass-border);
-      border-top: 1px solid var(--glass-border-top);
+      background: rgba(255, 255, 255, 0.5);
+      border: 1.5px solid var(--glass-border);
       box-shadow: var(--glass-shine);
-      color: #ffffff;
+      color: #0f172a;
       font-family: var(--font-sans);
       font-size: 12.5px;
       font-weight: 600;
@@ -171,17 +171,17 @@
       display: flex; align-items: center; gap: 6px;
     }
     .btn-pdf:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(255, 255, 255, 1);
       box-shadow: var(--glass-shadow-hover);
       transform: translateY(-1px);
     }
 
     .btn-sign {
       background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6);
-      color: #0b0912;
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35), var(--glass-shine);
+      color: #0c1024;
       font-family: var(--font-sans);
       font-size: 12.5px;
       font-weight: 700;
@@ -192,34 +192,13 @@
       display: flex; align-items: center; gap: 6px;
     }
     .btn-sign:hover {
-      background: linear-gradient(135deg, #fbe69e 0%, #d4af37 100%);
-      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+      background: linear-gradient(135deg, #f59e0b 0%, #d4af37 100%);
+      box-shadow: 0 6px 22px rgba(212, 175, 55, 0.5), var(--glass-shine);
       transform: translateY(-1px);
     }
 
     .container { max-width: 1400px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
-    .section-wrap { padding: 80px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); position: relative; }
-    
-    /* Section specific background texture layers */
-    .section-wrap::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: -1;
-      opacity: 0.85;
-      background-size: cover;
-      background-position: center;
-    }
-    #section-overview::before { background-image: var(--bg-abstract); }
-    #section-3d-twin::before { background-image: var(--bg-bokeh); opacity: 0.75; }
-    #section-cad-plan::before { background-image: var(--bg-abstract); opacity: 0.8; }
-    #section-features::before { background-image: var(--bg-abstract); }
-    #section-lighting-showcase::before { background-image: var(--bg-bokeh); opacity: 0.85; }
-    #section-materials::before { background-image: var(--bg-marble); opacity: 0.45; }
-    #section-schedules::before { background-image: var(--bg-gradient); opacity: 0.65; }
-    #section-renders::before { background-image: var(--bg-abstract); }
-    #section-signoff::before { background-image: var(--bg-gradient); opacity: 0.75; }
+    .section-wrap { padding: 80px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.4); position: relative; }
 
     .section-header { margin-bottom: 40px; }
     .section-tag {
@@ -228,11 +207,12 @@
       font-weight: 700;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--gold-light);
+      color: var(--gold-dark);
       display: inline-block;
       margin-bottom: 8px;
-      background: rgba(212, 175, 55, 0.12);
+      background: rgba(255, 255, 255, 0.7);
       border: 1px solid var(--glass-border-gold);
+      box-shadow: var(--glass-shine);
       padding: 3px 12px;
       border-radius: 14px;
       backdrop-filter: blur(8px);
@@ -241,10 +221,10 @@
       font-family: var(--font-serif);
       font-size: 38px;
       font-weight: 700;
-      color: #ffffff;
+      color: #0c1024;
       letter-spacing: 0.02em;
       margin-bottom: 10px;
-      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
+      text-shadow: 0 1px 4px rgba(255, 255, 255, 0.8);
     }
     .section-desc {
       color: var(--text-muted);
@@ -253,14 +233,13 @@
       line-height: 1.65;
     }
 
-    /* Glassmorphism Cards & Panels */
-    .glass-card {
+    /* Glassmorphic Cards & Panels */
+    .glass-card, .feature-visual-card, .material-card, .gallery-card, .signoff-card {
       background: var(--glass-bg-card);
       backdrop-filter: var(--glass-blur);
       -webkit-backdrop-filter: var(--glass-blur);
-      border: 1px solid var(--glass-border);
-      border-top: 1px solid var(--glass-border-top);
-      border-left: 1px solid rgba(255, 255, 255, 0.22);
+      border: 1.5px solid var(--glass-border);
+      border-top: 2px solid var(--glass-border-top);
       box-shadow: var(--glass-shine), var(--glass-shadow);
       border-radius: 22px;
       padding: 28px;
@@ -268,6 +247,13 @@
       position: relative;
       overflow: hidden;
     }
+    .glass-card:hover, .feature-visual-card:hover, .material-card:hover, .gallery-card:hover {
+      background: var(--glass-bg-hover);
+      border-color: var(--glass-border-gold);
+      box-shadow: var(--glass-shadow-hover);
+      transform: translateY(-3px);
+    }
+
     .glass-card:hover {
       background: var(--glass-bg-hover);
       border-color: var(--glass-border-gold);
@@ -301,12 +287,12 @@
       font-family: var(--font-serif);
       font-size: 36px;
       font-weight: 700;
-      color: #ffffff;
+      color: #0c1024;
       letter-spacing: -0.01em;
       margin-bottom: 8px;
       text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
     }
-    .section-desc { color: #cbd5e1; font-size: 15px; max-width: 840px; font-weight: 500; }
+    .section-desc { color: #334155; font-size: 15px; max-width: 840px; font-weight: 500; }
 
     /* Hero Banner */
     .hero-banner {
@@ -334,7 +320,7 @@
       font-family: var(--font-serif);
       font-size: 50px;
       font-weight: 700;
-      color: #ffffff;
+      color: #0c1024;
       letter-spacing: 0.02em;
       line-height: 1.15;
       margin-bottom: 14px;
@@ -380,7 +366,7 @@
       color: var(--gold-dark);
       margin-bottom: 4px;
     }
-    .meta-value { font-size: 16px; font-weight: 700; color: #ffffff; }
+    .meta-value { font-size: 16px; font-weight: 700; color: #0c1024; }
     .meta-value.gold { color: var(--gold-dark); }
 
     /* Visual Photo Cut Badges & Tags */
@@ -406,7 +392,7 @@
       gap: 5px;
       background: rgba(9, 13, 22, 0.75);
       backdrop-filter: blur(12px);
-      color: #ffffff;
+      color: #0c1024;
       font-family: var(--font-mono);
       font-size: 11px;
       font-weight: 600;
@@ -415,9 +401,9 @@
       border: 1px solid rgba(255, 255, 255, 0.25);
       box-shadow: 0 4px 14px rgba(0,0,0,0.2);
     }
-    .dim-pill.gold {
+    .dim-pill.gold { background: rgba(254, 240, 138, 0.4); color: #784c00; border: 1px solid rgba(184, 134, 11, 0.5); font-weight: 700;
       background: linear-gradient(135deg, rgba(212, 175, 55, 0.9) 0%, rgba(184, 134, 11, 0.9) 100%);
-      color: #ffffff;
+      color: #0c1024;
       border: 1px solid rgba(255, 255, 255, 0.6);
       box-shadow: var(--glass-shine), 0 4px 14px rgba(184, 134, 11, 0.3);
     }
@@ -517,7 +503,7 @@
       transition: all 0.2s ease;
     }
     .btn-pill:hover { background: rgba(30, 41, 59, 0.95); border-color: #fef08a; color: #fef08a; }
-    .btn-pill.active { background: #b8860b; color: #ffffff; border-color: #fef08a; }
+    .btn-pill.active { background: #b8860b; color: #0c1024; border-color: #fef08a; }
 
     /* Live Object Spec Card in 3D Viewport */
     #info-panel {
@@ -534,7 +520,7 @@
     #info-panel.visible { display: block; }
     .info-title { font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #fef08a; margin-bottom: 4px; }
     .info-dims { font-family: var(--font-mono); font-size: 11px; color: #38bdf8; margin-bottom: 6px; font-weight: 600; }
-    .info-desc { font-size: 12.5px; color: #cbd5e1; line-height: 1.4; }
+    .info-desc { font-size: 12.5px; color: #334155; line-height: 1.4; }
 
     /* Camera Studio Panel */
     #camera-studio-panel {
@@ -620,7 +606,7 @@
       position: absolute;
       bottom: 12px; right: 12px;
       background: linear-gradient(135deg, rgba(212, 175, 55, 0.95) 0%, rgba(184, 134, 11, 0.95) 100%);
-      color: #ffffff;
+      color: #0c1024;
       font-family: var(--font-mono);
       font-size: 11px;
       font-weight: 700;
@@ -646,7 +632,7 @@
       font-family: var(--font-serif);
       font-size: 28px;
       font-weight: 700;
-      color: #ffffff;
+      color: #0c1024;
       margin-bottom: 16px;
       line-height: 1.25;
       text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
@@ -671,7 +657,7 @@
       font-size: 13.5px;
     }
     .dim-row:last-child { border-bottom: none; }
-    .dim-name { color: #cbd5e1; font-weight: 600; }
+    .dim-name { color: #334155; font-weight: 600; }
     .dim-val { font-family: var(--font-mono); font-weight: 700; color: var(--gold-dark); }
 
     /* Visual Cuts Spotlight Grid */
@@ -762,8 +748,8 @@
     .material-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
     .material-body { padding: 20px; }
     .material-code { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--gold-dark); margin-bottom: 4px; }
-    .material-name { font-family: var(--font-serif); font-size: 21px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
-    .material-desc { font-size: 13px; color: #cbd5e1; line-height: 1.5; }
+    .material-name { font-family: var(--font-serif); font-size: 21px; font-weight: 700; color: #0c1024; margin-bottom: 6px; }
+    .material-desc { font-size: 13px; color: #334155; line-height: 1.5; }
 
     /* Technical Schedules (Tabs & Table) */
     .schedule-tabs { display: flex; gap: 10px; margin-bottom: 22px; flex-wrap: wrap; }
@@ -778,7 +764,7 @@
       box-shadow: var(--glass-shine);
     }
     .tab-btn:hover { background: rgba(255, 255, 255, 0.75); color: var(--gold-dark); border-color: var(--gold-primary); transform: translateY(-1px); }
-    .tab-btn.active { background: linear-gradient(135deg, #d4af37, #b8860b); color: #ffffff; border-color: rgba(255,255,255,0.8); box-shadow: 0 4px 16px rgba(184, 134, 11, 0.35); }
+    .tab-btn.active { background: linear-gradient(135deg, #d4af37, #b8860b); color: #0c1024; border-color: rgba(255,255,255,0.8); box-shadow: 0 4px 16px rgba(184, 134, 11, 0.35); }
 
     .schedule-panel { display: none; }
     .schedule-panel.active { display: block; }
@@ -801,7 +787,7 @@
       letter-spacing: 0.08em; text-transform: uppercase;
       padding: 16px 20px; border-bottom: 1.5px solid var(--glass-border);
     }
-    .schedule-table td { padding: 16px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.5); color: #ffffff; }
+    .schedule-table td { padding: 16px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.5); color: #0c1024; }
     .schedule-table tr:hover td { background: rgba(255, 255, 255, 0.06); }
     .schedule-table tr:last-child td { border-bottom: none; }
 
@@ -833,8 +819,8 @@
     .gallery-card:hover .gallery-img-wrap img { transform: scale(1.04); }
     .gallery-info { padding: 20px; }
     .gallery-pass-code { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--gold-dark); margin-bottom: 4px; }
-    .gallery-title { font-family: var(--font-serif); font-size: 21px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
-    .gallery-desc { font-size: 13px; color: #cbd5e1; line-height: 1.45; }
+    .gallery-title { font-family: var(--font-serif); font-size: 21px; font-weight: 700; color: #0c1024; margin-bottom: 6px; }
+    .gallery-desc { font-size: 13px; color: #334155; line-height: 1.45; }
 
     /* Lightbox Modal */
     #lightbox-modal {
@@ -863,8 +849,8 @@
       background: rgba(255, 255, 255, 0.85);
       border-top: 1px solid var(--border-subtle);
     }
-    .lightbox-title-text { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: #ffffff; }
-    .lightbox-desc-text { font-size: 13px; color: #cbd5e1; }
+    .lightbox-title-text { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: #0c1024; }
+    .lightbox-desc-text { font-size: 13px; color: #334155; }
     .lightbox-close-btn {
       position: absolute; top: 16px; right: 16px;
       background: rgba(15, 23, 42, 0.85); color: #fff;
@@ -896,7 +882,7 @@
       padding: 38px;
     }
     .signoff-checklist { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
-    .signoff-item { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: #ffffff; }
+    .signoff-item { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: #0c1024; }
     .signoff-checkbox { margin-top: 3px; accent-color: var(--gold-primary); width: 18px; height: 18px; cursor: pointer; }
 
     .signoff-actions { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; border-top: 1.5px solid rgba(255, 255, 255, 0.5); padding-top: 24px; }
@@ -914,7 +900,7 @@
       backdrop-filter: var(--glass-blur);
       border-top: 1.5px solid var(--glass-border);
       padding: 56px 0 36px 0;
-      color: #cbd5e1;
+      color: #334155;
       font-size: 13px;
       position: relative;
       z-index: 1;
@@ -977,7 +963,7 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
         <span>Print PDF</span>
       </button>
-      <a href="#section-signoff" class="btn-sign">Verify & Sign</a>
+      <a href="#section-signoff" class="btn-sign" style="color: #ffffff !important;">Verify & Sign</a>
     </div>
   </header>
 
@@ -1029,8 +1015,8 @@
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
         <div class="meta-card" style="padding: 26px;">
           <div class="cut-badge">✦ THE RETAIL CONCEPT</div>
-          <div style="font-family: var(--font-serif); font-size: 23px; font-weight: 700; color: #ffffff; margin: 6px 0 10px 0;">White Calacatta Marble & Radiant Brushed Gold</div>
-          <p style="font-size: 13.5px; color: #cbd5e1; line-height: 1.6; margin-bottom: 14px;">
+          <div style="font-family: var(--font-serif); font-size: 23px; font-weight: 700; color: #0c1024; margin: 6px 0 10px 0;">White Calacatta Marble & Radiant Brushed Gold</div>
+          <p style="font-size: 13.5px; color: #334155; line-height: 1.6; margin-bottom: 14px;">
             The Vel Ra boutique blends seamless white Calacatta Gold marble flooring and countertop slabs with warm 3000K backlit gold fragrance shelving to highlight luxury perfume extracts with maximum clarity and elegance.
           </p>
           <div style="display: flex; flex-wrap: wrap; gap: 8px;">
@@ -1042,7 +1028,7 @@
 
         <div class="meta-card" style="padding: 26px;">
           <div class="cut-badge">✦ KEY ARCHITECTURAL DIMENSIONS</div>
-          <div style="font-family: var(--font-serif); font-size: 23px; font-weight: 700; color: #ffffff; margin: 6px 0 10px 0;">Verified Spatial Clearances (cm)</div>
+          <div style="font-family: var(--font-serif); font-size: 23px; font-weight: 700; color: #0c1024; margin: 6px 0 10px 0;">Verified Spatial Clearances (cm)</div>
           <div class="dim-breakdown-box" style="margin-bottom: 0;">
             <div class="dim-row">
               <span class="dim-name">Front Glazed Storefront Span:</span>
@@ -1136,9 +1122,9 @@
         <div id="camera-studio-panel">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
             <span style="font-family: var(--font-mono); font-weight: 700; color: #fef08a;">🎥 CAMERA DIRECTOR</span>
-            <button id="btn-close-studio" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 16px;">✕</button>
+            <button id="btn-close-studio" style="background: none; border: none; color: #64748b; cursor: pointer; font-size: 16px;">✕</button>
           </div>
-          <div id="cam-coords" style="font-family: var(--font-mono); font-size: 10px; color: #cbd5e1; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 8px; margin-bottom: 10px; line-height: 1.4;">
+          <div id="cam-coords" style="font-family: var(--font-mono); font-size: 10px; color: #334155; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 8px; margin-bottom: 10px; line-height: 1.4;">
             Pos: (0.00, 0.00, 0.00)<br>Target: (0.00, 0.00, 0.00)
           </div>
           <div style="display: flex; flex-direction: column; gap: 6px;">
@@ -1150,100 +1136,247 @@
           </div>
         </div>
 
-        <div id="hint" style="position: absolute; bottom: 20px; right: 20px; font-family: var(--font-mono); font-size: 11px; color: #cbd5e1; background: rgba(15,23,42,0.8); padding: 5px 12px; border-radius: 20px; pointer-events: none; backdrop-filter: blur(8px);">
+        <div id="hint" style="position: absolute; bottom: 20px; right: 20px; font-family: var(--font-mono); font-size: 11px; color: #334155; background: rgba(15,23,42,0.8); padding: 5px 12px; border-radius: 20px; pointer-events: none; backdrop-filter: blur(8px);">
           Left Click + Drag: Rotate • Right Click: Pan • Scroll: Zoom
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 03: CAD Floor Plan & Visual Zoning Plan -->
+  <!-- SECTION 03: CAD Floor Plan & Architectural Blueprint Showcase -->
   <section id="section-cad-plan" class="section-wrap">
     <div class="container">
       <div class="section-header">
-        <div class="section-number">Section 03</div>
-        <h2 class="section-heading">Architectural CAD Blueprint & Spatial Zoning</h2>
-        <p class="section-desc">Exact architectural dimensions in centimeters (cm), customer flow clearances, and joinery coordinates.</p>
+        <div class="section-tag">ARCHITECTURAL DRAWINGS & CAD BLUEPRINTS</div>
+        <h2 class="section-heading">Architectural CAD Blueprints & Technical Drawings</h2>
+        <p class="section-desc">Official architectural layout, elevations, cross-sections, and spatial clearance schedules in centimeters (cm) and millimeters (mm).</p>
       </div>
 
-      <div class="feature-visual-card" style="padding: 24px;">
-        <div style="overflow-x: auto; margin-bottom: 20px; border-radius: 16px; border: 1.5px solid var(--glass-border); box-shadow: var(--glass-shine);">
-          <svg id="cad-floorplan-svg" viewBox="0 0 1000 680" style="width: 100%; height: auto; min-width: 750px; display: block;">
-            <defs>
-              <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(184, 134, 11, 0.12)" stroke-width="0.8"/>
-              </pattern>
-              <marker id="arrow-cad" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
-                <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#b8860b" />
-              </marker>
-            </defs>
+      <!-- Blueprint View Switcher Tabs -->
+      <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 24px;">
+        <button class="blueprint-tab-btn active" data-view="master-sheet" style="padding: 10px 20px; border-radius: 20px; font-family: var(--font-sans); font-size: 13.5px; font-weight: 700; cursor: pointer; border: 1.5px solid var(--glass-border-gold); background: rgba(255, 255, 255, 0.85); color: #784c00; backdrop-filter: blur(12px); box-shadow: var(--glass-shine); transition: all 0.25s ease;">
+          Master Blueprint Sheet (Plan & Elevations)
+        </button>
+        <button class="blueprint-tab-btn" data-view="cad-plan" style="padding: 10px 20px; border-radius: 20px; font-family: var(--font-sans); font-size: 13.5px; font-weight: 600; cursor: pointer; border: 1.5px solid var(--glass-border); background: rgba(255, 255, 255, 0.45); color: #334155; backdrop-filter: blur(12px); box-shadow: var(--glass-shine); transition: all 0.25s ease;">
+          2D CAD Blueprint Plan
+        </button>
+        <button class="blueprint-tab-btn" data-view="3d-topdown" style="padding: 10px 20px; border-radius: 20px; font-family: var(--font-sans); font-size: 13.5px; font-weight: 600; cursor: pointer; border: 1.5px solid var(--glass-border); background: rgba(255, 255, 255, 0.45); color: #334155; backdrop-filter: blur(12px); box-shadow: var(--glass-shine); transition: all 0.25s ease;">
+          3D Architectural Top-Down
+        </button>
+        <button class="blueprint-tab-btn" data-view="svg-vector" style="padding: 10px 20px; border-radius: 20px; font-family: var(--font-sans); font-size: 13.5px; font-weight: 600; cursor: pointer; border: 1.5px solid var(--glass-border); background: rgba(255, 255, 255, 0.45); color: #334155; backdrop-filter: blur(12px); box-shadow: var(--glass-shine); transition: all 0.25s ease;">
+          Interactive Vector Zoning Plan
+        </button>
+      </div>
 
-            <rect width="1000" height="680" fill="#ffffff" fill-opacity="0.85"/>
-            <rect width="1000" height="680" fill="url(#grid)"/>
-
-            <!-- Store Outer Boundary Walls -->
-            <polygon points="180,120 780,120 780,220 830,220 830,560 180,560" fill="rgba(212, 175, 55, 0.08)" stroke="#b8860b" stroke-width="3"/>
-            
-            <!-- Structural Hatching for Walls -->
-            <rect x="165" y="105" width="15" height="470" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-            <rect x="180" y="105" width="600" height="15" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-            <rect x="830" y="205" width="15" height="370" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-            <rect x="780" y="105" width="15" height="115" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-            <rect x="780" y="205" width="50" height="15" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-
-            <!-- Front Entrance Glazed Façade Opening -->
-            <line x1="180" y1="560" x2="830" y2="560" stroke="#b8860b" stroke-width="5" stroke-dasharray="14 6"/>
-            <text x="505" y="585" fill="#784c00" font-family="monospace" font-size="12" text-anchor="middle" font-weight="bold">FRONT GLAZED ENTRANCE PORTAL (SPAN: 590 CM)</text>
-
-            <!-- Left Perimeter Feature Perfume Shelving -->
-            <rect x="180" y="160" width="40" height="340" fill="rgba(212, 175, 55, 0.3)" stroke="#b8860b" stroke-width="2"/>
-            <text x="200" y="330" fill="#784c00" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle" transform="rotate(-90 200 330)">LEFT PERIMETER SHELVING (240 × 90 × 35 CM)</text>
-
-            <!-- Right Perimeter Arched Vitrines -->
-            <rect x="790" y="250" width="40" height="250" fill="rgba(212, 175, 55, 0.3)" stroke="#b8860b" stroke-width="2"/>
-            <text x="810" y="375" fill="#784c00" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle" transform="rotate(90 810 375)">RIGHT PERIMETER SHOWCASES</text>
-
-            <!-- Central Consultation Island Counter -->
-            <rect x="410" y="290" width="190" height="95" rx="10" fill="rgba(212, 175, 55, 0.35)" stroke="#b8860b" stroke-width="2.5"/>
-            <line x1="410" y1="337" x2="600" y2="337" stroke="rgba(184, 134, 11, 0.7)" stroke-width="1" stroke-dasharray="4 2"/>
-            <text x="505" y="332" fill="#090d16" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">CENTRAL ISLAND COUNTER</text>
-            <text x="505" y="352" fill="#784c00" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">240 × 90 × 95 CM</text>
-
-            <!-- Cashier & Packaging POS Desk -->
-            <rect x="395" y="140" width="220" height="65" rx="4" fill="rgba(15, 23, 42, 0.1)" stroke="#334155" stroke-width="2"/>
-            <text x="505" y="175" fill="#090d16" font-family="sans-serif" font-size="11.5" font-weight="bold" text-anchor="middle">CASHIER & POS WRAP COUNTER</text>
-            <text x="505" y="192" fill="#475569" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">220 × 80 × 105 CM</text>
-
-            <!-- Restroom / WC Corridor -->
-            <rect x="690" y="120" width="90" height="100" fill="rgba(59, 130, 246, 0.16)" stroke="#2563eb" stroke-width="1.5" stroke-dasharray="3 3"/>
-            <text x="735" y="165" fill="#1d4ed8" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">SERVICE & WC</text>
-            <text x="735" y="182" fill="#1e40af" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">DOOR: 77 CM</text>
-
-            <!-- Architectural Dimension Lines -->
-            <!-- Back Wall Span -->
-            <line x1="180" y1="85" x2="780" y2="85" stroke="#b8860b" stroke-width="1.5" marker-start="url(#arrow-cad)" marker-end="url(#arrow-cad)"/>
-            <text x="480" y="78" fill="#784c00" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">BACK WALL SPAN: 543 CM</text>
-
-            <!-- Total Store Depth -->
-            <line x1="130" y1="120" x2="130" y2="560" stroke="#b8860b" stroke-width="1.5" marker-start="url(#arrow-cad)" marker-end="url(#arrow-cad)"/>
-            <text x="115" y="340" fill="#784c00" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle" transform="rotate(-90 115 340)">OVERALL DEPTH: 730 CM</text>
-
-            <!-- Clearance Arrows -->
-            <line x1="220" y1="337" x2="410" y2="337" stroke="#059669" stroke-width="1.5" stroke-dasharray="2 2" marker-start="url(#arrow-cad)" marker-end="url(#arrow-cad)"/>
-            <text x="315" y="330" fill="#047857" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">AISLE: ≥ 120 CM</text>
-          </svg>
-        </div>
-
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <span class="dim-pill gold">TOTAL DEPTH: 730 CM</span>
-            <span class="dim-pill gold">FRONT SPAN: 590 CM</span>
-            <span class="dim-pill">REAR SPAN: 543 CM</span>
-            <span class="dim-pill">WC DOOR: 77 CM</span>
+      <!-- Blueprint Content Displays -->
+      <div class="glass-card" style="padding: 24px; margin-bottom: 30px;">
+        
+        <!-- View 1: Master Blueprint Drawing Sheet -->
+        <div id="view-master-sheet" class="blueprint-view-panel" style="display: block; text-align: center;">
+          <div style="position: relative; overflow: hidden; border-radius: 16px; border: 1.5px solid var(--glass-border); box-shadow: var(--glass-shine); cursor: pointer; background: #ffffff;" onclick="openLightbox('/assets/blueprint_master_sheet.jpg', 'Master Architectural Blueprint Sheet - Plan, Front Elevation, Section A-A, Section B-B & Door Schedule')">
+            <img src="/assets/blueprint_master_sheet.jpg" alt="Master Architectural Blueprint Sheet" style="max-width: 100%; max-height: 850px; object-fit: contain; display: block; margin: 0 auto; transition: transform 0.4s ease;">
+            <div style="position: absolute; bottom: 16px; right: 16px; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(12px); border: 1px solid var(--glass-border-gold); padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; color: #784c00; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+              Click to Enlarge Full Blueprint
+            </div>
           </div>
-          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--gold-dark); font-weight: 700;">★ All dimensions subject to contractor laser site-verification</span>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; padding: 0 8px; flex-wrap: wrap; gap: 10px;">
+            <div style="font-size: 13.5px; color: #334155; text-align: left;">
+              <strong style="color: #0c1024;">Drawing Title:</strong> RETAIL SHOWROOM LAYOUT - PLAN, ELEVATION, SECTIONS & DETAILS | <strong style="color: #0c1024;">Scale:</strong> 1:50 | <strong style="color: #0c1024;">Units:</strong> Millimeters & Centimeters
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <span class="dim-pill gold">STOREFRONT: 590 CM</span>
+              <span class="dim-pill gold">DEPTH: 797 CM</span>
+            </div>
+          </div>
         </div>
+
+        <!-- View 2: 2D CAD Blueprint Plan -->
+        <div id="view-cad-plan" class="blueprint-view-panel" style="display: none; text-align: center;">
+          <div style="position: relative; overflow: hidden; border-radius: 16px; border: 1.5px solid var(--glass-border); box-shadow: var(--glass-shine); cursor: pointer; background: #ffffff;" onclick="openLightbox('/assets/blueprint_cad_plan.png', '2D CAD Floor Plan - Exact Dimensions in Centimeters (cm)')">
+            <img src="/assets/blueprint_cad_plan.png" alt="2D CAD Floor Plan" style="max-width: 100%; max-height: 850px; object-fit: contain; display: block; margin: 0 auto; transition: transform 0.4s ease;">
+            <div style="position: absolute; bottom: 16px; right: 16px; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(12px); border: 1px solid var(--glass-border-gold); padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; color: #784c00; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+              Click to Enlarge
+            </div>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; padding: 0 8px; flex-wrap: wrap; gap: 10px;">
+            <div style="font-size: 13.5px; color: #334155; text-align: left;">
+              <strong style="color: #0c1024;">Storefront Width:</strong> 590 cm | <strong style="color: #0c1024;">Clear Interior:</strong> 543 cm | <strong style="color: #0c1024;">Overall Depth:</strong> 797 cm (730 cm + 67 cm WC)
+            </div>
+            <span class="dim-pill gold">CALACATTA MARBLE INLAY</span>
+          </div>
+        </div>
+
+        <!-- View 3: 3D Architectural Top-Down -->
+        <div id="view-3d-topdown" class="blueprint-view-panel" style="display: none; text-align: center;">
+          <div style="position: relative; overflow: hidden; border-radius: 16px; border: 1.5px solid var(--glass-border); box-shadow: var(--glass-shine); cursor: pointer; background: #ffffff;" onclick="openLightbox('/assets/blueprint_3d_topdown.png', '3D Architectural Top-Down Layout with Dimension Overlays')">
+            <img src="/assets/blueprint_3d_topdown.png" alt="3D Architectural Top-Down Layout" style="max-width: 100%; max-height: 850px; object-fit: contain; display: block; margin: 0 auto; transition: transform 0.4s ease;">
+            <div style="position: absolute; bottom: 16px; right: 16px; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(12px); border: 1px solid var(--glass-border-gold); padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; color: #784c00; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+              Click to Enlarge
+            </div>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px; padding: 0 8px; flex-wrap: wrap; gap: 10px;">
+            <div style="font-size: 13.5px; color: #334155; text-align: left;">
+              <strong style="color: #0c1024;">3D Spatial Twin:</strong> Top-down view showing consultation island, perimeter vitrines, and restroom extension.
+            </div>
+            <span class="dim-pill gold">ISLAND: 230 × 90 CM</span>
+          </div>
+        </div>
+
+        <!-- View 4: Interactive Vector Zoning Plan -->
+        <div id="view-svg-vector" class="blueprint-view-panel" style="display: none;">
+          <div style="overflow-x: auto; margin-bottom: 20px; border-radius: 16px; border: 1.5px solid var(--glass-border); box-shadow: var(--glass-shine);">
+            <svg id="cad-floorplan-svg" viewBox="0 0 1000 680" style="width: 100%; height: auto; min-width: 750px; display: block;">
+              <defs>
+                <pattern id="grid-light" width="20" height="20" patternUnits="userSpaceOnUse">
+                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(184, 134, 11, 0.12)" stroke-width="0.8"/>
+                </pattern>
+                <marker id="arrow-cad-gold" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                  <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#b8860b" />
+                </marker>
+              </defs>
+
+              <rect width="1000" height="680" fill="#ffffff" fill-opacity="0.95"/>
+              <rect width="1000" height="680" fill="url(#grid-light)"/>
+
+              <!-- Store Outer Boundary Walls -->
+              <polygon points="180,120 780,120 780,220 830,220 830,560 180,560" fill="rgba(212, 175, 55, 0.08)" stroke="#b8860b" stroke-width="3"/>
+              
+              <!-- Structural Walls -->
+              <rect x="165" y="105" width="15" height="470" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+              <rect x="180" y="105" width="600" height="15" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+              <rect x="830" y="205" width="15" height="370" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+              <rect x="780" y="105" width="15" height="115" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+              <rect x="780" y="205" width="50" height="15" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+
+              <!-- Front Entrance Glazed Façade Opening -->
+              <line x1="180" y1="560" x2="830" y2="560" stroke="#b8860b" stroke-width="5" stroke-dasharray="14 6"/>
+              <text x="505" y="585" fill="#784c00" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" text-anchor="middle">590 cm STOREFRONT SPAN</text>
+
+              <!-- Left Column Jog -->
+              <line x1="180" y1="540" x2="230" y2="540" stroke="#b8860b" stroke-width="2" marker-start="url(#arrow-cad-gold)" marker-end="url(#arrow-cad-gold)"/>
+              <text x="205" y="530" fill="#784c00" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700" text-anchor="middle">47 cm</text>
+
+              <!-- Rear Wall Span -->
+              <line x1="180" y1="90" x2="780" y2="90" stroke="#b8860b" stroke-width="2" marker-start="url(#arrow-cad-gold)" marker-end="url(#arrow-cad-gold)"/>
+              <text x="480" y="80" fill="#784c00" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" text-anchor="middle">543 cm REAR FEATURE WALL</text>
+
+              <!-- Sales Floor Depth -->
+              <line x1="130" y1="120" x2="130" y2="560" stroke="#b8860b" stroke-width="2" marker-start="url(#arrow-cad-gold)" marker-end="url(#arrow-cad-gold)"/>
+              <text x="110" y="345" fill="#784c00" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" text-anchor="middle" transform="rotate(-90 110 345)">730 cm SALES FLOOR</text>
+
+              <!-- Overall Depth inc WC -->
+              <line x1="880" y1="120" x2="880" y2="560" stroke="#b8860b" stroke-width="2" marker-start="url(#arrow-cad-gold)" marker-end="url(#arrow-cad-gold)"/>
+              <text x="905" y="345" fill="#784c00" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="700" text-anchor="middle" transform="rotate(90 905 345)">797 cm TOTAL DEPTH (730 + 67 cm)</text>
+
+              <!-- Central Consultation Island Counter -->
+              <rect x="420" y="270" width="160" height="90" rx="45" fill="rgba(212, 175, 55, 0.22)" stroke="#b8860b" stroke-width="2.5"/>
+              <text x="500" y="310" fill="#0c1024" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" text-anchor="middle">ISLAND COUNTER</text>
+              <text x="500" y="328" fill="#784c00" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600" text-anchor="middle">230 × 90 × 95 cm</text>
+
+              <!-- Perimeter Shelving Left -->
+              <rect x="180" y="150" width="35" height="360" fill="rgba(212, 175, 55, 0.15)" stroke="#b8860b" stroke-width="1.5"/>
+              <text x="197" y="335" fill="#0c1024" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="700" text-anchor="middle" transform="rotate(-90 197 335)">LEFT SHELVES: 35 cm D</text>
+
+              <!-- Perimeter Vitrines Right -->
+              <rect x="795" y="240" width="35" height="280" fill="rgba(212, 175, 55, 0.15)" stroke="#b8860b" stroke-width="1.5"/>
+              <text x="812" y="380" fill="#0c1024" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="700" text-anchor="middle" transform="rotate(90 812 380)">RIGHT VITRINES: 40 cm D</text>
+
+              <!-- WC / Restroom Enclosure -->
+              <rect x="780" y="120" width="50" height="100" fill="rgba(212, 175, 55, 0.18)" stroke="#b8860b" stroke-width="1.5"/>
+              <text x="805" y="165" fill="#784c00" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="700" text-anchor="middle">TOILET</text>
+              <text x="805" y="180" fill="#334155" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" text-anchor="middle">80×210 D</text>
+            </svg>
+          </div>
+        </div>
+
       </div>
+
+      <!-- Architectural Dimension Matrix Table -->
+      <div class="glass-card" style="padding: 24px;">
+        <h3 style="font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: #0c1024; margin-bottom: 16px;">
+          Certified Architectural Dimensions & Fixture Schedule
+        </h3>
+        <table class="schedule-table" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr>
+              <th style="padding: 12px 16px; background: rgba(255, 255, 255, 0.65); color: #784c00; font-size: 12px; font-weight: 700; text-align: left; border-bottom: 1.5px solid var(--glass-border);">Architectural Element</th>
+              <th style="padding: 12px 16px; background: rgba(255, 255, 255, 0.65); color: #784c00; font-size: 12px; font-weight: 700; text-align: left; border-bottom: 1.5px solid var(--glass-border);">Blueprint Reference</th>
+              <th style="padding: 12px 16px; background: rgba(255, 255, 255, 0.65); color: #784c00; font-size: 12px; font-weight: 700; text-align: left; border-bottom: 1.5px solid var(--glass-border);">Dimension in cm</th>
+              <th style="padding: 12px 16px; background: rgba(255, 255, 255, 0.65); color: #784c00; font-size: 12px; font-weight: 700; text-align: left; border-bottom: 1.5px solid var(--glass-border);">Dimension in mm [Imperial]</th>
+              <th style="padding: 12px 16px; background: rgba(255, 255, 255, 0.65); color: #784c00; font-size: 12px; font-weight: 700; text-align: left; border-bottom: 1.5px solid var(--glass-border);">Joinery Specification</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-weight: 600; color: #0c1024;">Storefront Width</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); color: #334155;">Glazed Façade Outer</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); font-weight: 700; color: #784c00;">590 cm</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); color: #334155;">5900 mm [19'-4"]</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); color: #334155;">Full storefront structural span inc. window & entrance</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-weight: 600; color: #0c1024;">Sales Floor Width</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); color: #334155;">Interior Clear Span</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); font-weight: 700; color: #784c00;">543 cm</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); color: #334155;">5430 mm [17'-10"]</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); color: #334155;">Clear span between perimeter wall cladding</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-weight: 600; color: #0c1024;">Main Sales Floor Depth</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); color: #334155;">Store Front to Rear</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); font-weight: 700; color: #784c00;">730 cm</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); color: #334155;">7300 mm [23'-11"]</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); color: #334155;">Primary boutique customer gallery length</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-weight: 600; color: #0c1024;">Total Building Depth</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); color: #334155;">Overall inc. Toilet</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); font-weight: 700; color: #784c00;">797 cm</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); color: #334155;">7970 mm [26'-1"]</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); color: #334155;">Includes 67 cm (670 mm / 2'-2") rear WC alcove offset</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-weight: 600; color: #0c1024;">Front Column Recess</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); color: #334155;">Left Entrance Jog</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); font-weight: 700; color: #784c00;">47 cm</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); color: #334155;">470 mm [1'-7"]</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); color: #334155;">Architectural column corner offset</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-weight: 600; color: #0c1024;">Central Island Counter</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); color: #334155;">Freestanding Island</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); font-weight: 700; color: #784c00;">230 × 90 cm</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); color: #334155;">2300 × 900 mm [7'-3" × 3'-0"]</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); color: #334155;">Fluted brass pedestal base with Calacatta marble slab (95 cm H)</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-weight: 600; color: #0c1024;">Main Entrance Door (D1)</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); color: #334155;">Door Schedule D1</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); font-weight: 700; color: #784c00;">90 × 210 cm</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); color: #334155;">900 × 2100 mm [2'-11" × 6'-11"]</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); color: #334155;">Single swing glazed door, opens inward</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-weight: 600; color: #0c1024;">Toilet Service Door (D)</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); color: #334155;">Door Schedule D</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); font-weight: 700; color: #784c00;">80 × 210 cm</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); font-family: var(--font-mono); color: #334155;">800 × 2100 mm [2'-7" × 6'-11"]</td>
+              <td style="padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); color: #334155;">Concealed pivot flush door, opens inward</td>
+            </tr>
+            <tr>
+              <td style="padding: 12px 16px; font-weight: 600; color: #0c1024;">Side Wall Display Shelves (A)</td>
+              <td style="padding: 12px 16px; font-family: var(--font-mono); color: #334155;">Section A-A</td>
+              <td style="padding: 12px 16px; font-family: var(--font-mono); font-weight: 700; color: #784c00;">40 cm equal tiers</td>
+              <td style="padding: 12px 16px; font-family: var(--font-mono); color: #334155;">400 mm shelf intervals [1'-4"]</td>
+              <td style="padding: 12px 16px; color: #334155;">47 cm base plinth, 4 × 40 cm equal glass shelves, 30 cm crown header</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
   </section>
 
@@ -1669,14 +1802,14 @@
           </div>
           <div class="lighting-card-body">
             <div class="cut-badge">✦ FIXTURE L-01 • SHELF HALO</div>
-            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Dotless COB Micro-Extrusion</h4>
+            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #0c1024; margin-bottom: 6px;">Dotless COB Micro-Extrusion</h4>
             <div class="dim-breakdown-box" style="padding: 12px 16px; margin-bottom: 12px;">
               <div class="dim-row"><span class="dim-name">CCT / CRI:</span><span class="dim-val">3000K / CRI 98 (R9 > 90)</span></div>
               <div class="dim-row"><span class="dim-name">Profile Run:</span><span class="dim-val">240 cm Linear Runs</span></div>
               <div class="dim-row"><span class="dim-name">Driver Protocol:</span><span class="dim-val">Tridonic 24V DALI-2 Dimmable</span></div>
               <div class="dim-row"><span class="dim-name">Extrusion:</span><span class="dim-val">1.0 × 0.8 cm Anodized + Opal</span></div>
             </div>
-            <p style="font-size: 12.5px; color: #cbd5e1;">Eliminates visible diode reflection on glass flacons; enhances golden perfume hue.</p>
+            <p style="font-size: 12.5px; color: #334155;">Eliminates visible diode reflection on glass flacons; enhances golden perfume hue.</p>
           </div>
         </div>
 
@@ -1688,14 +1821,14 @@
           </div>
           <div class="lighting-card-body">
             <div class="cut-badge">✦ FIXTURE L-02 • CEILING COVE</div>
-            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Indirect Perimeter Cove Ribbon</h4>
+            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #0c1024; margin-bottom: 6px;">Indirect Perimeter Cove Ribbon</h4>
             <div class="dim-breakdown-box" style="padding: 12px 16px; margin-bottom: 12px;">
               <div class="dim-row"><span class="dim-name">CCT / Output:</span><span class="dim-val">3000K / 19.2 W/m (1800 lm)</span></div>
               <div class="dim-row"><span class="dim-name">Pelmet Reveal:</span><span class="dim-val">25 cm Gypsum Reveal</span></div>
               <div class="dim-row"><span class="dim-name">Driver:</span><span class="dim-val">Osram Optotronic 24V DALI</span></div>
               <div class="dim-row"><span class="dim-name">Compliance:</span><span class="dim-val">CE / ENEC / BS 5266</span></div>
             </div>
-            <p style="font-size: 12.5px; color: #cbd5e1;">Soft upward wash across the ceiling plane, providing warm ambient base lux.</p>
+            <p style="font-size: 12.5px; color: #334155;">Soft upward wash across the ceiling plane, providing warm ambient base lux.</p>
           </div>
         </div>
 
@@ -1707,14 +1840,14 @@
           </div>
           <div class="lighting-card-body">
             <div class="cut-badge">✦ FIXTURE L-03 • TASK DOWNLIGHT</div>
-            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Anti-Glare Precision Gimbal Spot</h4>
+            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #0c1024; margin-bottom: 6px;">Anti-Glare Precision Gimbal Spot</h4>
             <div class="dim-breakdown-box" style="padding: 12px 16px; margin-bottom: 12px;">
               <div class="dim-row"><span class="dim-name">Wattage / Optics:</span><span class="dim-val">15W / 24° Precision Lens</span></div>
               <div class="dim-row"><span class="dim-name">Glare Rating:</span><span class="dim-val">UGR &lt; 13 (Anti-Glare Baffle)</span></div>
               <div class="dim-row"><span class="dim-name">Colour Quality:</span><span class="dim-val">3000K / CRI 97 (MacAdam 2)</span></div>
               <div class="dim-row"><span class="dim-name">Cutout Size:</span><span class="dim-val">8.5 cm Ø Recessed</span></div>
             </div>
-            <p style="font-size: 12.5px; color: #cbd5e1;">Focused 1,500 lux spotlighting on the central marble consultation island.</p>
+            <p style="font-size: 12.5px; color: #334155;">Focused 1,500 lux spotlighting on the central marble consultation island.</p>
           </div>
         </div>
 
@@ -1726,14 +1859,14 @@
           </div>
           <div class="lighting-card-body">
             <div class="cut-badge">✦ FIXTURE L-04 • BRAND HALO</div>
-            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">VEL RA 3D Backlit Gold Signage</h4>
+            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #0c1024; margin-bottom: 6px;">VEL RA 3D Backlit Gold Signage</h4>
             <div class="dim-breakdown-box" style="padding: 12px 16px; margin-bottom: 12px;">
               <div class="dim-row"><span class="dim-name">CCT / Rating:</span><span class="dim-val">3000K / IP65 Sealed</span></div>
               <div class="dim-row"><span class="dim-name">Sign Dimension:</span><span class="dim-val">180 cm Wide × 35 cm High</span></div>
               <div class="dim-row"><span class="dim-name">Relief Standoff:</span><span class="dim-val">5.0 cm Brass Spacers</span></div>
               <div class="dim-row"><span class="dim-name">Operation:</span><span class="dim-val">24/7 Storefront Timer Circuit</span></div>
             </div>
-            <p style="font-size: 12.5px; color: #cbd5e1;">PVD brushed gold 3D lettering with radiant ambient halo glow.</p>
+            <p style="font-size: 12.5px; color: #334155;">PVD brushed gold 3D lettering with radiant ambient halo glow.</p>
           </div>
         </div>
       </div>
@@ -1741,8 +1874,8 @@
       <div class="meta-card" style="padding: 22px 28px;">
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
           <div>
-            <div style="font-family: var(--font-serif); font-size: 21px; font-weight: 700; color: #ffffff;">Irish & European Retail Compliance Notes</div>
-            <div style="font-size: 13.5px; color: #cbd5e1;">All drivers isolated in ventilated joinery plinths with accessible magnetic maintenance hatches.</div>
+            <div style="font-family: var(--font-serif); font-size: 21px; font-weight: 700; color: #0c1024;">Irish & European Retail Compliance Notes</div>
+            <div style="font-size: 13.5px; color: #334155;">All drivers isolated in ventilated joinery plinths with accessible magnetic maintenance hatches.</div>
           </div>
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
             <span class="dim-pill gold">230V 50Hz SINGLE PHASE</span>
@@ -2188,8 +2321,8 @@
       <div class="signoff-card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
           <div>
-            <div style="font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: #ffffff;">Concept Verification Checklist</div>
-            <div style="font-size: 13.5px; color: #cbd5e1;">Vel Ra Perfumes Concept Interior • Handover Package Rev 1.0</div>
+            <div style="font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: #0c1024;">Concept Verification Checklist</div>
+            <div style="font-size: 13.5px; color: #334155;">Vel Ra Perfumes Concept Interior • Handover Package Rev 1.0</div>
           </div>
           <span class="dim-pill gold">STAGE 04 SIGN-OFF</span>
         </div>
@@ -2219,8 +2352,8 @@
 
         <div class="signoff-actions">
           <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-            <input type="text" id="sign-name" placeholder="Enter Approver Full Name" value="VEL RA Client Representative" style="background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); border: 1.5px solid var(--glass-border); padding: 10px 18px; border-radius: 20px; font-size: 13.5px; color: #ffffff; font-family: var(--font-sans); width: 280px; box-shadow: var(--glass-shine);">
-            <button id="btn-confirm-sign" class="btn-sign" style="padding: 10px 26px;">Confirm & Record Approval</button>
+            <input type="text" id="sign-name" placeholder="Enter Approver Full Name" value="VEL RA Client Representative" style="background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); border: 1.5px solid var(--glass-border); padding: 10px 18px; border-radius: 20px; font-size: 13.5px; color: #0c1024; font-family: var(--font-sans); width: 280px; box-shadow: var(--glass-shine);">
+            <button id="btn-confirm-sign" class="btn-sign" style="color: #ffffff !important;" style="padding: 10px 26px;">Confirm & Record Approval</button>
           </div>
 
           <div id="sign-stamp" class="signoff-stamp verified">
@@ -2238,7 +2371,7 @@
       <div class="footer-grid">
         <div>
           <div class="footer-brand">VEL RA PERFUMES</div>
-          <p style="font-size: 13.5px; max-width: 480px; line-height: 1.65; margin-bottom: 16px; color: #cbd5e1;">
+          <p style="font-size: 13.5px; max-width: 480px; line-height: 1.65; margin-bottom: 16px; color: #334155;">
             Concept interior architectural handover package. Designed with Calacatta Gold marble, illuminated gold fragrance joinery, Irish/EU compliant 3000K lighting, and interactive 3D digital twin technology.
           </p>
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
@@ -2251,13 +2384,13 @@
         <div>
           <div class="footer-heading">Project Navigation</div>
           <ul class="footer-list">
-            <li><a href="#section-overview" style="color: #cbd5e1; text-decoration: none;">Executive Overview</a></li>
-            <li><a href="#section-3d-twin" style="color: #cbd5e1; text-decoration: none;">3D Digital Twin</a></li>
-            <li><a href="#section-cad-plan" style="color: #cbd5e1; text-decoration: none;">CAD Plan & Dimensions</a></li>
-            <li><a href="#section-features" style="color: #cbd5e1; text-decoration: none;">Visual Cuts & Details</a></li>
-            <li><a href="#section-lighting-showcase" style="color: #cbd5e1; text-decoration: none;">Lighting System (Ireland)</a></li>
-            <li><a href="#section-schedules" style="color: #cbd5e1; text-decoration: none;">Technical Schedules</a></li>
-            <li><a href="#section-renders" style="color: #cbd5e1; text-decoration: none;">4K Master Renders</a></li>
+            <li><a href="#section-overview" style="color: #334155; text-decoration: none;">Executive Overview</a></li>
+            <li><a href="#section-3d-twin" style="color: #334155; text-decoration: none;">3D Digital Twin</a></li>
+            <li><a href="#section-cad-plan" style="color: #334155; text-decoration: none;">CAD Plan & Dimensions</a></li>
+            <li><a href="#section-features" style="color: #334155; text-decoration: none;">Visual Cuts & Details</a></li>
+            <li><a href="#section-lighting-showcase" style="color: #334155; text-decoration: none;">Lighting System (Ireland)</a></li>
+            <li><a href="#section-schedules" style="color: #334155; text-decoration: none;">Technical Schedules</a></li>
+            <li><a href="#section-renders" style="color: #334155; text-decoration: none;">4K Master Renders</a></li>
           </ul>
         </div>
 
