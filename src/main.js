@@ -599,42 +599,42 @@ function buildFloorPlanDimensions() {
   floorPlanDimensionsGroup.clear();
   const yLevel = 0.40;
 
-  // 1. Back Wall Span (5430 mm)
+  // 1. Back Wall Span (543 cm)
   floorPlanDimensionsGroup.add(
     createArchitecturalDimension({
       start: new THREE.Vector3(0.30, yLevel, -7.05),
       end: new THREE.Vector3(4.55, yLevel, -7.05),
-      labelText: '5430 mm',
+      labelText: '543 cm',
       offsetLabel: new THREE.Vector3(0, 0, -0.45)
     })
   );
 
-  // 2. Front Glazing Span (5900 mm)
+  // 2. Front Glazing Span (590 cm)
   floorPlanDimensionsGroup.add(
     createArchitecturalDimension({
       start: new THREE.Vector3(0.00, yLevel, 0.40),
       end: new THREE.Vector3(4.85, yLevel, 0.40),
-      labelText: '5900 mm',
+      labelText: '590 cm',
       offsetLabel: new THREE.Vector3(0, 0, 0.45)
     })
   );
 
-  // 3. Store Depth (7300 mm)
+  // 3. Store Depth (730 cm)
   floorPlanDimensionsGroup.add(
     createArchitecturalDimension({
       start: new THREE.Vector3(-0.35, yLevel, 0.20),
       end: new THREE.Vector3(-0.35, yLevel, -6.90),
-      labelText: '7300 mm',
+      labelText: '730 cm',
       offsetLabel: new THREE.Vector3(-0.55, 0, 0)
     })
   );
 
-  // 4. WC Doorway Clearance (770 mm)
+  // 4. WC Doorway Clearance (77 cm)
   floorPlanDimensionsGroup.add(
     createArchitecturalDimension({
       start: new THREE.Vector3(3.90, yLevel, -6.65),
       end: new THREE.Vector3(4.52, yLevel, -6.65),
-      labelText: '770 mm',
+      labelText: '77 cm',
       color: 0x38bdf8,
       colorHex: '#38bdf8',
       offsetLabel: new THREE.Vector3(0, 0, 0.35)
@@ -655,7 +655,7 @@ function getObjectMetadata(mesh) {
     return {
       category: 'Consultation Joinery',
       name: 'Central Consultation Island',
-      desc: 'Custom 2400 × 900 × 950mm consultation bar with bookmatched marble countertop, fluted brass pedestal base, and lockable fragrance tester vitrines.',
+      desc: 'Custom 240 × 90 × 95 cm consultation bar with bookmatched marble countertop, fluted brass pedestal base, and lockable fragrance tester vitrines.',
       w: '240 cm', h: '95 cm', d: '90 cm',
       details: 'Bookmatched Italian Marble top, PVD brushed gold base, 3000K LED vitrine.'
     };
@@ -663,23 +663,23 @@ function getObjectMetadata(mesh) {
     return {
       category: 'Display Architecture',
       name: 'Illuminated Perfume Feature Wall',
-      desc: 'Modular 2400 × 900 × 350mm full-height display units with geometric 3D relief gold backplates and 3000K edge-lit floating glass shelves.',
+      desc: 'Modular 240 × 90 × 35 cm full-height display units with geometric 3D relief gold backplates and 3000K edge-lit floating glass shelves.',
       w: '90 cm', h: '240 cm', d: '35 cm',
-      details: 'Concealed 24V LED channels, 10mm tempered glass, bottom stock drawers.'
+      details: 'Concealed 24V LED channels, 1.0 cm tempered glass, bottom stock drawers.'
     };
   } else if (name.includes('floor')) {
     return {
       category: 'Architectural Surface',
       name: 'Italian Porcelain Marble Flooring',
       desc: 'Bookmatched polished porcelain tile with delicate warm amber veining and 1.5mm color-matched epoxy grout.',
-      w: '120 cm', h: '10 mm', d: '60 cm',
+      w: '120 cm', h: '1 cm', d: '60 cm',
       details: 'High-gloss polished finish, R9 slip rating, brass threshold trims.'
     };
   } else if (name.includes('door') || name.includes('wc') || name.includes('sign')) {
     return {
       category: 'Service Corridor',
       name: 'Concealed Restroom / Service Door',
-      desc: 'Seamlessly integrated flush pivot door (~770mm clearance) matching wall cladding with magnetic acoustic drop seal.',
+      desc: 'Seamlessly integrated flush pivot door (~77 cm clearance) matching wall cladding with magnetic acoustic drop seal.',
       w: '77 cm', h: '210 cm', d: '5 cm',
       details: 'Concealed pivot hinge, acoustic perimeter drop seal, staff access.'
     };
