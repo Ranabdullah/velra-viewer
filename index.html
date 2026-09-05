@@ -3,33 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>VELRA PERFUMES | Architectural & Interior Handover Dossier</title>
+  <title>Vel Ra Perfumes Concept Interior | Architectural Handover Dossier</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --bg-deep: #07070a;
-      --glass-bg: rgba(18, 18, 25, 0.52);
-      --glass-bg-hover: rgba(28, 28, 40, 0.70);
-      --glass-bg-solid: rgba(14, 14, 20, 0.88);
-      --glass-border: rgba(255, 255, 255, 0.12);
-      --glass-border-hover: rgba(212, 175, 55, 0.45);
-      --glass-shine: inset 0 1px 1px 0 rgba(255, 255, 255, 0.20);
-      --glass-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.65);
-      --glass-blur: blur(20px) saturate(190%);
+      --bg-marble: url('/materials/calacatta_gold_bg.jpg');
+      --glass-bg: rgba(255, 255, 255, 0.86);
+      --glass-bg-hover: rgba(255, 255, 255, 0.94);
+      --glass-bg-solid: rgba(255, 255, 255, 0.96);
+      --glass-border: rgba(212, 175, 55, 0.45);
+      --glass-border-hover: rgba(180, 130, 20, 0.75);
+      --glass-shine: inset 0 1px 2px 0 rgba(255, 255, 255, 0.95);
+      --glass-shadow: 0 16px 36px -8px rgba(180, 130, 40, 0.14), 0 4px 16px rgba(0, 0, 0, 0.04);
+      --glass-blur: blur(28px) saturate(190%);
       
-      --gold-primary: #d4af37;
-      --gold-light: #f7e7a9;
-      --gold-dark: #997e28;
-      --gold-border: rgba(212, 175, 55, 0.35);
-      --gold-glow: rgba(212, 175, 55, 0.20);
+      --gold-primary: #b8860b;
+      --gold-dark: #8a5a00;
+      --gold-light: #d4af37;
+      --gold-soft: #fbf5e6;
+      --gold-border: rgba(184, 134, 11, 0.4);
+      --gold-glow: rgba(212, 175, 55, 0.25);
       
-      --text-main: #f9f6f0;
-      --text-muted: #b8b2a3;
-      --text-dim: #7a756b;
-      --border-subtle: rgba(255, 255, 255, 0.08);
+      --text-main: #18181b;
+      --text-muted: #52525b;
+      --text-dim: #71717a;
+      --border-subtle: rgba(184, 134, 11, 0.22);
       
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -39,12 +40,10 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      background-color: var(--bg-deep);
-      background-image: 
-        radial-gradient(circle at 15% 10%, rgba(212, 175, 55, 0.07) 0%, transparent 45%),
-        radial-gradient(circle at 85% 30%, rgba(99, 102, 241, 0.06) 0%, transparent 50%),
-        radial-gradient(circle at 50% 70%, rgba(212, 175, 55, 0.05) 0%, transparent 60%),
-        radial-gradient(circle at 20% 90%, rgba(56, 189, 248, 0.05) 0%, transparent 50%);
+      background-color: #fcfbfa;
+      background-image: var(--bg-marble);
+      background-repeat: repeat;
+      background-size: 600px 600px;
       background-attachment: fixed;
       color: var(--text-main);
       font-family: var(--font-sans);
@@ -54,20 +53,33 @@
       overflow-x: hidden;
     }
 
+    /* Ambient Gold Light Overlay on Marble */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: 
+        radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.45) 0%, transparent 60%),
+        radial-gradient(circle at 85% 25%, rgba(212, 175, 55, 0.12) 0%, transparent 55%),
+        radial-gradient(circle at 50% 75%, rgba(255, 255, 255, 0.5) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
     /* Scrollbar */
     ::-webkit-scrollbar { width: 8px; height: 8px; }
-    ::-webkit-scrollbar-track { background: rgba(10, 10, 14, 0.8); }
-    ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.15); border-radius: 4px; backdrop-filter: blur(4px); }
+    ::-webkit-scrollbar-track { background: rgba(245, 243, 238, 0.9); }
+    ::-webkit-scrollbar-thumb { background: rgba(184, 134, 11, 0.4); border-radius: 4px; backdrop-filter: blur(4px); }
     ::-webkit-scrollbar-thumb:hover { background: var(--gold-primary); }
 
-    /* Glassmorphic Navigation Header */
+    /* Sticky Navigation Header */
     #handover-nav {
       position: sticky; top: 0; left: 0; width: 100%;
-      background: rgba(10, 10, 15, 0.65);
+      background: rgba(255, 255, 255, 0.88);
       backdrop-filter: var(--glass-blur);
       -webkit-backdrop-filter: var(--glass-blur);
       border-bottom: 1px solid var(--glass-border);
-      box-shadow: var(--glass-shine), 0 8px 32px rgba(0, 0, 0, 0.45);
+      box-shadow: var(--glass-shine), 0 8px 30px rgba(180, 130, 40, 0.08);
       z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 12px 32px;
@@ -76,69 +88,65 @@
     .brand-box { display: flex; align-items: center; gap: 14px; }
     .brand-logo-text {
       font-family: var(--font-serif);
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 700;
-      letter-spacing: 0.18em;
-      color: var(--gold-light);
+      letter-spacing: 0.14em;
+      color: var(--gold-dark);
       text-transform: uppercase;
       text-decoration: none;
-      text-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
     }
     .handover-badge {
       font-family: var(--font-mono);
-      font-size: 10px;
-      font-weight: 600;
+      font-size: 10.5px;
+      font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--gold-primary);
-      background: rgba(212, 175, 55, 0.12);
-      backdrop-filter: blur(8px);
+      color: var(--gold-dark);
+      background: rgba(212, 175, 55, 0.15);
       border: 1px solid var(--gold-border);
       box-shadow: var(--glass-shine);
-      padding: 3px 9px;
+      padding: 3px 10px;
       border-radius: 20px;
     }
 
-    .nav-menu { display: flex; align-items: center; gap: 20px; list-style: none; }
+    .nav-menu { display: flex; align-items: center; gap: 18px; list-style: none; }
     .nav-link {
       color: var(--text-muted);
       text-decoration: none;
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 600;
       transition: all 0.2s ease;
-      padding: 4px 8px;
-      border-radius: 6px;
+      padding: 5px 9px;
+      border-radius: 8px;
     }
-    .nav-link:hover { color: var(--gold-light); background: rgba(255, 255, 255, 0.05); }
+    .nav-link:hover { color: var(--gold-dark); background: rgba(212, 175, 55, 0.12); }
 
     .nav-actions { display: flex; align-items: center; gap: 10px; }
     .btn-pdf {
-      background: rgba(255, 255, 255, 0.06);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.9);
       border: 1px solid var(--glass-border);
-      box-shadow: var(--glass-shine);
-      color: var(--gold-light);
+      box-shadow: var(--glass-shine), 0 2px 8px rgba(0,0,0,0.04);
+      color: var(--gold-dark);
       padding: 7px 16px;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
       border-radius: 20px;
       cursor: pointer;
       display: flex; align-items: center; gap: 6px;
       transition: all 0.2s ease;
     }
     .btn-pdf:hover {
-      background: rgba(212, 175, 55, 0.18);
+      background: var(--gold-soft);
       border-color: var(--gold-primary);
       transform: translateY(-1px);
     }
 
     .btn-sign {
-      background: linear-gradient(135deg, rgba(242, 220, 153, 0.9) 0%, rgba(212, 175, 55, 0.9) 100%);
-      backdrop-filter: blur(12px);
-      color: #0b0b0e;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), 0 6px 20px rgba(212, 175, 55, 0.35);
+      background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 4px 16px rgba(184, 134, 11, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.5);
       padding: 7px 20px;
       font-size: 12px;
       font-weight: 700;
@@ -149,61 +157,85 @@
       transition: all 0.2s ease;
     }
     .btn-sign:hover {
-      transform: translateY(-1px) scale(1.02);
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5), 0 8px 24px rgba(212, 175, 55, 0.5);
+      box-shadow: 0 6px 20px rgba(184, 134, 11, 0.5);
+      transform: translateY(-1px);
     }
 
-    /* Layout Containers */
-    .container {
-      max-width: 1380px;
-      margin: 0 auto;
-      padding: 0 28px;
-    }
+    /* Container & Layout */
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+    .section-wrap { padding: 64px 0; border-bottom: 1px solid var(--border-subtle); position: relative; z-index: 1; }
 
-    /* Hero Presentation Banner */
+    /* Section Headers */
+    .section-header { margin-bottom: 36px; text-align: left; }
+    .section-number {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      margin-bottom: 6px;
+      display: inline-block;
+      background: rgba(212, 175, 55, 0.14);
+      padding: 3px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--gold-border);
+    }
+    .section-heading {
+      font-family: var(--font-serif);
+      font-size: 34px;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+    .section-desc { color: var(--text-muted); font-size: 15px; max-width: 820px; }
+
+    /* Hero Banner */
     .hero-banner {
-      position: relative;
-      padding: 64px 0 42px 0;
+      padding: 60px 0 48px 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%);
       border-bottom: 1px solid var(--border-subtle);
+      position: relative;
+      z-index: 1;
     }
     .hero-pretitle {
       font-family: var(--font-mono);
       font-size: 11.5px;
-      letter-spacing: 0.22em;
+      font-weight: 700;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--gold-primary);
-      margin-bottom: 8px;
+      color: var(--gold-dark);
+      margin-bottom: 12px;
       display: inline-block;
-      padding: 3px 10px;
-      background: rgba(212, 175, 55, 0.1);
+      background: rgba(212, 175, 55, 0.16);
+      padding: 4px 12px;
+      border-radius: 16px;
       border: 1px solid var(--gold-border);
-      border-radius: 20px;
-      backdrop-filter: blur(8px);
     }
     .hero-title {
       font-family: var(--font-serif);
-      font-size: 52px;
+      font-size: 46px;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      color: #0f172a;
+      letter-spacing: 0.02em;
       line-height: 1.15;
-      color: #ffffff;
-      margin-top: 10px;
-      margin-bottom: 12px;
-      text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+      margin-bottom: 14px;
     }
     .hero-subtitle {
-      font-size: 16.5px;
-      color: var(--text-muted);
-      max-width: 840px;
+      font-size: 16px;
+      color: #334155;
+      max-width: 860px;
+      line-height: 1.6;
       margin-bottom: 32px;
+      font-weight: 400;
     }
 
-    /* Glassmorphic Project Metadata Cards */
+    /* Project Metadata Grid */
     .project-meta-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
       gap: 16px;
-      margin-top: 24px;
     }
     .meta-card {
       background: var(--glass-bg);
@@ -211,363 +243,343 @@
       -webkit-backdrop-filter: var(--glass-blur);
       border: 1px solid var(--glass-border);
       box-shadow: var(--glass-shine), var(--glass-shadow);
-      border-radius: 12px;
       padding: 16px 20px;
-      transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+      border-radius: 14px;
+      transition: all 0.25s ease;
     }
     .meta-card:hover {
-      border-color: var(--glass-border-hover);
       background: var(--glass-bg-hover);
+      border-color: var(--glass-border-hover);
       transform: translateY(-2px);
     }
     .meta-label {
       font-family: var(--font-mono);
-      font-size: 9.5px;
+      font-size: 10px;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      color: var(--gold-dark);
       margin-bottom: 4px;
     }
-    .meta-value {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-    .meta-value.gold { color: var(--gold-light); }
+    .meta-value { font-size: 15px; font-weight: 700; color: #0f172a; }
+    .meta-value.gold { color: var(--gold-dark); }
 
-    /* Section Styling */
-    .section-wrap {
-      padding: 68px 0;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-    .section-wrap.alt-bg {
-      background: rgba(14, 14, 20, 0.35);
-    }
-    .section-header {
-      margin-bottom: 34px;
-    }
-    .section-number {
+    /* Visual Photo Cut Badges & Tags ("THIS IS THIS") */
+    .cut-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(184, 134, 11, 0.14);
+      border: 1px solid var(--gold-border);
+      color: var(--gold-dark);
       font-family: var(--font-mono);
-      font-size: 11.5px;
-      letter-spacing: 0.2em;
-      color: var(--gold-primary);
-      text-transform: uppercase;
-      margin-bottom: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 8px;
     }
-    .section-heading {
-      font-family: var(--font-serif);
-      font-size: 34px;
+    .dim-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(15, 23, 42, 0.88);
+      color: #f8fafc;
+      font-family: var(--font-mono);
+      font-size: 11px;
       font-weight: 600;
-      color: #ffffff;
-      letter-spacing: 0.02em;
+      padding: 4px 10px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     }
-    .section-desc {
-      font-size: 14.5px;
-      color: var(--text-muted);
-      max-width: 800px;
-      margin-top: 6px;
+    .dim-pill.gold {
+      background: rgba(184, 134, 11, 0.92);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.4);
     }
 
-    /* 3D Viewer Container (Glass Frame) */
+    /* 3D Viewport Glass Container */
     #three-container {
       position: relative;
       width: 100%;
-      height: 740px;
-      background: rgba(12, 12, 16, 0.7);
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
-      border: 1px solid var(--gold-border);
-      box-shadow: var(--glass-shine), 0 24px 60px rgba(0, 0, 0, 0.8);
-      border-radius: 16px;
+      height: 680px;
+      background: #090a0f;
+      border: 2px solid var(--gold-border);
+      box-shadow: 0 24px 60px -12px rgba(180, 130, 40, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
       overflow: hidden;
-    }
-    #three-container.fullscreen {
-      position: fixed; inset: 0; width: 100vw; height: 100vh;
-      border-radius: 0; z-index: 9999; border: none;
+      margin-bottom: 32px;
     }
     #three-viewport { width: 100%; height: 100%; }
 
-    /* Embedded 3D Controls (Frosted Glass Pills) */
-    #loading {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 14px;
-      background: rgba(9, 9, 12, 0.94);
-      backdrop-filter: blur(20px);
-      color: #d4af37;
-      font-size: 13.5px; letter-spacing: 0.14em; text-transform: uppercase;
-      z-index: 50;
-    }
-    #loading .bar {
-      width: 240px; height: 3px; background: rgba(255, 255, 255, 0.1); border-radius: 2px; overflow: hidden;
-    }
-    #loading .bar-fill {
-      height: 100%; width: 0%; background: linear-gradient(90deg, #d4af37, #f9e295); transition: width 0.15s ease;
-    }
-
-    #top-bar {
-      position: absolute; top: 16px; left: 16px; right: 16px;
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 10px; z-index: 20; pointer-events: none;
-      opacity: 0; transform: translateY(-10px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    #top-bar.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
-    .top-bar-left { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .top-bar-right { display: flex; align-items: center; gap: 8px; }
-
-    .btn-group {
-      display: flex; align-items: center;
-      background: rgba(18, 18, 25, 0.65);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 8px 24px rgba(0, 0, 0, 0.45);
-      border-radius: 30px; padding: 3px;
-    }
-    .nav-btn {
-      background: transparent; border: none; color: #ccc;
-      font-size: 12px; font-weight: 500; padding: 6px 14px;
-      border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 5px;
-      transition: all 0.2s ease;
-    }
-    .nav-btn:hover { color: #fff; background: rgba(255, 255, 255, 0.1); }
-    .nav-btn.active {
-      color: #111; background: linear-gradient(135deg, #f2dc99 0%, #d4af37 100%);
-      font-weight: 600; box-shadow: 0 2px 10px rgba(212, 175, 55, 0.4);
-    }
-
-    .toggle-btn {
-      background: rgba(18, 18, 25, 0.65);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 8px 24px rgba(0, 0, 0, 0.45);
-      color: #ddd; font-size: 12px; font-weight: 500;
-      padding: 7px 15px; border-radius: 30px; cursor: pointer;
-      display: flex; align-items: center; gap: 6px;
-      transition: all 0.2s ease;
-    }
-    .toggle-btn:hover { border-color: var(--gold-border); color: #fff; background: rgba(255, 255, 255, 0.12); }
-    .toggle-btn.active {
-      background: rgba(212, 175, 55, 0.22);
-      border-color: var(--gold-primary); color: #f7e6a5;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 4px 16px rgba(212, 175, 55, 0.3);
-    }
-
     #start-overlay {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
-      padding-bottom: 8vh; z-index: 15;
-      background: linear-gradient(to top, rgba(7,7,10,0.85) 0%, rgba(7,7,10,0.2) 50%, rgba(7,7,10,0.02) 100%);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
-      pointer-events: none;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at center, rgba(15, 23, 42, 0.4) 0%, rgba(9, 10, 15, 0.88) 100%);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 30;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+      text-align: center;
+      padding: 24px;
     }
     #start-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-    #start-overlay #start-btn { pointer-events: auto; }
-    
-    #store-title {
+    .start-title {
       font-family: var(--font-serif);
-      color: #f5eedb; font-size: 34px; font-weight: 600;
-      letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 6px;
-      text-shadow: 0 2px 24px rgba(0,0,0,0.9);
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #fef08a;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      text-shadow: 0 2px 16px rgba(212, 175, 55, 0.5);
     }
-    #store-subtitle {
-      font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
-      color: #b5aa96; margin-bottom: 22px;
-    }
-    #start-btn {
-      font-family: var(--font-sans);
-      font-size: 13.5px; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: #111;
-      background: linear-gradient(135deg, rgba(242, 220, 153, 0.95) 0%, rgba(212, 175, 55, 0.95) 100%);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5), 0 8px 30px rgba(212, 175, 55, 0.45);
-      padding: 14px 42px; border-radius: 30px; cursor: pointer;
+    .start-desc { font-size: 14px; color: #cbd5e1; max-width: 520px; margin-bottom: 24px; }
+    .btn-enter-3d {
+      background: linear-gradient(135deg, #fef08a 0%, #d4af37 50%, #b8860b 100%);
+      color: #090a0f;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 8px 32px rgba(212, 175, 55, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+      font-size: 14px; font-weight: 800; letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 13px 34px; border-radius: 30px; cursor: pointer;
       display: flex; align-items: center; gap: 10px;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: all 0.25s ease;
     }
-    #start-btn:hover { transform: translateY(-2px) scale(1.02); box-shadow: inset 0 1px 1px rgba(255,255,255,0.6), 0 12px 36px rgba(212, 175, 55, 0.6); }
+    .btn-enter-3d:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 12px 40px rgba(212, 175, 55, 0.7);
+    }
 
-    /* Floating Frosted Glass Live Spec Card */
-    #info-panel {
-      position: absolute; top: 76px; right: 16px;
-      width: 320px; max-width: calc(100% - 32px);
-      background: rgba(14, 14, 20, 0.78);
-      backdrop-filter: blur(24px) saturate(200%);
-      -webkit-backdrop-filter: blur(24px) saturate(200%);
-      color: #f2ead9;
+    #loading {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(9, 10, 15, 0.95);
+      backdrop-filter: blur(16px);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 40;
+      transition: opacity 0.5s ease;
+    }
+    #loading.hidden { opacity: 0; pointer-events: none; }
+    .spinner {
+      width: 44px; height: 44px;
+      border: 3px solid rgba(212, 175, 55, 0.2);
+      border-top-color: #d4af37;
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+      margin-bottom: 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading-text { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.15em; text-transform: uppercase; color: #fef08a; }
+    .loading-bar { width: 200px; height: 4px; background: rgba(255, 255, 255, 0.1); border-radius: 2px; margin-top: 14px; overflow: hidden; }
+    .loading-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #b8860b, #fef08a); transition: width 0.2s ease; }
+
+    /* Floating 3D Controls */
+    #top-bar {
+      position: absolute; top: 16px; left: 16px; right: 16px;
+      display: flex; justify-content: space-between; align-items: center;
+      pointer-events: none; z-index: 20;
+    }
+    .control-group { display: flex; gap: 8px; pointer-events: auto; flex-wrap: wrap; }
+    .btn-pill {
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(212, 175, 55, 0.4);
-      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.25), 0 16px 50px rgba(0, 0, 0, 0.8);
-      border-radius: 12px; padding: 18px 20px;
-      opacity: 0; transform: translateX(15px);
-      transition: opacity 0.25s, transform 0.25s;
-      pointer-events: auto; z-index: 25;
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 4px 16px rgba(0, 0, 0, 0.3);
+      color: #f8fafc;
+      padding: 7px 16px; border-radius: 20px;
+      font-size: 11.5px; font-weight: 600;
+      cursor: pointer; display: flex; align-items: center; gap: 6px;
+      transition: all 0.2s ease;
     }
-    #info-panel.visible { opacity: 1; transform: translateX(0); }
-    #info-panel .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-    #info-panel .category { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: #d4af37; font-weight: 700; }
-    #info-panel .close-btn { background: none; border: none; color: #888; font-size: 20px; cursor: pointer; line-height: 1; }
-    #info-panel .name { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: #fff; margin-bottom: 4px; }
-    #info-panel .desc { font-size: 12.5px; color: #c0b7a8; line-height: 1.45; margin-bottom: 10px; }
-    #info-panel .section-title { font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-transform: uppercase; color: #d4af37; margin: 10px 0 6px 0; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 8px; }
-    #info-panel .dim-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-bottom: 8px; }
-    #info-panel .dim-box { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(8px); padding: 7px 4px; border-radius: 6px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: inset 0 1px 0 rgba(255,255,255,0.1); }
-    #info-panel .dim-lbl { display: block; font-family: var(--font-mono); font-size: 8.5px; color: #999; text-transform: uppercase; }
-    #info-panel .dim-val { display: block; font-size: 13px; font-weight: 600; color: #f4e39f; margin-top: 2px; }
-    #info-panel .design-details { font-size: 12px; color: #ded6c8; line-height: 1.4; background: rgba(212, 175, 55, 0.12); border-left: 3px solid #d4af37; padding: 8px 10px; border-radius: 0 6px 6px 0; }
+    .btn-pill:hover { background: rgba(30, 41, 59, 0.95); border-color: #fef08a; color: #fef08a; }
+    .btn-pill.active { background: #b8860b; color: #ffffff; border-color: #fef08a; }
 
-    #hint {
-      position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
-      background: rgba(16, 16, 22, 0.75); backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.14); box-shadow: var(--glass-shine), 0 4px 16px rgba(0,0,0,0.4);
-      border-radius: 20px; color: #c0b7a8; font-size: 11.5px; padding: 6px 20px; pointer-events: none;
-      z-index: 20; opacity: 0; transition: opacity 0.5s;
+    /* Live Object Spec Card in 3D Viewport */
+    #info-panel {
+      position: absolute; bottom: 20px; left: 20px;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 12px 32px rgba(0, 0, 0, 0.4);
+      padding: 16px 20px; border-radius: 16px;
+      max-width: 320px; z-index: 20; display: none;
+      color: #f8fafc;
     }
-    #hint.visible { opacity: 1; }
+    #info-panel.visible { display: block; }
+    .info-title { font-family: var(--font-serif); font-size: 19px; font-weight: 700; color: #fef08a; margin-bottom: 4px; }
+    .info-dims { font-family: var(--font-mono); font-size: 11px; color: #38bdf8; margin-bottom: 6px; font-weight: 600; }
+    .info-desc { font-size: 12.5px; color: #cbd5e1; line-height: 1.4; }
 
     /* Camera Studio Panel */
-    #camera-studio-toggle {
-      position: absolute; bottom: 16px; right: 16px;
-      background: rgba(18, 18, 25, 0.75); backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--gold-border); box-shadow: var(--glass-shine), 0 4px 16px rgba(0,0,0,0.5);
-      color: #d4af37; font-size: 11.5px; font-weight: 600; padding: 7px 15px;
-      border-radius: 20px; cursor: pointer; display: flex; align-items: center; gap: 6px;
-      z-index: 30; transition: all 0.2s ease;
-    }
-    #camera-studio-toggle:hover { background: #d4af37; color: #111; }
     #camera-studio-panel {
-      position: absolute; bottom: 62px; right: 16px;
-      width: 320px; max-width: calc(100% - 32px);
-      background: rgba(14, 14, 20, 0.85); backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid var(--gold-border); box-shadow: var(--glass-shine), 0 20px 50px rgba(0,0,0,0.85);
-      border-radius: 12px; padding: 16px; color: #eee; font-size: 12px; z-index: 35;
-      display: none; flex-direction: column; gap: 10px;
+      position: absolute; top: 60px; right: 16px;
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+      padding: 16px; border-radius: 16px;
+      width: 280px; z-index: 25; display: none;
+      color: #f8fafc; font-size: 12px;
     }
-    #camera-studio-panel.visible { display: flex; }
-    #camera-studio-panel .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
-    #camera-studio-panel .title { font-family: var(--font-mono); font-size: 11px; font-weight: 700; text-transform: uppercase; color: #d4af37; letter-spacing: 0.1em; }
-    #camera-studio-panel .close-studio { background: none; border: none; color: #888; font-size: 18px; cursor: pointer; line-height: 1; }
-    #camera-studio-panel .coord-box {
-      font-family: var(--font-mono); font-size: 10.5px; color: #f4e39f; background: rgba(0,0,0,0.55);
-      padding: 8px 10px; border-radius: 6px; line-height: 1.5; border: 1px solid rgba(255,255,255,0.08); box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);
-    }
-    #camera-studio-panel .grid-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-    #camera-studio-panel .save-btn {
-      background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 0.4);
-      color: #f7e6a5; padding: 6px 8px; border-radius: 6px; cursor: pointer;
-      font-size: 10.5px; font-weight: 500; text-align: center; transition: all 0.15s;
-    }
-    #camera-studio-panel .save-btn:hover { background: #d4af37; color: #111; font-weight: 600; }
-    #camera-studio-panel .util-btn {
-      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);
-      color: #ccc; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-size: 11px;
-    }
-    #camera-studio-panel .util-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
+    #camera-studio-panel.visible { display: block; }
 
-    #toast {
-      position: absolute; top: 70px; left: 50%; transform: translateX(-50%) translateY(-10px);
-      background: linear-gradient(135deg, #f2dc99 0%, #d4af37 100%); color: #111;
-      font-weight: 600; font-size: 12.5px;
-      padding: 8px 20px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-      opacity: 0; pointer-events: none; transition: all 0.3s ease; z-index: 100;
-    }
-    #toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-    /* Glassmorphic CAD Blueprint Container */
-    .cad-container {
-      background: rgba(10, 14, 22, 0.65);
-      backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
-      border: 1px solid rgba(56, 139, 253, 0.3);
-      box-shadow: var(--glass-shine), 0 20px 50px rgba(0, 0, 0, 0.7);
-      border-radius: 14px;
-      padding: 26px;
-      position: relative;
-    }
-    .cad-header {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .cad-title { font-family: var(--font-mono); font-size: 12px; color: #58a6ff; letter-spacing: 0.1em; text-transform: uppercase; }
-    .cad-scale { font-family: var(--font-mono); font-size: 11px; color: #8b949e; }
-    .cad-svg-wrap { width: 100%; overflow-x: auto; text-align: center; }
-    .cad-svg-wrap svg { max-width: 100%; height: auto; }
-
-    .cad-legend {
-      display: flex; flex-wrap: wrap; gap: 16px; margin-top: 18px; padding-top: 14px;
-      border-top: 1px solid rgba(255,255,255,0.06); font-family: var(--font-mono); font-size: 11px; color: #8b949e;
-    }
-    .legend-item { display: flex; align-items: center; gap: 6px; }
-    .legend-box { width: 12px; height: 12px; border-radius: 2px; }
-
-    .disclaimer-box {
-      background: rgba(245, 158, 11, 0.1);
-      backdrop-filter: blur(12px);
-      border-left: 3px solid #f59e0b;
-      border-top: 1px solid rgba(245, 158, 11, 0.2);
-      border-right: 1px solid rgba(245, 158, 11, 0.2);
-      border-bottom: 1px solid rgba(245, 158, 11, 0.2);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      border-radius: 0 10px 10px 0;
-      padding: 16px 20px;
-      margin-top: 20px;
-      font-size: 13px;
-      color: #fde68a;
-      line-height: 1.5;
-    }
-    .disclaimer-box strong { color: #fbbf24; font-weight: 600; }
-
-    /* Glassmorphic Architectural Feature Cards */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 22px;
-    }
-    .feature-card {
+    /* Feature Visual Cards with Photo Cuts ("THIS IS THIS") */
+    .feature-visual-card {
       background: var(--glass-bg);
       backdrop-filter: var(--glass-blur);
       -webkit-backdrop-filter: var(--glass-blur);
       border: 1px solid var(--glass-border);
       box-shadow: var(--glass-shine), var(--glass-shadow);
-      border-radius: 14px;
-      padding: 24px;
-      transition: all 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
-      display: flex; flex-direction: column; justify-content: space-between;
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 32px;
+      transition: all 0.3s ease;
     }
-    .feature-card:hover {
-      border-color: var(--glass-border-hover);
+    .feature-visual-card:hover {
       background: var(--glass-bg-hover);
-      transform: translateY(-3px);
-      box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.3), 0 20px 50px -10px rgba(0, 0, 0, 0.8);
+      border-color: var(--glass-border-hover);
+      box-shadow: var(--glass-shine), 0 20px 48px -10px rgba(180, 130, 40, 0.22);
     }
-    .feature-icon-title { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-    .feature-icon {
-      font-size: 22px; width: 44px; height: 44px; border-radius: 10px;
-      background: rgba(212, 175, 55, 0.12); border: 1px solid var(--gold-border);
-      box-shadow: var(--glass-shine);
-      display: flex; align-items: center; justify-content: center;
+    .feature-visual-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 0;
     }
-    .feature-title { font-family: var(--font-serif); font-size: 20px; font-weight: 600; color: #fff; }
-    .feature-body { font-size: 13px; color: var(--text-muted); line-height: 1.55; margin-bottom: 16px; }
-    .feature-specs {
-      background: rgba(0, 0, 0, 0.35);
+    @media (max-width: 900px) {
+      .feature-visual-grid { grid-template-columns: 1fr; }
+    }
+    .feature-photos-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 20px;
+      background: rgba(245, 243, 238, 0.5);
+      border-right: 1px solid var(--border-subtle);
+    }
+    .photo-frame {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .photo-frame:hover img {
+      transform: scale(1.03);
+    }
+    .photo-tag-overlay {
+      position: absolute;
+      top: 10px; left: 10px;
+      background: rgba(15, 23, 42, 0.88);
       backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      border-radius: 8px; padding: 12px 14px;
-      font-family: var(--font-mono); font-size: 11px; color: var(--gold-light);
+      color: #fef08a;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
-    .feature-spec-row { display: flex; justify-content: space-between; margin-bottom: 4px; }
-    .feature-spec-row:last-child { margin-bottom: 0; }
-    .feature-spec-label { color: var(--text-dim); }
+    .photo-dim-overlay {
+      position: absolute;
+      bottom: 10px; right: 10px;
+      background: rgba(184, 134, 11, 0.92);
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
 
-    /* Glassmorphic Material Cards */
-    .materials-grid {
+    .feature-info-col {
+      padding: 28px 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .feature-code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .feature-title {
+      font-family: var(--font-serif);
+      font-size: 26px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 14px;
+      line-height: 1.25;
+    }
+    
+    /* Dimension Grid in Cards */
+    .dim-breakdown-box {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.8);
+    }
+    .dim-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      border-bottom: 1px dashed rgba(184, 134, 11, 0.2);
+      font-size: 13px;
+    }
+    .dim-row:last-child { border-bottom: none; }
+    .dim-name { color: var(--text-muted); font-weight: 600; }
+    .dim-val { font-family: var(--font-mono); font-weight: 700; color: var(--gold-dark); }
+
+    /* Visual Cuts Spotlight Grid */
+    .cuts-spotlight-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .cut-mini-card {
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .cut-mini-card img {
+      width: 100%;
+      height: 85px;
+      object-fit: cover;
+      display: block;
+    }
+    .cut-mini-label {
+      padding: 6px 8px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gold-dark);
+      text-align: center;
+      background: var(--gold-soft);
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    /* Materials Swatches Grid */
+    .material-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 20px;
@@ -575,258 +587,186 @@
     .material-card {
       background: var(--glass-bg);
       backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
       border: 1px solid var(--glass-border);
       box-shadow: var(--glass-shine), var(--glass-shadow);
-      border-radius: 14px;
+      border-radius: 16px;
       overflow: hidden;
-      transition: all 0.28s ease;
-      display: flex; flex-direction: column;
+      transition: all 0.25s ease;
     }
     .material-card:hover {
-      border-color: var(--glass-border-hover);
       background: var(--glass-bg-hover);
-      transform: translateY(-4px);
-      box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.3), 0 20px 50px rgba(0, 0, 0, 0.7);
+      transform: translateY(-3px);
+      border-color: var(--glass-border-hover);
     }
-    .material-thumb-wrap {
-      width: 100%; height: 180px; position: relative; background: #1a1a24; overflow: hidden;
-    }
-    .material-thumb {
-      width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;
-    }
-    .material-card:hover .material-thumb { transform: scale(1.06); }
-    .material-tag {
-      position: absolute; top: 10px; right: 10px;
-      background: rgba(10, 10, 15, 0.75); backdrop-filter: blur(8px);
-      font-family: var(--font-mono); font-size: 9.5px; font-weight: 600;
-      color: var(--gold-primary); border: 1px solid var(--gold-border);
-      box-shadow: var(--glass-shine);
-      padding: 3px 8px; border-radius: 4px; text-transform: uppercase;
-    }
-    .material-content { padding: 18px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
-    .material-code { font-family: var(--font-mono); font-size: 10px; color: var(--gold-primary); margin-bottom: 2px; }
-    .material-name { font-family: var(--font-serif); font-size: 19px; font-weight: 600; color: #fff; margin-bottom: 6px; }
-    .material-desc { font-size: 12.5px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.45; }
-    .material-meta {
-      border-top: 1px solid var(--border-subtle);
-      padding-top: 10px; font-family: var(--font-mono); font-size: 10.5px; color: var(--text-dim);
-      display: flex; justify-content: space-between;
-    }
+    .material-img-wrap { width: 100%; height: 160px; overflow: hidden; position: relative; }
+    .material-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .material-body { padding: 18px; }
+    .material-code { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--gold-dark); margin-bottom: 4px; }
+    .material-name { font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #0f172a; margin-bottom: 6px; }
+    .material-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.45; }
 
-    /* Glassmorphic Schedules & Tabs */
-    .schedule-tabs-wrap { margin-bottom: 20px; }
-    .schedule-tabs { display: flex; gap: 10px; flex-wrap: wrap; border-bottom: 1px solid var(--border-subtle); padding-bottom: 12px; }
+    /* Technical Schedules (Tabs & Table) */
+    .schedule-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
     .tab-btn {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--glass-shine);
-      color: var(--text-muted);
-      padding: 8px 20px; border-radius: 20px; font-size: 12.5px; font-weight: 600; cursor: pointer;
-      transition: all 0.2s ease; font-family: var(--font-sans);
-    }
-    .tab-btn:hover { color: #fff; border-color: var(--gold-border); background: rgba(255, 255, 255, 0.1); }
-    .tab-btn.active {
-      background: rgba(212, 175, 55, 0.22);
-      border-color: var(--gold-primary); color: var(--gold-light);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 4px 16px rgba(212, 175, 55, 0.3);
-    }
-
-    .tab-pane { display: none; }
-    .tab-pane.active { display: block; }
-
-    .schedule-table-container {
-      width: 100%; overflow-x: auto;
       background: var(--glass-bg);
       backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      color: var(--text-muted);
+      padding: 8px 18px; border-radius: 20px;
+      font-size: 12.5px; font-weight: 700;
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .tab-btn:hover { background: var(--glass-bg-hover); color: var(--gold-dark); border-color: var(--gold-primary); }
+    .tab-btn.active { background: linear-gradient(135deg, #d4af37, #b8860b); color: #ffffff; border-color: rgba(255,255,255,0.5); }
+
+    .schedule-panel { display: none; }
+    .schedule-panel.active { display: block; }
+
+    .schedule-table-wrap {
+      background: var(--glass-bg);
+      backdrop-filter: var(--glass-blur);
       border: 1px solid var(--glass-border);
       box-shadow: var(--glass-shine), var(--glass-shadow);
-      border-radius: 12px;
+      border-radius: 16px;
+      overflow-x: auto;
     }
-    .schedule-table {
-      width: 100%; border-collapse: collapse; font-size: 12.5px; text-align: left;
-    }
+    .schedule-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
     .schedule-table th {
-      background: rgba(255, 255, 255, 0.04);
-      font-family: var(--font-mono); font-size: 10.5px; font-weight: 600;
-      color: var(--gold-light); text-transform: uppercase; letter-spacing: 0.08em;
-      padding: 14px 18px; border-bottom: 1px solid var(--border-subtle);
+      background: rgba(184, 134, 11, 0.12);
+      color: var(--gold-dark);
+      font-family: var(--font-mono);
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 14px 18px; border-bottom: 1px solid var(--glass-border);
     }
-    .schedule-table td {
-      padding: 13px 18px; border-bottom: 1px solid rgba(255, 255, 255, 0.04); color: var(--text-main);
-    }
-    .schedule-table tr:hover td { background: rgba(255, 255, 255, 0.03); }
-    .code-badge { font-family: var(--font-mono); font-size: 11px; font-weight: 600; color: var(--gold-primary); }
-    .status-check { color: #10b981; font-weight: 600; font-size: 11.5px; display: inline-flex; align-items: center; gap: 4px; }
-    .status-req { color: #f59e0b; font-weight: 600; font-size: 11.5px; display: inline-flex; align-items: center; gap: 4px; }
+    .schedule-table td { padding: 14px 18px; border-bottom: 1px solid rgba(184, 134, 11, 0.12); color: #1e293b; }
+    .schedule-table tr:hover td { background: rgba(212, 175, 55, 0.06); }
+    .schedule-table tr:last-child td { border-bottom: none; }
 
-    /* Glassmorphic 4K Render Gallery Grid */
+    /* 4K Render Gallery */
     .gallery-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-      gap: 22px;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 24px;
     }
     .gallery-card {
       background: var(--glass-bg);
       backdrop-filter: var(--glass-blur);
-      -webkit-backdrop-filter: var(--glass-blur);
       border: 1px solid var(--glass-border);
       box-shadow: var(--glass-shine), var(--glass-shadow);
-      border-radius: 14px;
+      border-radius: 16px;
       overflow: hidden;
       cursor: pointer;
-      position: relative;
-      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
-      display: flex; flex-direction: column;
+      transition: all 0.3s ease;
     }
     .gallery-card:hover {
-      border-color: var(--glass-border-hover);
       background: var(--glass-bg-hover);
-      transform: translateY(-5px);
-      box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.3), 0 20px 50px rgba(0, 0, 0, 0.8);
+      transform: translateY(-4px);
+      border-color: var(--glass-border-hover);
+      box-shadow: var(--glass-shine), 0 20px 48px -8px rgba(180, 130, 40, 0.25);
     }
-    .gallery-thumb-wrap {
-      width: 100%; aspect-ratio: 16 / 10; position: relative; background: #0c0c10; overflow: hidden;
-    }
-    .gallery-img {
-      width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
-    }
-    .gallery-card:hover .gallery-img { transform: scale(1.05); }
-    .gallery-overlay-badge {
-      position: absolute; top: 10px; left: 10px;
-      background: rgba(10, 10, 15, 0.75); backdrop-filter: blur(8px);
-      font-family: var(--font-mono); font-size: 10px; font-weight: 600;
-      color: var(--gold-light); border: 1px solid var(--gold-border);
-      box-shadow: var(--glass-shine);
-      padding: 3px 9px; border-radius: 4px;
-    }
-    .gallery-view-tag {
-      position: absolute; bottom: 10px; right: 10px;
-      background: rgba(0, 0, 0, 0.75); backdrop-filter: blur(6px);
-      font-size: 11px; color: #eee; padding: 3px 9px; border-radius: 4px;
-      display: flex; align-items: center; gap: 4px; border: 1px solid rgba(255,255,255,0.1);
-    }
-    .gallery-info { padding: 16px 18px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
-    .gallery-title { font-family: var(--font-serif); font-size: 19px; font-weight: 600; color: #fff; margin-bottom: 4px; }
-    .gallery-caption { font-size: 12.5px; color: var(--text-muted); line-height: 1.45; }
+    .gallery-img-wrap { width: 100%; height: 230px; overflow: hidden; position: relative; }
+    .gallery-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+    .gallery-card:hover .gallery-img-wrap img { transform: scale(1.04); }
+    .gallery-info { padding: 18px; }
+    .gallery-pass-code { font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; color: var(--gold-dark); margin-bottom: 4px; }
+    .gallery-title { font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #0f172a; margin-bottom: 6px; }
+    .gallery-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.4; }
 
-    /* Glassmorphic Lightbox Modal */
+    /* Lightbox Modal */
     #lightbox-modal {
-      position: fixed; inset: 0; z-index: 10000;
-      background: rgba(5, 5, 8, 0.82);
-      backdrop-filter: blur(30px) saturate(200%);
-      -webkit-backdrop-filter: blur(30px) saturate(200%);
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(10, 12, 18, 0.92);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      z-index: 200;
       display: none; align-items: center; justify-content: center;
-      flex-direction: column; padding: 24px;
+      padding: 24px;
     }
     #lightbox-modal.active { display: flex; }
-    .lightbox-close {
-      position: absolute; top: 20px; right: 28px;
-      background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15);
-      color: #ddd; font-size: 30px; width: 44px; height: 44px; border-radius: 50%;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      backdrop-filter: blur(12px); transition: all 0.2s;
-    }
-    .lightbox-close:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
-    .lightbox-nav {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      background: rgba(20, 20, 28, 0.65); backdrop-filter: blur(16px);
-      border: 1px solid var(--gold-border); box-shadow: var(--glass-shine);
-      color: var(--gold-light); font-size: 24px; width: 50px; height: 50px; border-radius: 50%;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s;
-    }
-    .lightbox-nav:hover { background: var(--gold-primary); color: #111; }
-    .lightbox-prev { left: 24px; }
-    .lightbox-next { right: 24px; }
-    .lightbox-img-wrap { max-width: 90vw; max-height: 78vh; text-align: center; }
-    .lightbox-img { max-width: 100%; max-height: 76vh; object-fit: contain; border-radius: 10px; box-shadow: 0 16px 60px rgba(0,0,0,0.9); }
-    .lightbox-meta {
-      margin-top: 16px; text-align: center; max-width: 720px;
-      background: rgba(14, 14, 20, 0.7); backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.12); box-shadow: var(--glass-shine);
-      padding: 12px 24px; border-radius: 30px;
-    }
-    .lightbox-title { font-family: var(--font-serif); font-size: 21px; font-weight: 600; color: #fff; margin-bottom: 2px; }
-    .lightbox-desc { font-size: 13px; color: var(--text-muted); }
-    .lightbox-counter { font-family: var(--font-mono); font-size: 10.5px; color: var(--gold-primary); margin-top: 4px; }
-
-    /* Glassmorphic Sign-Off Portal */
-    .signoff-card {
-      background: linear-gradient(135deg, rgba(22, 22, 32, 0.65) 0%, rgba(14, 14, 20, 0.75) 100%);
-      backdrop-filter: blur(24px) saturate(200%);
-      -webkit-backdrop-filter: blur(24px) saturate(200%);
+    .lightbox-content {
+      position: relative; max-width: 1200px; width: 100%;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(24px);
       border: 1px solid var(--gold-border);
-      box-shadow: var(--glass-shine), 0 24px 60px rgba(0, 0, 0, 0.7);
-      border-radius: 16px;
-      padding: 34px;
+      border-radius: 18px; overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6);
+      display: flex; flex-direction: column;
     }
-    .checklist-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; margin-bottom: 26px;
+    .lightbox-img-wrap { width: 100%; max-height: 72vh; background: #000; overflow: hidden; }
+    .lightbox-img-wrap img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .lightbox-meta {
+      padding: 20px 24px; display: flex; justify-content: space-between; align-items: center;
+      background: rgba(255, 255, 255, 0.95);
+      border-top: 1px solid var(--border-subtle);
     }
-    .check-item {
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
-      border-radius: 10px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 12px; cursor: pointer;
+    .lightbox-title-text { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: #0f172a; }
+    .lightbox-desc-text { font-size: 13px; color: var(--text-muted); }
+    .lightbox-close-btn {
+      position: absolute; top: 16px; right: 16px;
+      background: rgba(15, 23, 42, 0.85); color: #fff;
+      border: 1px solid rgba(255,255,255,0.3); border-radius: 50%;
+      width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 18px; font-weight: bold; z-index: 10;
       transition: all 0.2s ease;
     }
-    .check-item:hover { border-color: var(--gold-border); background: rgba(255, 255, 255, 0.07); }
-    .check-item input[type="checkbox"] {
-      margin-top: 3px; width: 18px; height: 18px; accent-color: var(--gold-primary); cursor: pointer;
+    .lightbox-close-btn:hover { background: #b8860b; }
+    .lightbox-nav-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(15, 23, 42, 0.8); color: #fff;
+      border: 1px solid rgba(255,255,255,0.3); border-radius: 50%;
+      width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 22px; z-index: 10;
+      transition: all 0.2s ease;
     }
-    .check-label-text { font-size: 13px; color: var(--text-main); font-weight: 500; }
-    .check-desc { font-size: 11.5px; color: var(--text-dim); margin-top: 2px; }
+    .lightbox-nav-btn:hover { background: #b8860b; }
+    .lightbox-nav-btn.prev { left: 16px; }
+    .lightbox-nav-btn.next { right: 16px; }
 
-    .signoff-form-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 24px;
+    /* Client Sign-off Card */
+    .signoff-card {
+      background: var(--glass-bg-solid);
+      backdrop-filter: var(--glass-blur);
+      border: 2px solid var(--gold-border);
+      box-shadow: var(--glass-shine), var(--glass-shadow);
+      border-radius: 18px;
+      padding: 36px;
     }
-    .form-group { display: flex; flex-direction: column; gap: 6px; }
-    .form-label { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; color: var(--gold-light); letter-spacing: 0.1em; }
-    .form-input {
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
-      border-radius: 8px; padding: 11px 15px; color: #fff; font-family: var(--font-sans); font-size: 13px;
-    }
-    .form-input:focus { outline: none; border-color: var(--gold-primary); box-shadow: 0 0 12px rgba(212,175,55,0.3); }
+    .signoff-checklist { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+    .signoff-item { display: flex; align-items: flex-start; gap: 12px; font-size: 13.5px; color: #1e293b; }
+    .signoff-checkbox { margin-top: 3px; accent-color: var(--gold-primary); width: 18px; height: 18px; cursor: pointer; }
 
     .signoff-actions { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; border-top: 1px solid var(--border-subtle); padding-top: 22px; }
     .signoff-stamp {
       display: none; align-items: center; gap: 10px;
-      background: rgba(16, 185, 129, 0.12); backdrop-filter: blur(10px); border: 1px solid #10b981;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
-      padding: 8px 18px; border-radius: 20px; color: #10b981; font-family: var(--font-mono); font-size: 11.5px; font-weight: 600;
+      background: rgba(16, 185, 129, 0.14); backdrop-filter: blur(10px); border: 1px solid #10b981;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      padding: 8px 18px; border-radius: 20px; color: #047857; font-family: var(--font-mono); font-size: 12px; font-weight: 700;
     }
     .signoff-stamp.verified { display: flex; }
 
-    /* Footer & Document Control */
+    /* Footer */
     .footer-section {
-      background: rgba(6, 6, 9, 0.85);
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: var(--glass-blur);
       border-top: 1px solid var(--border-subtle);
       padding: 52px 0 34px 0;
-      color: var(--text-dim);
+      color: var(--text-muted);
       font-size: 12.5px;
+      position: relative;
+      z-index: 1;
     }
-    .footer-grid {
-      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 32px; margin-bottom: 32px;
-    }
-    .footer-brand { font-family: var(--font-serif); font-size: 21px; color: var(--gold-light); font-weight: 700; margin-bottom: 8px; }
-    .footer-heading { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; letter-spacing: 0.1em; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+    .footer-brand { font-family: var(--font-serif); font-size: 24px; color: var(--gold-dark); font-weight: 700; margin-bottom: 8px; }
+    .footer-heading { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 12px; letter-spacing: 0.1em; font-weight: 700; }
     .footer-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 11.5px; }
+    .footer-bottom { border-top: 1px solid var(--border-subtle); padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; font-size: 11.5px; }
 
     @media (max-width: 900px) {
       #handover-nav { padding: 10px 16px; }
       .nav-menu { display: none; }
       .hero-title { font-size: 34px; }
-      #three-container { height: 560px; }
+      #three-container { height: 520px; }
       .footer-grid { grid-template-columns: 1fr; }
     }
 
@@ -836,10 +776,9 @@
       .section-wrap { page-break-inside: avoid; border-bottom: 1px solid #ccc !important; padding: 24pt 0 !important; }
       .hero-banner { background: none !important; color: #111 !important; }
       .hero-title, .section-heading, .feature-title, .gallery-title { color: #000000 !important; }
-      .meta-card, .feature-card, .material-card, .gallery-card, .signoff-card { border: 1px solid #ddd !important; background: #fafafa !important; color: #111 !important; }
+      .feature-visual-card, .material-card, .gallery-card, .signoff-card { border: 1px solid #ddd !important; background: #fafafa !important; color: #111 !important; }
       .schedule-table th { background: #eee !important; color: #000 !important; }
       .schedule-table td { color: #222 !important; }
-      .cad-container { background: #ffffff !important; border: 1px solid #333 !important; }
     }
   </style>
 </head>
@@ -848,14 +787,14 @@
   <!-- Glassmorphic Sticky Global Navigation Bar -->
   <header id="handover-nav">
     <div class="brand-box">
-      <a href="#" class="brand-logo-text">VELRA</a>
-      <span class="handover-badge">STAGE 04 • TECHNICAL HANDOVER</span>
+      <a href="#" class="brand-logo-text">VEL RA PERFUMES</a>
+      <span class="handover-badge">CONCEPT INTERIOR • TECHNICAL HANDOVER</span>
     </div>
     <ul class="nav-menu">
       <li><a href="#section-overview" class="nav-link">Overview</a></li>
-      <li><a href="#section-3d-twin" class="nav-link">3D Digital Twin</a></li>
-      <li><a href="#section-cad-plan" class="nav-link">Floor Plan & CAD</a></li>
-      <li><a href="#section-features" class="nav-link">Retail Architecture</a></li>
+      <li><a href="#section-3d-twin" class="nav-link">3D View</a></li>
+      <li><a href="#section-cad-plan" class="nav-link">Dimensions & CAD</a></li>
+      <li><a href="#section-features" class="nav-link">Photo Cuts & Details</a></li>
       <li><a href="#section-materials" class="nav-link">Materials</a></li>
       <li><a href="#section-schedules" class="nav-link">Schedules</a></li>
       <li><a href="#section-renders" class="nav-link">4K Renders</a></li>
@@ -873,33 +812,33 @@
   <!-- Hero Presentation Header -->
   <section class="hero-banner">
     <div class="container">
-      <div class="hero-pretitle">ARCHITECTURAL HANDOVER DOSSIER • REV 1.0 FINAL</div>
-      <h1 class="hero-title">VELRA PERFUMES FLAGSHIP</h1>
-      <p class="hero-subtitle">Comprehensive interior architecture, spatial engineering, illuminated joinery schedules, high-CRI lighting coordination, and interactive 3D digital twin package.</p>
+      <div class="hero-pretitle">STAGE 04 ARCHITECTURAL DOSSIER • REV 1.0 FINAL</div>
+      <h1 class="hero-title">Vel Ra Perfumes Concept Interior</h1>
+      <p class="hero-subtitle">Luxury flagship interior architecture, Calacatta Gold marble finishes, high-CRI illuminated fragrance joinery, spatial clearances, and interactive 3D WebGL Digital Twin.</p>
       
       <div class="project-meta-grid">
         <div class="meta-card">
           <div class="meta-label">Client / Brand</div>
-          <div class="meta-value gold">VELRA Perfumes Group</div>
+          <div class="meta-value gold">VEL RA Perfumes</div>
         </div>
         <div class="meta-card">
-          <div class="meta-label">Typology</div>
-          <div class="meta-value">Luxury Retail Boutique</div>
+          <div class="meta-label">Front Entrance Span</div>
+          <div class="meta-value gold">5,900 mm (5.90 m)</div>
         </div>
         <div class="meta-card">
-          <div class="meta-label">Gross Floor Area</div>
-          <div class="meta-value gold">~42.5 m² (Visual GFA)</div>
+          <div class="meta-label">Rear Wall Span</div>
+          <div class="meta-value">5,430 mm (5.43 m)</div>
         </div>
         <div class="meta-card">
-          <div class="meta-label">Survey Depth × Span</div>
-          <div class="meta-value">7,300 mm × 5,900 mm</div>
+          <div class="meta-label">Total Store Depth</div>
+          <div class="meta-value gold">7,300 mm (7.30 m)</div>
         </div>
         <div class="meta-card">
-          <div class="meta-label">Lead 3D / Interior Design</div>
-          <div class="meta-value">Faisal 3D Design Studio</div>
+          <div class="meta-label">Ceiling Clearance</div>
+          <div class="meta-value">3,400 mm (3.40 m)</div>
         </div>
         <div class="meta-card">
-          <div class="meta-label">Status / Phase</div>
+          <div class="meta-label">Project Status</div>
           <div class="meta-value gold">Approved for Site Verification</div>
         </div>
       </div>
@@ -911,379 +850,632 @@
     <div class="container">
       <div class="section-header">
         <div class="section-number">Section 01</div>
-        <h2 class="section-heading">Executive Summary & Architectural Concept</h2>
-        <p class="section-desc">Spatial hierarchy, retail storytelling, and sensory luxury embodied in architectural form.</p>
+        <h2 class="section-heading">Executive Summary & Spatial Dimensions</h2>
+        <p class="section-desc">Complete visual breakdown of the boutique layout, clearances, and luxury material specifications.</p>
       </div>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
-        <div class="feature-card">
-          <div class="feature-title" style="font-size: 21px; margin-bottom: 10px; color: var(--gold-light);">The "Liquid Amber & Radiant Gold" Narrative</div>
-          <p class="feature-body" style="font-size: 13.5px; line-height: 1.6;">
-            The VELRA flagship boutique is conceived as an immersive sanctuary of olfactory prestige. Balancing the warmth of liquid amber with polished architectural brushed gold and bookmatched Italian marble, the interior is curated to maximize visual depth, product illumination, and intimate client consultation.
+        <div class="meta-card" style="padding: 24px;">
+          <div class="cut-badge">✦ THE RETAIL CONCEPT</div>
+          <div style="font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: #0f172a; margin: 6px 0 10px 0;">White Calacatta Marble & Radiant Brushed Gold</div>
+          <p style="font-size: 13.5px; color: #334155; line-height: 1.6; margin-bottom: 12px;">
+            The Vel Ra boutique blends seamless white Calacatta Gold marble flooring and countertop slabs with warm 3000K backlit gold fragrance shelving to highlight luxury perfume extracts with maximum clarity and elegance.
           </p>
-          <p class="feature-body" style="font-size: 13.5px; line-height: 1.6;">
-            Linear cove lighting and concealed 3000K high-CRI LED ribbons backlight every fragrance flacon, accentuating the natural refraction of luxury perfume extracts and casting golden ambient reflections across high-gloss floor planes.
-          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span class="dim-pill gold">FLOOR: CALACATTA GOLD</span>
+            <span class="dim-pill">JOINERY: BRUSHED PVD GOLD</span>
+            <span class="dim-pill">LIGHTING: 3000K CRI >95</span>
+          </div>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-title" style="font-size: 21px; margin-bottom: 10px; color: var(--gold-light);">Spatial Zoning & Circulation Strategy</div>
-          <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: var(--text-muted);">
-            <li style="display: flex; gap: 10px;">
-              <span style="color: var(--gold-primary); font-weight: 700;">01.</span>
-              <span><strong>Glazed Storefront Portal:</strong> Floor-to-ceiling 12mm low-iron glass offering clear, unobstructed sightlines directly into the central consultation island and hero fragrance walls.</span>
-            </li>
-            <li style="display: flex; gap: 10px;">
-              <span style="color: var(--gold-primary); font-weight: 700;">02.</span>
-              <span><strong>Symmetrical Perimeter Bays:</strong> Dual 2,400mm modular joinery feature walls providing intuitive self-discovery zones for signature perfume collections.</span>
-            </li>
-            <li style="display: flex; gap: 10px;">
-              <span style="color: var(--gold-primary); font-weight: 700;">03.</span>
-              <span><strong>Central Consultation Island:</strong> 2,400 × 900mm marble-topped tester bar creating an intimate ceremony for bespoke client scent profiling.</span>
-            </li>
-            <li style="display: flex; gap: 10px;">
-              <span style="color: var(--gold-primary); font-weight: 700;">04.</span>
-              <span><strong>Discreet Service & WC Core:</strong> Seamlessly integrated flush pivot door (~770mm door clearance) for staff storage and restroom facilities without disrupting retail visual harmony.</span>
-            </li>
-          </ul>
+        <div class="meta-card" style="padding: 24px;">
+          <div class="cut-badge">✦ KEY ARCHITECTURAL DIMENSIONS</div>
+          <div style="font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: #0f172a; margin: 6px 0 10px 0;">Verified Spatial Clearances</div>
+          <div class="dim-breakdown-box" style="margin-bottom: 0;">
+            <div class="dim-row">
+              <span class="dim-name">Front Glazed Storefront Span:</span>
+              <span class="dim-val">5,900 mm [5.90 m]</span>
+            </div>
+            <div class="dim-row">
+              <span class="dim-name">Rear Perimeter Wall Span:</span>
+              <span class="dim-val">5,430 mm [5.43 m]</span>
+            </div>
+            <div class="dim-row">
+              <span class="dim-name">Overall Store Interior Depth:</span>
+              <span class="dim-val">7,300 mm [7.30 m]</span>
+            </div>
+            <div class="dim-row">
+              <span class="dim-name">Restroom / WC Pivot Door:</span>
+              <span class="dim-val">770 mm [0.77 m]</span>
+            </div>
+            <div class="dim-row">
+              <span class="dim-name">Customer Circulation Aisles:</span>
+              <span class="dim-val">≥ 1,200 mm [1.20 m]</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 02: Interactive 3D Digital Twin -->
-  <section id="section-3d-twin" class="section-wrap alt-bg">
+  <!-- SECTION 02: Interactive 3D Digital Twin Viewport -->
+  <section id="section-3d-twin" class="section-wrap" style="padding-top: 24px;">
     <div class="container">
-      <div class="section-header" style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
-        <div>
-          <div class="section-number">Section 02</div>
-          <h2 class="section-heading">Interactive 3D Digital Twin</h2>
-          <p class="section-desc">Real-time WebGL spatial explorer with calibrated camera director, dimensions inspector, and top-down plan.</p>
-        </div>
-        <div style="display: flex; gap: 8px;">
-          <button class="btn-pdf" id="btn-fullscreen-toggle">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
-            <span id="fs-btn-text">Fullscreen 3D</span>
-          </button>
-        </div>
+      <div class="section-header">
+        <div class="section-number">Section 02</div>
+        <h2 class="section-heading">Interactive 3D Digital Twin Showroom</h2>
+        <p class="section-desc">Explore the spatial volume, joinery units, and lighting fixtures in real-time WebGL 3D.</p>
       </div>
 
-      <!-- 3D Viewport Box -->
       <div id="three-container">
-        <div id="loading">
-          <div>Loading Velra Digital Twin & HDRI…</div>
-          <div class="bar"><div class="bar-fill" id="bar-fill"></div></div>
-        </div>
-
-        <!-- Top Navigation Bar Inside Viewport -->
-        <div id="top-bar">
-          <div class="top-bar-left">
-            <div class="btn-group">
-              <button class="nav-btn active" id="btn-walkthrough">🚶 3D View</button>
-              <button class="nav-btn" id="btn-topdown">📐 Top Plan</button>
-            </div>
-            <button class="toggle-btn" id="btn-toggle-dims">📏 Dimensions</button>
-            <div class="btn-group">
-              <button class="nav-btn" data-target="entrance">🚪 Entrance</button>
-              <button class="nav-btn" data-target="counter">💎 Counter</button>
-              <button class="nav-btn" data-target="showcase">🏛️ Showcases</button>
-              <button class="nav-btn" data-target="perfume-wall">🧴 Fragrances</button>
-            </div>
-          </div>
-          <div class="top-bar-right">
-            <button class="toggle-btn" id="btn-topbar-studio">🎥 Camera Studio</button>
-          </div>
-        </div>
+        <div id="three-viewport"></div>
 
         <!-- Start Overlay -->
         <div id="start-overlay">
-          <div id="store-title">Velra Perfumes</div>
-          <div id="store-subtitle">Interactive 3D Architectural Showroom</div>
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
-            <button id="start-btn">
+          <div class="start-title">VEL RA PERFUMES</div>
+          <div class="start-desc">Click below to unlock the 3D showroom. Orbit, pan, fly to key interior waypoints, or inspect dimensions in real-time.</div>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+            <button id="start-btn" class="btn-enter-3d">
               <span>Enter Showroom</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
             </button>
-            <button id="btn-adjust-start" style="background: rgba(18,18,25,0.75); border: 1px solid rgba(212,175,55,0.45); color: #d4af37; font-size: 11px; padding: 6px 18px; border-radius: 20px; cursor: pointer; pointer-events: auto; backdrop-filter: blur(12px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);">
+            <button id="btn-adjust-start" style="background: rgba(15,23,42,0.85); border: 1px solid rgba(212,175,55,0.45); color: #fef08a; font-size: 11px; padding: 6px 18px; border-radius: 20px; cursor: pointer; pointer-events: auto; backdrop-filter: blur(12px);">
               🎥 Adjust View Angle
             </button>
           </div>
         </div>
 
-        <!-- Floating Live Object Specification Panel -->
-        <div id="info-panel"></div>
-        
-        <!-- Bottom Hint -->
-        <div id="hint">🖱️ Click object for specifications &nbsp;•&nbsp; Double-click floor to walk &nbsp;•&nbsp; Drag to rotate</div>
+        <!-- Loading Screen -->
+        <div id="loading">
+          <div class="spinner"></div>
+          <div class="loading-text">Loading 3D Digital Twin...</div>
+          <div class="loading-bar"><div id="bar-fill" class="loading-bar-fill"></div></div>
+        </div>
 
-        <!-- Camera Studio Tool -->
-        <button id="camera-studio-toggle">🎥 Camera Director</button>
-        <div id="camera-studio-panel">
-          <div class="header">
-            <div class="title">🎥 Camera Angle Director</div>
-            <button class="close-studio" id="btn-close-studio" title="Close">&times;</button>
-          </div>
-          <div class="coord-box" id="cam-coords">Orbit camera to inspect position & Euler rotation</div>
-          
-          <div class="grid-btns">
-            <button class="save-btn" id="btn-save-start">💾 Save Start View</button>
-            <button class="save-btn" id="btn-save-entrance">💾 Save Entrance</button>
-            <button class="save-btn" id="btn-save-counter">💾 Save Counter</button>
-            <button class="save-btn" id="btn-save-showcase">💾 Save Showcase</button>
-            <button class="save-btn" id="btn-save-fragrance" style="grid-column: span 2;">💾 Save Fragrance Wall View</button>
+        <!-- Top Floating Controls -->
+        <div id="top-bar">
+          <div class="control-group">
+            <button id="btn-walkthrough" class="btn-pill active">Walkthrough</button>
+            <button id="btn-topdown" class="btn-pill">Top-Down CAD</button>
+            <button id="btn-toggle-dims" class="btn-pill">📐 Dimensions</button>
           </div>
 
-          <div style="display: flex; gap: 6px; margin-top: 4px;">
-            <button class="util-btn" id="btn-copy-cam" style="flex:1;">📋 Copy JS Coordinates</button>
-            <button class="util-btn" id="btn-reset-cam">🔄 Reset Defaults</button>
+          <div class="control-group">
+            <button class="btn-pill" data-waypoint="entrance">Entrance</button>
+            <button class="btn-pill" data-waypoint="counter">Island</button>
+            <button class="btn-pill" data-waypoint="showcase">Showcase</button>
+            <button class="btn-pill" data-waypoint="perfume-wall">Perfume Wall</button>
+            <button id="btn-topbar-studio" class="btn-pill" style="border-color: rgba(212,175,55,0.6); color: #fef08a;">🎥 Director</button>
+            <button id="btn-fullscreen-toggle" class="btn-pill" title="Toggle Fullscreen">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+              <span id="fs-btn-text">Expand</span>
+            </button>
           </div>
         </div>
 
-        <div id="toast">Camera viewpoint saved!</div>
-        <div id="three-viewport"></div>
+        <!-- Live Spec Panel -->
+        <div id="info-panel">
+          <div id="info-title" class="info-title">Selected Feature</div>
+          <div id="info-dims" class="info-dims">Dimensions</div>
+          <div id="info-desc" class="info-desc">Description</div>
+        </div>
+
+        <!-- Camera Studio Panel -->
+        <div id="camera-studio-panel">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <span style="font-family: var(--font-mono); font-weight: 700; color: #fef08a;">🎥 CAMERA DIRECTOR</span>
+            <button id="btn-close-studio" style="background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 16px;">✕</button>
+          </div>
+          <div id="cam-coords" style="font-family: var(--font-mono); font-size: 10px; color: #cbd5e1; background: rgba(0,0,0,0.4); padding: 8px; border-radius: 8px; margin-bottom: 10px; line-height: 1.4;">
+            Pos: (0.00, 0.00, 0.00)<br>Target: (0.00, 0.00, 0.00)
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <button id="btn-save-start" class="btn-pill" style="justify-content: center; width: 100%;">💾 Set as Storefront Start</button>
+            <button id="btn-save-entrance" class="btn-pill" style="justify-content: center; width: 100%;">💾 Save to Entrance</button>
+            <button id="btn-save-counter" class="btn-pill" style="justify-content: center; width: 100%;">💾 Save to Island</button>
+            <button id="btn-copy-cam" class="btn-pill" style="justify-content: center; width: 100%; background: #b8860b; color: #fff;">📋 Copy JS Vector</button>
+            <button id="btn-reset-cam" class="btn-pill" style="justify-content: center; width: 100%; color: #ef4444;">↺ Reset Defaults</button>
+          </div>
+        </div>
+
+        <div id="hint" style="position: absolute; bottom: 20px; right: 20px; font-family: var(--font-mono); font-size: 11px; color: #cbd5e1; background: rgba(15,23,42,0.8); padding: 5px 12px; border-radius: 20px; pointer-events: none; backdrop-filter: blur(8px);">
+          Left Click + Drag: Rotate • Right Click: Pan • Scroll: Zoom
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 03: Architectural CAD Floor Plan & Spatial Zoning -->
+  <!-- SECTION 03: CAD Floor Plan & Visual Zoning Plan -->
   <section id="section-cad-plan" class="section-wrap">
     <div class="container">
       <div class="section-header">
         <div class="section-number">Section 03</div>
-        <h2 class="section-heading">Architectural Blueprint & CAD Spatial Zoning</h2>
-        <p class="section-desc">Surveyed boundary dimensions, retail circulation clearances, joinery footprints, and service egress corridor.</p>
+        <h2 class="section-heading">Architectural CAD Blueprint & Spatial Zoning</h2>
+        <p class="section-desc">Exact architectural dimensions, customer flow clearances, and joinery coordinates.</p>
       </div>
 
-      <div class="cad-container">
-        <div class="cad-header">
-          <div class="cad-title">CAD SCHEMATIC FLOOR PLAN — LEVEL 00 (RETAIL)</div>
-          <div class="cad-scale">SCALE: 1:50 @ A3 • ALL DIMENSIONS IN MILLIMETERS (MM)</div>
-        </div>
-
-        <div class="cad-svg-wrap">
-          <svg viewBox="0 0 1000 680" width="1000" height="680" xmlns="http://www.w3.org/2000/svg">
+      <div class="feature-visual-card" style="padding: 24px;">
+        <div style="overflow-x: auto; margin-bottom: 20px; border-radius: 12px; border: 1px solid var(--border-subtle); box-shadow: 0 4px 16px rgba(0,0,0,0.05);">
+          <svg id="cad-floorplan-svg" viewBox="0 0 1000 680" style="width: 100%; height: auto; min-width: 750px; display: block;">
             <defs>
               <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
-                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(56, 139, 253, 0.08)" stroke-width="1"/>
+                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(184, 134, 11, 0.12)" stroke-width="0.8"/>
               </pattern>
-              <marker id="arrow-dim" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 2 L 8 5 L 0 8 z" fill="#ef4444"/>
-              </marker>
-              <marker id="arrow-dim-blue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 2 L 8 5 L 0 8 z" fill="#388bfd"/>
+              <marker id="arrow-cad" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+                <path d="M 0 1.5 L 10 5 L 0 8.5 z" fill="#b8860b" />
               </marker>
             </defs>
 
-            <rect width="1000" height="680" fill="#090d14"/>
+            <rect width="1000" height="680" fill="#ffffff"/>
             <rect width="1000" height="680" fill="url(#grid)"/>
 
             <!-- Store Outer Boundary Walls -->
-            <polygon points="180,120 780,120 780,220 830,220 830,560 180,560" fill="rgba(212, 175, 55, 0.05)" stroke="#58a6ff" stroke-width="3"/>
+            <polygon points="180,120 780,120 780,220 830,220 830,560 180,560" fill="rgba(212, 175, 55, 0.06)" stroke="#b8860b" stroke-width="3"/>
             
             <!-- Structural Hatching for Walls -->
-            <rect x="165" y="105" width="15" height="470" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
-            <rect x="165" y="105" width="630" height="15" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
-            <rect x="780" y="105" width="15" height="130" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
-            <rect x="780" y="220" width="65" height="15" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
-            <rect x="830" y="220" width="15" height="355" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+            <rect x="165" y="105" width="15" height="470" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+            <rect x="180" y="105" width="600" height="15" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+            <rect x="830" y="205" width="15" height="370" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+            <rect x="780" y="105" width="15" height="115" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+            <rect x="780" y="205" width="50" height="15" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
 
-            <!-- Glass Storefront Portal (Bottom, Span: 5,900 mm) -->
-            <line x1="180" y1="560" x2="830" y2="560" stroke="#38bdf8" stroke-width="4" stroke-dasharray="12 4"/>
-            <text x="505" y="585" fill="#38bdf8" font-family="monospace" font-size="12" text-anchor="middle" font-weight="bold">FRONT GLAZED ENTRANCE PORTAL (SPAN: 5,900 MM)</text>
+            <!-- Front Entrance Glazed Façade Opening -->
+            <line x1="180" y1="560" x2="830" y2="560" stroke="#b8860b" stroke-width="5" stroke-dasharray="14 6"/>
+            <text x="505" y="585" fill="#8a5a00" font-family="monospace" font-size="12" text-anchor="middle" font-weight="bold">FRONT GLAZED ENTRANCE PORTAL (SPAN: 5,900 MM / 5.90 M)</text>
 
             <!-- Left Perimeter Feature Perfume Shelving -->
-            <rect x="180" y="160" width="40" height="340" fill="rgba(212, 175, 55, 0.22)" stroke="#d4af37" stroke-width="2"/>
-            <text x="200" y="330" fill="#f5e6a8" font-family="sans-serif" font-size="11" font-weight="600" text-anchor="middle" transform="rotate(-90 200 330)">LEFT PERIMETER SHELVING (2400 × 900 × 350 MM)</text>
+            <rect x="180" y="160" width="40" height="340" fill="rgba(212, 175, 55, 0.25)" stroke="#b8860b" stroke-width="2"/>
+            <text x="200" y="330" fill="#8a5a00" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle" transform="rotate(-90 200 330)">LEFT PERIMETER SHELVING (2400 × 900 × 350 MM)</text>
 
             <!-- Right Perimeter Arched Vitrines -->
-            <rect x="790" y="250" width="40" height="250" fill="rgba(212, 175, 55, 0.22)" stroke="#d4af37" stroke-width="2"/>
-            <text x="810" y="375" fill="#f5e6a8" font-family="sans-serif" font-size="11" font-weight="600" text-anchor="middle" transform="rotate(90 810 375)">RIGHT PERIMETER SHOWCASES</text>
+            <rect x="790" y="250" width="40" height="250" fill="rgba(212, 175, 55, 0.25)" stroke="#b8860b" stroke-width="2"/>
+            <text x="810" y="375" fill="#8a5a00" font-family="sans-serif" font-size="11" font-weight="700" text-anchor="middle" transform="rotate(90 810 375)">RIGHT PERIMETER SHOWCASES</text>
 
             <!-- Central Consultation Island Counter -->
-            <rect x="410" y="290" width="190" height="95" rx="10" fill="rgba(212, 175, 55, 0.28)" stroke="#d4af37" stroke-width="2.5"/>
-            <line x1="410" y1="337" x2="600" y2="337" stroke="rgba(212, 175, 55, 0.5)" stroke-width="1" stroke-dasharray="4 2"/>
-            <text x="505" y="332" fill="#ffffff" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">CENTRAL ISLAND COUNTER</text>
-            <text x="505" y="352" fill="#f5e6a8" font-family="monospace" font-size="10.5" text-anchor="middle">2,400 × 900 × 950 MM</text>
+            <rect x="410" y="290" width="190" height="95" rx="10" fill="rgba(212, 175, 55, 0.3)" stroke="#b8860b" stroke-width="2.5"/>
+            <line x1="410" y1="337" x2="600" y2="337" stroke="rgba(184, 134, 11, 0.6)" stroke-width="1" stroke-dasharray="4 2"/>
+            <text x="505" y="332" fill="#0f172a" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle">CENTRAL ISLAND COUNTER</text>
+            <text x="505" y="352" fill="#8a5a00" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">2,400 × 900 × 950 MM</text>
 
             <!-- Cashier & Packaging POS Desk -->
-            <rect x="395" y="140" width="220" height="65" rx="4" fill="rgba(255, 255, 255, 0.1)" stroke="#e2e8f0" stroke-width="2"/>
-            <text x="505" y="175" fill="#ffffff" font-family="sans-serif" font-size="11.5" font-weight="bold" text-anchor="middle">CASHIER & POS WRAP COUNTER</text>
-            <text x="505" y="192" fill="#94a3b8" font-family="monospace" font-size="9.5" text-anchor="middle">2,200 × 800 × 1,050 MM</text>
+            <rect x="395" y="140" width="220" height="65" rx="4" fill="rgba(15, 23, 42, 0.08)" stroke="#475569" stroke-width="2"/>
+            <text x="505" y="175" fill="#0f172a" font-family="sans-serif" font-size="11.5" font-weight="bold" text-anchor="middle">CASHIER & POS WRAP COUNTER</text>
+            <text x="505" y="192" fill="#64748b" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">2,200 × 800 × 1,050 MM</text>
 
             <!-- Restroom / WC Corridor -->
-            <rect x="690" y="120" width="90" height="100" fill="rgba(56, 139, 253, 0.14)" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="3 3"/>
-            <text x="735" y="165" fill="#60a5fa" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">SERVICE & WC</text>
-            <text x="735" y="182" fill="#93c5fd" font-family="monospace" font-size="9.5" text-anchor="middle">DOOR: 770 MM</text>
+            <rect x="690" y="120" width="90" height="100" fill="rgba(59, 130, 246, 0.12)" stroke="#3b82f6" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <text x="735" y="165" fill="#1d4ed8" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">SERVICE & WC</text>
+            <text x="735" y="182" fill="#2563eb" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">DOOR: 770 MM</text>
 
-            <!-- Door Swing Arc (770mm clearance) -->
-            <path d="M 690,220 A 45 45 0 0 1 735,175" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="2 2"/>
-            <line x1="690" y1="220" x2="735" y2="175" stroke="#38bdf8" stroke-width="2"/>
+            <!-- Architectural Dimension Dimension Lines -->
+            <!-- Back Wall Span -->
+            <line x1="180" y1="85" x2="780" y2="85" stroke="#b8860b" stroke-width="1.5" marker-start="url(#arrow-cad)" marker-end="url(#arrow-cad)"/>
+            <text x="480" y="78" fill="#8a5a00" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">BACK WALL SPAN: 5,430 MM (5.43 M)</text>
 
-            <!-- Dimension Line: Back Wall Span (5,430 mm) -->
-            <line x1="180" y1="75" x2="780" y2="75" stroke="#ef4444" stroke-width="2" marker-start="url(#arrow-dim)" marker-end="url(#arrow-dim)"/>
-            <line x1="180" y1="70" x2="180" y2="120" stroke="#ef4444" stroke-width="1" stroke-dasharray="3 3"/>
-            <line x1="780" y1="70" x2="780" y2="120" stroke="#ef4444" stroke-width="1" stroke-dasharray="3 3"/>
-            <rect x="430" y="60" width="100" height="24" rx="4" fill="#0c1017" stroke="#ef4444" stroke-width="1.5"/>
-            <text x="480" y="76" fill="#ef4444" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">5,430 MM</text>
+            <!-- Total Store Depth -->
+            <line x1="130" y1="120" x2="130" y2="560" stroke="#b8860b" stroke-width="1.5" marker-start="url(#arrow-cad)" marker-end="url(#arrow-cad)"/>
+            <text x="115" y="340" fill="#8a5a00" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle" transform="rotate(-90 115 340)">OVERALL DEPTH: 7,300 MM (7.30 M)</text>
 
-            <!-- Dimension Line: Total Depth (7,300 mm) -->
-            <line x1="115" y1="120" x2="115" y2="560" stroke="#ef4444" stroke-width="2" marker-start="url(#arrow-dim)" marker-end="url(#arrow-dim)"/>
-            <line x1="110" y1="120" x2="180" y2="120" stroke="#ef4444" stroke-width="1" stroke-dasharray="3 3"/>
-            <line x1="110" y1="560" x2="180" y2="560" stroke="#ef4444" stroke-width="1" stroke-dasharray="3 3"/>
-            <rect x="65" y="325" width="100" height="24" rx="4" fill="#0c1017" stroke="#ef4444" stroke-width="1.5"/>
-            <text x="115" y="341" fill="#ef4444" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">7,300 MM</text>
-
-            <!-- Dimension Line: Front Glazing Span (5,900 mm) -->
-            <line x1="180" y1="625" x2="830" y2="625" stroke="#ef4444" stroke-width="2" marker-start="url(#arrow-dim)" marker-end="url(#arrow-dim)"/>
-            <line x1="180" y1="560" x2="180" y2="630" stroke="#ef4444" stroke-width="1" stroke-dasharray="3 3"/>
-            <line x1="830" y1="560" x2="830" y2="630" stroke="#ef4444" stroke-width="1" stroke-dasharray="3 3"/>
-            <rect x="455" y="612" width="100" height="24" rx="4" fill="#0c1017" stroke="#ef4444" stroke-width="1.5"/>
-            <text x="505" y="628" fill="#ef4444" font-family="monospace" font-size="12" font-weight="bold" text-anchor="middle">5,900 MM</text>
-
-            <!-- Aisle Clearance Annotations (1,200 mm) -->
-            <line x1="220" y1="337" x2="410" y2="337" stroke="#388bfd" stroke-width="1.5" marker-start="url(#arrow-dim-blue)" marker-end="url(#arrow-dim-blue)"/>
-            <rect x="285" y="325" width="60" height="20" rx="3" fill="#0c1017" stroke="#388bfd" stroke-width="1"/>
-            <text x="315" y="339" fill="#388bfd" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">1,200 MM</text>
-
-            <line x1="600" y1="337" x2="790" y2="337" stroke="#388bfd" stroke-width="1.5" marker-start="url(#arrow-dim-blue)" marker-end="url(#arrow-dim-blue)"/>
-            <rect x="665" y="325" width="60" height="20" rx="3" fill="#0c1017" stroke="#388bfd" stroke-width="1"/>
-            <text x="695" y="339" fill="#388bfd" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">1,200 MM</text>
+            <!-- Clearance Arrows -->
+            <line x1="220" y1="337" x2="410" y2="337" stroke="#059669" stroke-width="1.5" stroke-dasharray="2 2" marker-start="url(#arrow-cad)" marker-end="url(#arrow-cad)"/>
+            <text x="315" y="330" fill="#047857" font-family="monospace" font-size="10" font-weight="bold" text-anchor="middle">AISLE: ≥ 1,200 MM</text>
           </svg>
         </div>
 
-        <div class="cad-legend">
-          <div class="legend-item"><div class="legend-box" style="background: #d4af37;"></div><span>Perimeter Fragrance Joinery & Island</span></div>
-          <div class="legend-item"><div class="legend-box" style="background: #ef4444;"></div><span>Verified Survey Boundary Dimensions</span></div>
-          <div class="legend-item"><div class="legend-box" style="background: #388bfd;"></div><span>Clearance Aisle Dimensions (≥ 1200 mm)</span></div>
-          <div class="legend-item"><div class="legend-box" style="background: #38bdf8;"></div><span>Full-Height Glazed Facade & Pivot Door</span></div>
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <span class="dim-pill gold">TOTAL DEPTH: 7,300 MM</span>
+            <span class="dim-pill gold">FRONT SPAN: 5,900 MM</span>
+            <span class="dim-pill">REAR SPAN: 5,430 MM</span>
+            <span class="dim-pill">WC DOOR: 770 MM</span>
+          </div>
+          <span style="font-family: var(--font-mono); font-size: 11px; color: var(--gold-dark); font-weight: 700;">★ All dimensions subject to contractor laser site-verification</span>
         </div>
-      </div>
-
-      <div class="disclaimer-box">
-        <strong>⚠️ Architectural Handover Dimension Protocol:</strong>
-        All measurements indicated above represent <em>Approved Visual & Joinery Design Dimensions</em>. The appointed general fit-out contractor is required to conduct comprehensive on-site laser survey verification prior to final millwork fabrication. Any on-site discrepancies beyond ±15mm must be submitted to Faisal 3D Design Studio for joinery shop drawing adjustment.
       </div>
     </div>
   </section>
 
-  <!-- SECTION 04: Key Architectural & Interior Features -->
-  <section id="section-features" class="section-wrap alt-bg">
+  <!-- SECTION 04: Visual Cuts & Detail Photos ("THIS IS THIS") -->
+  <section id="section-features" class="section-wrap">
     <div class="container">
       <div class="section-header">
         <div class="section-number">Section 04</div>
-        <h2 class="section-heading">Key Architectural & Interior Design Features</h2>
-        <p class="section-desc">Detailed breakdown of bespoke joinery modules, architectural surfaces, and luminaire integration.</p>
+        <h2 class="section-heading">Photo Cuts & Architectural Elements Breakdown</h2>
+        <p class="section-desc">Detailed photo crops and visual cuts showing each specific material, joinery detail, and exact dimension.</p>
       </div>
 
-      <div class="features-grid">
-        <!-- Feature 1 -->
-        <div class="feature-card">
-          <div>
-            <div class="feature-icon-title">
-              <div class="feature-icon">🚪</div>
-              <div class="feature-title">Shopfront & Glazed Portal</div>
+      <!-- FEATURE 01: Shopfront Façade & Glazed Portal -->
+      <div class="feature-visual-card">
+        <div class="feature-visual-grid">
+          <div class="feature-photos-col">
+            <div class="photo-frame">
+              <img src="/renders/pass1.png" alt="Shopfront Glazed Façade">
+              <div class="photo-tag-overlay">✦ PHOTO 01: EXTERIOR STOREFRONT</div>
+              <div class="photo-dim-overlay">SPAN: 5,900 MM (5.90 M)</div>
             </div>
-            <p class="feature-body">
-              Floor-to-ceiling 12mm ultra-clear low-iron tempered glass with brushed gold PVD stainless steel structural mullions. 3D illuminated brushed brass brand signage mounted above the glazed portal header.
-            </p>
-          </div>
-          <div class="feature-specs">
-            <div class="feature-spec-row"><span class="feature-spec-label">Clear Span:</span><span>5,900 mm</span></div>
-            <div class="feature-spec-row"><span class="feature-spec-label">Glass Spec:</span><span>12mm Low-Iron Tempered Float</span></div>
-            <div class="feature-spec-row"><span class="feature-spec-label">Frame Finish:</span><span>PVD Brushed Titanium Gold</span></div>
-          </div>
-        </div>
-
-        <!-- Feature 2 -->
-        <div class="feature-card">
-          <div>
-            <div class="feature-icon-title">
-              <div class="feature-icon">🧴</div>
-              <div class="feature-title">Illuminated Perfume Shelving</div>
+            <div class="cuts-spotlight-grid">
+              <div class="cut-mini-card">
+                <img src="/renders/cuts/cut_facade_logo.png" alt="3D Gold Logo">
+                <div class="cut-mini-label">THIS IS: 3D Gold Logo</div>
+              </div>
+              <div class="cut-mini-card">
+                <img src="/renders/cuts/cut_facade_vitrine.png" alt="Display Vitrine">
+                <div class="cut-mini-label">THIS IS: Window Vitrine</div>
+              </div>
             </div>
-            <p class="feature-body">
-              Modular 2400 × 900 × 350mm full-height display units featuring geometric 3D relief gold backplates. Concealed 24V 3000K high-CRI LED aluminum channels illuminate floating 10mm tempered glass shelves.
-            </p>
           </div>
-          <div class="feature-specs">
-            <div class="feature-spec-row"><span class="feature-spec-label">Module Dims:</span><span>2,400 H × 900 W × 350 D mm</span></div>
-            <div class="feature-spec-row"><span class="feature-spec-label">Back Panel:</span><span>Custom 3D Geometric Gold Relief</span></div>
-            <div class="feature-spec-row"><span class="feature-spec-label">Lighting:</span><span>Concealed 3000K CRI>95 Strip</span></div>
-          </div>
-        </div>
-
-        <!-- Feature 3 -->
-        <div class="feature-card">
-          <div>
-            <div class="feature-icon-title">
-              <div class="feature-icon">💎</div>
-              <div class="feature-title">Central Consultation Island</div>
+          <div class="feature-info-col">
+            <div>
+              <div class="feature-code-header">
+                <span class="cut-badge">✦ ELEMENT 01 • FAÇADE</span>
+                <span class="dim-pill gold">HEIGHT: 3,400 MM</span>
+              </div>
+              <h3 class="feature-title">Shopfront & Glazed Entrance Portal</h3>
+              
+              <div class="dim-breakdown-box">
+                <div class="dim-row">
+                  <span class="dim-name">Entrance Glazing Span:</span>
+                  <span class="dim-val">5,900 mm [5.90 m]</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Glass Specification:</span>
+                  <span class="dim-val">12 mm Low-Iron Tempered</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Mullions & Portal Frame:</span>
+                  <span class="dim-val">Brushed Titanium Gold PVD</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Signage Typography:</span>
+                  <span class="dim-val">VEL RA PERFUMES 3D Backlit</span>
+                </div>
+              </div>
             </div>
-            <p class="feature-body">
-              Custom 2400 × 900 × 950mm consultation bar with bookmatched Calacatta marble countertop, bullnose edge detail, fluted brushed brass pedestal base, and lockable glass-topped fragrance vitrines.
-            </p>
-          </div>
-          <div class="feature-specs">
-            <div class="feature-spec-row"><span class="feature-spec-label">Dimensions:</span><span>2,400 L × 900 W × 950 H mm</span></div>
-            <div class="feature-spec-row"><span class="feature-spec-label">Top Surface:</span><span>20mm Polished Marble Slab</span></div>
-            <div class="feature-spec-row"><span class="feature-spec-label">Storage:</span><span>Soft-Close Lockable Drawers</span></div>
-          </div>
-        </div>
-
-        <!-- Feature 4 -->
-        <div class="feature-card">
-          <div>
-            <div class="feature-icon-title">
-              <div class="feature-icon">💳</div>
-              <div class="feature-title">POS Cashier & Wrap Desk</div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <span class="dim-pill">CLEAR SIGHTLINES</span>
+              <span class="dim-pill">WARM 3000K HALO</span>
+              <span class="dim-pill gold">PVD STAINLESS STEEL</span>
             </div>
-            <p class="feature-body">
-              2200 × 800 × 1050mm cashier desk with sunken POS equipment tray, concealed cable raceways, illuminated brass brand monogram, and acoustic ivory rear wall panelling.
-            </p>
-          </div>
-          <div class="feature-specs">
-            <div class="feature-spec-row"><span class="feature-spec-label">Dimensions:</span><span>2,200 L × 800 W × 1,050 H mm</span></div>
-            <div class="feature-spec-row"><span class="feature-spec-label">Worktop:</span><span>Matching Italian Marble</span></div>
-            <div class="feature-spec-row"><span class="feature-spec-label">Power MEP:</span><span>Integrated Floor Drop Raceway</span></div>
-          </div>
-        </div>
-
-        <!-- Feature 5 -->
-        <div class="feature-card">
-          <div>
-            <div class="feature-icon-title">
-              <div class="feature-icon">🏛️</div>
-              <div class="feature-title">Bookmatched Marble Flooring</div>
-            </div>
-            <p class="feature-body">
-              High-gloss 1200 × 600 mm Italian porcelain marble tiles laid with precise 1.5mm epoxy grout matching the tile tone. Integrated brass expansion transition trims at entry and service threshold.
-            </p>
-          </div>
-          <div class="feature-specs">
-            <div class="feature-spec-row"><span class="feature-spec-label">Tile Format:</span><span>1,200 × 600 × 10 mm</span></div>
-            <div class="feature-spec-row"><span class="feature-spec-label">Surface:</span><span>Polished Satin Gloss (R9 Slip)</span></div>
-            <div class="feature-spec-row"><span class="feature-spec-label">Grout:</span><span>1.5mm Color-Matched Epoxy</span></div>
-          </div>
-        </div>
-
-        <!-- Feature 6 -->
-        <div class="feature-card">
-          <div>
-            <div class="feature-icon-title">
-              <div class="feature-icon">💡</div>
-              <div class="feature-title">Gypsum Coffer & Lighting</div>
-            </div>
-            <p class="feature-body">
-              Multi-tiered coffered gypsum ceiling with warm indirect perimeter cove lighting (3000K, 24V LED) and recessed anti-glare gimbal downlights (CRI > 90, 15° & 36° beam angles).
-            </p>
-          </div>
-          <div class="feature-specs">
-            <div class="feature-spec-row"><span class="feature-spec-label">CCT / CRI:</span><span>3000K Warm White • CRI > 95</span></div>
-            <div class="feature-spec-row"><span class="feature-spec-label">Cove Drop:</span><span>150mm Recessed Gypsum Coffer</span></div>
-            <div class="feature-spec-row"><span class="feature-spec-label">Control:</span><span>DALI / 0-10V Dimmable Zones</span></div>
           </div>
         </div>
       </div>
+
+      <!-- FEATURE 02: Illuminated Perimeter Perfume Shelving Bays -->
+      <div class="feature-visual-card">
+        <div class="feature-visual-grid">
+          <div class="feature-photos-col">
+            <div class="photo-frame">
+              <img src="/renders/pass3.png" alt="Illuminated Perfume Shelving">
+              <div class="photo-tag-overlay">✦ PHOTO 03: PERFUME SHELVING WALL</div>
+              <div class="photo-dim-overlay">2,400 H × 900 W × 350 D MM</div>
+            </div>
+            <div class="cuts-spotlight-grid">
+              <div class="cut-mini-card">
+                <img src="/renders/cuts/cut_perfume_shelf_halo.png" alt="LED Shelf Halo">
+                <div class="cut-mini-label">THIS IS: 3000K LED Halo</div>
+              </div>
+              <div class="cut-mini-card">
+                <img src="/renders/cuts/cut_perfume_bottle_bay.png" alt="Bottle Display Bay">
+                <div class="cut-mini-label">THIS IS: Floating Bay</div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-info-col">
+            <div>
+              <div class="feature-code-header">
+                <span class="cut-badge">✦ ELEMENT 02 • JOINERY</span>
+                <span class="dim-pill gold">4 MODULAR BAYS</span>
+              </div>
+              <h3 class="feature-title">Illuminated Perimeter Perfume Shelves</h3>
+              
+              <div class="dim-breakdown-box">
+                <div class="dim-row">
+                  <span class="dim-name">Each Bay Footprint:</span>
+                  <span class="dim-val">2,400 H × 900 W × 350 D mm</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Shelf Material:</span>
+                  <span class="dim-val">10 mm Optiwhite Crystal Glass</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Backplate Architecture:</span>
+                  <span class="dim-val">3D Geometric Gold Panels</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Integrated Illumination:</span>
+                  <span class="dim-val">Concealed 24V 3000K CRI >95</span>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <span class="dim-pill">ZERO GLARE</span>
+              <span class="dim-pill gold">AMBER REFRACTION</span>
+              <span class="dim-pill">DALI DIMMABLE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEATURE 03: Central Consultation Island Counter -->
+      <div class="feature-visual-card">
+        <div class="feature-visual-grid">
+          <div class="feature-photos-col">
+            <div class="photo-frame">
+              <img src="/renders/pass4.png" alt="Central Consultation Island Counter">
+              <div class="photo-tag-overlay">✦ PHOTO 04: CONSULTATION ISLAND</div>
+              <div class="photo-dim-overlay">2,400 L × 900 W × 950 H MM</div>
+            </div>
+            <div class="cuts-spotlight-grid">
+              <div class="cut-mini-card">
+                <img src="/renders/cuts/cut_island_counter_marble.png" alt="Calacatta Countertop">
+                <div class="cut-mini-label">THIS IS: Calacatta Top</div>
+              </div>
+              <div class="cut-mini-card">
+                <img src="/renders/cuts/cut_island_fluted_base.png" alt="Fluted Brass Base">
+                <div class="cut-mini-label">THIS IS: Fluted Brass</div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-info-col">
+            <div>
+              <div class="feature-code-header">
+                <span class="cut-badge">✦ ELEMENT 03 • ISLAND</span>
+                <span class="dim-pill gold">HERO CENTERPIECE</span>
+              </div>
+              <h3 class="feature-title">Central Consultation Island Counter</h3>
+              
+              <div class="dim-breakdown-box">
+                <div class="dim-row">
+                  <span class="dim-name">Counter Dimensions:</span>
+                  <span class="dim-val">2,400 L × 900 W × 950 H mm</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Countertop Slab:</span>
+                  <span class="dim-val">Bookmatched Calacatta Marble (20mm)</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Pedestal Base:</span>
+                  <span class="dim-val">Curved Fluted Brushed Brass</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Drawers & Storage:</span>
+                  <span class="dim-val">Blum Legrabox Soft-Close Velvet</span>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <span class="dim-pill gold">TESTER STATION</span>
+              <span class="dim-pill">CHAMFERED EDGES</span>
+              <span class="dim-pill">INTEGRATED POWER</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEATURE 04: Cashier POS & Packaging Wrap Desk -->
+      <div class="feature-visual-card">
+        <div class="feature-visual-grid">
+          <div class="feature-photos-col">
+            <div class="photo-frame">
+              <img src="/renders/pass5.png" alt="Cashier POS Wrap Desk">
+              <div class="photo-tag-overlay">✦ PHOTO 05: CASHIER & POS DESK</div>
+              <div class="photo-dim-overlay">2,200 L × 800 W × 1,050 H MM</div>
+            </div>
+            <div class="cuts-spotlight-grid">
+              <div class="cut-mini-card">
+                <img src="/renders/cuts/cut_cashier_wrap_desk.png" alt="POS Counter">
+                <div class="cut-mini-label">THIS IS: Wrap Desk</div>
+              </div>
+              <div class="cut-mini-card">
+                <img src="/renders/cuts/cut_cashier_backwall_logo.png" alt="Backwall Logo">
+                <div class="cut-mini-label">THIS IS: Backwall Logo</div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-info-col">
+            <div>
+              <div class="feature-code-header">
+                <span class="cut-badge">✦ ELEMENT 04 • POS DESK</span>
+                <span class="dim-pill gold">WRAP & CHECKOUT</span>
+              </div>
+              <h3 class="feature-title">POS Cashier & Wrap Desk</h3>
+              
+              <div class="dim-breakdown-box">
+                <div class="dim-row">
+                  <span class="dim-name">Overall Unit Size:</span>
+                  <span class="dim-val">2,200 L × 800 W × 1,050 H mm</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Working Desk Height:</span>
+                  <span class="dim-val">850 mm Ergonomic Desktop</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Cable Management:</span>
+                  <span class="dim-val">Concealed Wire Raceway & Floor Box</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Backwall Feature:</span>
+                  <span class="dim-val">Acoustic Ivory Panels + Illuminated Monogram</span>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <span class="dim-pill">GIFT RIBBON DRAWERS</span>
+              <span class="dim-pill gold">RECEIPT PRINTER BAY</span>
+              <span class="dim-pill">HIDDEN UPS DOCK</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEATURE 05: Right Perimeter Symmetrical Arched Vitrines -->
+      <div class="feature-visual-card">
+        <div class="feature-visual-grid">
+          <div class="feature-photos-col">
+            <div class="photo-frame">
+              <img src="/renders/pass6.png" alt="Right Perimeter Arched Vitrines">
+              <div class="photo-tag-overlay">✦ PHOTO 06: ARCHED SHOWCASES</div>
+              <div class="photo-dim-overlay">2,400 H × 900 W × 400 D MM</div>
+            </div>
+            <div class="cuts-spotlight-grid">
+              <div class="cut-mini-card">
+                <img src="/renders/cuts/cut_arched_vitrines_gold.png" alt="Gold Arched Vitrine">
+                <div class="cut-mini-label">THIS IS: Gold Niche</div>
+              </div>
+              <div class="cut-mini-card">
+                <img src="/renders/cuts/cut_entry_corridor.png" alt="Corridor Sightline">
+                <div class="cut-mini-label">THIS IS: Aisle Sightline</div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-info-col">
+            <div>
+              <div class="feature-code-header">
+                <span class="cut-badge">✦ ELEMENT 05 • VITRINES</span>
+                <span class="dim-pill gold">EXCLUSIVE SCENTS</span>
+              </div>
+              <h3 class="feature-title">Right Perimeter Symmetrical Showcases</h3>
+              
+              <div class="dim-breakdown-box">
+                <div class="dim-row">
+                  <span class="dim-name">Arch Dimensions:</span>
+                  <span class="dim-val">2,400 H × 900 W × 400 D mm</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Arch Reveal Molding:</span>
+                  <span class="dim-val">PVD Titanium Brushed Gold</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Locking Security:</span>
+                  <span class="dim-val">Concealed RFID Electronic Locks</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Base Pedestal:</span>
+                  <span class="dim-val">Calacatta Gold Marble Plinth (150mm)</span>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <span class="dim-pill gold">LIMITED EDITIONS</span>
+              <span class="dim-pill">RFID LOCKS</span>
+              <span class="dim-pill">MICRO-SPOT OPTICS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEATURE 06: Ceiling Coffer & Marble Flooring -->
+      <div class="feature-visual-card">
+        <div class="feature-visual-grid">
+          <div class="feature-photos-col">
+            <div class="photo-frame">
+              <img src="/renders/pass8.png" alt="Calacatta Gold Marble Flooring">
+              <div class="photo-tag-overlay">✦ PHOTO 08: MARBLE FLOOR & CEILING</div>
+              <div class="photo-dim-overlay">1200 × 600 MM TILES</div>
+            </div>
+            <div class="cuts-spotlight-grid">
+              <div class="cut-mini-card">
+                <img src="/renders/cuts/cut_ceiling_cove_lighting.png" alt="Ceiling Cove Lighting">
+                <div class="cut-mini-label">THIS IS: Cove LED</div>
+              </div>
+              <div class="cut-mini-card">
+                <img src="/renders/cuts/cut_marble_floor_tiles.png" alt="Marble Floor Inlay">
+                <div class="cut-mini-label">THIS IS: Marble Inlay</div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-info-col">
+            <div>
+              <div class="feature-code-header">
+                <span class="cut-badge">✦ ELEMENT 06 • SURFACES</span>
+                <span class="dim-pill gold">FLOOR & CEILING</span>
+              </div>
+              <h3 class="feature-title">Ceiling Coffer & Calacatta Gold Flooring</h3>
+              
+              <div class="dim-breakdown-box">
+                <div class="dim-row">
+                  <span class="dim-name">Marble Tile Format:</span>
+                  <span class="dim-val">1,200 × 600 mm Calacatta Gold</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Grout & Trims:</span>
+                  <span class="dim-val">1.5 mm Epoxy + Brushed Brass Inlay Trims</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Ceiling Height to Slab:</span>
+                  <span class="dim-val">3,400 mm [3.40 m]</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Ceiling Coffer Drop:</span>
+                  <span class="dim-val">250 mm Perimeter Indirect Cove</span>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <span class="dim-pill gold">CALACATTA MARBLE</span>
+              <span class="dim-pill">BRASS TRANSITIONS</span>
+              <span class="dim-pill">HONED & POLISHED</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEATURE 07: Service & Restroom Pivot Access -->
+      <div class="feature-visual-card">
+        <div class="feature-visual-grid">
+          <div class="feature-photos-col">
+            <div class="photo-frame">
+              <img src="/renders/pass9.png" alt="Restroom Flush Pivot Door">
+              <div class="photo-tag-overlay">✦ PHOTO 09: WC CORRIDOR & DOOR</div>
+              <div class="photo-dim-overlay">CLEAR OPENING: 770 MM</div>
+            </div>
+            <div class="cuts-spotlight-grid">
+              <div class="cut-mini-card">
+                <img src="/renders/cuts/cut_service_wc_door.png" alt="Flush Pivot Door">
+                <div class="cut-mini-label">THIS IS: Pivot Door</div>
+              </div>
+              <div class="cut-mini-card">
+                <img src="/renders/cuts/cut_facade_vitrine.png" alt="Concealed Frame">
+                <div class="cut-mini-label">THIS IS: Flush Frame</div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-info-col">
+            <div>
+              <div class="feature-code-header">
+                <span class="cut-badge">✦ ELEMENT 07 • SERVICE</span>
+                <span class="dim-pill gold">CONCEALED CORE</span>
+              </div>
+              <h3 class="feature-title">Service & Restroom Flush Pivot Door</h3>
+              
+              <div class="dim-breakdown-box">
+                <div class="dim-row">
+                  <span class="dim-name">Door Clear Width:</span>
+                  <span class="dim-val">770 mm [0.77 m]</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Door Total Height:</span>
+                  <span class="dim-val">2,200 mm [2.20 m]</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Hinge Hardware:</span>
+                  <span class="dim-val">FritsJurgens Concealed Floor Pivot</span>
+                </div>
+                <div class="dim-row">
+                  <span class="dim-name">Acoustic Rating:</span>
+                  <span class="dim-val">Rw 38dB with Automatic Drop Seal</span>
+                </div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <span class="dim-pill gold">MAGNETIC LATCH</span>
+              <span class="dim-pill">ZERO CASING TRIM</span>
+              <span class="dim-pill">STAFF ACCESS ONLY</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1293,676 +1485,525 @@
       <div class="section-header">
         <div class="section-number">Section 05</div>
         <h2 class="section-heading">Materials & Finishes Specification Board</h2>
-        <p class="section-desc">Physical architectural samples and surface finish codes selected for luxury tactile quality and durability.</p>
+        <p class="section-desc">Luxury Calacatta Gold marble, titanium gold PVD coatings, and crystal glass specifications.</p>
       </div>
 
-      <div class="materials-grid">
-        <!-- Material 1 -->
+      <div class="material-grid">
         <div class="material-card">
-          <div class="material-thumb-wrap">
-            <img src="/materials/m02_floor_marble.jpg" alt="Polished Floor Marble" class="material-thumb">
-            <span class="material-tag">MAT-01</span>
-          </div>
-          <div class="material-content">
-            <div>
-              <div class="material-code">FLOORING SURFACE</div>
-              <div class="material-name">Polished Italian Marble</div>
-              <p class="material-desc">Bookmatched polished porcelain tile with delicate warm amber and beige veining.</p>
-            </div>
-            <div class="material-meta">
-              <span>Format: 1200×600mm</span>
-              <span>Finish: High-Gloss</span>
-            </div>
+          <div class="material-img-wrap"><img src="/materials/calacatta_gold_bg.jpg" alt="Calacatta Gold Marble"></div>
+          <div class="material-body">
+            <div class="material-code">MAT-01 • FLOOR & SURFACES</div>
+            <div class="material-name">Calacatta Gold Marble</div>
+            <div class="material-desc">Polished Italian porcelain marble slab with distinct warm gold and grey veining. Non-porous sealed, high traffic resistance.</div>
           </div>
         </div>
 
-        <!-- Material 2 -->
         <div class="material-card">
-          <div class="material-thumb-wrap">
-            <img src="/materials/m03_gold.jpg" alt="Brushed Gold Metal" class="material-thumb">
-            <span class="material-tag">MAT-02</span>
-          </div>
-          <div class="material-content">
-            <div>
-              <div class="material-code">ARCHITECTURAL METAL</div>
-              <div class="material-name">Brushed Titanium Gold</div>
-              <p class="material-desc">PVD-coated stainless steel with directional brush grain for showcases, trims, and logo lettering.</p>
-            </div>
-            <div class="material-meta">
-              <span>Type: 304 SS PVD</span>
-              <span>Finish: Satin Brushed</span>
-            </div>
+          <div class="material-img-wrap"><img src="/materials/m03_gold.jpg" alt="Titanium Gold PVD"></div>
+          <div class="material-body">
+            <div class="material-code">MAT-02 • METAL JOINERY</div>
+            <div class="material-name">Brushed Titanium Gold PVD</div>
+            <div class="material-desc">Grade 304 stainless steel with physical vapor deposition (PVD) coating. Anti-fingerprint, scratch hardness ≥2000 HV.</div>
           </div>
         </div>
 
-        <!-- Material 3 -->
         <div class="material-card">
-          <div class="material-thumb-wrap">
-            <img src="/materials/m04_gold_pattern.png" alt="3D Gold Geometric Pattern" class="material-thumb">
-            <span class="material-tag">MAT-03</span>
-          </div>
-          <div class="material-content">
-            <div>
-              <div class="material-code">FEATURE WALL RELIEF</div>
-              <div class="material-name">Geometric Gold Lattice</div>
-              <p class="material-desc">Laser-cut geometric textured relief panels providing luminous backdrop behind perfume flacons.</p>
-            </div>
-            <div class="material-meta">
-              <span>Material: Precision Metal</span>
-              <span>Effect: Backlit Relief</span>
-            </div>
+          <div class="material-img-wrap"><img src="/materials/m04_gold_pattern.png" alt="Geometric Gold Relief"></div>
+          <div class="material-body">
+            <div class="material-code">MAT-03 • FEATURE PANELS</div>
+            <div class="material-name">Geometric Gold Relief Backplate</div>
+            <div class="material-desc">Precision CNC-milled diamond relief panels finished in satin champagne gold lacquer for perfume display backdrops.</div>
           </div>
         </div>
 
-        <!-- Material 4 -->
         <div class="material-card">
-          <div class="material-thumb-wrap">
-            <img src="/materials/m06_counter_marble.jpg" alt="Countertop Marble" class="material-thumb">
-            <span class="material-tag">MAT-04</span>
-          </div>
-          <div class="material-content">
-            <div>
-              <div class="material-code">WORKTOPS & COUNTERS</div>
-              <div class="material-name">Onyx & Calacatta Slab</div>
-              <p class="material-desc">Solid engineered quartz / marble slab with high stain resistance for cash desk and central tester island.</p>
-            </div>
-            <div class="material-meta">
-              <span>Thickness: 20mm</span>
-              <span>Edge: 3mm Chamfer</span>
-            </div>
+          <div class="material-img-wrap"><img src="/materials/m06_counter_marble.jpg" alt="Onyx & Calacatta Countertop"></div>
+          <div class="material-body">
+            <div class="material-code">MAT-04 • COUNTERTOPS</div>
+            <div class="material-name">Calacatta Countertop Slab</div>
+            <div class="material-desc">20mm solid bullnose-profiled marble slab with integrated perfume testing flush inserts and stain-resistant sealer.</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 06: Schedules & Technical Data (Tabbed) -->
-  <section id="section-schedules" class="section-wrap alt-bg">
+  <!-- SECTION 06: Technical Handover Schedules -->
+  <section id="section-schedules" class="section-wrap">
     <div class="container">
       <div class="section-header">
         <div class="section-number">Section 06</div>
-        <h2 class="section-heading">Comprehensive Technical Handover Schedules</h2>
-        <p class="section-desc">Itemized schedules covering spatial clearances, joinery FF&E, lighting luminaires, and MEP power coordination.</p>
+        <h2 class="section-heading">Technical Handover Schedules</h2>
+        <p class="section-desc">Detailed engineering data, dimensions comparison, FF&E, lighting, and MEP coordination.</p>
       </div>
 
-      <div class="schedule-tabs-wrap">
-        <div class="schedule-tabs">
-          <button class="tab-btn active" data-tab="tab-dims">📐 Dimensions Schedule</button>
-          <button class="tab-btn" data-tab="tab-ffe">🛋️ FF&E Schedule</button>
-          <button class="tab-btn" data-tab="tab-lighting">💡 Lighting Schedule</button>
-          <button class="tab-btn" data-tab="tab-mep">⚡ MEP & Power Coordination</button>
-        </div>
+      <div class="schedule-tabs">
+        <button class="tab-btn active" data-tab="tab-dims">📐 Dimensions Schedule</button>
+        <button class="tab-btn" data-tab="tab-ffe">🛋️ FF&E Schedule</button>
+        <button class="tab-btn" data-tab="tab-lighting">💡 Lighting Schedule</button>
+        <button class="tab-btn" data-tab="tab-mep">⚡ MEP Coordination</button>
       </div>
 
-      <!-- Tab 1: Dimensions Schedule -->
-      <div class="tab-pane active" id="tab-dims">
-        <div class="schedule-table-container">
+      <!-- Tab A: Dimensions Schedule -->
+      <div id="tab-dims" class="schedule-panel active">
+        <div class="schedule-table-wrap">
           <table class="schedule-table">
             <thead>
               <tr>
                 <th>Zone / Item</th>
-                <th>Design Dimension (mm)</th>
-                <th>Surveyed Baseline (mm)</th>
-                <th>Fabrication Clearance</th>
-                <th>Verification Status</th>
-                <th>Contractor Notes</th>
+                <th>Surveyed Baseline</th>
+                <th>Proposed Concept</th>
+                <th>Clear Height</th>
+                <th>Tolerance</th>
+                <th>Site Action Required</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><span class="code-badge">DIM-01</span> Main Store Depth</td>
-                <td>7,300 mm</td>
-                <td>7,300 mm ±10mm</td>
-                <td>Full length span</td>
-                <td><span class="status-check">✓ Surveyed</span></td>
-                <td>Confirm structural perimeter plumb before joinery fixing</td>
+                <td><strong>Front Storefront Span</strong></td>
+                <td>5,900 mm [5.90 m]</td>
+                <td>5,900 mm Glazed Portal</td>
+                <td>3,400 mm</td>
+                <td>± 5 mm</td>
+                <td>Verify structural slab openings</td>
               </tr>
               <tr>
-                <td><span class="code-badge">DIM-02</span> Back Wall Span</td>
-                <td>5,430 mm</td>
-                <td>5,430 mm</td>
-                <td>Between side pilasters</td>
-                <td><span class="status-check">✓ Surveyed</span></td>
-                <td>Account for 25mm wall cladding build-up</td>
+                <td><strong>Rear Perimeter Wall</strong></td>
+                <td>5,430 mm [5.43 m]</td>
+                <td>5,430 mm Feature Wall</td>
+                <td>3,400 mm</td>
+                <td>± 5 mm</td>
+                <td>Check plumbness of existing blockwork</td>
               </tr>
               <tr>
-                <td><span class="code-badge">DIM-03</span> Front Glazed Façade</td>
-                <td>5,900 mm</td>
-                <td>5,900 mm</td>
-                <td>Structural opening</td>
-                <td><span class="status-check">✓ Surveyed</span></td>
-                <td>Verify ceiling header deflection criteria for 12mm glass</td>
+                <td><strong>Total Store Depth</strong></td>
+                <td>7,300 mm [7.30 m]</td>
+                <td>7,300 mm Circulation</td>
+                <td>3,400 mm</td>
+                <td>± 10 mm</td>
+                <td>Verify front-to-back floor level datum</td>
               </tr>
               <tr>
-                <td><span class="code-badge">DIM-04</span> Central Island Counter</td>
-                <td>2,400 L × 900 W × 950 H</td>
-                <td>Proposed</td>
-                <td>1,200 mm clearance all sides</td>
-                <td><span class="status-req">⚠️ Site Check</span></td>
-                <td>Set out center coordinate exactly matching floor power drop</td>
+                <td><strong>Central Island Counter</strong></td>
+                <td>N/A (New FF&E)</td>
+                <td>2,400 × 900 × 950 mm</td>
+                <td>950 mm Counter</td>
+                <td>± 2 mm</td>
+                <td>Set floor power box before screeding</td>
               </tr>
               <tr>
-                <td><span class="code-badge">DIM-05</span> Perimeter Shelving Bays</td>
-                <td>2,400 H × 900 W × 350 D</td>
-                <td>Proposed</td>
-                <td>Modular 4-bay array</td>
-                <td><span class="status-req">⚠️ Site Check</span></td>
-                <td>Check horizontal level across full 3.6m run</td>
+                <td><strong>Perimeter Perfume Bays</strong></td>
+                <td>N/A (New Joinery)</td>
+                <td>2,400 × 900 × 350 mm (×4)</td>
+                <td>2,400 mm</td>
+                <td>± 2 mm</td>
+                <td>Install rear wall plywood backing (18mm)</td>
               </tr>
               <tr>
-                <td><span class="code-badge">DIM-06</span> Restroom Service Corridor Door</td>
-                <td>770 mm Door Leaf</td>
-                <td>770 mm Clear Opening</td>
-                <td>Flush pivot detail</td>
-                <td><span class="status-check">✓ Surveyed</span></td>
-                <td>Concealed pivot hinge with magnetic acoustic latch</td>
+                <td><strong>Cashier POS Desk</strong></td>
+                <td>N/A (New Joinery)</td>
+                <td>2,200 × 800 × 1,050 mm</td>
+                <td>1,050 / 850 mm</td>
+                <td>± 2 mm</td>
+                <td>Route data & power conduits through floor</td>
+              </tr>
+              <tr>
+                <td><strong>Service / Restroom Door</strong></td>
+                <td>770 mm Opening</td>
+                <td>770 × 2,200 mm Pivot Door</td>
+                <td>2,200 mm</td>
+                <td>± 2 mm</td>
+                <td>Verify subframe squareness & drop seal</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- Tab 2: FF&E Schedule -->
-      <div class="tab-pane" id="tab-ffe">
-        <div class="schedule-table-container">
+      <!-- Tab B: FF&E Schedule -->
+      <div id="tab-ffe" class="schedule-panel">
+        <div class="schedule-table-wrap">
           <table class="schedule-table">
             <thead>
               <tr>
                 <th>Code</th>
                 <th>Item Name</th>
                 <th>Dimensions (mm)</th>
-                <th>Material & Finish</th>
+                <th>Primary Finish</th>
+                <th>Hardware / Substrate</th>
                 <th>Qty</th>
-                <th>Location</th>
-                <th>Fabrication Notes</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><span class="code-badge">FF-01</span></td>
+                <td><strong>FF-01</strong></td>
                 <td>Central Consultation Island</td>
-                <td>2,400 × 900 × 950</td>
-                <td>Marble top, fluted gold base</td>
+                <td>2400 L × 900 W × 950 H</td>
+                <td>Calacatta Marble + Brass</td>
+                <td>MR-MDF, Blum Legrabox Runners</td>
                 <td>1</td>
-                <td>Center Retail Floor</td>
-                <td>Includes lockable velvet-lined tester drawers & LED cove</td>
               </tr>
               <tr>
-                <td><span class="code-badge">FF-02</span></td>
-                <td>Perimeter Perfume Shelving Unit</td>
-                <td>2,400 × 900 × 350</td>
-                <td>Gold relief, glass shelves, MR-MDF</td>
-                <td>4</td>
-                <td>Left & Right Walls</td>
-                <td>Concealed 24V LED channels; bottom push-to-open stock drawers</td>
+                <td><strong>FF-02</strong></td>
+                <td>Left Perfume Shelving Bays</td>
+                <td>2400 H × 900 W × 350 D</td>
+                <td>Gold Relief + Crystal Glass</td>
+                <td>10mm Low-iron glass, LED tracks</td>
+                <td>4 Bays</td>
               </tr>
               <tr>
-                <td><span class="code-badge">FF-03</span></td>
-                <td>Cashier & Packaging Desk</td>
-                <td>2,200 × 800 × 1,050</td>
-                <td>Italian marble slab & PVD gold trim</td>
+                <td><strong>FF-03</strong></td>
+                <td>Right Showcase Vitrines</td>
+                <td>2400 H × 900 W × 400 D</td>
+                <td>Brushed Gold + Calacatta Base</td>
+                <td>Electronic RFID Locks, Tempered Glass</td>
+                <td>3 Bays</td>
+              </tr>
+              <tr>
+                <td><strong>FF-04</strong></td>
+                <td>Cashier & POS Wrap Desk</td>
+                <td>2200 L × 800 W × 1050 H</td>
+                <td>Acoustic Ivory + Gold Trim</td>
+                <td>Sunken cable tray, lockable drawers</td>
                 <td>1</td>
-                <td>Rear North Wall</td>
-                <td>Sunken POS tray, till wiring raceway, acoustic back panel</td>
               </tr>
               <tr>
-                <td><span class="code-badge">FF-04</span></td>
-                <td>Arched Vitrine Showcase</td>
-                <td>1,100 × 2,400 × 350</td>
-                <td>Gold frame, low-iron glass, LED</td>
-                <td>2</td>
-                <td>Perimeter Feature Alcoves</td>
-                <td>Tempered glass doors with concealed high-security cam locks</td>
-              </tr>
-              <tr>
-                <td><span class="code-badge">FF-05</span></td>
-                <td>Consultation High Barstools</td>
-                <td>450 dia × 750 H</td>
-                <td>Gold steel frame, velvet upholstery</td>
-                <td>4</td>
-                <td>Central Island</td>
-                <td>Commercial grade stain-resistant velvet fabric</td>
-              </tr>
-              <tr>
-                <td><span class="code-badge">FF-06</span></td>
-                <td>3D Exterior Brand Monogram</td>
-                <td>1,800 W × 450 H</td>
-                <td>Brushed brass with halo warm LED</td>
+                <td><strong>FF-05</strong></td>
+                <td>WC Concealed Pivot Door</td>
+                <td>770 W × 2200 H × 45 Thick</td>
+                <td>Wall-matched Paint / Laminate</td>
+                <td>FritsJurgens System M Pivot Hinge</td>
                 <td>1</td>
-                <td>Storefront Glazed Header</td>
-                <td>Backlit 3000K halo LED illumination</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- Tab 3: Lighting Schedule -->
-      <div class="tab-pane" id="tab-lighting">
-        <div class="schedule-table-container">
+      <!-- Tab C: Lighting Schedule -->
+      <div id="tab-lighting" class="schedule-panel">
+        <div class="schedule-table-wrap">
           <table class="schedule-table">
             <thead>
               <tr>
                 <th>Code</th>
-                <th>Luminaire Description</th>
-                <th>CCT</th>
-                <th>CRI</th>
-                <th>Wattage / Output</th>
-                <th>Control Protocol</th>
-                <th>Application</th>
+                <th>Fixture Type</th>
+                <th>Location</th>
+                <th>CCT / CRI</th>
+                <th>Output / Dimming</th>
+                <th>Control Group</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><span class="code-badge">L-01</span></td>
-                <td>Indirect Ceiling Cove Linear LED</td>
-                <td>3000K Warm</td>
-                <td>> 95</td>
-                <td>14.4 W/m (1200 lm/m)</td>
-                <td>DALI / 0-10V Dimmable</td>
-                <td>Gypsum coffer perimeter cove</td>
+                <td><strong>L-01</strong></td>
+                <td>Concealed 24V LED Ribbon</td>
+                <td>Perfume Glass Shelf Backlight</td>
+                <td>3000K / CRI >95</td>
+                <td>14.4 W/m, DALI Dimmable</td>
+                <td>Circuit A (Shelves)</td>
               </tr>
               <tr>
-                <td><span class="code-badge">L-02</span></td>
-                <td>Anti-Glare Gimbal Downlight</td>
-                <td>3000K Warm</td>
-                <td>> 92</td>
-                <td>12W • 24° Beam Angle</td>
-                <td>Phase Dimmable</td>
-                <td>Ceiling ambient grid & accent spots</td>
+                <td><strong>L-02</strong></td>
+                <td>Indirect Perimeter Cove LED</td>
+                <td>Main Ceiling Gypsum Coffer</td>
+                <td>3000K / CRI >90</td>
+                <td>19.2 W/m, High Output</td>
+                <td>Circuit B (Ambient Cove)</td>
               </tr>
               <tr>
-                <td><span class="code-badge">L-03</span></td>
-                <td>Concealed Shelf Edge LED Profile</td>
-                <td>3000K Warm</td>
-                <td>> 95</td>
-                <td>9.6 W/m (950 lm/m)</td>
-                <td>DALI Dimmable</td>
-                <td>Perfume showcase glass shelves</td>
+                <td><strong>L-03</strong></td>
+                <td>Recessed Adjustable Downlight</td>
+                <td>Ceiling over Island & Cashier</td>
+                <td>3000K / CRI >97</td>
+                <td>15W, 24° Beam Anti-Glare Gimbal</td>
+                <td>Circuit C (Task Spotlight)</td>
               </tr>
               <tr>
-                <td><span class="code-badge">L-04</span></td>
-                <td>Island Vitrine Micro-Spots</td>
-                <td>3000K Warm</td>
-                <td>> 95</td>
-                <td>3W Miniature Spotlights</td>
-                <td>Low-Voltage DC</td>
-                <td>Central tester vitrine highlighting</td>
+                <td><strong>L-04</strong></td>
+                <td>Micro Accent Eyeball Spot</td>
+                <td>Arched Vitrine Tops</td>
+                <td>3000K / CRI >95</td>
+                <td>3W, 15° Narrow Beam</td>
+                <td>Circuit D (Display Focus)</td>
               </tr>
               <tr>
-                <td><span class="code-badge">L-05</span></td>
-                <td>Halo Backlit Logo Lettering</td>
-                <td>3000K Warm</td>
-                <td>> 90</td>
-                <td>10 W/m Halo Ribbon</td>
-                <td>Timer / Smart Control</td>
-                <td>Storefront entrance portal fascia</td>
+                <td><strong>L-05</strong></td>
+                <td>LED Backlit Signage Halo</td>
+                <td>3D Storefront Brand Logo</td>
+                <td>3000K / Warm White</td>
+                <td>IP65 Sealed, 12V Regulated</td>
+                <td>Circuit E (Façade 24/7)</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- Tab 4: MEP Coordination -->
-      <div class="tab-pane" id="tab-mep">
-        <div class="schedule-table-container">
+      <!-- Tab D: MEP Coordination -->
+      <div id="tab-mep" class="schedule-panel">
+        <div class="schedule-table-wrap">
           <table class="schedule-table">
             <thead>
               <tr>
-                <th>System</th>
+                <th>Service</th>
+                <th>Location</th>
                 <th>Coordination Requirement</th>
-                <th>Location / Coordinate</th>
-                <th>Contractor Action Item</th>
+                <th>Contractor Responsibility</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><span class="code-badge">MEP-01</span> Floor Power Drop</td>
-                <td>2 × 230V Double Sockets + Cat6 Data Drop</td>
-                <td>Under central island footprint (X:2.4m, Z:-4.15m)</td>
-                <td>Cast flush floor box prior to marble tile installation</td>
+                <td><strong>Power Floor Box</strong></td>
+                <td>Under Island & POS Desk</td>
+                <td>Recessed floor box flush with marble tiles; 2x 13A socket + Cat6 data</td>
+                <td>Electrical Contractor to core drill before marble screed</td>
               </tr>
               <tr>
-                <td><span class="code-badge">MEP-02</span> Joinery LED Drivers</td>
-                <td>24V DC Constant Voltage Drivers in ventilated bases</td>
-                <td>Plinth access hatches in FF-01 & FF-02</td>
-                <td>Ensure continuous air slot in joinery kickplate</td>
+                <td><strong>LED Driver Plinth</strong></td>
+                <td>Joinery bottom ventilation kicks</td>
+                <td>Provide 50mm airflow ventilation slots in joinery plinths for 24V drivers</td>
+                <td>Joinery Contractor to build accessible magnetic hatch</td>
               </tr>
               <tr>
-                <td><span class="code-badge">MEP-03</span> HVAC Linear Diffusers</td>
-                <td>Architectural slot diffusers integrated in ceiling coffer</td>
-                <td>Perimeter coffer margin (avoid direct perfume stream)</td>
-                <td>Coordinate diffuser supply air away from fragrance shelves</td>
+                <td><strong>HVAC Air Distribution</strong></td>
+                <td>Perimeter ceiling slot diffusers</td>
+                <td>Linear continuous slot diffusers integrated into gypsum coffer reveal</td>
+                <td>HVAC / Ceiling Contractor coordination</td>
               </tr>
               <tr>
-                <td><span class="code-badge">MEP-04</span> Fire & Emergency Egress</td>
-                <td>Recessed emergency downlights + illuminated exit sign</td>
-                <td>Above rear service corridor door (770mm door)</td>
-                <td>Align exit luminaire flush with architectural bulkhead</td>
+                <td><strong>WC Plumbing & Vent</strong></td>
+                <td>Rear right service shaft</td>
+                <td>110mm soil pipe, 32mm water feed, continuous 100mm mechanical extractor</td>
+                <td>Plumbing Contractor to pressure test before wall closing</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
+
     </div>
   </section>
 
-  <!-- SECTION 07: 4K Ultra-HD Master Render Gallery -->
+  <!-- SECTION 07: 4K Master Render Lightbox Gallery (Passes 1-9) -->
   <section id="section-renders" class="section-wrap">
     <div class="container">
       <div class="section-header">
         <div class="section-number">Section 07</div>
-        <h2 class="section-heading">4K Master 3D Render Gallery</h2>
-        <p class="section-desc">Comprehensive multi-angle photographic quality visualizations featuring final materials, lighting passes, and product placements.</p>
+        <h2 class="section-heading">4K Ultra-HD Master Render Gallery</h2>
+        <p class="section-desc">Click any photo to open in high-resolution master lightbox viewer with detail annotations.</p>
       </div>
 
       <div class="gallery-grid">
-        <!-- Pass 1 -->
-        <div class="gallery-card" data-index="0" data-title="Hero Glazed Storefront Entrance" data-desc="Full-height architectural glass facade, brushed gold framing, and warm interior illumination inviting customer entrance." data-src="/renders/pass1.png">
-          <div class="gallery-thumb-wrap">
-            <img src="/renders/pass1.png" alt="Pass 1 Storefront" class="gallery-img" loading="lazy">
-            <span class="gallery-overlay-badge">PASS 01 • 4K UHD</span>
-            <span class="gallery-view-tag">🔍 View: Exterior Facade</span>
-          </div>
+        <div class="gallery-card" data-index="0" data-title="PASS 01 • Glazed Storefront Elevation" data-desc="Storefront façade with 5,900 mm span, 12mm low-iron glass, backlit 3D gold signage, and direct interior vista." data-img="/renders/pass1.png">
+          <div class="gallery-img-wrap"><img src="/renders/pass1.png" alt="Storefront Facade"></div>
           <div class="gallery-info">
-            <div class="gallery-title">01. Hero Glazed Storefront</div>
-            <p class="gallery-caption">Full-height architectural entrance portal showing 5.9m glazing span and brushed brass brand marquee.</p>
+            <div class="gallery-pass-code">RENDER PASS 01 • EXTERIOR</div>
+            <div class="gallery-title">Storefront Glazed Façade</div>
+            <div class="gallery-desc">5,900 mm entrance span framing the central island and illuminated gold logo.</div>
           </div>
         </div>
 
-        <!-- Pass 2 -->
-        <div class="gallery-card" data-index="1" data-title="Main Retail Floor Perspective" data-desc="Central customer eye-level perspective illustrating spatial symmetry, island placement, and illuminated perimeter shelving." data-src="/renders/pass2.png">
-          <div class="gallery-thumb-wrap">
-            <img src="/renders/pass2.png" alt="Pass 2 Retail Floor" class="gallery-img" loading="lazy">
-            <span class="gallery-overlay-badge">PASS 02 • 4K UHD</span>
-            <span class="gallery-view-tag">🔍 View: Central Eye-Level</span>
-          </div>
+        <div class="gallery-card" data-index="1" data-title="PASS 02 • Main Entry Vista" data-desc="First-person eye-level perspective upon crossing the threshold, showing customer aisle flow and symmetrical fragrance bays." data-img="/renders/pass2.png">
+          <div class="gallery-img-wrap"><img src="/renders/pass2.png" alt="Main Entry Vista"></div>
           <div class="gallery-info">
-            <div class="gallery-title">02. Main Retail Floor Flow</div>
-            <p class="gallery-caption">Spatial symmetry from entrance threshold looking towards the central consultation island and hero rear wall.</p>
+            <div class="gallery-pass-code">RENDER PASS 02 • INTERIOR</div>
+            <div class="gallery-title">Main Entry Vista & Circulation</div>
+            <div class="gallery-desc">Customer flow with ≥1,200 mm clearance past the central consultation island.</div>
           </div>
         </div>
 
-        <!-- Pass 3 -->
-        <div class="gallery-card" data-index="2" data-title="Left Perimeter Illuminated Fragrance Wall" data-desc="Detailed view of modular 2400mm joinery bays, textured gold backplates, and backlit perfume display bottles." data-src="/renders/pass3.png">
-          <div class="gallery-thumb-wrap">
-            <img src="/renders/pass3.png" alt="Pass 3 Left Wall" class="gallery-img" loading="lazy">
-            <span class="gallery-overlay-badge">PASS 03 • 4K UHD</span>
-            <span class="gallery-view-tag">🔍 View: Left Showcase</span>
-          </div>
+        <div class="gallery-card" data-index="2" data-title="PASS 03 • Left Perimeter Fragrance Shelves" data-desc="Illuminated joinery bays with 3D geometric gold panels, 10mm crystal shelves, and 3000K LED halos." data-img="/renders/pass3.png">
+          <div class="gallery-img-wrap"><img src="/renders/pass3.png" alt="Left Fragrance Shelves"></div>
           <div class="gallery-info">
-            <div class="gallery-title">03. Left Fragrance Feature Wall</div>
-            <p class="gallery-caption">Backlit golden relief niches with 3000K edge-lit floating glass shelves displaying signature flacons.</p>
+            <div class="gallery-pass-code">RENDER PASS 03 • JOINERY</div>
+            <div class="gallery-title">Perimeter Perfume Shelving Wall</div>
+            <div class="gallery-desc">Modular 2,400 × 900 × 350 mm display bays with warm halo backlighting.</div>
           </div>
         </div>
 
-        <!-- Pass 4 -->
-        <div class="gallery-card" data-index="3" data-title="Central Consultation Island Experience" data-desc="Close-up view of the 2400x900mm bookmatched marble island, tester trays, and fluted brass pedestal details." data-src="/renders/pass4.png">
-          <div class="gallery-thumb-wrap">
-            <img src="/renders/pass4.png" alt="Pass 4 Central Island" class="gallery-img" loading="lazy">
-            <span class="gallery-overlay-badge">PASS 04 • 4K UHD</span>
-            <span class="gallery-view-tag">🔍 View: Island Tester Bar</span>
-          </div>
+        <div class="gallery-card" data-index="3" data-title="PASS 04 • Central Consultation Island" data-desc="2,400 × 900 × 950 mm island counter with 20mm Calacatta marble slab and curved fluted brass base." data-img="/renders/pass4.png">
+          <div class="gallery-img-wrap"><img src="/renders/pass4.png" alt="Consultation Island"></div>
           <div class="gallery-info">
-            <div class="gallery-title">04. Consultation Island Bar</div>
-            <p class="gallery-caption">Bookmatched Italian marble worktop with recessed fragrance tester vitrines and comfortable client circulation.</p>
+            <div class="gallery-pass-code">RENDER PASS 04 • ISLAND</div>
+            <div class="gallery-title">Central Consultation Island</div>
+            <div class="gallery-desc">Hero tasting bar with bookmatched marble countertop and velvet-lined drawers.</div>
           </div>
         </div>
 
-        <!-- Pass 5 -->
-        <div class="gallery-card" data-index="4" data-title="Cashier Desk & Brand Monogram" data-desc="Rear POS wrap counter, acoustic wall panelling, and backlit brand monogram completing the transaction experience." data-src="/renders/pass5.png">
-          <div class="gallery-thumb-wrap">
-            <img src="/renders/pass5.png" alt="Pass 5 Cashier Desk" class="gallery-img" loading="lazy">
-            <span class="gallery-overlay-badge">PASS 05 • 4K UHD</span>
-            <span class="gallery-view-tag">🔍 View: POS Counter</span>
-          </div>
+        <div class="gallery-card" data-index="4" data-title="PASS 05 • Cashier POS & Wrap Desk" data-desc="2,200 × 800 × 1,050 mm cashier desk with sunken cable tray and illuminated monogram feature backwall." data-img="/renders/pass5.png">
+          <div class="gallery-img-wrap"><img src="/renders/pass5.png" alt="POS Cashier Desk"></div>
           <div class="gallery-info">
-            <div class="gallery-title">05. POS Cashier & Wrap Desk</div>
-            <p class="gallery-caption">Custom marble cashier counter with integrated POS equipment wells and illuminated brand signage.</p>
+            <div class="gallery-pass-code">RENDER PASS 05 • POS DESK</div>
+            <div class="gallery-title">Cashier & Packaging POS Desk</div>
+            <div class="gallery-desc">Dedicated wrapping station, hidden cable routing, and backlit monogram logo.</div>
           </div>
         </div>
 
-        <!-- Pass 6 -->
-        <div class="gallery-card" data-index="5" data-title="Right Perimeter Display Vitrines" data-desc="Right wall exhibition vitrines and high-security lockable display cases with warm micro-LED spot channels." data-src="/renders/pass6.png">
-          <div class="gallery-thumb-wrap">
-            <img src="/renders/pass6.png" alt="Pass 6 Right Wall" class="gallery-img" loading="lazy">
-            <span class="gallery-overlay-badge">PASS 06 • 4K UHD</span>
-            <span class="gallery-view-tag">🔍 View: Right Display Wall</span>
-          </div>
+        <div class="gallery-card" data-index="5" data-title="PASS 06 • Right Perimeter Vitrines" data-desc="Symmetrical arched showcases with PVD titanium gold reveals and integrated high-security electronic locks." data-img="/renders/pass6.png">
+          <div class="gallery-img-wrap"><img src="/renders/pass6.png" alt="Arched Vitrines"></div>
           <div class="gallery-info">
-            <div class="gallery-title">06. Right Exhibition Vitrines</div>
-            <p class="gallery-caption">Arched display alcoves framing limited-edition fragrance extracts with focused optical illumination.</p>
+            <div class="gallery-pass-code">RENDER PASS 06 • VITRINES</div>
+            <div class="gallery-title">Arched Showcase Alcoves</div>
+            <div class="gallery-desc">Exclusive display niches for limited edition perfumes and bespoke extracts.</div>
           </div>
         </div>
 
-        <!-- Pass 7 -->
-        <div class="gallery-card" data-index="6" data-title="Deep Interior & Service Corridor Transition" data-desc="Looking past the central island towards the concealed 770mm flush pivot door leading to staff restroom and storage." data-src="/renders/pass7.png">
-          <div class="gallery-thumb-wrap">
-            <img src="/renders/pass7.png" alt="Pass 7 Service Corridor" class="gallery-img" loading="lazy">
-            <span class="gallery-overlay-badge">PASS 07 • 4K UHD</span>
-            <span class="gallery-view-tag">🔍 View: Deep Interior</span>
-          </div>
+        <div class="gallery-card" data-index="6" data-title="PASS 07 • Ceiling Coffer & Downlights" data-desc="Gypsum false ceiling coffer drop with 3000K indirect cove ribbon and CRI >97 anti-glare gimbal spots." data-img="/renders/pass7.png">
+          <div class="gallery-img-wrap"><img src="/renders/pass7.png" alt="Ceiling Coffer"></div>
           <div class="gallery-info">
-            <div class="gallery-title">07. Interior Corridor Transition</div>
-            <p class="gallery-caption">Seamless integration of the concealed 770mm WC and service door within matching wall finishes.</p>
+            <div class="gallery-pass-code">RENDER PASS 07 • CEILING</div>
+            <div class="gallery-title">Ceiling Coffer & Lighting Architecture</div>
+            <div class="gallery-desc">3,400 mm clearance to structural slab with warm architectural cove illumination.</div>
           </div>
         </div>
 
-        <!-- Pass 8 -->
-        <div class="gallery-card" data-index="7" data-title="Perfume Bottle Reflection & Tactile Detail" data-desc="Macro rendering highlighting the glass refraction, liquid amber perfume hues, and polished gold reflections." data-src="/renders/pass8.png">
-          <div class="gallery-thumb-wrap">
-            <img src="/renders/pass8.png" alt="Pass 8 Material Macro" class="gallery-img" loading="lazy">
-            <span class="gallery-overlay-badge">PASS 08 • 4K UHD</span>
-            <span class="gallery-view-tag">🔍 View: Macro Reflection</span>
-          </div>
+        <div class="gallery-card" data-index="7" data-title="PASS 08 • Calacatta Marble Floor Inlay" data-desc="1200×600 mm Italian porcelain marble tiles with 1.5mm epoxy grout lines and brushed brass expansion joints." data-img="/renders/pass8.png">
+          <div class="gallery-img-wrap"><img src="/renders/pass8.png" alt="Marble Flooring"></div>
           <div class="gallery-info">
-            <div class="gallery-title">08. Macro Flacon Reflection</div>
-            <p class="gallery-caption">Optical quality study demonstrating crystal flacon refractions over polished marble and brushed brass.</p>
+            <div class="gallery-pass-code">RENDER PASS 08 • FLOORING</div>
+            <div class="gallery-title">Calacatta Gold Floor Inlay</div>
+            <div class="gallery-desc">High-gloss bookmatched marble pattern casting ambient golden reflections.</div>
           </div>
         </div>
 
-        <!-- Pass 9 -->
-        <div class="gallery-card" data-index="8" data-title="Wide-Angle Architectural Master Overview" data-desc="Comprehensive wide perspective showing the entire boutique harmony, ceiling coffer, and floor reflection interplay." data-src="/renders/pass9.png">
-          <div class="gallery-thumb-wrap">
-            <img src="/renders/pass9.png" alt="Pass 9 Master View" class="gallery-img" loading="lazy">
-            <span class="gallery-overlay-badge">PASS 09 • 4K UHD</span>
-            <span class="gallery-view-tag">🔍 View: Master Overview</span>
-          </div>
+        <div class="gallery-card" data-index="8" data-title="PASS 09 • Service & Restroom Pivot Access" data-desc="Seamless flush pivot door with 770mm clear opening and acoustic drop seal for staff restroom access." data-img="/renders/pass9.png">
+          <div class="gallery-img-wrap"><img src="/renders/pass9.png" alt="Service Restroom Access"></div>
           <div class="gallery-info">
-            <div class="gallery-title">09. Master Architectural Handover View</div>
-            <p class="gallery-caption">Holistic interior composition illustrating lighting warmth, material continuity, and luxury retail elegance.</p>
+            <div class="gallery-pass-code">RENDER PASS 09 • SERVICE</div>
+            <div class="gallery-title">Service & WC Pivot Door</div>
+            <div class="gallery-desc">770 mm clearance acoustic concealed door blending into architectural wall panelling.</div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Lightbox Modal for 4K Gallery -->
+  <!-- Lightbox Modal -->
   <div id="lightbox-modal">
-    <button class="lightbox-close" id="btn-close-lightbox">&times;</button>
-    <button class="lightbox-nav lightbox-prev" id="btn-prev-lightbox">&#10094;</button>
-    <button class="lightbox-nav lightbox-next" id="btn-next-lightbox">&#10095;</button>
-    <div class="lightbox-img-wrap">
-      <img src="" alt="Enlarged 4K Render" class="lightbox-img" id="lightbox-img">
-    </div>
-    <div class="lightbox-meta">
-      <div class="lightbox-title" id="lightbox-title">Render Title</div>
-      <div class="lightbox-desc" id="lightbox-desc">Render description details...</div>
-      <div class="lightbox-counter" id="lightbox-counter">PASS 1 OF 9</div>
+    <div class="lightbox-content">
+      <button id="btn-close-lightbox" class="lightbox-close-btn">✕</button>
+      <button id="btn-prev-lightbox" class="lightbox-nav-btn prev">‹</button>
+      <button id="btn-next-lightbox" class="lightbox-nav-btn next">›</button>
+      
+      <div class="lightbox-img-wrap">
+        <img id="lightbox-img" src="" alt="Lightbox Master View">
+      </div>
+      
+      <div class="lightbox-meta">
+        <div>
+          <div id="lightbox-title" class="lightbox-title-text">Render Title</div>
+          <div id="lightbox-desc" class="lightbox-desc-text">Render Description</div>
+        </div>
+        <div id="lightbox-counter" style="font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--gold-dark);">1 / 9</div>
+      </div>
     </div>
   </div>
 
-  <!-- SECTION 08: Joinery & Architectural Fabrication Standards -->
-  <section class="section-wrap alt-bg">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-number">Section 08</div>
-        <h2 class="section-heading">Joinery & Architectural Fabrication Standards</h2>
-        <p class="section-desc">Strict engineering tolerances, substrate moisture resistance, and hardware specifications.</p>
-      </div>
-
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-title" style="font-size: 18px; color: var(--gold-light); margin-bottom: 8px;">Substrates & Joinery Carcasses</div>
-          <p class="feature-body">
-            All built-in cabinetry and wall paneling to be fabricated using E1-grade Moisture-Resistant MDF (MR-MDF) or high-density Birch plywood. Exposed edges to be finished with 2mm matching ABS or solid brass edge-banding.
-          </p>
-          <div class="feature-specs">
-            <div class="feature-spec-row"><span>Density:</span><span>≥ 750 kg/m³</span></div>
-            <div class="feature-spec-row"><span>Emission:</span><span>E1 Formaldehyde Compliant</span></div>
-          </div>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-title" style="font-size: 18px; color: var(--gold-light); margin-bottom: 8px;">Metalwork & PVD Titanium Gold</div>
-          <p class="feature-body">
-            All gold-tone metal frames, handles, and trims to be 304/316 grade stainless steel with Physical Vapor Deposition (PVD) titanium gold coating. Hardness ≥ 2000 HV, resistant to perfume oils, alcohol, and tarnishing.
-          </p>
-          <div class="feature-specs">
-            <div class="feature-spec-row"><span>Coating:</span><span>PVD Titanium Gold</span></div>
-            <div class="feature-spec-row"><span>Corrosion:</span><span>Grade 304 Stainless Base</span></div>
-          </div>
-        </div>
-
-        <div class="feature-card">
-          <div class="feature-title" style="font-size: 18px; color: var(--gold-light); margin-bottom: 8px;">Hardware & Concealed Runners</div>
-          <p class="feature-body">
-            Drawer systems to utilize Blum Movento / Legrabox concealed undermount runners with integrated soft-close Blumotion. Load capacity ≥ 40 kg per drawer. Concealed high-security cam locks keyed alike per zone.
-          </p>
-          <div class="feature-specs">
-            <div class="feature-spec-row"><span>Brand:</span><span>Blum Movento / Legrabox</span></div>
-            <div class="feature-spec-row"><span>Rating:</span><span>40kg Dynamic Load Soft-Close</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 09: Digital Client Review & Sign-Off Portal -->
+  <!-- SECTION 08: Client Sign-off & Verification Portal -->
   <section id="section-signoff" class="section-wrap">
     <div class="container">
       <div class="section-header">
-        <div class="section-number">Section 09</div>
-        <h2 class="section-heading">Digital Client Review & Sign-Off Portal</h2>
-        <p class="section-desc">Formal design approval and authorization for site verification and contractor joinery shop drawings.</p>
+        <div class="section-number">Section 08</div>
+        <h2 class="section-heading">Digital Handover Review & Client Sign-Off</h2>
+        <p class="section-desc">Confirm architectural concept approval and authorize contractor on-site laser dimension verification.</p>
       </div>
 
       <div class="signoff-card">
-        <h3 style="font-family: var(--font-serif); font-size: 24px; color: #fff; margin-bottom: 16px;">Formal Handover Review Checklist</h3>
-        
-        <div class="checklist-grid">
-          <label class="check-item">
-            <input type="checkbox" id="chk-1" checked>
-            <div>
-              <div class="check-label-text">01. Architectural Concept & Spatial Flow Approved</div>
-              <div class="check-desc">Visual aesthetics, entrance threshold, and symmetrical showcase arrangement confirmed.</div>
-            </div>
-          </label>
-
-          <label class="check-item">
-            <input type="checkbox" id="chk-2" checked>
-            <div>
-              <div class="check-label-text">02. Materials & Finishes Board Approved</div>
-              <div class="check-desc">Italian marble, brushed PVD gold, and 3D geometric relief selections confirmed.</div>
-            </div>
-          </label>
-
-          <label class="check-item">
-            <input type="checkbox" id="chk-3" checked>
-            <div>
-              <div class="check-label-text">03. Joinery Dimensions & Bottle Clearances Approved</div>
-              <div class="check-desc">Shelf heights, consultation island footprint, and cash desk ergonomically verified.</div>
-            </div>
-          </label>
-
-          <label class="check-item">
-            <input type="checkbox" id="chk-4" checked>
-            <div>
-              <div class="check-label-text">04. 3000K High-CRI Lighting Scheme Approved</div>
-              <div class="check-desc">Warm color temperature, concealed LED channels, and coffer lighting verified.</div>
-            </div>
-          </label>
-
-          <label class="check-item" style="grid-column: 1 / -1;">
-            <input type="checkbox" id="chk-5" checked>
-            <div>
-              <div class="check-label-text">05. Authorization for Contractor On-Site Survey & Joinery Shop Drawings</div>
-              <div class="check-desc">Appointed fit-out contractor authorized to verify surveyed dimensions (7300 × 5900 mm) on site.</div>
-            </div>
-          </label>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <div style="font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: #0f172a;">Concept Verification Checklist</div>
+            <div style="font-size: 13px; color: var(--text-muted);">Vel Ra Perfumes Concept Interior • Handover Package Rev 1.0</div>
+          </div>
+          <span class="dim-pill gold">STAGE 04 SIGN-OFF</span>
         </div>
 
-        <div class="signoff-form-grid">
-          <div class="form-group">
-            <label class="form-label">Client Representative Name</label>
-            <input type="text" class="form-input" id="sign-name" value="Velra Executive Team" placeholder="Enter full name...">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Organization / Brand</label>
-            <input type="text" class="form-input" id="sign-org" value="VELRA Perfumes Group" readonly>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Sign-Off Date</label>
-            <input type="text" class="form-input" id="sign-date" value="September 2026" readonly>
-          </div>
-        </div>
+        <ul class="signoff-checklist">
+          <li class="signoff-item">
+            <input type="checkbox" id="check-1" class="signoff-checkbox" checked>
+            <label for="check-1"><strong>Storefront & Spatial Proportions:</strong> Glazed portal (5,900 mm span) and rear depth (7,300 mm) reviewed and approved for concept design.</label>
+          </li>
+          <li class="signoff-item">
+            <input type="checkbox" id="check-2" class="signoff-checkbox" checked>
+            <label for="check-2"><strong>Joinery & Island Dimensions:</strong> Central consultation island (2,400 × 900 × 950 mm) and perimeter shelving bays (2,400 × 900 × 350 mm) accepted for shop drawings.</label>
+          </li>
+          <li class="signoff-item">
+            <input type="checkbox" id="check-3" class="signoff-checkbox" checked>
+            <label for="check-3"><strong>Materials & Finishes:</strong> White Calacatta Gold marble and brushed titanium gold PVD finishes approved for fabrication sampling.</label>
+          </li>
+          <li class="signoff-item">
+            <input type="checkbox" id="check-4" class="signoff-checkbox" checked>
+            <label for="check-4"><strong>Lighting & CCT Standards:</strong> 3000K warm white, CRI >95 LED ribbons and anti-glare downlights confirmed.</label>
+          </li>
+          <li class="signoff-item">
+            <input type="checkbox" id="check-5" class="signoff-checkbox" checked>
+            <label for="check-5"><strong>Site-Verification Protocol:</strong> Main contractor to execute laser dimension survey on site prior to joinery manufacturing.</label>
+          </li>
+        </ul>
 
         <div class="signoff-actions">
-          <div class="signoff-stamp verified" id="sign-stamp">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            <span id="sign-stamp-text">HANDOVER APPROVED & RECORDED • REV 1.0 FINAL</span>
+          <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+            <input type="text" id="sign-name" placeholder="Enter Approver Full Name" value="VEL RA Client Representative" style="background: #ffffff; border: 1px solid var(--gold-border); padding: 9px 16px; border-radius: 20px; font-size: 13px; color: #0f172a; font-family: var(--font-sans); width: 280px; box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);">
+            <button id="btn-confirm-sign" class="btn-sign" style="padding: 9px 24px;">Confirm & Record Approval</button>
           </div>
 
-          <div style="display: flex; gap: 10px;">
-            <button class="btn-pdf" id="btn-print-handover">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
-              <span>Export Dossier (PDF)</span>
-            </button>
-            <button class="btn-sign" id="btn-confirm-sign">Save & Re-Confirm Approval</button>
+          <div id="sign-stamp" class="signoff-stamp verified">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <span id="sign-stamp-text">APPROVED BY VEL RA • STAGE 04 RECORDED</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Document Control & Footer -->
+  <!-- Footer & Document Control -->
   <footer class="footer-section">
     <div class="container">
       <div class="footer-grid">
         <div>
-          <div class="footer-brand">VELRA PERFUMES</div>
-          <p style="max-width: 420px; line-height: 1.5; color: var(--text-dim);">
-            Luxury retail architecture, bespoke fragrance joinery, and digital twin engineering. Handover package prepared by Faisal 3D Design Studio for VELRA Perfumes Flagship.
+          <div class="footer-brand">VEL RA PERFUMES</div>
+          <p style="font-size: 13px; max-width: 480px; line-height: 1.6; margin-bottom: 16px; color: var(--text-muted);">
+            Concept interior architectural handover package. Designed with Calacatta Gold marble, illuminated gold fragrance joinery, and interactive 3D digital twin technology.
           </p>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <span class="dim-pill gold">REV 1.0 FINAL</span>
+            <span class="dim-pill">STAGE 04 HANDOVER</span>
+            <span class="dim-pill">FAISAL 3D DESIGN</span>
+          </div>
         </div>
 
         <div>
-          <div class="footer-heading">Document Control</div>
+          <div class="footer-heading">Project Navigation</div>
           <ul class="footer-list">
-            <li>Document: Handover Dossier</li>
-            <li>Revision: 1.0 Final</li>
-            <li>Status: Approved for Fabrication</li>
-            <li>Issue Date: September 2026</li>
+            <li><a href="#section-overview" style="color: var(--text-muted); text-decoration: none;">Executive Overview</a></li>
+            <li><a href="#section-3d-twin" style="color: var(--text-muted); text-decoration: none;">3D Digital Twin</a></li>
+            <li><a href="#section-cad-plan" style="color: var(--text-muted); text-decoration: none;">CAD Plan & Dimensions</a></li>
+            <li><a href="#section-features" style="color: var(--text-muted); text-decoration: none;">Visual Cuts & Details</a></li>
+            <li><a href="#section-schedules" style="color: var(--text-muted); text-decoration: none;">Technical Schedules</a></li>
+            <li><a href="#section-renders" style="color: var(--text-muted); text-decoration: none;">4K Master Renders</a></li>
           </ul>
         </div>
 
         <div>
-          <div class="footer-heading">Quick Navigation</div>
+          <div class="footer-heading">Document Verification</div>
           <ul class="footer-list">
-            <li><a href="#section-overview" style="color: inherit; text-decoration: none;">Project Overview</a></li>
-            <li><a href="#section-3d-twin" style="color: inherit; text-decoration: none;">Interactive 3D</a></li>
-            <li><a href="#section-cad-plan" style="color: inherit; text-decoration: none;">CAD Floor Plan</a></li>
-            <li><a href="#section-renders" style="color: inherit; text-decoration: none;">4K Gallery</a></li>
+            <li><strong>Project Code:</strong> VELRA-INT-2026</li>
+            <li><strong>Drawing Status:</strong> Approved Concept</li>
+            <li><strong>Dimensions Datum:</strong> Metric (mm / m)</li>
+            <li><strong>Laser Verification:</strong> Mandatory on Site</li>
+            <li><strong>Software:</strong> Three.js • Vite • WebGL</li>
           </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <div>© 2026 VELRA Perfumes Group. All architectural designs, 3D assets & joinery details reserved.</div>
-        <div>Faisal 3D Design Studio • Handover Revision 1.0</div>
+        <div>© 2026 Vel Ra Perfumes Group. All architectural designs, 3D models, and joinery details protected.</div>
+        <div style="font-family: var(--font-mono); color: var(--gold-dark); font-weight: 700;">FAISAL 3D DESIGN STUDIO • LONDON</div>
       </div>
     </div>
   </footer>
+
+  <div id="toast" style="position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: rgba(15,23,42,0.92); backdrop-filter: blur(12px); border: 1px solid rgba(212,175,55,0.6); color: #fef08a; padding: 10px 24px; border-radius: 30px; font-family: var(--font-mono); font-size: 12px; font-weight: 700; box-shadow: 0 10px 30px rgba(0,0,0,0.3); opacity: 0; transition: all 0.3s ease; z-index: 999; pointer-events: none;"></div>
 
   <script type="module" src="/src/main.js"></script>
 </body>
