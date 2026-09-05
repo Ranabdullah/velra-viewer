@@ -87,8 +87,9 @@ function showToast(msg) {
 }
 
 // User-calibrated exterior and interior default views
-const EXTERIOR_POS = new THREE.Vector3(2.70, 1.59, 4.23);
-const EXTERIOR_LOOKAT = new THREE.Vector3(2.70, 1.47, 0.37);
+const CALIBRATED_START = loadSavedCam('start', new THREE.Vector3(2.45, 1.62, 4.60), new THREE.Vector3(2.45, 1.55, 0.15));
+const EXTERIOR_POS = CALIBRATED_START.pos;
+const EXTERIOR_LOOKAT = CALIBRATED_START.lookAt;
 
 const DEFAULT_EXTERIOR = { pos: EXTERIOR_POS.clone(), lookAt: EXTERIOR_LOOKAT.clone() };
 const DEFAULT_ENTRANCE = loadSavedCam('entrance', new THREE.Vector3(4.18, 1.64, -0.69), new THREE.Vector3(2.46, 1.11, -3.80));
