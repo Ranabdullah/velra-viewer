@@ -9,35 +9,41 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
+    
     :root {
-      --bg-marble: url('/materials/calacatta_gold_bg.jpg');
+      --bg-abstract: url('/backgrounds/bg_abstract_luxury.jpg');
+      --bg-bokeh: url('/backgrounds/bg_gold_bokeh.jpg');
+      --bg-marble: url('/backgrounds/bg_marble_veining.jpg');
+      --bg-gradient: url('/backgrounds/bg_soft_gradient.jpg');
       
-      /* Pure Optical Glassmorphism */
-      --glass-bg: rgba(255, 255, 255, 0.28);
-      --glass-bg-card: rgba(255, 255, 255, 0.32);
-      --glass-bg-hover: rgba(255, 255, 255, 0.48);
-      --glass-bg-subtle: rgba(255, 255, 255, 0.18);
-      --glass-bg-solid: rgba(255, 255, 255, 0.58);
+      /* Pure Optical Glassmorphism - Dark Luxury & Luminous Gold */
+      --glass-bg: rgba(255, 255, 255, 0.07);
+      --glass-bg-card: rgba(24, 20, 32, 0.58);
+      --glass-bg-hover: rgba(38, 32, 50, 0.72);
+      --glass-bg-subtle: rgba(255, 255, 255, 0.05);
+      --glass-bg-solid: rgba(20, 17, 28, 0.88);
+      --glass-bg-floating: rgba(18, 15, 26, 0.75);
       
-      --glass-border: rgba(255, 255, 255, 0.65);
+      --glass-border: rgba(255, 255, 255, 0.16);
+      --glass-border-top: rgba(255, 255, 255, 0.35);
       --glass-border-gold: rgba(212, 175, 55, 0.45);
-      --glass-border-hover: rgba(212, 175, 55, 0.85);
+      --glass-border-hover: rgba(245, 208, 120, 0.75);
       
-      --glass-shine: inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 2px 0 rgba(212, 175, 55, 0.15);
-      --glass-shadow: 0 20px 50px -10px rgba(180, 130, 40, 0.15), 0 8px 24px -4px rgba(0, 0, 0, 0.06);
-      --glass-shadow-hover: 0 30px 60px -8px rgba(180, 130, 40, 0.25), 0 12px 30px -4px rgba(0, 0, 0, 0.08);
-      --glass-blur: blur(28px) saturate(200%);
+      --glass-shine: inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.35), inset 0 -1px 2px 0 rgba(0, 0, 0, 0.3);
+      --glass-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.65), 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+      --glass-shadow-hover: 0 30px 60px -8px rgba(0, 0, 0, 0.75), 0 0 30px rgba(212, 175, 55, 0.22), inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.45);
+      --glass-blur: blur(24px) saturate(180%);
       
-      --gold-primary: #b8860b;
-      --gold-dark: #784c00;
-      --gold-light: #fef08a;
-      --gold-soft: rgba(254, 240, 138, 0.25);
-      --gold-border: rgba(184, 134, 11, 0.45);
+      --gold-primary: #d4af37;
+      --gold-dark: #b8860b;
+      --gold-light: #fbe69e;
+      --gold-soft: rgba(212, 175, 55, 0.18);
+      --gold-border: rgba(212, 175, 55, 0.4);
       
-      --text-main: #090d16;
-      --text-muted: #334155;
-      --text-dim: #475569;
-      --border-subtle: rgba(255, 255, 255, 0.5);
+      --text-main: #f8fafc;
+      --text-muted: #cbd5e1;
+      --text-dim: #94a3b8;
+      --border-subtle: rgba(255, 255, 255, 0.14);
       
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -47,10 +53,11 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      background-color: #f8f6f0;
-      background-image: var(--bg-marble);
-      background-repeat: repeat;
-      background-size: 550px 550px;
+      background-color: #0d0b12;
+      background-image: var(--bg-abstract);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center top;
       background-attachment: fixed;
       color: var(--text-main);
       font-family: var(--font-sans);
@@ -61,136 +68,215 @@
       position: relative;
     }
 
-    /* Ambient Floating Glassmorphic Orbs & Refraction Light Sources */
+    /* Ambient Floating Refraction Orbs */
     .glass-orb {
       position: fixed;
       border-radius: 50%;
-      filter: blur(80px);
+      filter: blur(100px);
       pointer-events: none;
       z-index: 0;
-      opacity: 0.65;
-      animation: floatOrb 20s ease-in-out infinite alternate;
+      opacity: 0.55;
+      animation: floatOrb 22s ease-in-out infinite alternate;
     }
-    .orb-1 { width: 500px; height: 500px; top: -100px; left: -100px; background: radial-gradient(circle, rgba(251, 191, 36, 0.45) 0%, rgba(245, 158, 11, 0.15) 70%, transparent 100%); }
-    .orb-2 { width: 600px; height: 600px; top: 30%; right: -150px; background: radial-gradient(circle, rgba(244, 63, 94, 0.25) 0%, rgba(212, 175, 55, 0.2) 60%, transparent 100%); animation-delay: -5s; }
-    .orb-3 { width: 550px; height: 550px; bottom: 10%; left: 5%; background: radial-gradient(circle, rgba(56, 189, 248, 0.25) 0%, rgba(212, 175, 55, 0.18) 65%, transparent 100%); animation-delay: -10s; }
-    .orb-4 { width: 450px; height: 450px; bottom: -100px; right: 20%; background: radial-gradient(circle, rgba(234, 179, 8, 0.35) 0%, rgba(245, 158, 11, 0.15) 70%, transparent 100%); animation-delay: -15s; }
+    .orb-1 { width: 650px; height: 650px; top: -120px; left: -100px; background: radial-gradient(circle, rgba(245, 175, 45, 0.45) 0%, rgba(212, 160, 23, 0.15) 70%, transparent 100%); }
+    .orb-2 { width: 750px; height: 750px; top: 25%; right: -180px; background: radial-gradient(circle, rgba(217, 119, 6, 0.35) 0%, rgba(180, 83, 9, 0.15) 60%, transparent 100%); animation-delay: -6s; }
+    .orb-3 { width: 600px; height: 600px; bottom: 15%; left: 5%; background: radial-gradient(circle, rgba(234, 179, 8, 0.3) 0%, rgba(161, 98, 7, 0.15) 65%, transparent 100%); animation-delay: -12s; }
+    .orb-4 { width: 550px; height: 550px; bottom: -80px; right: 15%; background: radial-gradient(circle, rgba(245, 158, 11, 0.35) 0%, rgba(120, 53, 15, 0.12) 70%, transparent 100%); animation-delay: -18s; }
 
     @keyframes floatOrb {
       0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(40px, 30px) scale(1.08); }
-      100% { transform: translate(-30px, 50px) scale(0.95); }
+      50% { transform: translate(50px, 35px) scale(1.1); }
+      100% { transform: translate(-40px, 60px) scale(0.92); }
     }
 
     /* Scrollbar */
     ::-webkit-scrollbar { width: 9px; height: 9px; }
-    ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(8px); }
-    ::-webkit-scrollbar-thumb { background: rgba(184, 134, 11, 0.5); border-radius: 6px; border: 2px solid rgba(255, 255, 255, 0.8); }
+    ::-webkit-scrollbar-track { background: rgba(15, 12, 22, 0.7); backdrop-filter: blur(12px); }
+    ::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.45); border-radius: 6px; border: 2px solid rgba(25, 20, 35, 0.8); }
     ::-webkit-scrollbar-thumb:hover { background: var(--gold-primary); }
 
     /* Glassmorphic Navigation Header */
     #handover-nav {
       position: sticky; top: 0; left: 0; width: 100%;
-      background: rgba(255, 255, 255, 0.38);
+      background: var(--glass-bg-floating);
       backdrop-filter: var(--glass-blur);
       -webkit-backdrop-filter: var(--glass-blur);
-      border-bottom: 1.5px solid var(--glass-border);
-      box-shadow: var(--glass-shine), 0 10px 35px rgba(180, 130, 40, 0.09);
+      border-bottom: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shine), 0 15px 40px rgba(0, 0, 0, 0.5);
       z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 32px;
+      padding: 14px 36px;
     }
 
     .brand-box { display: flex; align-items: center; gap: 14px; }
     .brand-logo-text {
       font-family: var(--font-serif);
-      font-size: 25px;
+      font-size: 26px;
       font-weight: 700;
       letter-spacing: 0.14em;
-      color: var(--gold-dark);
+      color: #ffffff;
       text-transform: uppercase;
       text-decoration: none;
-      text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9);
+      text-shadow: 0 0 20px rgba(212, 175, 55, 0.45);
     }
+    .brand-logo-text span { color: var(--gold-light); }
     .handover-badge {
       font-family: var(--font-mono);
       font-size: 10.5px;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--gold-dark);
-      background: rgba(255, 255, 255, 0.5);
-      border: 1px solid var(--glass-border);
+      color: var(--gold-light);
+      background: rgba(212, 175, 55, 0.14);
+      border: 1px solid var(--glass-border-gold);
       box-shadow: var(--glass-shine);
       padding: 4px 12px;
       border-radius: 20px;
     }
 
-    .nav-menu { display: flex; align-items: center; gap: 16px; list-style: none; }
+    .nav-menu { display: flex; align-items: center; gap: 14px; list-style: none; }
     .nav-link {
-      color: #1e293b;
+      color: #e2e8f0;
       text-decoration: none;
       font-size: 13px;
       font-weight: 600;
-      transition: all 0.25s ease;
-      padding: 6px 12px;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 6px 14px;
       border-radius: 20px;
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid transparent;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
     }
     .nav-link:hover {
-      color: var(--gold-dark);
-      background: rgba(255, 255, 255, 0.6);
-      border-color: var(--glass-border);
-      box-shadow: var(--glass-shine);
+      color: #ffffff;
+      background: rgba(212, 175, 55, 0.18);
+      border-color: var(--glass-border-gold);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.25), var(--glass-shine);
       transform: translateY(-1px);
     }
 
-    .nav-actions { display: flex; align-items: center; gap: 10px; }
+    .nav-actions { display: flex; align-items: center; gap: 12px; }
     .btn-pdf {
-      background: rgba(255, 255, 255, 0.45);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1.5px solid var(--glass-border);
-      box-shadow: var(--glass-shine), 0 4px 14px rgba(0, 0, 0, 0.05);
-      color: var(--gold-dark);
-      padding: 7px 18px;
-      font-size: 12px;
-      font-weight: 700;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--glass-border);
+      border-top: 1px solid var(--glass-border-top);
+      box-shadow: var(--glass-shine);
+      color: #ffffff;
+      font-family: var(--font-sans);
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 8px 18px;
       border-radius: 20px;
       cursor: pointer;
-      display: flex; align-items: center; gap: 6px;
       transition: all 0.25s ease;
+      display: flex; align-items: center; gap: 6px;
     }
     .btn-pdf:hover {
-      background: rgba(255, 255, 255, 0.75);
-      border-color: var(--gold-primary);
-      box-shadow: var(--glass-shine), 0 6px 20px rgba(184, 134, 11, 0.2);
-      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.35);
+      box-shadow: var(--glass-shadow-hover);
+      transform: translateY(-1px);
     }
 
     .btn-sign {
-      background: linear-gradient(135deg, rgba(212, 175, 55, 0.95) 0%, rgba(184, 134, 11, 0.95) 100%);
-      backdrop-filter: blur(16px);
-      color: #ffffff;
-      border: 1.5px solid rgba(255, 255, 255, 0.8);
-      box-shadow: var(--glass-shine), 0 6px 20px rgba(184, 134, 11, 0.35);
-      padding: 7px 22px;
-      font-size: 12px;
+      background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+      color: #0b0912;
+      font-family: var(--font-sans);
+      font-size: 12.5px;
       font-weight: 700;
-      letter-spacing: 0.04em;
+      padding: 8px 18px;
       border-radius: 20px;
       cursor: pointer;
-      text-decoration: none;
       transition: all 0.25s ease;
+      display: flex; align-items: center; gap: 6px;
     }
     .btn-sign:hover {
-      box-shadow: 0 8px 25px rgba(184, 134, 11, 0.55);
-      transform: translateY(-2px) scale(1.02);
+      background: linear-gradient(135deg, #fbe69e 0%, #d4af37 100%);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+      transform: translateY(-1px);
     }
 
-    /* Layout Containers */
-    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
+    .section-wrap { padding: 80px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.08); position: relative; }
+    
+    /* Section specific background texture layers */
+    .section-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0.85;
+      background-size: cover;
+      background-position: center;
+    }
+    #section-overview::before { background-image: var(--bg-abstract); }
+    #section-3d-twin::before { background-image: var(--bg-bokeh); opacity: 0.75; }
+    #section-cad-plan::before { background-image: var(--bg-abstract); opacity: 0.8; }
+    #section-features::before { background-image: var(--bg-abstract); }
+    #section-lighting-showcase::before { background-image: var(--bg-bokeh); opacity: 0.85; }
+    #section-materials::before { background-image: var(--bg-marble); opacity: 0.45; }
+    #section-schedules::before { background-image: var(--bg-gradient); opacity: 0.65; }
+    #section-renders::before { background-image: var(--bg-abstract); }
+    #section-signoff::before { background-image: var(--bg-gradient); opacity: 0.75; }
+
+    .section-header { margin-bottom: 40px; }
+    .section-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      display: inline-block;
+      margin-bottom: 8px;
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid var(--glass-border-gold);
+      padding: 3px 12px;
+      border-radius: 14px;
+      backdrop-filter: blur(8px);
+    }
+    .section-heading {
+      font-family: var(--font-serif);
+      font-size: 38px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.02em;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
+    }
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 15.5px;
+      max-width: 820px;
+      line-height: 1.65;
+    }
+
+    /* Glassmorphism Cards & Panels */
+    .glass-card {
+      background: var(--glass-bg-card);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--glass-border);
+      border-top: 1px solid var(--glass-border-top);
+      border-left: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: var(--glass-shine), var(--glass-shadow);
+      border-radius: 22px;
+      padding: 28px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .glass-card:hover {
+      background: var(--glass-bg-hover);
+      border-color: var(--glass-border-gold);
+      border-top-color: rgba(255, 255, 255, 0.55);
+      box-shadow: var(--glass-shadow-hover);
+      transform: translateY(-3px);
+    }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 1; }
     .section-wrap { padding: 64px 0; border-bottom: 1.5px solid rgba(255, 255, 255, 0.5); position: relative; z-index: 1; }
 
     /* Section Headers */
@@ -204,7 +290,7 @@
       color: var(--gold-dark);
       margin-bottom: 8px;
       display: inline-block;
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.07);
       backdrop-filter: blur(12px);
       padding: 4px 12px;
       border-radius: 20px;
@@ -215,12 +301,12 @@
       font-family: var(--font-serif);
       font-size: 36px;
       font-weight: 700;
-      color: #090d16;
+      color: #ffffff;
       letter-spacing: -0.01em;
       margin-bottom: 8px;
       text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
     }
-    .section-desc { color: #334155; font-size: 15px; max-width: 840px; font-weight: 500; }
+    .section-desc { color: #cbd5e1; font-size: 15px; max-width: 840px; font-weight: 500; }
 
     /* Hero Banner */
     .hero-banner {
@@ -248,7 +334,7 @@
       font-family: var(--font-serif);
       font-size: 50px;
       font-weight: 700;
-      color: #090d16;
+      color: #ffffff;
       letter-spacing: 0.02em;
       line-height: 1.15;
       margin-bottom: 14px;
@@ -256,7 +342,7 @@
     }
     .hero-subtitle {
       font-size: 16px;
-      color: #1e293b;
+      color: #e2e8f0;
       max-width: 880px;
       line-height: 1.65;
       margin-bottom: 34px;
@@ -294,7 +380,7 @@
       color: var(--gold-dark);
       margin-bottom: 4px;
     }
-    .meta-value { font-size: 16px; font-weight: 700; color: #090d16; }
+    .meta-value { font-size: 16px; font-weight: 700; color: #ffffff; }
     .meta-value.gold { color: var(--gold-dark); }
 
     /* Visual Photo Cut Badges & Tags */
@@ -560,7 +646,7 @@
       font-family: var(--font-serif);
       font-size: 28px;
       font-weight: 700;
-      color: #090d16;
+      color: #ffffff;
       margin-bottom: 16px;
       line-height: 1.25;
       text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
@@ -585,7 +671,7 @@
       font-size: 13.5px;
     }
     .dim-row:last-child { border-bottom: none; }
-    .dim-name { color: #334155; font-weight: 600; }
+    .dim-name { color: #cbd5e1; font-weight: 600; }
     .dim-val { font-family: var(--font-mono); font-weight: 700; color: var(--gold-dark); }
 
     /* Visual Cuts Spotlight Grid */
@@ -596,7 +682,7 @@
       margin-top: 14px;
     }
     .cut-mini-card {
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.07);
       backdrop-filter: blur(12px);
       border: 1.5px solid var(--glass-border);
       border-radius: 14px;
@@ -676,16 +762,16 @@
     .material-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
     .material-body { padding: 20px; }
     .material-code { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--gold-dark); margin-bottom: 4px; }
-    .material-name { font-family: var(--font-serif); font-size: 21px; font-weight: 700; color: #090d16; margin-bottom: 6px; }
-    .material-desc { font-size: 13px; color: #334155; line-height: 1.5; }
+    .material-name { font-family: var(--font-serif); font-size: 21px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
+    .material-desc { font-size: 13px; color: #cbd5e1; line-height: 1.5; }
 
     /* Technical Schedules (Tabs & Table) */
     .schedule-tabs { display: flex; gap: 10px; margin-bottom: 22px; flex-wrap: wrap; }
     .tab-btn {
-      background: rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.06);
       backdrop-filter: var(--glass-blur);
       border: 1.5px solid var(--glass-border);
-      color: #1e293b;
+      color: #e2e8f0;
       padding: 9px 20px; border-radius: 20px;
       font-size: 13px; font-weight: 700;
       cursor: pointer; transition: all 0.25s ease;
@@ -715,8 +801,8 @@
       letter-spacing: 0.08em; text-transform: uppercase;
       padding: 16px 20px; border-bottom: 1.5px solid var(--glass-border);
     }
-    .schedule-table td { padding: 16px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.5); color: #090d16; }
-    .schedule-table tr:hover td { background: rgba(255, 255, 255, 0.4); }
+    .schedule-table td { padding: 16px 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.5); color: #ffffff; }
+    .schedule-table tr:hover td { background: rgba(255, 255, 255, 0.06); }
     .schedule-table tr:last-child td { border-bottom: none; }
 
     /* 4K Render Gallery */
@@ -747,8 +833,8 @@
     .gallery-card:hover .gallery-img-wrap img { transform: scale(1.04); }
     .gallery-info { padding: 20px; }
     .gallery-pass-code { font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--gold-dark); margin-bottom: 4px; }
-    .gallery-title { font-family: var(--font-serif); font-size: 21px; font-weight: 700; color: #090d16; margin-bottom: 6px; }
-    .gallery-desc { font-size: 13px; color: #334155; line-height: 1.45; }
+    .gallery-title { font-family: var(--font-serif); font-size: 21px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
+    .gallery-desc { font-size: 13px; color: #cbd5e1; line-height: 1.45; }
 
     /* Lightbox Modal */
     #lightbox-modal {
@@ -777,8 +863,8 @@
       background: rgba(255, 255, 255, 0.85);
       border-top: 1px solid var(--border-subtle);
     }
-    .lightbox-title-text { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: #090d16; }
-    .lightbox-desc-text { font-size: 13px; color: #334155; }
+    .lightbox-title-text { font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: #ffffff; }
+    .lightbox-desc-text { font-size: 13px; color: #cbd5e1; }
     .lightbox-close-btn {
       position: absolute; top: 16px; right: 16px;
       background: rgba(15, 23, 42, 0.85); color: #fff;
@@ -810,7 +896,7 @@
       padding: 38px;
     }
     .signoff-checklist { list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
-    .signoff-item { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: #090d16; }
+    .signoff-item { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: #ffffff; }
     .signoff-checkbox { margin-top: 3px; accent-color: var(--gold-primary); width: 18px; height: 18px; cursor: pointer; }
 
     .signoff-actions { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; border-top: 1.5px solid rgba(255, 255, 255, 0.5); padding-top: 24px; }
@@ -828,7 +914,7 @@
       backdrop-filter: var(--glass-blur);
       border-top: 1.5px solid var(--glass-border);
       padding: 56px 0 36px 0;
-      color: #334155;
+      color: #cbd5e1;
       font-size: 13px;
       position: relative;
       z-index: 1;
@@ -943,8 +1029,8 @@
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
         <div class="meta-card" style="padding: 26px;">
           <div class="cut-badge">✦ THE RETAIL CONCEPT</div>
-          <div style="font-family: var(--font-serif); font-size: 23px; font-weight: 700; color: #090d16; margin: 6px 0 10px 0;">White Calacatta Marble & Radiant Brushed Gold</div>
-          <p style="font-size: 13.5px; color: #334155; line-height: 1.6; margin-bottom: 14px;">
+          <div style="font-family: var(--font-serif); font-size: 23px; font-weight: 700; color: #ffffff; margin: 6px 0 10px 0;">White Calacatta Marble & Radiant Brushed Gold</div>
+          <p style="font-size: 13.5px; color: #cbd5e1; line-height: 1.6; margin-bottom: 14px;">
             The Vel Ra boutique blends seamless white Calacatta Gold marble flooring and countertop slabs with warm 3000K backlit gold fragrance shelving to highlight luxury perfume extracts with maximum clarity and elegance.
           </p>
           <div style="display: flex; flex-wrap: wrap; gap: 8px;">
@@ -956,7 +1042,7 @@
 
         <div class="meta-card" style="padding: 26px;">
           <div class="cut-badge">✦ KEY ARCHITECTURAL DIMENSIONS</div>
-          <div style="font-family: var(--font-serif); font-size: 23px; font-weight: 700; color: #090d16; margin: 6px 0 10px 0;">Verified Spatial Clearances (cm)</div>
+          <div style="font-family: var(--font-serif); font-size: 23px; font-weight: 700; color: #ffffff; margin: 6px 0 10px 0;">Verified Spatial Clearances (cm)</div>
           <div class="dim-breakdown-box" style="margin-bottom: 0;">
             <div class="dim-row">
               <span class="dim-name">Front Glazed Storefront Span:</span>
@@ -1521,7 +1607,7 @@
                 <div class="cut-mini-label">THIS IS: Pivot Door</div>
               </div>
               <div class="cut-mini-card">
-                <img src="/renders/cuts/cut_facade_vitrine.png" alt="Concealed Frame">
+                <img src="/renders/cuts/cut_wc_door_hardware.png" alt="Concealed Pivot Frame & Hardware">
                 <div class="cut-mini-label">THIS IS: Flush Frame</div>
               </div>
             </div>
@@ -1583,14 +1669,14 @@
           </div>
           <div class="lighting-card-body">
             <div class="cut-badge">✦ FIXTURE L-01 • SHELF HALO</div>
-            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #090d16; margin-bottom: 6px;">Dotless COB Micro-Extrusion</h4>
+            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Dotless COB Micro-Extrusion</h4>
             <div class="dim-breakdown-box" style="padding: 12px 16px; margin-bottom: 12px;">
               <div class="dim-row"><span class="dim-name">CCT / CRI:</span><span class="dim-val">3000K / CRI 98 (R9 > 90)</span></div>
               <div class="dim-row"><span class="dim-name">Profile Run:</span><span class="dim-val">240 cm Linear Runs</span></div>
               <div class="dim-row"><span class="dim-name">Driver Protocol:</span><span class="dim-val">Tridonic 24V DALI-2 Dimmable</span></div>
               <div class="dim-row"><span class="dim-name">Extrusion:</span><span class="dim-val">1.0 × 0.8 cm Anodized + Opal</span></div>
             </div>
-            <p style="font-size: 12.5px; color: #334155;">Eliminates visible diode reflection on glass flacons; enhances golden perfume hue.</p>
+            <p style="font-size: 12.5px; color: #cbd5e1;">Eliminates visible diode reflection on glass flacons; enhances golden perfume hue.</p>
           </div>
         </div>
 
@@ -1602,14 +1688,14 @@
           </div>
           <div class="lighting-card-body">
             <div class="cut-badge">✦ FIXTURE L-02 • CEILING COVE</div>
-            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #090d16; margin-bottom: 6px;">Indirect Perimeter Cove Ribbon</h4>
+            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Indirect Perimeter Cove Ribbon</h4>
             <div class="dim-breakdown-box" style="padding: 12px 16px; margin-bottom: 12px;">
               <div class="dim-row"><span class="dim-name">CCT / Output:</span><span class="dim-val">3000K / 19.2 W/m (1800 lm)</span></div>
               <div class="dim-row"><span class="dim-name">Pelmet Reveal:</span><span class="dim-val">25 cm Gypsum Reveal</span></div>
               <div class="dim-row"><span class="dim-name">Driver:</span><span class="dim-val">Osram Optotronic 24V DALI</span></div>
               <div class="dim-row"><span class="dim-name">Compliance:</span><span class="dim-val">CE / ENEC / BS 5266</span></div>
             </div>
-            <p style="font-size: 12.5px; color: #334155;">Soft upward wash across the ceiling plane, providing warm ambient base lux.</p>
+            <p style="font-size: 12.5px; color: #cbd5e1;">Soft upward wash across the ceiling plane, providing warm ambient base lux.</p>
           </div>
         </div>
 
@@ -1621,14 +1707,14 @@
           </div>
           <div class="lighting-card-body">
             <div class="cut-badge">✦ FIXTURE L-03 • TASK DOWNLIGHT</div>
-            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #090d16; margin-bottom: 6px;">Anti-Glare Precision Gimbal Spot</h4>
+            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Anti-Glare Precision Gimbal Spot</h4>
             <div class="dim-breakdown-box" style="padding: 12px 16px; margin-bottom: 12px;">
               <div class="dim-row"><span class="dim-name">Wattage / Optics:</span><span class="dim-val">15W / 24° Precision Lens</span></div>
               <div class="dim-row"><span class="dim-name">Glare Rating:</span><span class="dim-val">UGR &lt; 13 (Anti-Glare Baffle)</span></div>
               <div class="dim-row"><span class="dim-name">Colour Quality:</span><span class="dim-val">3000K / CRI 97 (MacAdam 2)</span></div>
               <div class="dim-row"><span class="dim-name">Cutout Size:</span><span class="dim-val">8.5 cm Ø Recessed</span></div>
             </div>
-            <p style="font-size: 12.5px; color: #334155;">Focused 1,500 lux spotlighting on the central marble consultation island.</p>
+            <p style="font-size: 12.5px; color: #cbd5e1;">Focused 1,500 lux spotlighting on the central marble consultation island.</p>
           </div>
         </div>
 
@@ -1640,14 +1726,14 @@
           </div>
           <div class="lighting-card-body">
             <div class="cut-badge">✦ FIXTURE L-04 • BRAND HALO</div>
-            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #090d16; margin-bottom: 6px;">VEL RA 3D Backlit Gold Signage</h4>
+            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">VEL RA 3D Backlit Gold Signage</h4>
             <div class="dim-breakdown-box" style="padding: 12px 16px; margin-bottom: 12px;">
               <div class="dim-row"><span class="dim-name">CCT / Rating:</span><span class="dim-val">3000K / IP65 Sealed</span></div>
               <div class="dim-row"><span class="dim-name">Sign Dimension:</span><span class="dim-val">180 cm Wide × 35 cm High</span></div>
               <div class="dim-row"><span class="dim-name">Relief Standoff:</span><span class="dim-val">5.0 cm Brass Spacers</span></div>
               <div class="dim-row"><span class="dim-name">Operation:</span><span class="dim-val">24/7 Storefront Timer Circuit</span></div>
             </div>
-            <p style="font-size: 12.5px; color: #334155;">PVD brushed gold 3D lettering with radiant ambient halo glow.</p>
+            <p style="font-size: 12.5px; color: #cbd5e1;">PVD brushed gold 3D lettering with radiant ambient halo glow.</p>
           </div>
         </div>
       </div>
@@ -1655,8 +1741,8 @@
       <div class="meta-card" style="padding: 22px 28px;">
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
           <div>
-            <div style="font-family: var(--font-serif); font-size: 21px; font-weight: 700; color: #090d16;">Irish & European Retail Compliance Notes</div>
-            <div style="font-size: 13.5px; color: #334155;">All drivers isolated in ventilated joinery plinths with accessible magnetic maintenance hatches.</div>
+            <div style="font-family: var(--font-serif); font-size: 21px; font-weight: 700; color: #ffffff;">Irish & European Retail Compliance Notes</div>
+            <div style="font-size: 13.5px; color: #cbd5e1;">All drivers isolated in ventilated joinery plinths with accessible magnetic maintenance hatches.</div>
           </div>
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
             <span class="dim-pill gold">230V 50Hz SINGLE PHASE</span>
@@ -2102,38 +2188,38 @@
       <div class="signoff-card">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
           <div>
-            <div style="font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: #090d16;">Concept Verification Checklist</div>
-            <div style="font-size: 13.5px; color: #334155;">Vel Ra Perfumes Concept Interior • Handover Package Rev 1.0</div>
+            <div style="font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: #ffffff;">Concept Verification Checklist</div>
+            <div style="font-size: 13.5px; color: #cbd5e1;">Vel Ra Perfumes Concept Interior • Handover Package Rev 1.0</div>
           </div>
           <span class="dim-pill gold">STAGE 04 SIGN-OFF</span>
         </div>
 
         <ul class="signoff-checklist">
           <li class="signoff-item">
-            <input type="checkbox" id="check-1" class="signoff-checkbox" checked>
+            <input type="checkbox" id="check-1" class="signoff-checkbox">
             <label for="check-1"><strong>Storefront & Spatial Proportions:</strong> Glazed portal (590 cm span) and rear depth (730 cm) reviewed and approved for concept design.</label>
           </li>
           <li class="signoff-item">
-            <input type="checkbox" id="check-2" class="signoff-checkbox" checked>
+            <input type="checkbox" id="check-2" class="signoff-checkbox">
             <label for="check-2"><strong>Joinery & Island Dimensions:</strong> Central consultation island (240 × 90 × 95 cm) and perimeter shelving bays (240 × 90 × 35 cm) accepted for shop drawings.</label>
           </li>
           <li class="signoff-item">
-            <input type="checkbox" id="check-3" class="signoff-checkbox" checked>
+            <input type="checkbox" id="check-3" class="signoff-checkbox">
             <label for="check-3"><strong>Materials & Finishes:</strong> White Calacatta Gold marble and brushed titanium gold PVD finishes approved for fabrication sampling.</label>
           </li>
           <li class="signoff-item">
-            <input type="checkbox" id="check-4" class="signoff-checkbox" checked>
+            <input type="checkbox" id="check-4" class="signoff-checkbox">
             <label for="check-4"><strong>Irish & EU Retail Lighting Standards:</strong> 3000K warm white, CRI 98 (R9 > 90) dotless COB LED extrusions and anti-glare gimbal downlights confirmed.</label>
           </li>
           <li class="signoff-item">
-            <input type="checkbox" id="check-5" class="signoff-checkbox" checked>
+            <input type="checkbox" id="check-5" class="signoff-checkbox">
             <label for="check-5"><strong>Site-Verification Protocol:</strong> Main contractor to execute laser dimension survey on site prior to joinery manufacturing.</label>
           </li>
         </ul>
 
         <div class="signoff-actions">
           <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
-            <input type="text" id="sign-name" placeholder="Enter Approver Full Name" value="VEL RA Client Representative" style="background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(12px); border: 1.5px solid var(--glass-border); padding: 10px 18px; border-radius: 20px; font-size: 13.5px; color: #090d16; font-family: var(--font-sans); width: 280px; box-shadow: var(--glass-shine);">
+            <input type="text" id="sign-name" placeholder="Enter Approver Full Name" value="VEL RA Client Representative" style="background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(12px); border: 1.5px solid var(--glass-border); padding: 10px 18px; border-radius: 20px; font-size: 13.5px; color: #ffffff; font-family: var(--font-sans); width: 280px; box-shadow: var(--glass-shine);">
             <button id="btn-confirm-sign" class="btn-sign" style="padding: 10px 26px;">Confirm & Record Approval</button>
           </div>
 
@@ -2152,7 +2238,7 @@
       <div class="footer-grid">
         <div>
           <div class="footer-brand">VEL RA PERFUMES</div>
-          <p style="font-size: 13.5px; max-width: 480px; line-height: 1.65; margin-bottom: 16px; color: #334155;">
+          <p style="font-size: 13.5px; max-width: 480px; line-height: 1.65; margin-bottom: 16px; color: #cbd5e1;">
             Concept interior architectural handover package. Designed with Calacatta Gold marble, illuminated gold fragrance joinery, Irish/EU compliant 3000K lighting, and interactive 3D digital twin technology.
           </p>
           <div style="display: flex; gap: 8px; flex-wrap: wrap;">
@@ -2165,13 +2251,13 @@
         <div>
           <div class="footer-heading">Project Navigation</div>
           <ul class="footer-list">
-            <li><a href="#section-overview" style="color: #334155; text-decoration: none;">Executive Overview</a></li>
-            <li><a href="#section-3d-twin" style="color: #334155; text-decoration: none;">3D Digital Twin</a></li>
-            <li><a href="#section-cad-plan" style="color: #334155; text-decoration: none;">CAD Plan & Dimensions</a></li>
-            <li><a href="#section-features" style="color: #334155; text-decoration: none;">Visual Cuts & Details</a></li>
-            <li><a href="#section-lighting-showcase" style="color: #334155; text-decoration: none;">Lighting System (Ireland)</a></li>
-            <li><a href="#section-schedules" style="color: #334155; text-decoration: none;">Technical Schedules</a></li>
-            <li><a href="#section-renders" style="color: #334155; text-decoration: none;">4K Master Renders</a></li>
+            <li><a href="#section-overview" style="color: #cbd5e1; text-decoration: none;">Executive Overview</a></li>
+            <li><a href="#section-3d-twin" style="color: #cbd5e1; text-decoration: none;">3D Digital Twin</a></li>
+            <li><a href="#section-cad-plan" style="color: #cbd5e1; text-decoration: none;">CAD Plan & Dimensions</a></li>
+            <li><a href="#section-features" style="color: #cbd5e1; text-decoration: none;">Visual Cuts & Details</a></li>
+            <li><a href="#section-lighting-showcase" style="color: #cbd5e1; text-decoration: none;">Lighting System (Ireland)</a></li>
+            <li><a href="#section-schedules" style="color: #cbd5e1; text-decoration: none;">Technical Schedules</a></li>
+            <li><a href="#section-renders" style="color: #cbd5e1; text-decoration: none;">4K Master Renders</a></li>
           </ul>
         </div>
 
