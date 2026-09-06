@@ -262,6 +262,16 @@
       transform: translateY(-1px);
     }
     
+    
+    @keyframes spinLoader {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes spinLoaderReverse {
+      0% { transform: rotate(360deg); }
+      100% { transform: rotate(0deg); }
+    }
+
     /* 3D Viewport Adaptive Quality & Time Presets */
     .quality-btn {
       font-family: var(--font-heading);
@@ -913,7 +923,7 @@
     
 
   </style>
-  <script type="module" crossorigin src="/assets/index-BU8S1b2H.js"></script>
+  <script type="module" crossorigin src="/assets/index-B_f9bDSj.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/three-Bz_qPWse.js">
 </head>
 <body>
@@ -1119,17 +1129,17 @@
         </div>
 
         <!-- Mat 02 -->
-        <div class="arch-image-card" onclick="openBeastLightbox('/materials/mat_champagne_gold.jpg', 'MAT-02: Brushed Champagne Gold Titanium PVD Stainless Steel')">
+        <div class="arch-image-card" onclick="openBeastLightbox('/materials/white_acrylic_solid_surface.png', 'MAT-02: White Acrylic Solid Surface Sheets (Corian / Hi-Macs Architectural Grade)')">
           <div class="arch-img-frame ratio-4-3">
-            <div class="arch-tag-overlay">02 // <span>CHAMPAGNE GOLD PVD</span></div>
+            <div class="arch-tag-overlay">02 // <span>WHITE SOLID SURFACE</span></div>
             <div class="arch-zoom-hint">🔍</div>
-            <img src="/materials/mat_champagne_gold.jpg" alt="Brushed Brass PVD Metal">
+            <img src="/materials/white_acrylic_solid_surface.png" alt="White Acrylic Solid Surface Sheets">
           </div>
           <div class="arch-caption-block">
-            <div class="arch-caption-title">Brushed Champagne Gold Stainless Steel</div>
+            <div class="arch-caption-title">White Acrylic Solid Surface Sheets</div>
             <div class="arch-caption-meta">
-              <span>TITANIUM PVD COATING • GRADE 316</span>
-              <span class="arch-caption-tag">ACCENTS & TRIMS</span>
+              <span>SEAMLESS THERMOFORMABLE • HYGIENIC MATTE</span>
+              <span class="arch-caption-tag">COUNTERTOPS & DISPLAY SURFACES</span>
             </div>
           </div>
         </div>
@@ -1281,6 +1291,38 @@
         </div>
 
         <div style="position: relative; width: 100%; height: 620px; border-radius: 18px; overflow: hidden; background: #0a0e18; border: 2px solid rgba(255, 255, 255, 0.95); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);" id="canvas-container">
+          
+          <!-- Luxury 3D Digital Twin Loading Screen Overlay -->
+          <div id="viewer-loading-screen" style="position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(15, 23, 42, 0.96) 0%, rgba(6, 8, 14, 0.98) 100%); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;">
+            <div style="text-align: center; max-width: 380px; padding: 0 20px; width: 100%;">
+              <!-- Pulsing Gold Ring & Monogram -->
+              <div style="position: relative; width: 72px; height: 72px; margin: 0 auto 20px;">
+                <div style="position: absolute; inset: 0; border: 2.5px solid rgba(212, 175, 55, 0.25); border-top-color: #d4af37; border-radius: 50%; animation: spinLoader 1.3s cubic-bezier(0.65, 0, 0.35, 1) infinite;"></div>
+                <div style="position: absolute; inset: 6px; border: 1.5px dashed rgba(254, 240, 138, 0.4); border-radius: 50%; animation: spinLoaderReverse 3.5s linear infinite;"></div>
+                <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 24px;">🏛️</div>
+              </div>
+
+              <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #d4af37; margin-bottom: 6px;">
+                INITIALIZING 3D DIGITAL TWIN
+              </div>
+              <div style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 10px; letter-spacing: 0.02em;">
+                Vel Ra Perfumes Dublin
+              </div>
+              <div id="viewer-loading-status" style="font-family: var(--font-mono); font-size: 11px; color: #94a3b8; margin-bottom: 18px;">
+                Loading Capel Street Boutique Model...
+              </div>
+
+              <!-- Sleek Progress Bar -->
+              <div style="width: 100%; height: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 4px; overflow: hidden; margin-bottom: 10px; border: 1px solid rgba(255, 255, 255, 0.08);">
+                <div id="viewer-loading-bar" style="width: 15%; height: 100%; background: linear-gradient(90deg, #b8860b 0%, #d4af37 50%, #fef08a 100%); transition: width 0.3s ease; box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);"></div>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 10px; color: #64748b;">
+                <span>DRACO GLTF DECOMPRESSION</span>
+                <span id="viewer-loading-percent">15%</span>
+              </div>
+            </div>
+          </div>
+
           <canvas id="three-canvas" style="width: 100%; height: 100%; display: block;"></canvas>
         </div>
       </div>
@@ -1878,7 +1920,7 @@
           </li>
           <li style="display: flex; align-items: flex-start; gap: 12px; font-size: 14.5px; color: #334155;">
             <input type="checkbox" id="check-2" class="signoff-checkbox" style="margin-top: 4px; accent-color: #b8860b; width: 18px; height: 18px; cursor: pointer;">
-            <label for="check-2" style="cursor: pointer;"><strong>Materials & Finishes:</strong> Book-matched Calacatta Gold marble, Titanium Gold PVD stainless steel, and fluted brass millwork approved.</label>
+            <label for="check-2" style="cursor: pointer;"><strong>Materials & Finishes:</strong> Book-matched Calacatta Gold marble, White Acrylic Solid Surface sheets, and fluted brass millwork approved.</label>
           </li>
           <li style="display: flex; align-items: flex-start; gap: 12px; font-size: 14.5px; color: #334155;">
             <input type="checkbox" id="check-3" class="signoff-checkbox" style="margin-top: 4px; accent-color: #b8860b; width: 18px; height: 18px; cursor: pointer;">

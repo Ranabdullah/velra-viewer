@@ -16,6 +16,33 @@ import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 // ---------------------------------------------------------------------------
 // 1. Viewport & Canvas Setup
 // ---------------------------------------------------------------------------
+
+// ---------------------------------------------------------------------------
+// 0. Loading Screen Controller
+// ---------------------------------------------------------------------------
+function updateLoadingProgress(percent, statusText) {
+  const bar = document.getElementById('viewer-loading-bar');
+  const label = document.getElementById('viewer-loading-percent');
+  const status = document.getElementById('viewer-loading-status');
+  if (bar) bar.style.width = `${percent}%`;
+  if (label) label.innerText = `${Math.round(percent)}%`;
+  if (status && statusText) status.innerText = statusText;
+}
+
+function hideLoadingScreen() {
+  updateLoadingProgress(100, '3D Digital Twin Ready');
+  const screen = document.getElementById('viewer-loading-screen');
+  if (screen) {
+    setTimeout(() => {
+      screen.style.opacity = '0';
+      screen.style.pointerEvents = 'none';
+      setTimeout(() => {
+        screen.style.display = 'none';
+      }, 800);
+    }, 350);
+  }
+}
+
 const container = document.getElementById('canvas-container');
 const canvas = document.getElementById('three-canvas');
 
@@ -461,10 +488,21 @@ gltfLoader.load(
     calculateLightingForTime(16.5);
     setQualityTier('high');
     requestRender();
+    hideLoadingScreen();
     console.log('Vel Ra 3D Model loaded with optimized physical lighting system.');
   },
-  undefined,
-  (err) => console.warn('Model loading notice:', err)
+  (xhr) => {
+    if (xhr.lengthComputable && xhr.total > 0) {
+      const p = Math.min(95, Math.max(15, (xhr.loaded / xhr.total) * 100));
+      updateLoadingProgress(p, `Loading Geometry & Textures (${Math.round(p)}%)...`);
+    } else {
+      updateLoadingProgress(70, 'Decompressing Draco Geometry...');
+    }
+  },
+  (err) => {
+    console.warn('Model loading notice:', err);
+    hideLoadingScreen();
+  }
 );
 
 // ---------------------------------------------------------------------------
