@@ -3,9 +3,18 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { EXRLoader } from 'three/examples/jsm/loaders/EXRLoader.js';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
+
+// ===========================================================================
+// VEL RA PERFUMES — ARCHITECTURAL 3D LIGHTING & RENDERING ENGINE
+// Maximum Photorealism with Minimum Draw-Call & GPU Memory Cost
+// ===========================================================================
 
 // ---------------------------------------------------------------------------
-// 1. Viewport & Canvas Setup (Lumen Studio Architectural Standard - Direct WebGL)
+// 1. Viewport & Canvas Setup
 // ---------------------------------------------------------------------------
 const container = document.getElementById('canvas-container');
 const canvas = document.getElementById('three-canvas');
@@ -14,7 +23,7 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x0a0d14);
 
 const camera = new THREE.PerspectiveCamera(
-  38, // Architectural prime focal length
+  38, // 38mm architectural prime focal length
   container ? (container.clientWidth / container.clientHeight) : (window.innerWidth / window.innerHeight),
   0.1,
   1000
@@ -33,6 +42,31 @@ renderer.toneMappingExposure = 1.0;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
+// Selective, Ultra-Subtle Bloom Pipeline (High Quality Tier)
+let composer = null;
+let bloomPass = null;
+let usePostProcessing = true;
+
+try {
+  composer = new EffectComposer(renderer);
+  const renderPass = new RenderPass(scene, camera);
+  composer.addPass(renderPass);
+
+  bloomPass = new UnrealBloomPass(
+    new THREE.Vector2(container ? container.clientWidth : window.innerWidth, container ? container.clientHeight : window.innerHeight),
+    0.16, // Bloom strength (restrained & physically believable)
+    0.28, // Bloom radius (tight around fixtures)
+    1.04  // Luminance threshold (ensures normal materials/metals NEVER bloom)
+  );
+  composer.addPass(bloomPass);
+
+  const outputPass = new OutputPass();
+  composer.addPass(outputPass);
+} catch (e) {
+  console.warn('Notice setting up post-processing:', e);
+  usePostProcessing = false;
+}
+
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.05;
@@ -43,7 +77,7 @@ controls.autoRotate = false;
 controls.autoRotateSpeed = 1.0;
 
 // ---------------------------------------------------------------------------
-// 2. HDRI Environment (Subtle Specular Reflection on Brass & Marble)
+// 2. HDRI Environment Lighting (PMREM 2K Preprocessed)
 // ---------------------------------------------------------------------------
 const pmremGenerator = new THREE.PMREMGenerator(renderer);
 pmremGenerator.compileEquirectangularShader();
@@ -54,7 +88,7 @@ exrLoader.load(
   (texture) => {
     const envMap = pmremGenerator.fromEquirectangular(texture).texture;
     scene.environment = envMap;
-    scene.environmentIntensity = 0.25;
+    scene.environmentIntensity = 0.24; // Subtle environment & reflection fill
     texture.dispose();
     pmremGenerator.dispose();
     requestRender();
@@ -64,40 +98,40 @@ exrLoader.load(
 );
 
 // ---------------------------------------------------------------------------
-// 3. Physical Architectural Lighting (Sun Beam, Soft Shadows, Discrete Spots)
+// 3. Physical Lighting Architecture (Single Sun, Soft Shadows, Minimal Spots)
 // ---------------------------------------------------------------------------
-// 3.1 Ambient Fill (Soft & Warm, No Flat Glare)
-const ambientLight = new THREE.AmbientLight(0xffecd8, 0.12);
+// 3.1 Ambient & Sky Fill
+const ambientLight = new THREE.AmbientLight(0xffecd8, 0.10);
 scene.add(ambientLight);
 
-const hemiLight = new THREE.HemisphereLight(0xfff0dc, 0x141820, 0.16);
+const hemiLight = new THREE.HemisphereLight(0xfff2e0, 0x141824, 0.14);
 scene.add(hemiLight);
 
-// 3.2 Directional Sunlight (Crisp-to-Soft Sunlight streaming through front window)
-const sunLight = new THREE.DirectionalLight(0xfff3da, 3.8);
+// 3.2 Single Main Directional Sunlight
+const sunLight = new THREE.DirectionalLight(0xfff3dc, 3.8);
 sunLight.position.set(5.2, 4.4, 6.5);
 sunLight.target.position.set(-0.6, 0.4, -0.4);
 sunLight.castShadow = true;
 sunLight.shadow.mapSize.set(2048, 2048);
-sunLight.shadow.bias = -0.0001;
-sunLight.shadow.normalBias = 0.04;
+sunLight.shadow.bias = -0.00008;
+sunLight.shadow.normalBias = 0.035;
 sunLight.shadow.radius = 2.0;
 sunLight.shadow.camera.near = 0.5;
-sunLight.shadow.camera.far = 25;
-sunLight.shadow.camera.left = -5.5;
-sunLight.shadow.camera.right = 5.5;
-sunLight.shadow.camera.top = 5.5;
-sunLight.shadow.camera.bottom = -5.5;
+sunLight.shadow.camera.far = 22;
+sunLight.shadow.camera.left = -4.8;
+sunLight.shadow.camera.right = 4.8;
+sunLight.shadow.camera.top = 4.8;
+sunLight.shadow.camera.bottom = -4.8;
 scene.add(sunLight);
 scene.add(sunLight.target);
 
 // 3.3 Warm Floor Sun-Bounce
-const floorBounce = new THREE.PointLight(0xffdda8, 1.2, 6, 2.0);
+const floorBounce = new THREE.PointLight(0xffdda0, 1.0, 5.5, 2.0);
 floorBounce.position.set(0.6, 0.25, 0.8);
 scene.add(floorBounce);
 
 // 3.4 Central Island Spot (Physically Radiating Downward with Soft Decay)
-const islandLight = new THREE.SpotLight(0xffeed8, 3.0, 7.0, Math.PI / 4.6, 0.8, 2.0);
+const islandLight = new THREE.SpotLight(0xffeed8, 2.8, 6.5, Math.PI / 4.8, 0.82, 2.0);
 islandLight.position.set(0, 2.45, 0.15);
 islandLight.target.position.set(0, 0.85, 0.15);
 islandLight.castShadow = true;
@@ -108,89 +142,208 @@ scene.add(islandLight);
 scene.add(islandLight.target);
 
 // 3.5 Backwall Monogram Accent Spot
-const monogramLight = new THREE.SpotLight(0xffe4aa, 2.4, 5.0, Math.PI / 4.0, 0.7, 2.0);
+const monogramLight = new THREE.SpotLight(0xffe4aa, 2.2, 4.8, Math.PI / 4.0, 0.75, 2.0);
 monogramLight.position.set(-0.2, 2.4, -0.2);
 monogramLight.target.position.set(-0.2, 1.6, -1.8);
 scene.add(monogramLight);
 scene.add(monogramLight.target);
 
-// 3.6 Ceiling Cove LED Strip
-const coveLight = new THREE.PointLight(0xffe2b0, 1.4, 6.5, 2.0);
+// 3.6 Ceiling Cove LED Strip Fill
+const coveLight = new THREE.PointLight(0xffe2b4, 1.2, 5.5, 2.0);
 coveLight.position.set(0, 2.3, 0);
 scene.add(coveLight);
 
 // ---------------------------------------------------------------------------
-// 4. Dynamic Time of Day Controller Function
+// 4. Smooth Time-of-Day System (0–24 Parameter with Physical Interpolation)
 // ---------------------------------------------------------------------------
-function setTimeOfDay(hour) {
-  const h = parseFloat(hour);
+let currentTimeOfDay = 16.5;
+let isTimeTransitioning = false;
+
+function calculateLightingForTime(h) {
+  const time = Math.max(0, Math.min(24, parseFloat(h)));
+  currentTimeOfDay = time;
+
   const label = document.getElementById('label-time-of-day');
   const slider = document.getElementById('slider-time-of-day');
-  if (slider) slider.value = h;
+  if (slider && parseFloat(slider.value) !== time) {
+    slider.value = time;
+  }
 
-  let timeName = '';
-  if (h < 10) timeName = `${Math.floor(h)}:00 Morning Sun`;
-  else if (h < 15) timeName = `${Math.floor(h)}:00 Midday Natural`;
-  else if (h < 18) timeName = `${Math.floor(h)}:30 Golden Hour`;
-  else timeName = `${Math.floor(h)}:00 Evening Boutique Glow`;
+  // Update visual presets active buttons
+  document.querySelectorAll('.time-preset-btn').forEach(btn => {
+    const val = parseFloat(btn.getAttribute('data-time') || '-1');
+    if (Math.abs(val - time) < 0.6) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
 
-  if (label) label.innerText = timeName;
+  let timeDesc = '';
+  if (time < 5) timeDesc = `${Math.floor(time)}:00 Night Twilight`;
+  else if (time < 7.5) timeDesc = `${Math.floor(time)}:00 Sunrise`;
+  else if (time < 11) timeDesc = `${Math.floor(time)}:00 Morning Sun`;
+  else if (time < 14) timeDesc = `${Math.floor(time)}:00 Midday Natural`;
+  else if (time < 17) timeDesc = `${Math.floor(time)}:00 Afternoon Daylight`;
+  else if (time < 19.5) timeDesc = `${Math.floor(time)}:30 Golden Hour`;
+  else timeDesc = `${Math.floor(time)}:00 Evening Boutique Glow`;
 
-  // Day / Afternoon / Evening Calculation
-  if (h < 18.5) {
-    const dayProgress = Math.max(0, Math.min(1, (h - 6) / 12.5));
+  if (label) label.innerText = timeDesc;
+
+  // Day calculations (06:00 to 19:00)
+  if (time >= 6.0 && time <= 19.0) {
+    const dayProgress = (time - 6.0) / 13.0;
     const angle = dayProgress * Math.PI;
 
-    const sunX = 7.0 * Math.cos(angle * 0.8);
-    const sunY = 3.5 + 4.5 * Math.sin(angle);
-    const sunZ = 5.0 + 3.0 * Math.sin(angle);
+    // Continuous celestial sun trajectory through storefront window
+    const sunX = 6.8 * Math.cos(angle * 0.8);
+    const sunY = 3.2 + 4.8 * Math.sin(angle);
+    const sunZ = 4.8 + 3.2 * Math.sin(angle);
     sunLight.position.set(sunX, sunY, sunZ);
 
-    if (h < 10) {
-      // Warm Morning Sun
-      sunLight.color.setHex(0xffdfb8);
-      sunLight.intensity = 3.6 * Math.sin(angle);
+    if (time < 8.0) {
+      // 06:00 Sunrise (Warm Amber)
+      const t = (time - 6.0) / 2.0;
+      sunLight.color.setHex(0xffc28c);
+      sunLight.intensity = 2.8 + t * 0.8;
+      ambientLight.intensity = 0.08 + t * 0.02;
+      hemiLight.intensity = 0.10 + t * 0.02;
+    } else if (time < 11.0) {
+      // 09:00 Morning (Warm Directional Light)
+      sunLight.color.setHex(0xffe0ba);
+      sunLight.intensity = 3.8;
       ambientLight.intensity = 0.10;
-    } else if (h < 15) {
-      // Crisp Midday
+      hemiLight.intensity = 0.14;
+    } else if (time < 14.0) {
+      // 12:00 Midday (Crisp Architectural Daylight)
       sunLight.color.setHex(0xfffaee);
       sunLight.intensity = 4.2;
       ambientLight.intensity = 0.14;
+      hemiLight.intensity = 0.18;
+    } else if (time < 17.0) {
+      // 15:00 Afternoon (Bright Soft Natural)
+      sunLight.color.setHex(0xfff0d8);
+      sunLight.intensity = 3.9;
+      ambientLight.intensity = 0.11;
+      hemiLight.intensity = 0.15;
     } else {
-      // Golden Hour
-      sunLight.color.setHex(0xffd59e);
-      sunLight.intensity = 4.0;
-      ambientLight.intensity = 0.10;
+      // 18:00 Sunset / Golden Hour (Rich Golden Ray)
+      const t = (time - 17.0) / 2.0;
+      sunLight.color.setHex(0xffcb86);
+      sunLight.intensity = 3.8 * (1.0 - t * 0.3);
+      ambientLight.intensity = 0.08;
+      hemiLight.intensity = 0.11;
     }
 
-    floorBounce.intensity = 1.2;
+    floorBounce.intensity = 1.0;
     scene.background.setHex(0x0a0d14);
-    scene.environmentIntensity = 0.25;
+    scene.environmentIntensity = 0.24;
+
     islandLight.intensity = 2.4;
-    monogramLight.intensity = 2.0;
+    monogramLight.intensity = 1.8;
     coveLight.intensity = 1.0;
   } else {
-    // Evening / Night Mode (Boutique Interior Glow)
+    // Night Mode (Sun set, boutique lights take over)
     sunLight.intensity = 0.0;
-    floorBounce.intensity = 0.15;
-    ambientLight.intensity = 0.05;
-    hemiLight.intensity = 0.08;
-    scene.background.setHex(0x04060a);
-    scene.environmentIntensity = 0.12;
+    floorBounce.intensity = 0.12;
+    ambientLight.intensity = 0.04;
+    hemiLight.intensity = 0.06;
+    scene.background.setHex(0x03050a);
+    scene.environmentIntensity = 0.10;
 
-    // Interior recessed spots take over
     islandLight.intensity = 4.2;
-    monogramLight.intensity = 3.4;
+    monogramLight.intensity = 3.2;
     coveLight.intensity = 2.0;
   }
 
   requestRender();
 }
 
+function transitionTimeTo(targetHour, duration = 600) {
+  if (isTimeTransitioning) return;
+  isTimeTransitioning = true;
+
+  const startHour = currentTimeOfDay;
+  const startTime = performance.now();
+
+  function step(now) {
+    const elapsed = Math.min(1, (now - startTime) / duration);
+    const ease = elapsed < 0.5 ? 2 * elapsed * elapsed : 1 - Math.pow(-2 * elapsed + 2, 2) / 2;
+    const current = startHour + (targetHour - startHour) * ease;
+    calculateLightingForTime(current);
+
+    if (elapsed < 1) {
+      requestAnimationFrame(step);
+    } else {
+      isTimeTransitioning = false;
+      calculateLightingForTime(targetHour);
+    }
+  }
+  requestAnimationFrame(step);
+}
+
+function setTimeOfDay(hour, smooth = false) {
+  const h = parseFloat(hour);
+  if (smooth) {
+    transitionTimeTo(h);
+  } else {
+    calculateLightingForTime(h);
+  }
+}
+
 window.setTimeOfDay = setTimeOfDay;
 
 // ---------------------------------------------------------------------------
-// 5. Accurate Physical Materials (100% Matte Walls, Real Gold, Natural Marble)
+// 5. Adaptive Quality Tier System (High PBR / Medium Balanced / Low Eco)
+// ---------------------------------------------------------------------------
+let currentQualityTier = 'high';
+
+function setQualityTier(tier) {
+  currentQualityTier = tier;
+
+  document.querySelectorAll('.quality-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.id === 'btn-quality-' + tier);
+  });
+
+  const width = container ? container.clientWidth : window.innerWidth;
+  const height = container ? container.clientHeight : window.innerHeight;
+
+  if (tier === 'high') {
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    sunLight.castShadow = true;
+    sunLight.shadow.mapSize.set(2048, 2048);
+    islandLight.castShadow = true;
+    islandLight.shadow.mapSize.set(1024, 1024);
+    usePostProcessing = !!composer;
+    if (bloomPass) bloomPass.strength = 0.16;
+  } else if (tier === 'medium') {
+    renderer.setPixelRatio(1.0);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFShadowMap;
+    sunLight.castShadow = true;
+    sunLight.shadow.mapSize.set(1024, 1024);
+    islandLight.castShadow = false;
+    usePostProcessing = false;
+  } else if (tier === 'low') {
+    renderer.setPixelRatio(1.0);
+    renderer.shadowMap.enabled = false;
+    sunLight.castShadow = false;
+    islandLight.castShadow = false;
+    usePostProcessing = false;
+  }
+
+  renderer.setSize(width, height);
+  if (composer) composer.setSize(width, height);
+  requestRender();
+  console.log(`[VEL RA 3D] Active Quality Tier: ${tier.toUpperCase()}`);
+}
+
+window.setQualityTier = setQualityTier;
+
+// ---------------------------------------------------------------------------
+// 6. Accurate Physical Materials (PBR Standards, Controlled Emissive)
 // ---------------------------------------------------------------------------
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
@@ -212,7 +365,7 @@ function enhanceMeshMaterial(mesh) {
     const matName = (mat.name || '').toLowerCase();
     const meshName = (mesh.name || '').toLowerCase();
 
-    // 1. SIGNAGE, BANNER & TEXT (Crisp, clean, matte architectural lettering - ZERO NEON GLOW)
+    // 1. SIGNAGE, BANNER & LOGO (Crisp, clean, matte architectural lettering - ZERO GLOW)
     if (matName.includes('svgmat') || meshName.includes('text') || meshName.includes('signage') || matName.includes('logo') || meshName.includes('logo')) {
       mat.color = new THREE.Color(0xf5f3ee);
       mat.roughness = 0.95;
@@ -220,15 +373,15 @@ function enhanceMeshMaterial(mesh) {
       mat.emissive = new THREE.Color(0x000000);
       mat.emissiveIntensity = 0.0;
     }
-    // 2. LIGHT-DIFFUSER STRIPS (Gentle natural soft self-illumination)
+    // 2. LIGHT-DIFFUSER STRIPS (Controlled local glowing surface - NO runaway halo)
     else if (matName.includes('lamp') || matName.includes('cove') || (matName.includes('light') && !matName.includes('sun'))) {
       mat.color = new THREE.Color(0xffeed4);
-      mat.emissive = new THREE.Color(0xffe6b0);
-      mat.emissiveIntensity = 0.6;
+      mat.emissive = new THREE.Color(0xffe2b0);
+      mat.emissiveIntensity = 0.70;
       mat.roughness = 0.5;
       mat.metalness = 0.0;
     }
-    // 3. GOLD & BRASS METALS (Real physical metal reflection - ZERO GLOW)
+    // 3. GOLD & BRASS METALS (Physical metallic reflection - ZERO artificial glow)
     else if (matName.includes('gold') || matName.includes('brass') || meshName.includes('brass') || meshName.includes('gold') || matName.includes('m03') || matName.includes('m04') || matName.includes('metalic')) {
       mat.metalness = 0.90;
       mat.roughness = 0.28;
@@ -244,7 +397,7 @@ function enhanceMeshMaterial(mesh) {
       mat.emissive = new THREE.Color(0x000000);
       mat.emissiveIntensity = 0.0;
     } 
-    // 5. WALLS, PLASTER, CEILING, MOLDINGS (100% Completely MATTE - Zero Gloss, Zero Glow)
+    // 5. WALLS, PLASTER, CEILING, MOLDINGS (100% Completely MATTE - Zero Gloss)
     else if (matName.includes('wall') || matName.includes('plaster') || meshName.includes('wall') || matName.includes('cement') || meshName.includes('ceiling') || matName.includes('ceiling') || matName.includes('facade')) {
       mat.color = new THREE.Color(0xede8de);
       mat.roughness = 0.99;
@@ -305,16 +458,17 @@ gltfLoader.load(
 
     // Initial Camera View & Golden Hour
     setCameraPreset('front');
-    setTimeOfDay(16.5);
+    calculateLightingForTime(16.5);
+    setQualityTier('high');
     requestRender();
-    console.log('Vel Ra 3D Model loaded with clean physical materials and lighting.');
+    console.log('Vel Ra 3D Model loaded with optimized physical lighting system.');
   },
   undefined,
   (err) => console.warn('Model loading notice:', err)
 );
 
 // ---------------------------------------------------------------------------
-// 6. Calibrated Camera Presets (Elevated Front Entrance for Full Banner View)
+// 7. Calibrated Camera Presets (Elevated Front Entrance)
 // ---------------------------------------------------------------------------
 const cameraPresets = {
   'front': {
@@ -402,7 +556,7 @@ function setCameraPreset(presetKey) {
 }
 
 // ---------------------------------------------------------------------------
-// 7. User Controls: Presets, Auto-Rotate Inside & Wireframe
+// 8. User Controls: Presets, Auto-Rotate Inside & Wireframe
 // ---------------------------------------------------------------------------
 ['front', 'island', 'pos', 'alcoves'].forEach(key => {
   const btn = document.getElementById('btn-cam-' + key);
@@ -448,7 +602,7 @@ if (btnWireframe) {
 }
 
 // ---------------------------------------------------------------------------
-// 8. Camera Wall Boundary & Interior Collision Clamping
+// 9. Camera Wall Boundary & Interior Collision Clamping
 // ---------------------------------------------------------------------------
 function clampCameraInsideWalls() {
   if (currentPresetKey === 'front') return;
@@ -466,7 +620,7 @@ function clampCameraInsideWalls() {
 }
 
 // ---------------------------------------------------------------------------
-// 9. Global API for Top Passes & Section Integration
+// 10. Global API for Top Passes & Section Integration
 // ---------------------------------------------------------------------------
 window.velra3D = {
   setCameraPreset(presetKey) {
@@ -483,11 +637,17 @@ window.velra3D = {
     };
     const key = cameraPresets[presetKey] ? presetKey : (passMap[presetKey] || 'front');
     setCameraPreset(key);
+  },
+  setTimeOfDay(hour, smooth) {
+    setTimeOfDay(hour, smooth);
+  },
+  setQualityTier(tier) {
+    setQualityTier(tier);
   }
 };
 
 // ---------------------------------------------------------------------------
-// 10. High-Performance IntersectionObserver & Direct WebGL Render Loop
+// 11. High-Performance IntersectionObserver & Smart Render Loop
 // ---------------------------------------------------------------------------
 let isViewportVisible = true;
 let renderRequested = false;
@@ -521,6 +681,10 @@ function onWindowResize() {
   camera.aspect = width / height;
   camera.updateProjectionMatrix();
   renderer.setSize(width, height);
+  if (composer) {
+    composer.setSize(width, height);
+    if (bloomPass) bloomPass.setSize(width, height);
+  }
   requestRender();
 }
 
@@ -531,10 +695,16 @@ function renderLoop() {
 
   if (!isViewportVisible) return;
 
-  if (controls.autoRotate || isTransitioning || renderRequested) {
+  if (controls.autoRotate || isTransitioning || isTimeTransitioning || renderRequested) {
     controls.update();
     clampCameraInsideWalls();
-    renderer.render(scene, camera);
+
+    if (usePostProcessing && composer) {
+      composer.render();
+    } else {
+      renderer.render(scene, camera);
+    }
+
     renderRequested = false;
   }
 }
