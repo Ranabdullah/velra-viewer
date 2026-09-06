@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
+import { EXRLoader } from 'three/examples/jsm/loaders/EXRLoader.js';
 
 // ---------------------------------------------------------------------------
 // 1. Viewport & Canvas Setup
@@ -10,8 +11,7 @@ const container = document.getElementById('canvas-container');
 const canvas = document.getElementById('three-canvas');
 
 const scene = new THREE.Scene();
-// Deep cinematic studio backdrop
-scene.background = new THREE.Color(0x0e1322);
+scene.background = new THREE.Color(0x0c101d);
 
 const camera = new THREE.PerspectiveCamera(
   40,
@@ -29,7 +29,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(container ? container.clientWidth : window.innerWidth, container ? container.clientHeight : window.innerHeight);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.42; // Rich cinematic luminescence
+renderer.toneMappingExposure = 1.02; // Calibrated realistic exposure (no washed out whites)
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -40,53 +40,85 @@ controls.maxPolarAngle = Math.PI * 0.49;
 controls.minDistance = 0.4;
 controls.maxDistance = 15;
 controls.autoRotate = false;
-controls.autoRotateSpeed = 1.4;
+controls.autoRotateSpeed = 1.2;
 
 // ---------------------------------------------------------------------------
-// 2. Realistic Cinematic Lighting Scheme (Warm 3000K Luxury Boutique)
+// 2. Photorealistic IBL Environment Map (EXR Studio Reflection)
 // ---------------------------------------------------------------------------
-// 2.1 Ambient & Sky Fill
-const ambientLight = new THREE.AmbientLight(0xfff7ea, 1.5);
+const pmremGenerator = new THREE.PMREMGenerator(renderer);
+pmremGenerator.compileEquirectangularShader();
+
+const exrLoader = new EXRLoader();
+exrLoader.load(
+  '/assets/urban_street_02_2k.exr',
+  (texture) => {
+    const envMap = pmremGenerator.fromEquirectangular(texture).texture;
+    scene.environment = envMap;
+    scene.environmentIntensity = 0.85; // Natural metallic and marble reflections
+    texture.dispose();
+    pmremGenerator.dispose();
+    console.log('Photorealistic EXR Environment Map loaded successfully.');
+  },
+  undefined,
+  (err) => console.warn('Notice loading EXR map:', err)
+);
+
+// ---------------------------------------------------------------------------
+// 3. Realistic Architectural Lighting Scheme (3000K High-CRI Retail)
+// ---------------------------------------------------------------------------
+// 3.1 Soft Warm Ambient Base
+const ambientLight = new THREE.AmbientLight(0xfff3e0, 0.45);
 scene.add(ambientLight);
 
-const hemiLight = new THREE.HemisphereLight(0xfff2dc, 0x182033, 1.2);
+const hemiLight = new THREE.HemisphereLight(0xfff0dc, 0x141a28, 0.55);
 scene.add(hemiLight);
 
-// 2.2 Key Directional Sun Light (Exterior & Window Wash)
-const mainSun = new THREE.DirectionalLight(0xfff5e6, 2.4);
-mainSun.position.set(15, 30, 20);
+// 3.2 Key Sun Light (Front Façade & Window Inflow)
+const mainSun = new THREE.DirectionalLight(0xfffaed, 1.8);
+mainSun.position.set(12, 24, 18);
 mainSun.castShadow = true;
 mainSun.shadow.mapSize.set(2048, 2048);
 mainSun.shadow.bias = -0.0001;
 scene.add(mainSun);
 
-// 2.3 Interior Central Island Pendant / Chandelier Spot
-const islandSpot = new THREE.PointLight(0xffe8b8, 3.2, 12, 1.2);
-islandSpot.position.set(0, 2.4, 0.2);
+// 3.3 Central Fragrance Island Downward Spotlight
+const islandSpot = new THREE.SpotLight(0xffe8ba, 4.5, 10, Math.PI / 4, 0.65, 1.5);
+islandSpot.position.set(0, 2.55, 0.2);
+islandSpot.target.position.set(0, 0.8, 0.2);
 islandSpot.castShadow = true;
+islandSpot.shadow.mapSize.set(1024, 1024);
 scene.add(islandSpot);
+scene.add(islandSpot.target);
 
-// 2.4 Backwall Brand Signage & Monogram Illuminator
-const monogramSpot = new THREE.PointLight(0xffdf95, 2.8, 8, 1.4);
-monogramSpot.position.set(-0.2, 1.7, -1.6);
+// 3.4 Backwall Brand Monogram Pin-Spot
+const monogramSpot = new THREE.SpotLight(0xffdf90, 3.8, 8, Math.PI / 3.5, 0.6, 1.5);
+monogramSpot.position.set(-0.2, 2.3, -0.8);
+monogramSpot.target.position.set(-0.2, 1.4, -2.4);
+monogramSpot.castShadow = true;
 scene.add(monogramSpot);
+scene.add(monogramSpot.target);
 
-// 2.5 Left & Right Arched Perfume Display Wall Grazers
-const leftWallLight = new THREE.PointLight(0xffeccc, 2.2, 7, 1.5);
-leftWallLight.position.set(-1.4, 1.6, 0.4);
-scene.add(leftWallLight);
+// 3.5 Right Perfume Wall Alcoves Downward Grazer
+const rightWallSpot = new THREE.SpotLight(0xffecd0, 3.2, 8, Math.PI / 3, 0.7, 1.5);
+rightWallSpot.position.set(1.4, 2.45, 0.5);
+rightWallSpot.target.position.set(1.6, 0.8, 0.5);
+scene.add(rightWallSpot);
+scene.add(rightWallSpot.target);
 
-const rightWallLight = new THREE.PointLight(0xffeccc, 2.2, 7, 1.5);
-rightWallLight.position.set(1.4, 1.6, 0.4);
-scene.add(rightWallLight);
+// 3.6 Left Perfume Wall Alcoves Downward Grazer
+const leftWallSpot = new THREE.SpotLight(0xffecd0, 3.2, 8, Math.PI / 3, 0.7, 1.5);
+leftWallSpot.position.set(-1.4, 2.45, 0.5);
+leftWallSpot.target.position.set(-1.6, 0.8, 0.5);
+scene.add(leftWallSpot);
+scene.add(leftWallSpot.target);
 
-// 2.6 Storefront Vitrine Accent
-const storefrontLight = new THREE.PointLight(0xfffaea, 2.0, 8, 1.5);
-storefrontLight.position.set(0, 2.1, 3.5);
-scene.add(storefrontLight);
+// 3.7 Storefront Vitrine Accent Point
+const storefrontPoint = new THREE.PointLight(0xfff7e8, 1.8, 7, 1.6);
+storefrontPoint.position.set(0, 2.0, 3.4);
+scene.add(storefrontPoint);
 
 // ---------------------------------------------------------------------------
-// 3. GLTF Loader & Mesh Material Enhancement
+// 4. GLTF Loader & Physically Based Material (PBR) Shaders
 // ---------------------------------------------------------------------------
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
@@ -106,33 +138,51 @@ function enhanceMeshMaterial(mesh) {
   const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
   
   mats.forEach(mat => {
-    const name = (mat.name || '').toLowerCase();
+    const matName = (mat.name || '').toLowerCase();
     const meshName = (mesh.name || '').toLowerCase();
     
-    // Check if this is the ceiling
-    if (meshName.includes('ceiling') || name.includes('ceiling')) {
+    // Tag ceiling mesh
+    if (meshName.includes('ceiling') || matName.includes('ceiling')) {
       ceilingMesh = mesh;
     }
 
-    if (name.includes('light') || name.includes('lamp') || name.includes('emissive') || meshName.includes('text') || meshName.includes('signage')) {
-      mat.emissive = new THREE.Color(0xffdf88);
-      mat.emissiveIntensity = 2.4;
-    } else if (name.includes('gold') || name.includes('brass') || meshName.includes('brass') || meshName.includes('gold')) {
-      mat.metalness = 0.95;
-      mat.roughness = 0.18;
-      mat.emissive = new THREE.Color(0x281c08);
-      mat.emissiveIntensity = 0.35;
-    } else if (name.includes('marble') || name.includes('calacatta') || name.includes('floor') || meshName.includes('floor')) {
+    // 1. Gold / Brass PVD Metals
+    if (matName.includes('gold') || matName.includes('brass') || meshName.includes('brass') || meshName.includes('gold') || matName.includes('m03') || matName.includes('m04')) {
+      mat.metalness = 0.96;
       mat.roughness = 0.16;
-      mat.metalness = 0.05;
-    } else if (name.includes('glass') || name.includes('vitrine') || name.includes('window') || meshName.includes('glass')) {
+      mat.color = new THREE.Color(0xd8b548); // Luxurious Champagne Gold
+      mat.emissive = new THREE.Color(0x241804);
+      mat.emissiveIntensity = 0.3;
+    } 
+    // 2. Calacatta Gold Marble Flooring & Island Counter
+    else if (matName.includes('marble') || matName.includes('calacatta') || matName.includes('floor') || meshName.includes('floor') || matName.includes('m02') || matName.includes('m06')) {
+      mat.roughness = 0.14; // Polished gloss reflection
+      mat.metalness = 0.06;
+      mat.color = new THREE.Color(0xfcfaf6);
+    } 
+    // 3. Architectural Alabaster Walls & Niches (Warm, Non-Washed Out)
+    else if (matName.includes('wall') || matName.includes('plaster') || meshName.includes('wall') || matName.includes('cement')) {
+      mat.color = new THREE.Color(0xf5f2eb); // Soft warm alabaster micro-cement
+      mat.roughness = 0.82;
+      mat.metalness = 0.0;
+    } 
+    // 4. Low-Iron Ultra-Clear Vitrine Glass & Partitions
+    else if (matName.includes('glass') || matName.includes('vitrine') || matName.includes('window') || meshName.includes('glass')) {
       mat.transparent = true;
-      mat.opacity = 0.32;
-      mat.roughness = 0.04;
-      mat.metalness = 0.1;
-    } else if (name.includes('wall') || name.includes('plaster')) {
-      mat.roughness = 0.65;
-      mat.metalness = 0.02;
+      mat.opacity = 0.28;
+      mat.roughness = 0.03;
+      mat.metalness = 0.12;
+      mat.color = new THREE.Color(0xf5f8fa);
+    } 
+    // 5. Emissive Lighting Strips & Monogram Signage
+    else if (matName.includes('light') || matName.includes('lamp') || matName.includes('emissive') || meshName.includes('text') || meshName.includes('signage')) {
+      mat.emissive = new THREE.Color(0xffe090);
+      mat.emissiveIntensity = 2.4;
+    } 
+    // 6. Smoked Oak & Dark Accent Wood
+    else if (matName.includes('oak') || matName.includes('wood') || matName.includes('timber') || meshName.includes('door')) {
+      mat.roughness = 0.45;
+      mat.metalness = 0.04;
     }
   });
 }
@@ -163,14 +213,14 @@ gltfLoader.load(
 
     // Initial Camera View: 01 // Front Entrance
     setCameraPreset('front');
-    console.log('Vel Ra 3D Model loaded and cinematic lighting initialized.');
+    console.log('Vel Ra 3D Model loaded with photorealistic PBR lighting.');
   },
   undefined,
   (err) => console.warn('Model loading notice:', err)
 );
 
 // ---------------------------------------------------------------------------
-// 4. Calibrated Camera Presets (Matching User Screenshots Exactly)
+// 5. Calibrated Camera Presets (Matching User Screenshots Exactly)
 // ---------------------------------------------------------------------------
 const cameraPresets = {
   'front': {
@@ -269,7 +319,7 @@ function setCameraPreset(presetKey) {
 }
 
 // ---------------------------------------------------------------------------
-// 5. User Controls: Presets, Auto-Rotate Inside & Wireframe
+// 6. User Controls: Presets, Auto-Rotate Inside & Wireframe
 // ---------------------------------------------------------------------------
 ['front', 'island', 'pos', 'alcoves', 'top'].forEach(key => {
   const btn = document.getElementById('btn-cam-' + key);
@@ -313,10 +363,9 @@ if (btnWireframe) {
 }
 
 // ---------------------------------------------------------------------------
-// 6. Camera Wall Boundary & Interior Collision Clamping
+// 7. Camera Wall Boundary & Interior Collision Clamping
 // ---------------------------------------------------------------------------
 function clampCameraInsideWalls() {
-  // Only clamp when inspecting the interior (not in Top-Down or Front Façade view)
   if (currentPresetKey === 'top' || currentPresetKey === 'front') return;
 
   const minX = -2.05;
@@ -332,11 +381,10 @@ function clampCameraInsideWalls() {
 }
 
 // ---------------------------------------------------------------------------
-// 7. Global API for Top Passes & Section Integration
+// 8. Global API for Top Passes & Section Integration
 // ---------------------------------------------------------------------------
 window.velra3D = {
   setCameraPreset(presetKey) {
-    // Map pass keys to closest interior views if needed
     const passMap = {
       'pass1': 'front',
       'pass2': 'front',
@@ -354,7 +402,7 @@ window.velra3D = {
 };
 
 // ---------------------------------------------------------------------------
-// 8. Animation & Resize Loop
+// 9. Animation & Resize Loop
 // ---------------------------------------------------------------------------
 function onWindowResize() {
   if (!container) return;
