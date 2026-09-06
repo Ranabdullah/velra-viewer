@@ -474,11 +474,380 @@
       .container { padding: 0 16px; }
       .section-heading { font-size: 30px; }
     }
+  
+    /* ==========================================================================
+       VISUAL DIRECTION & DOMAIN COLOR-CODING ARCHITECTURE
+       ========================================================================== */
+    :root {
+      /* Step 01: Materials & Finishes (Gold/Amber) */
+      --domain-gold: #b8860b;
+      --domain-gold-bg: rgba(254, 240, 138, 0.4);
+      --domain-gold-border: rgba(212, 175, 55, 0.7);
+      --domain-gold-glow: 0 10px 30px rgba(212, 175, 55, 0.25);
+
+      /* Step 02: 3D Digital Twin (Spatial Indigo/Violet) */
+      --domain-indigo: #4f46e5;
+      --domain-indigo-light: #6366f1;
+      --domain-indigo-bg: rgba(224, 231, 255, 0.65);
+      --domain-indigo-border: rgba(99, 102, 241, 0.6);
+      --domain-indigo-glow: 0 10px 30px rgba(99, 102, 241, 0.25);
+
+      /* Step 03: CAD Blueprints & Dimensions (Technical Azure/Cyan) */
+      --domain-blue: #0284c7;
+      --domain-blue-light: #38bdf8;
+      --domain-blue-bg: rgba(224, 242, 254, 0.7);
+      --domain-blue-border: rgba(2, 132, 199, 0.6);
+      --domain-blue-glow: 0 10px 30px rgba(2, 132, 199, 0.25);
+
+      /* Step 04: Joinery & Millwork (Bronze/Amber) */
+      --domain-bronze: #a16207;
+      --domain-bronze-bg: rgba(254, 243, 199, 0.65);
+      --domain-bronze-border: rgba(202, 138, 4, 0.6);
+      --domain-bronze-glow: 0 10px 30px rgba(161, 98, 7, 0.25);
+
+      /* Step 05: Retail Lighting (Illumination Coral/Warm Amber) */
+      --domain-amber: #ea580c;
+      --domain-amber-bg: rgba(255, 237, 213, 0.7);
+      --domain-amber-border: rgba(234, 88, 12, 0.6);
+      --domain-amber-glow: 0 10px 30px rgba(234, 88, 12, 0.25);
+
+      /* Step 06: Client Sign-Off (Verification Emerald) */
+      --domain-emerald: #15803d;
+      --domain-emerald-bg: rgba(220, 252, 231, 0.75);
+      --domain-emerald-border: rgba(22, 163, 74, 0.6);
+      --domain-emerald-glow: 0 10px 30px rgba(22, 163, 74, 0.25);
+    }
+
+    /* Color Coded Step Badges */
+    .step-badge {
+      font-family: var(--font-heading);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      box-shadow: var(--glass-shine);
+      backdrop-filter: blur(8px);
+      transition: all 0.25s ease;
+    }
+    .step-badge.gold { color: #784c00; background: var(--domain-gold-bg); border: 1.5px solid var(--domain-gold-border); box-shadow: var(--domain-gold-glow); }
+    .step-badge.indigo { color: #3730a3; background: var(--domain-indigo-bg); border: 1.5px solid var(--domain-indigo-border); box-shadow: var(--domain-indigo-glow); }
+    .step-badge.blue { color: #075985; background: var(--domain-blue-bg); border: 1.5px solid var(--domain-blue-border); box-shadow: var(--domain-blue-glow); }
+    .step-badge.bronze { color: #713f12; background: var(--domain-bronze-bg); border: 1.5px solid var(--domain-bronze-border); box-shadow: var(--domain-bronze-glow); }
+    .step-badge.amber { color: #9a3412; background: var(--domain-amber-bg); border: 1.5px solid var(--domain-amber-border); box-shadow: var(--domain-amber-glow); }
+    .step-badge.emerald { color: #14532d; background: var(--domain-emerald-bg); border: 1.5px solid var(--domain-emerald-border); box-shadow: var(--domain-emerald-glow); }
+
+    /* Visual Onboarding Guide Card */
+    .quick-guide-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 28px;
+    }
+    @media (max-width: 1024px) {
+      .quick-guide-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .quick-guide-grid { grid-template-columns: 1fr; }
+    }
+    .guide-step-card {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: var(--glass-blur);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: var(--glass-shine), var(--glass-shadow);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    .guide-step-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08), var(--glass-shine);
+    }
+    .guide-step-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 4px;
+      background: var(--card-accent, var(--gold-primary));
+    }
+    .guide-step-card.step-1 { --card-accent: #b8860b; }
+    .guide-step-card.step-2 { --card-accent: #6366f1; }
+    .guide-step-card.step-3 { --card-accent: #0284c7; }
+    .guide-step-card.step-4 { --card-accent: #16a34a; }
+
+    .guide-step-num {
+      font-family: var(--font-heading);
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--card-accent, #b8860b);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .guide-step-title {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      font-weight: 700;
+      color: #0c1024;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+    .guide-step-desc {
+      font-size: 13px;
+      color: #475569;
+      line-height: 1.5;
+    }
+    .guide-step-action {
+      margin-top: auto;
+      padding-top: 12px;
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--card-accent, #b8860b);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* In-Context Interactive Helper Hint */
+    .interaction-helper {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-family: var(--font-heading);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      color: #334155;
+      margin-bottom: 14px;
+    }
+    .interaction-helper.pulse {
+      animation: helperPulse 2.5s infinite;
+    }
+    @keyframes helperPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+      50% { box-shadow: 0 0 0 8px rgba(212, 175, 55, 0); }
+    }
+
+    /* Directional Next Step Action Banner */
+    .next-step-banner {
+      margin-top: 40px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: var(--glass-blur);
+      border: 1.5px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      box-shadow: var(--glass-shine), 0 8px 24px rgba(0, 0, 0, 0.03);
+      transition: all 0.3s ease;
+    }
+    .next-step-banner:hover {
+      border-color: var(--banner-accent, var(--glass-border-gold));
+      box-shadow: var(--glass-shine), 0 12px 32px rgba(0, 0, 0, 0.06);
+    }
+    .next-step-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .next-step-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      background: var(--icon-bg, rgba(254, 240, 138, 0.4));
+      color: var(--icon-color, #784c00);
+      border: 1px solid var(--icon-border, var(--glass-border-gold));
+    }
+    .next-step-text-wrap h5 {
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #64748b;
+      margin-bottom: 2px;
+    }
+    .next-step-text-wrap h4 {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      font-weight: 700;
+      color: #0c1024;
+    }
+    .btn-next-step {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 10px 24px;
+      border-radius: 16px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #ffffff !important;
+      background: var(--btn-gradient, var(--gold-gradient));
+      border: 1.5px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), var(--glass-shine);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-next-step:hover {
+      transform: translateX(4px);
+      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.18), var(--glass-shine);
+    }
+
+    /* Floating Sticky Right-Hand Journey Rail */
+    #journey-rail {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 90;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 12px 8px;
+      border-radius: 30px;
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: var(--glass-shine), 0 12px 35px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+    @media (max-width: 1200px) {
+      #journey-rail { display: none; }
+    }
+    .rail-dot {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 700;
+      color: #64748b;
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      position: relative;
+      transition: all 0.25s ease;
+    }
+    .rail-dot:hover {
+      transform: scale(1.15);
+      color: #0c1024;
+      background: #ffffff;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    }
+    .rail-dot.active {
+      color: #ffffff;
+      background: var(--active-bg, #b8860b);
+      border-color: rgba(255, 255, 255, 1);
+      box-shadow: 0 0 16px var(--active-glow, rgba(184, 134, 11, 0.6));
+      transform: scale(1.2);
+    }
+    .rail-dot.dot-01.active { --active-bg: #b8860b; --active-glow: rgba(184, 134, 11, 0.6); }
+    .rail-dot.dot-02.active { --active-bg: #4f46e5; --active-glow: rgba(79, 70, 229, 0.6); }
+    .rail-dot.dot-03.active { --active-bg: #0284c7; --active-glow: rgba(2, 132, 199, 0.6); }
+    .rail-dot.dot-04.active { --active-bg: #a16207; --active-glow: rgba(161, 98, 7, 0.6); }
+    .rail-dot.dot-05.active { --active-bg: #ea580c; --active-glow: rgba(234, 88, 12, 0.6); }
+    .rail-dot.dot-06.active { --active-bg: #15803d; --active-glow: rgba(21, 128, 61, 0.6); }
+
+    .rail-tooltip {
+      position: absolute;
+      right: 46px;
+      background: #0c1024;
+      color: #ffffff;
+      padding: 5px 12px;
+      border-radius: 10px;
+      font-family: var(--font-heading);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateX(10px);
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    .rail-dot:hover .rail-tooltip {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
   </style>
   <script type="module" crossorigin src="/assets/index-BeAtwerX.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/three-C8Iezt2r.js">
 </head>
 <body>
+
+  <!-- FLOATING RIGHT-HAND ARCHITECTURAL JOURNEY PROGRESS RAIL -->
+  <nav id="journey-rail" aria-label="Dossier Navigation Tracker">
+    <a href="#section-overview" class="rail-dot dot-00 active" data-section="section-overview">
+      <span>00</span>
+      <span class="rail-tooltip">00. Overview</span>
+    </a>
+    <a href="#section-materials" class="rail-dot dot-01" data-section="section-materials">
+      <span>01</span>
+      <span class="rail-tooltip">01. Materials Board</span>
+    </a>
+    <a href="#section-3d-twin" class="rail-dot dot-02" data-section="section-3d-twin">
+      <span>02</span>
+      <span class="rail-tooltip">02. 3D Digital Twin</span>
+    </a>
+    <a href="#section-cad-plan" class="rail-dot dot-03" data-section="section-cad-plan">
+      <span>03</span>
+      <span class="rail-tooltip">03. CAD Blueprints & Dimensions</span>
+    </a>
+    <a href="#section-features" class="rail-dot dot-04" data-section="section-features">
+      <span>04</span>
+      <span class="rail-tooltip">04. Joinery Passes</span>
+    </a>
+    <a href="#section-lighting-showcase" class="rail-dot dot-05" data-section="section-lighting-showcase">
+      <span>05</span>
+      <span class="rail-tooltip">05. Retail Lighting</span>
+    </a>
+    <a href="#section-signoff" class="rail-dot dot-06" data-section="section-signoff">
+      <span>06</span>
+      <span class="rail-tooltip">06. Client Sign-Off</span>
+    </a>
+  </nav>
+
 
   <!-- Ambient Light Orbs -->
   <div class="glass-orb orb-1"></div>
@@ -542,6 +911,50 @@
               CAD Blueprints & Dimensions
             </a>
           </div>
+
+        <!-- Visual Onboarding Quick Guide -->
+        <div style="margin-top: 36px; text-align: left;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+            <div style="font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: #0c1024;">
+              Architectural Handover Flow — How to Navigate this Dossier
+            </div>
+            <span class="dim-pill gold">4-STEP GUIDED REVIEW</span>
+          </div>
+          <p style="font-size: 13.5px; color: #64748b; margin-bottom: 16px;">
+            Follow the color-coded architectural journey below to review materials, explore the 3D twin, inspect verified CAD dimensions, and sign off the handover:
+          </p>
+
+          <div class="quick-guide-grid">
+            <a href="#section-materials" class="guide-step-card step-1">
+              <div class="guide-step-num">Step 01 • Palette</div>
+              <div class="guide-step-title">Materials Board</div>
+              <div class="guide-step-desc">Inspect Calacatta marble, Titanium Gold PVD, fluted brass, and tactile finishes.</div>
+              <div class="guide-step-action">Review Finishes ➔</div>
+            </a>
+
+            <a href="#section-3d-twin" class="guide-step-card step-2">
+              <div class="guide-step-num">Step 02 • Spatial</div>
+              <div class="guide-step-title">3D Digital Twin</div>
+              <div class="guide-step-desc">Orbit, pan, and zoom inside the real-time 3D boutique interior with lighting toggles.</div>
+              <div class="guide-step-action">Launch 3D Twin ➔</div>
+            </a>
+
+            <a href="#section-cad-plan" class="guide-step-card step-3">
+              <div class="guide-step-num">Step 03 • Technical</div>
+              <div class="guide-step-title">CAD & Dimensions</div>
+              <div class="guide-step-desc">Switch 5 blueprint drawing sets and inspect every laser-measured millimeter.</div>
+              <div class="guide-step-action">Inspect Plans ➔</div>
+            </a>
+
+            <a href="#section-signoff" class="guide-step-card step-4">
+              <div class="guide-step-num">Step 04 • Handover</div>
+              <div class="guide-step-title">Client Sign-Off</div>
+              <div class="guide-step-desc">Complete the verification checklist and record final contractor sign-off.</div>
+              <div class="guide-step-action">Approve Handover ➔</div>
+            </a>
+          </div>
+        </div>
+
         </div>
       </div>
 
@@ -1422,8 +1835,9 @@
   <section id="section-signoff" class="section-wrap" style="border-bottom: none;">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag">STAGE 04 HANDOVER APPROVAL</div>
+        <div class="step-badge emerald">STEP 06 OF 06 // FINAL CLIENT VERIFICATION & SIGN-OFF</div>
         <h2 class="section-heading">Digital Handover Review & Client Sign-Off</h2>
+        <div class="interaction-helper pulse" style="color: #15803d; border-color: rgba(22, 163, 74, 0.4); background: rgba(220, 252, 231, 0.85);">✅ Review verification checklist items and click Confirm to record Stage 04 handover approval</div>
         <p class="section-desc">Confirm architectural concept approval and authorize contractor on-site laser dimension verification.</p>
       </div>
 
@@ -1675,6 +2089,34 @@
           alert('Vel Ra Perfumes Concept Interior approval confirmed and recorded successfully.');
         });
       }
+    
+      // Sticky Journey Rail Active Tracker
+      const sections = [
+        { id: 'section-overview', dot: '.dot-00' },
+        { id: 'section-materials', dot: '.dot-01' },
+        { id: 'section-3d-twin', dot: '.dot-02' },
+        { id: 'section-cad-plan', dot: '.dot-03' },
+        { id: 'section-features', dot: '.dot-04' },
+        { id: 'section-lighting-showcase', dot: '.dot-05' },
+        { id: 'section-signoff', dot: '.dot-06' }
+      ];
+
+      function updateActiveRail() {
+        const scrollPos = window.scrollY + 250;
+        for (let i = sections.length - 1; i >= 0; i--) {
+          const el = document.getElementById(sections[i].id);
+          if (el && el.offsetTop <= scrollPos) {
+            document.querySelectorAll('.rail-dot').forEach(d => d.classList.remove('active'));
+            const activeDot = document.querySelector(sections[i].dot);
+            if (activeDot) activeDot.classList.add('active');
+            break;
+          }
+        }
+      }
+
+      window.addEventListener('scroll', updateActiveRail, { passive: true });
+      updateActiveRail();
+
     })();
   </script>
 </body>
