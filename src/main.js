@@ -12,10 +12,11 @@ import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
 // ---------------------------------------------------------------------------
 // DOM Elements
 // ---------------------------------------------------------------------------
-const threeContainer = document.getElementById('three-container');
+const threeContainer = document.getElementById('canvas-container') || document.getElementById('three-container');
 const viewport = document.getElementById('three-viewport') || document.getElementById('app') || threeContainer;
-const loadingEl = document.getElementById('loading');
+const loadingEl = document.getElementById('loading-overlay') || document.getElementById('loading');
 const barFill = document.getElementById('bar-fill');
+const loadingText = document.getElementById('loading-text');
 const startOverlay = document.getElementById('start-overlay');
 const startBtn = document.getElementById('start-btn');
 const topBar = document.getElementById('top-bar');
@@ -27,6 +28,15 @@ const btnToggleDims = document.getElementById('btn-toggle-dims');
 const toastEl = document.getElementById('toast');
 const btnFullscreenToggle = document.getElementById('btn-fullscreen-toggle');
 const fsBtnText = document.getElementById('fs-btn-text');
+const btnResetView = document.getElementById('btn-reset-cam');
+const btnToggleLights = document.getElementById('btn-toggle-lights');
+
+const leftoverCanvas = document.getElementById('webgl-canvas');
+if (leftoverCanvas) leftoverCanvas.remove();
+
+if (!viewport) {
+  throw new Error('Velra viewer: missing #canvas-container');
+}
 
 // Camera Director Studio DOM
 const cameraStudioToggle = document.getElementById('camera-studio-toggle');
@@ -109,10 +119,11 @@ const WAYPOINTS = {
   'perfume-wall': { pos: new THREE.Vector3(1.5, 1.6, -2.4), lookAt: new THREE.Vector3(4.2, 1.45, -4.6) }
 };
 
-let currentMode = 'exterior';
+let currentMode = 'walkthrough';
 let showDimensions = false;
-let isInside = false;
+let isInside = true;
 let selectedTarget = null;
+let warmLighting = true;
 
 // ---------------------------------------------------------------------------
 // Scene & Renderer Setup (Responsive to Viewport)
@@ -134,8 +145,8 @@ const camera = new THREE.PerspectiveCamera(
   0.05,
   120
 );
-camera.position.copy(EXTERIOR_POS);
-camera.lookAt(EXTERIOR_LOOKAT);
+camera.position.copy(INTERIOR_ENTRY_POS);
+camera.lookAt(INTERIOR_ENTRY_LOOKAT);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
 renderer.setSize(initialSize.width, initialSize.height);
@@ -153,8 +164,10 @@ controls.dampingFactor = 0.08;
 controls.minDistance = 0.4;
 controls.maxDistance = 25;
 controls.maxPolarAngle = Math.PI * 0.49;
-controls.target.copy(EXTERIOR_LOOKAT);
-controls.enabled = false; // Locked until 'Enter Showroom' is clicked
+controls.target.copy(INTERIOR_ENTRY_LOOKAT);
+controls.enabled = true;
+controls.maxDistance = 4.2;
+controls.minDistance = 0.4;
 
 // ---------------------------------------------------------------------------
 // Post-Processing: Crisp Outline & Controlled Bloom
@@ -326,6 +339,73 @@ function enhanceMaterial(mat) {
   }
 }
 
+function hideLoadingOverlay() {
+  if (loadingEl) loadingEl.style.display = 'none';
+}
+
+function buildFallbackShowroom() {
+  const root = new THREE.Group();
+  root.name = 'velra-fallback-showroom';
+
+  const floor = new THREE.Mesh(
+    new THREE.BoxGeometry(5.9, 0.04, 7.3),
+    new THREE.MeshStandardMaterial({ color: 0xe8dcc8, roughness: 0.28, metalness: 0.04 })
+  );
+  floor.position.set(2.4, 0, -3.6);
+  floor.name = 'floor';
+  floor.receiveShadow = true;
+  root.add(floor);
+
+  const wallMat = new THREE.MeshStandardMaterial({ color: 0xf4efe6, roughness: 0.86 });
+  const back = new THREE.Mesh(new THREE.BoxGeometry(5.43, 3.1, 0.12), wallMat);
+  back.position.set(2.4, 1.55, -7.05);
+  back.name = 'wall-rear';
+  back.castShadow = true;
+  root.add(back);
+
+  const left = new THREE.Mesh(new THREE.BoxGeometry(0.12, 3.1, 7.3), wallMat);
+  left.position.set(-0.15, 1.55, -3.6);
+  left.name = 'shelf-left';
+  left.castShadow = true;
+  root.add(left);
+
+  const right = new THREE.Mesh(new THREE.BoxGeometry(0.12, 3.1, 6.2), wallMat);
+  right.position.set(4.95, 1.55, -4.0);
+  right.name = 'showcase-right';
+  right.castShadow = true;
+  root.add(right);
+
+  const ceiling = new THREE.Mesh(
+    new THREE.BoxGeometry(5.9, 0.08, 7.3),
+    new THREE.MeshStandardMaterial({ color: 0xf7f4ee, roughness: 0.9 })
+  );
+  ceiling.position.set(2.4, 3.15, -3.6);
+  ceiling.name = 'ceiling';
+  root.add(ceiling);
+  ceilingMeshes.push(ceiling);
+
+  const counter = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.55, 0.62, 0.95, 32),
+    new THREE.MeshStandardMaterial({ color: 0xc9a227, metalness: 0.7, roughness: 0.28 })
+  );
+  counter.position.set(2.4, 0.48, -4.15);
+  counter.name = 'counter';
+  counter.castShadow = true;
+  root.add(counter);
+  counterMeshes.push(counter);
+
+  const door = new THREE.Mesh(
+    new THREE.BoxGeometry(0.8, 2.1, 0.08),
+    new THREE.MeshStandardMaterial({ color: 0xd6c7a8, roughness: 0.6 })
+  );
+  door.position.set(4.2, 1.05, -6.7);
+  door.name = 'wc-door';
+  root.add(door);
+
+  floorMesh = floor;
+  return root;
+}
+
 loader.load(
   '/assets/model.glb',
   (gltf) => {
@@ -377,7 +457,7 @@ loader.load(
     });
 
     scene.add(sceneRoot);
-    if (loadingEl) loadingEl.style.display = 'none';
+    hideLoadingOverlay();
 
     buildInSceneDimensionBadges();
     buildFloorPlanDimensions();
@@ -389,10 +469,21 @@ loader.load(
     if (progress.total && barFill) {
       barFill.style.width = Math.min(100, (progress.loaded / progress.total) * 100) + '%';
     }
+    if (loadingText && progress.total) {
+      loadingText.textContent = `Loading model ${Math.round((progress.loaded / progress.total) * 100)}%`;
+    }
   },
   (error) => {
     console.error('Failed to load model.glb:', error);
-    if (loadingEl) loadingEl.querySelector('div').textContent = 'Could not load model.glb';
+    if (loadingText) loadingText.textContent = 'GLB not found — showing spatial proxy';
+    sceneRoot = buildFallbackShowroom();
+    scene.add(sceneRoot);
+    hideLoadingOverlay();
+    buildInSceneDimensionBadges();
+    buildFloorPlanDimensions();
+    dimensionBadgesGroup.visible = false;
+    floorPlanDimensionsGroup.visible = false;
+    showToast('Place model.glb in /public/assets to replace the proxy');
   }
 );
 
@@ -499,7 +590,7 @@ function createTextBadge(title, dimsText, accentColor = '#d4af37') {
 function buildInSceneDimensionBadges() {
   dimensionBadgesGroup.clear();
 
-  const counterBadge = createTextBadge('Island Counter', '238 × 98 × 82 cm');
+  const counterBadge = createTextBadge('Island Counter', '230 × 90 × 95 cm');
   counterBadge.position.set(2.4, 1.25, -4.15);
   dimensionBadgesGroup.add(counterBadge);
 
@@ -656,7 +747,7 @@ function getObjectMetadata(mesh) {
       category: 'Consultation Joinery',
       name: 'Central Consultation Island',
       desc: 'Custom 240 × 90 × 95 cm consultation bar with bookmatched marble countertop, fluted brass pedestal base, and lockable fragrance tester vitrines.',
-      w: '240 cm', h: '95 cm', d: '90 cm',
+      w: '230 cm', h: '95 cm', d: '90 cm',
       details: 'Bookmatched Italian Marble top, PVD brushed gold base, 3000K LED vitrine.'
     };
   } else if (name.includes('shelf') || name.includes('showcase') || name.includes('wall')) {
@@ -680,7 +771,7 @@ function getObjectMetadata(mesh) {
       category: 'Service Corridor',
       name: 'Concealed Restroom / Service Door',
       desc: 'Seamlessly integrated flush pivot door (~77 cm clearance) matching wall cladding with magnetic acoustic drop seal.',
-      w: '77 cm', h: '210 cm', d: '5 cm',
+      w: '80 cm', h: '210 cm', d: '5 cm',
       details: 'Concealed pivot hinge, acoustic perimeter drop seal, staff access.'
     };
   }
@@ -740,7 +831,7 @@ renderer.domElement.addEventListener('pointerdown', (e) => {
 
 renderer.domElement.addEventListener('click', (e) => {
   if (!controls.enabled || !sceneRoot) return;
-  if (!isInside && currentMode === 'exterior') return;
+  if (currentMode === 'exterior') return;
 
   const dragDist = Math.hypot(e.clientX - pointerDownPos.x, e.clientY - pointerDownPos.y);
   if (dragDist > 10) return;
@@ -921,7 +1012,9 @@ if (cameraStudioPanel) {
 
   if (btnResetCam) {
     btnResetCam.addEventListener('click', () => {
-      localStorage.clear();
+      ['start', 'entrance', 'counter', 'showcase', 'perfume-wall'].forEach((key) => {
+        localStorage.removeItem('velra_cam_' + key);
+      });
       showToast('Reset saved angles! Refreshing...');
       setTimeout(() => window.location.reload(), 800);
     });
@@ -954,7 +1047,40 @@ if (btnFullscreenToggle && threeContainer) {
   btnFullscreenToggle.addEventListener('click', () => {
     const isFs = threeContainer.classList.toggle('fullscreen');
     if (fsBtnText) fsBtnText.textContent = isFs ? 'Exit Fullscreen' : 'Fullscreen 3D';
-    updateViewportSize();
+    requestAnimationFrame(updateViewportSize);
+  });
+}
+
+if (btnResetView) {
+  btnResetView.addEventListener('click', () => {
+    const dest = currentMode === 'topdown' ? { pos: TOPDOWN_POS, lookAt: TOPDOWN_LOOKAT } : DEFAULT_ENTRANCE;
+    flyTo(dest.pos, dest.lookAt, 1200);
+  });
+}
+
+if (btnToggleLights) {
+  btnToggleLights.addEventListener('click', () => {
+    warmLighting = !warmLighting;
+    if (warmLighting) {
+      hemiLight.color.set(0xfff6ea);
+      hemiLight.intensity = 0.45;
+      sunLight.color.set(0xfff2de);
+      sunLight.intensity = currentMode === 'topdown' ? 0.25 : 0.75;
+      ceilingLight1.color.set(0xffe8c8);
+      ceilingLight2.color.set(0xffe8c8);
+      renderer.toneMappingExposure = currentMode === 'topdown' ? 0.82 : 0.88;
+      showToast('Warm 3000K lighting');
+    } else {
+      hemiLight.color.set(0xe8eef8);
+      hemiLight.intensity = 0.55;
+      sunLight.color.set(0xf3f6ff);
+      sunLight.intensity = currentMode === 'topdown' ? 0.3 : 0.65;
+      ceilingLight1.color.set(0xeef3ff);
+      ceilingLight2.color.set(0xeef3ff);
+      renderer.toneMappingExposure = 0.92;
+      showToast('Neutral white lighting');
+    }
+    btnToggleLights.classList.toggle('active', !warmLighting);
   });
 }
 
