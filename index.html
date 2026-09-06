@@ -1533,6 +1533,7 @@
       }
 
       window.openBeastLightbox = function(src, caption) {
+        if (!src) return;
         img.src = src;
         title.innerText = caption || 'Image Master View';
         scale = 1;
@@ -1555,32 +1556,56 @@
       document.getElementById('lb-btn-reset').addEventListener('click', () => { scale = 1; posX = 0; posY = 0; rotation = 0; updateTransform(); });
       document.getElementById('lb-btn-rotate').addEventListener('click', () => { rotation = (rotation + 90) % 360; updateTransform(); });
 
-      // Stage Mouse Drag / Pan
+      // Drag & Pan handlers (Mouse)
+      function startDrag(clientX, clientY) {
+        isDragging = true;
+        stage.classList.add('dragging');
+        startX = clientX - posX;
+        startY = clientY - posY;
+      }
+
+      function moveDrag(clientX, clientY) {
+        if (!isDragging) return;
+        posX = clientX - startX;
+        posY = clientY - startY;
+        updateTransform();
+      }
+
+      function endDrag() {
+        isDragging = false;
+        stage.classList.remove('dragging');
+      }
+
       stage.addEventListener('mousedown', (e) => {
-        if (e.target === modal || e.target === stage) {
-          isDragging = true;
-          stage.classList.add('dragging');
-          startX = e.clientX - posX;
-          startY = e.clientY - posY;
-        }
+        e.preventDefault();
+        startDrag(e.clientX, e.clientY);
       });
 
       window.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        posX = e.clientX - startX;
-        posY = e.clientY - startY;
-        updateTransform();
+        moveDrag(e.clientX, e.clientY);
       });
 
-      window.addEventListener('mouseup', () => {
-        isDragging = false;
-        stage.classList.remove('dragging');
-      });
+      window.addEventListener('mouseup', endDrag);
+
+      // Touch handlers (Mobile / Tablet)
+      stage.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          startDrag(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+
+      window.addEventListener('touchmove', (e) => {
+        if (isDragging && e.touches.length === 1) {
+          moveDrag(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+
+      window.addEventListener('touchend', endDrag);
 
       // Mouse Wheel Zoom
       stage.addEventListener('wheel', (e) => {
         e.preventDefault();
-        const delta = e.deltaY > 0 ? -0.15 : 0.15;
+        const delta = e.deltaY > 0 ? -0.18 : 0.18;
         scale = Math.min(Math.max(scale + delta, 0.4), 5);
         updateTransform();
       }, { passive: false });
@@ -1592,8 +1617,26 @@
         }
       });
 
+      // Close on clicking backdrop outside of image or controls
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeLightbox();
+        }
+      });
+
       // Backward compatibility alias
       window.openLightbox = window.openBeastLightbox;
+
+      // Automatically attach Beast Lightbox to ALL content images across the dossier
+      document.querySelectorAll('img:not(#lightbox-stage-img)').forEach(el => {
+        el.style.cursor = 'zoom-in';
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const card = el.closest('.glass-card, .gallery-card, .material-card, .joinery-card, .feature-visual-card, .fixture-card, .glow-img-wrap');
+          const caption = el.alt || (card ? (card.querySelector('h3, h4, .section-heading, .mat-title')?.innerText) : 'Vel Ra Architectural Master View');
+          window.openBeastLightbox(el.src, caption);
+        });
+      });
 
       // Blueprint Switcher
       document.querySelectorAll('.blueprint-tab-btn').forEach(btn => {
