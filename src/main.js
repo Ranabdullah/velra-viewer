@@ -10,14 +10,14 @@ const container = document.getElementById('canvas-container');
 const canvas = document.getElementById('three-canvas');
 
 const scene = new THREE.Scene();
-// Warm luxury architectural studio background
-scene.background = new THREE.Color(0x101524);
+// Deep cinematic studio backdrop
+scene.background = new THREE.Color(0x0e1322);
 
 const camera = new THREE.PerspectiveCamera(
-  42,
+  40,
   container ? (container.clientWidth / container.clientHeight) : (window.innerWidth / window.innerHeight),
   0.1,
-  2000
+  1000
 );
 
 const renderer = new THREE.WebGLRenderer({
@@ -29,126 +29,64 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(container ? container.clientWidth : window.innerWidth, container ? container.clientHeight : window.innerHeight);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.35; // Rich bright illumination
+renderer.toneMappingExposure = 1.42; // Rich cinematic luminescence
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
-controls.dampingFactor = 0.06;
+controls.dampingFactor = 0.05;
 controls.maxPolarAngle = Math.PI * 0.49;
-controls.minDistance = 0.5;
-controls.maxDistance = 600;
+controls.minDistance = 0.4;
+controls.maxDistance = 15;
+controls.autoRotate = false;
+controls.autoRotateSpeed = 1.4;
 
 // ---------------------------------------------------------------------------
-// 2. Rich Multi-Directional Architectural Illumination (Warm 3000K)
+// 2. Realistic Cinematic Lighting Scheme (Warm 3000K Luxury Boutique)
 // ---------------------------------------------------------------------------
-const ambientLight = new THREE.AmbientLight(0xfffaee, 1.9);
+// 2.1 Ambient & Sky Fill
+const ambientLight = new THREE.AmbientLight(0xfff7ea, 1.5);
 scene.add(ambientLight);
 
-const hemiLight = new THREE.HemisphereLight(0xfff6e5, 0x1a243b, 1.4);
+const hemiLight = new THREE.HemisphereLight(0xfff2dc, 0x182033, 1.2);
 scene.add(hemiLight);
 
-const mainSun = new THREE.DirectionalLight(0xfff5e0, 2.8);
-mainSun.position.set(35, 75, 45);
+// 2.2 Key Directional Sun Light (Exterior & Window Wash)
+const mainSun = new THREE.DirectionalLight(0xfff5e6, 2.4);
+mainSun.position.set(15, 30, 20);
 mainSun.castShadow = true;
 mainSun.shadow.mapSize.set(2048, 2048);
+mainSun.shadow.bias = -0.0001;
 scene.add(mainSun);
 
-const fillLightLeft = new THREE.DirectionalLight(0xffebcf, 1.6);
-fillLightLeft.position.set(-40, 50, -30);
-scene.add(fillLightLeft);
+// 2.3 Interior Central Island Pendant / Chandelier Spot
+const islandSpot = new THREE.PointLight(0xffe8b8, 3.2, 12, 1.2);
+islandSpot.position.set(0, 2.4, 0.2);
+islandSpot.castShadow = true;
+scene.add(islandSpot);
 
-const fillLightRight = new THREE.DirectionalLight(0xfffaec, 1.4);
-fillLightRight.position.set(40, 45, -30);
-scene.add(fillLightRight);
+// 2.4 Backwall Brand Signage & Monogram Illuminator
+const monogramSpot = new THREE.PointLight(0xffdf95, 2.8, 8, 1.4);
+monogramSpot.position.set(-0.2, 1.7, -1.6);
+scene.add(monogramSpot);
 
-const bottomBounce = new THREE.DirectionalLight(0xffe8c8, 0.8);
-bottomBounce.position.set(0, -20, 0);
-scene.add(bottomBounce);
+// 2.5 Left & Right Arched Perfume Display Wall Grazers
+const leftWallLight = new THREE.PointLight(0xffeccc, 2.2, 7, 1.5);
+leftWallLight.position.set(-1.4, 1.6, 0.4);
+scene.add(leftWallLight);
 
-// ---------------------------------------------------------------------------
-// 3. Model Hierarchy & Transform System
-// ---------------------------------------------------------------------------
-// modelRoot (centered at origin) -> modelGroup (has user position & rotation)
-const modelGroup = new THREE.Group();
-scene.add(modelGroup);
+const rightWallLight = new THREE.PointLight(0xffeccc, 2.2, 7, 1.5);
+rightWallLight.position.set(1.4, 1.6, 0.4);
+scene.add(rightWallLight);
 
-let modelRoot = null;
-let modelSize = new THREE.Vector3();
-let modelCenter = new THREE.Vector3();
-let maxDim = 50;
-
-// Default Model Transform
-const DEFAULT_MODEL_TRANSFORM = {
-  posX: 0,
-  posY: 0,
-  posZ: 0,
-  rotX: 0, // degrees
-  rotY: 0, // degrees
-  rotZ: 0, // degrees
-  scale: 1.0
-};
-
-let currentModelTransform = { ...DEFAULT_MODEL_TRANSFORM };
-
-// Load saved model transform from localStorage
-function loadSavedModelTransform() {
-  try {
-    const saved = localStorage.getItem('velra_3d_model_transform');
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      currentModelTransform = { ...DEFAULT_MODEL_TRANSFORM, ...parsed };
-    }
-  } catch (e) {
-    console.warn('Could not load saved model transform:', e);
-  }
-}
-
-function applyModelTransform() {
-  modelGroup.position.set(
-    currentModelTransform.posX,
-    currentModelTransform.posY,
-    currentModelTransform.posZ
-  );
-  modelGroup.rotation.set(
-    THREE.MathUtils.degToRad(currentModelTransform.rotX),
-    THREE.MathUtils.degToRad(currentModelTransform.rotY),
-    THREE.MathUtils.degToRad(currentModelTransform.rotZ)
-  );
-  modelGroup.scale.setScalar(currentModelTransform.scale || 1.0);
-}
-
-loadSavedModelTransform();
-applyModelTransform();
-
-function enhanceMeshMaterial(mesh) {
-  if (!mesh.material) return;
-  const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
-  
-  mats.forEach(mat => {
-    const name = (mat.name || '').toLowerCase();
-    
-    if (name.includes('light') || name.includes('lamp') || name.includes('emissive')) {
-      mat.emissive = new THREE.Color(0xffe29d);
-      mat.emissiveIntensity = 3.0;
-    } else if (name.includes('gold') || name.includes('brass') || name.includes('metallic')) {
-      mat.metalness = 0.94;
-      mat.roughness = 0.22;
-    } else if (name.includes('marble') || name.includes('calacatta') || name.includes('floor')) {
-      mat.roughness = 0.24;
-      mat.metalness = 0.04;
-    } else if (name.includes('glass') || name.includes('vitrine') || name.includes('window')) {
-      mat.transparent = true;
-      mat.opacity = 0.38;
-      mat.roughness = 0.08;
-      mat.metalness = 0.1;
-    }
-  });
-}
+// 2.6 Storefront Vitrine Accent
+const storefrontLight = new THREE.PointLight(0xfffaea, 2.0, 8, 1.5);
+storefrontLight.position.set(0, 2.1, 3.5);
+scene.add(storefrontLight);
 
 // ---------------------------------------------------------------------------
-// 4. GLTF / DRACO Loader
+// 3. GLTF Loader & Mesh Material Enhancement
 // ---------------------------------------------------------------------------
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
@@ -156,21 +94,62 @@ dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5
 const gltfLoader = new GLTFLoader();
 gltfLoader.setDRACOLoader(dracoLoader);
 
+const modelGroup = new THREE.Group();
+scene.add(modelGroup);
+
+let modelRoot = null;
+let ceilingMesh = null;
+let currentPresetKey = 'front';
+
+function enhanceMeshMaterial(mesh) {
+  if (!mesh.material) return;
+  const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+  
+  mats.forEach(mat => {
+    const name = (mat.name || '').toLowerCase();
+    const meshName = (mesh.name || '').toLowerCase();
+    
+    // Check if this is the ceiling
+    if (meshName.includes('ceiling') || name.includes('ceiling')) {
+      ceilingMesh = mesh;
+    }
+
+    if (name.includes('light') || name.includes('lamp') || name.includes('emissive') || meshName.includes('text') || meshName.includes('signage')) {
+      mat.emissive = new THREE.Color(0xffdf88);
+      mat.emissiveIntensity = 2.4;
+    } else if (name.includes('gold') || name.includes('brass') || meshName.includes('brass') || meshName.includes('gold')) {
+      mat.metalness = 0.95;
+      mat.roughness = 0.18;
+      mat.emissive = new THREE.Color(0x281c08);
+      mat.emissiveIntensity = 0.35;
+    } else if (name.includes('marble') || name.includes('calacatta') || name.includes('floor') || meshName.includes('floor')) {
+      mat.roughness = 0.16;
+      mat.metalness = 0.05;
+    } else if (name.includes('glass') || name.includes('vitrine') || name.includes('window') || meshName.includes('glass')) {
+      mat.transparent = true;
+      mat.opacity = 0.32;
+      mat.roughness = 0.04;
+      mat.metalness = 0.1;
+    } else if (name.includes('wall') || name.includes('plaster')) {
+      mat.roughness = 0.65;
+      mat.metalness = 0.02;
+    }
+  });
+}
+
 gltfLoader.load(
   '/assets/model.glb',
   (gltf) => {
     modelRoot = gltf.scene;
     
-    // 1. Calculate Bounding Box
+    // Calculate Bounding Box and Center
     const box = new THREE.Box3().setFromObject(modelRoot);
-    box.getCenter(modelCenter);
-    box.getSize(modelSize);
-    maxDim = Math.max(modelSize.x, modelSize.y, modelSize.z);
+    const center = new THREE.Vector3();
+    box.getCenter(center);
 
-    // 2. Center model inside modelRoot and rest base at y = 0
-    modelRoot.position.x = -modelCenter.x;
+    modelRoot.position.x = -center.x;
     modelRoot.position.y = -box.min.y;
-    modelRoot.position.z = -modelCenter.z;
+    modelRoot.position.z = -center.z;
 
     modelRoot.traverse((child) => {
       if (child.isMesh) {
@@ -181,123 +160,59 @@ gltfLoader.load(
     });
 
     modelGroup.add(modelRoot);
-    applyModelTransform();
 
-    // 3. Initialize Camera Presets and fly to initial preset
-    initCameraPresets();
+    // Initial Camera View: 01 // Front Entrance
     setCameraPreset('front');
-    console.log('Vel Ra 3D Model loaded, centered, and transform applied.');
-
-    // Notify UI that model is ready
-    if (window.onVelraModelReady) window.onVelraModelReady();
+    console.log('Vel Ra 3D Model loaded and cinematic lighting initialized.');
   },
   undefined,
   (err) => console.warn('Model loading notice:', err)
 );
 
 // ---------------------------------------------------------------------------
-// 5. Camera Presets & Location / Rotation Persistence
+// 4. Calibrated Camera Presets (Matching User Screenshots Exactly)
 // ---------------------------------------------------------------------------
-let defaultCameraPresets = {};
-
-function initCameraPresets() {
-  defaultCameraPresets = {
-    'front': {
-      name: '01 // Front Entrance',
-      pos: [0, modelSize.y * 0.65, maxDim * 0.90],
-      target: [0, modelSize.y * 0.35, 0]
-    },
-    'island': {
-      name: '02 // Central Island',
-      pos: [maxDim * 0.18, modelSize.y * 0.42, maxDim * 0.28],
-      target: [0, modelSize.y * 0.22, 0]
-    },
-    'pos': {
-      name: '03 // POS Cashier Desk',
-      pos: [-maxDim * 0.24, modelSize.y * 0.38, maxDim * 0.20],
-      target: [-maxDim * 0.08, modelSize.y * 0.18, -maxDim * 0.05]
-    },
-    'alcoves': {
-      name: '04 // Perfume Wall Alcoves',
-      pos: [maxDim * 0.26, modelSize.y * 0.40, -maxDim * 0.08],
-      target: [maxDim * 0.10, modelSize.y * 0.28, -maxDim * 0.12]
-    },
-    'top': {
-      name: '05 // Top-Down Plan',
-      pos: [0, maxDim * 1.35, 0.01],
-      target: [0, 0, 0]
-    },
-    // Render Passes Viewpoints
-    'pass1': {
-      name: 'Pass 01 // Front Entrance Perspective',
-      pos: [0, modelSize.y * 0.62, maxDim * 0.85],
-      target: [0, modelSize.y * 0.32, 0]
-    },
-    'pass2': {
-      name: 'Pass 02 // Façade & Window Vitrine',
-      pos: [-maxDim * 0.35, modelSize.y * 0.55, maxDim * 0.70],
-      target: [-maxDim * 0.10, modelSize.y * 0.30, maxDim * 0.10]
-    },
-    'pass3': {
-      name: 'Pass 03 // Back Wall & Monogram',
-      pos: [0, modelSize.y * 0.45, maxDim * 0.30],
-      target: [0, modelSize.y * 0.35, -maxDim * 0.45]
-    },
-    'pass4': {
-      name: 'Pass 04 // VIP Consultation Lounge',
-      pos: [-maxDim * 0.28, modelSize.y * 0.35, -maxDim * 0.15],
-      target: [-maxDim * 0.35, modelSize.y * 0.30, -maxDim * 0.35]
-    },
-    'pass5': {
-      name: 'Pass 05 // Fluted Glass Partition',
-      pos: [maxDim * 0.15, modelSize.y * 0.38, maxDim * 0.05],
-      target: [maxDim * 0.30, modelSize.y * 0.30, -maxDim * 0.10]
-    },
-    'pass6': {
-      name: 'Pass 06 // Arched Display Wall',
-      pos: [maxDim * 0.22, modelSize.y * 0.38, -maxDim * 0.05],
-      target: [maxDim * 0.40, modelSize.y * 0.30, -maxDim * 0.15]
-    },
-    'pass7': {
-      name: 'Pass 07 // Ceiling Lighting Cove',
-      pos: [0, modelSize.y * 0.25, maxDim * 0.40],
-      target: [0, modelSize.y * 0.85, 0]
-    },
-    'pass8': {
-      name: 'Pass 08 // Calacatta Floor Inlay',
-      pos: [0, modelSize.y * 0.75, maxDim * 0.25],
-      target: [0, 0, 0]
-    },
-    'pass9': {
-      name: 'Pass 09 // Fragrance Island Centerpiece',
-      pos: [maxDim * 0.14, modelSize.y * 0.36, maxDim * 0.22],
-      target: [0, modelSize.y * 0.20, 0]
-    }
-  };
-}
-
-let activeCameraPresets = {};
-
-function loadSavedCameraLocations() {
-  try {
-    const saved = localStorage.getItem('velra_3d_camera_locations');
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      activeCameraPresets = { ...defaultCameraPresets, ...parsed };
-      return;
-    }
-  } catch (e) {
-    console.warn('Could not load saved camera locations:', e);
+const cameraPresets = {
+  'front': {
+    name: '01 // Front Entrance',
+    pos: new THREE.Vector3(-0.31, 1.45, 7.25),
+    target: new THREE.Vector3(-0.31, 1.22, -0.11),
+    maxDist: 12.0,
+    minDist: 1.0
+  },
+  'island': {
+    name: '02 // Central Island',
+    pos: new THREE.Vector3(1.46, 1.55, 2.27),
+    target: new THREE.Vector3(0, 0.9, 0),
+    maxDist: 4.2,
+    minDist: 0.5
+  },
+  'pos': {
+    name: '03 // POS Cashier Desk',
+    pos: new THREE.Vector3(1.57, 1.73, -1.32),
+    target: new THREE.Vector3(-0.92, 1.33, -1.34),
+    maxDist: 4.0,
+    minDist: 0.5
+  },
+  'alcoves': {
+    name: '04 // Perfume Wall Alcoves',
+    pos: new THREE.Vector3(-1.32, 1.4, 1.72),
+    target: new THREE.Vector3(1.55, 1.15, -0.48),
+    maxDist: 4.5,
+    minDist: 0.5
+  },
+  'top': {
+    name: '05 // Top-Down Plan',
+    pos: new THREE.Vector3(0, 17.67, 0.01),
+    target: new THREE.Vector3(0, 0, 0),
+    maxDist: 35.0,
+    minDist: 4.0
   }
-  activeCameraPresets = { ...defaultCameraPresets };
-}
+};
 
-// ---------------------------------------------------------------------------
-// 6. Smooth Camera Fly Animation
-// ---------------------------------------------------------------------------
 let isTransitioning = false;
 
-function flyCamera(targetPos, targetLookAt, duration = 1100) {
+function flyCamera(destPos, destTarget, duration = 1100, onComplete) {
   if (isTransitioning) return;
   isTransitioning = true;
   controls.enabled = false;
@@ -305,9 +220,6 @@ function flyCamera(targetPos, targetLookAt, duration = 1100) {
   const startPos = camera.position.clone();
   const startTarget = controls.target.clone();
   const startTime = performance.now();
-
-  const destPos = Array.isArray(targetPos) ? new THREE.Vector3(...targetPos) : targetPos;
-  const destTarget = Array.isArray(targetLookAt) ? new THREE.Vector3(...targetLookAt) : targetLookAt;
 
   function animate(now) {
     const elapsed = Math.min(1, (now - startTime) / duration);
@@ -324,32 +236,65 @@ function flyCamera(targetPos, targetLookAt, duration = 1100) {
       controls.enabled = true;
       controls.target.copy(destTarget);
       controls.update();
+      if (onComplete) onComplete();
     }
   }
   requestAnimationFrame(animate);
 }
 
 function setCameraPreset(presetKey) {
-  if (!modelRoot) return;
-  loadSavedCameraLocations();
-
-  const data = activeCameraPresets[presetKey] || defaultCameraPresets[presetKey];
+  const data = cameraPresets[presetKey];
   if (!data) return;
 
-  // Update active button state in preset bar
+  currentPresetKey = presetKey;
+
+  // 1. Top-Down Ceiling Visibility Control
+  if (presetKey === 'top') {
+    if (ceilingMesh) ceilingMesh.visible = false;
+  } else {
+    if (ceilingMesh) ceilingMesh.visible = true;
+  }
+
+  // 2. Update Active Button State
   document.querySelectorAll('.cam-preset-btn').forEach(b => b.classList.remove('active'));
   const activeBtn = document.getElementById('btn-cam-' + presetKey);
   if (activeBtn) activeBtn.classList.add('active');
 
+  // 3. Set Control Limits
+  controls.maxDistance = data.maxDist || 15;
+  controls.minDistance = data.minDist || 0.4;
+
+  // 4. Fly Camera to calibrated position
   flyCamera(data.pos, data.target);
 }
 
-// Attach preset buttons
+// ---------------------------------------------------------------------------
+// 5. User Controls: Presets, Auto-Rotate Inside & Wireframe
+// ---------------------------------------------------------------------------
 ['front', 'island', 'pos', 'alcoves', 'top'].forEach(key => {
   const btn = document.getElementById('btn-cam-' + key);
   if (btn) btn.addEventListener('click', () => setCameraPreset(key));
 });
 
+// Auto-Rotate Inside Button
+let isRotatingInside = false;
+const btnAutoRotate = document.getElementById('btn-auto-rotate');
+if (btnAutoRotate) {
+  btnAutoRotate.addEventListener('click', () => {
+    isRotatingInside = !isRotatingInside;
+    controls.autoRotate = isRotatingInside;
+    btnAutoRotate.classList.toggle('active', isRotatingInside);
+    if (isRotatingInside) {
+      btnAutoRotate.style.background = 'var(--gold-gradient)';
+      btnAutoRotate.style.color = '#ffffff';
+    } else {
+      btnAutoRotate.style.background = '';
+      btnAutoRotate.style.color = '';
+    }
+  });
+}
+
+// Wireframe Toggle
 let isWireframe = false;
 const btnWireframe = document.getElementById('btn-wireframe');
 if (btnWireframe) {
@@ -368,134 +313,48 @@ if (btnWireframe) {
 }
 
 // ---------------------------------------------------------------------------
-// 7. PUBLIC 3D STUDIO API (Location, Rotation & Persistence)
+// 6. Camera Wall Boundary & Interior Collision Clamping
+// ---------------------------------------------------------------------------
+function clampCameraInsideWalls() {
+  // Only clamp when inspecting the interior (not in Top-Down or Front Façade view)
+  if (currentPresetKey === 'top' || currentPresetKey === 'front') return;
+
+  const minX = -2.05;
+  const maxX = 2.05;
+  const minY = 0.55;
+  const maxY = 2.55;
+  const minZ = -2.60;
+  const maxZ = 3.80;
+
+  camera.position.x = Math.max(minX, Math.min(maxX, camera.position.x));
+  camera.position.y = Math.max(minY, Math.min(maxY, camera.position.y));
+  camera.position.z = Math.max(minZ, Math.min(maxZ, camera.position.z));
+}
+
+// ---------------------------------------------------------------------------
+// 7. Global API for Top Passes & Section Integration
 // ---------------------------------------------------------------------------
 window.velra3D = {
-  // Model Transform Controls
-  getModelTransform() {
-    return { ...currentModelTransform };
-  },
-
-  setModelTransform(transform) {
-    currentModelTransform = { ...currentModelTransform, ...transform };
-    applyModelTransform();
-  },
-
-  saveModelTransform() {
-    try {
-      localStorage.setItem('velra_3d_model_transform', JSON.stringify(currentModelTransform));
-      console.log('Model transform saved permanently:', currentModelTransform);
-      return true;
-    } catch (e) {
-      console.error('Failed to save model transform:', e);
-      return false;
-    }
-  },
-
-  resetModelTransform() {
-    currentModelTransform = { ...DEFAULT_MODEL_TRANSFORM };
-    applyModelTransform();
-    localStorage.removeItem('velra_3d_model_transform');
-  },
-
-  // Camera Telemetry & Viewpoints
-  getCameraTelemetry() {
-    const pos = camera.position;
-    const target = controls.target;
-    const distance = pos.distanceTo(target);
-    
-    // Euler angles of camera
-    const rot = new THREE.Euler().setFromRotationMatrix(camera.matrix);
-    return {
-      pos: { x: Number(pos.x.toFixed(2)), y: Number(pos.y.toFixed(2)), z: Number(pos.z.toFixed(2)) },
-      target: { x: Number(target.x.toFixed(2)), y: Number(target.y.toFixed(2)), z: Number(target.z.toFixed(2)) },
-      rotDeg: {
-        x: Number(THREE.MathUtils.radToDeg(rot.x).toFixed(1)),
-        y: Number(THREE.MathUtils.radToDeg(rot.y).toFixed(1)),
-        z: Number(THREE.MathUtils.radToDeg(rot.z).toFixed(1))
-      },
-      distance: Number(distance.toFixed(2)),
-      fov: camera.fov
-    };
-  },
-
-  getAllPresets() {
-    loadSavedCameraLocations();
-    return { ...activeCameraPresets };
-  },
-
   setCameraPreset(presetKey) {
-    setCameraPreset(presetKey);
-  },
-
-  saveCurrentCameraView(presetKey, customName) {
-    loadSavedCameraLocations();
-    const tel = this.getCameraTelemetry();
-    const name = customName || (activeCameraPresets[presetKey] ? activeCameraPresets[presetKey].name : presetKey);
-    
-    activeCameraPresets[presetKey] = {
-      name: name,
-      pos: [tel.pos.x, tel.pos.y, tel.pos.z],
-      target: [tel.target.x, tel.target.y, tel.target.z]
+    // Map pass keys to closest interior views if needed
+    const passMap = {
+      'pass1': 'front',
+      'pass2': 'front',
+      'pass3': 'pos',
+      'pass4': 'pos',
+      'pass5': 'alcoves',
+      'pass6': 'alcoves',
+      'pass7': 'island',
+      'pass8': 'island',
+      'pass9': 'island'
     };
-
-    try {
-      localStorage.setItem('velra_3d_camera_locations', JSON.stringify(activeCameraPresets));
-      console.log(`Saved camera location & rotation for "${presetKey}":`, activeCameraPresets[presetKey]);
-      return true;
-    } catch (e) {
-      console.error('Failed to save camera location:', e);
-      return false;
-    }
-  },
-
-  resetCameraPreset(presetKey) {
-    loadSavedCameraLocations();
-    if (defaultCameraPresets[presetKey]) {
-      activeCameraPresets[presetKey] = { ...defaultCameraPresets[presetKey] };
-      localStorage.setItem('velra_3d_camera_locations', JSON.stringify(activeCameraPresets));
-      setCameraPreset(presetKey);
-    }
-  },
-
-  // Full Configuration Export & Import
-  exportAllConfig() {
-    return JSON.stringify({
-      version: '1.0',
-      modelTransform: currentModelTransform,
-      cameraLocations: activeCameraPresets
-    }, null, 2);
-  },
-
-  importConfig(jsonString) {
-    try {
-      const data = typeof jsonString === 'string' ? JSON.parse(jsonString) : jsonString;
-      if (data.modelTransform) {
-        currentModelTransform = { ...DEFAULT_MODEL_TRANSFORM, ...data.modelTransform };
-        applyModelTransform();
-        localStorage.setItem('velra_3d_model_transform', JSON.stringify(currentModelTransform));
-      }
-      if (data.cameraLocations) {
-        activeCameraPresets = { ...data.cameraLocations };
-        localStorage.setItem('velra_3d_camera_locations', JSON.stringify(activeCameraPresets));
-      }
-      return true;
-    } catch (e) {
-      console.error('Import failed:', e);
-      return false;
-    }
-  },
-
-  resetAllToDefault() {
-    this.resetModelTransform();
-    localStorage.removeItem('velra_3d_camera_locations');
-    activeCameraPresets = { ...defaultCameraPresets };
-    setCameraPreset('front');
+    const key = cameraPresets[presetKey] ? presetKey : (passMap[presetKey] || 'front');
+    setCameraPreset(key);
   }
 };
 
 // ---------------------------------------------------------------------------
-// 8. Responsive Resize & Animation Loop
+// 8. Animation & Resize Loop
 // ---------------------------------------------------------------------------
 function onWindowResize() {
   if (!container) return;
@@ -511,12 +370,8 @@ window.addEventListener('resize', onWindowResize);
 function renderLoop() {
   requestAnimationFrame(renderLoop);
   controls.update();
+  clampCameraInsideWalls();
   renderer.render(scene, camera);
-
-  // If studio panel is open, update live telemetry
-  if (window.updateStudioTelemetry) {
-    window.updateStudioTelemetry();
-  }
 }
 
 renderLoop();
