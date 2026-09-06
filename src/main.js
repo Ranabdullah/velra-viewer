@@ -5,16 +5,17 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 import { EXRLoader } from 'three/examples/jsm/loaders/EXRLoader.js';
 
 // ---------------------------------------------------------------------------
-// 1. Viewport & Canvas Setup (Performance Optimized)
+// 1. Viewport & Canvas Setup (Lumen Studio Cinematic Standard)
 // ---------------------------------------------------------------------------
 const container = document.getElementById('canvas-container');
 const canvas = document.getElementById('three-canvas');
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x0a0e18);
+// Dark luxury studio atmosphere
+scene.background = new THREE.Color(0x080b12);
 
 const camera = new THREE.PerspectiveCamera(
-  40,
+  36, // 36mm cinematic architectural prime lens
   container ? (container.clientWidth / container.clientHeight) : (window.innerWidth / window.innerHeight),
   0.1,
   1000
@@ -24,28 +25,27 @@ const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
   antialias: true,
   powerPreference: 'high-performance',
-  precision: 'mediump' // Smooth mobile and desktop GPU performance
+  stencil: false
 });
-// 1.5x pixel ratio provides ultra-crisp Retina visuals while saving ~45% GPU overhead
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
 renderer.setSize(container ? container.clientWidth : window.innerWidth, container ? container.clientHeight : window.innerHeight);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.02; // Calibrated realistic exposure
+renderer.toneMappingExposure = 1.08; // Moody, rich contrast with radiant highlights
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
-controls.dampingFactor = 0.06;
+controls.dampingFactor = 0.05;
 controls.maxPolarAngle = Math.PI * 0.49;
 controls.minDistance = 0.4;
 controls.maxDistance = 12;
 controls.autoRotate = false;
-controls.autoRotateSpeed = 1.2;
+controls.autoRotateSpeed = 1.0;
 
 // ---------------------------------------------------------------------------
-// 2. Photorealistic IBL Environment Map (EXR Studio Reflection)
+// 2. Photorealistic IBL Studio Reflection Map
 // ---------------------------------------------------------------------------
 const pmremGenerator = new THREE.PMREMGenerator(renderer);
 pmremGenerator.compileEquirectangularShader();
@@ -56,75 +56,85 @@ exrLoader.load(
   (texture) => {
     const envMap = pmremGenerator.fromEquirectangular(texture).texture;
     scene.environment = envMap;
-    scene.environmentIntensity = 0.85; // Natural metallic and marble specular reflections
+    scene.environmentIntensity = 0.75; // Rich specular highlights and reflections
     texture.dispose();
     pmremGenerator.dispose();
     requestRender();
-    console.log('Photorealistic EXR Environment Map loaded successfully.');
+    console.log('Lumen Studio HDRI Reflection Environment Loaded.');
   },
   undefined,
   (err) => console.warn('Notice loading EXR map:', err)
 );
 
 // ---------------------------------------------------------------------------
-// 3. Realistic Architectural Retail Lighting Scheme (Optimized Draw-Calls)
+// 3. Cinematic Architectural Lighting (Lumen Studio Style Sunlight & GI Bounce)
 // ---------------------------------------------------------------------------
-// 3.1 Soft Warm Ambient Base Fill
-const ambientLight = new THREE.AmbientLight(0xfff3e0, 0.42);
+// 3.1 Moody Ambient Base (Soft contrast, avoids flat washout)
+const ambientLight = new THREE.AmbientLight(0xffecd0, 0.25);
 scene.add(ambientLight);
 
-const hemiLight = new THREE.HemisphereLight(0xfff0dc, 0x141a28, 0.52);
+const hemiLight = new THREE.HemisphereLight(0xfff3e2, 0x0c121e, 0.35);
 scene.add(hemiLight);
 
-// 3.2 Key Sun Light (Single Optimized Shadow Map)
-const mainSun = new THREE.DirectionalLight(0xfffaee, 1.8);
-mainSun.position.set(12, 24, 18);
-mainSun.castShadow = true;
-mainSun.shadow.mapSize.set(1024, 1024); // Fast, sharp 1024 map with soft filter
-mainSun.shadow.bias = -0.0001;
-mainSun.shadow.radius = 2.0;
-scene.add(mainSun);
+// 3.2 Dramatic Angled Golden Sunlight (Streaming Through Window)
+const sunLight = new THREE.DirectionalLight(0xfff1d6, 3.4);
+sunLight.position.set(6.5, 7.8, 9.2);
+sunLight.target.position.set(-0.8, 0.6, -0.6);
+sunLight.castShadow = true;
+sunLight.shadow.mapSize.set(2048, 2048);
+sunLight.shadow.bias = -0.00008;
+sunLight.shadow.radius = 2.8;
+sunLight.shadow.camera.near = 0.5;
+sunLight.shadow.camera.far = 30;
+sunLight.shadow.camera.left = -6;
+sunLight.shadow.camera.right = 6;
+sunLight.shadow.camera.top = 6;
+sunLight.shadow.camera.bottom = -6;
+scene.add(sunLight);
+scene.add(sunLight.target);
 
-// 3.3 Ceiling Cove Warm Uplight
-const coveBounce = new THREE.PointLight(0xffe4b5, 1.2, 10, 1.8);
-coveBounce.position.set(0, 1.9, 0);
-scene.add(coveBounce);
+// 3.3 Floor GI Sun-Bounce (Warm upward bounce reflecting off Calacatta marble)
+const floorBounce = new THREE.PointLight(0xffdca8, 1.4, 8, 1.5);
+floorBounce.position.set(0.5, 0.25, 0.8);
+scene.add(floorBounce);
 
-// 3.4 Central Consultation Island Downward Spotlight
-const islandSpot = new THREE.SpotLight(0xffedd0, 4.2, 9, Math.PI / 4, 0.7, 1.8);
-islandSpot.position.set(0, 2.55, 0.15);
-islandSpot.target.position.set(0, 0.85, 0.15);
+// 3.4 Indirect Ceiling Cove Continuous Warm Ribbon
+const ceilingCove = new THREE.PointLight(0xffdfa8, 1.6, 9, 1.6);
+ceilingCove.position.set(0, 2.3, 0);
+scene.add(ceilingCove);
+
+// 3.5 Central Consultation Island Downlight Spot
+const islandSpot = new THREE.SpotLight(0xffedd2, 3.8, 8, Math.PI / 4.2, 0.7, 1.6);
+islandSpot.position.set(0, 2.55, 0.2);
+islandSpot.target.position.set(0, 0.85, 0.2);
+islandSpot.castShadow = true;
+islandSpot.shadow.mapSize.set(1024, 1024);
+islandSpot.shadow.bias = -0.0001;
 scene.add(islandSpot);
 scene.add(islandSpot.target);
 
-// 3.5 Backwall Brand Monogram Pin-Spot
-const monogramSpot = new THREE.SpotLight(0xffdf88, 3.6, 7.5, Math.PI / 3.8, 0.65, 1.8);
+// 3.6 Backwall Brand Signage & Monogram Pin-Spot
+const monogramSpot = new THREE.SpotLight(0xffdf88, 3.2, 7, Math.PI / 3.8, 0.65, 1.6);
 monogramSpot.position.set(-0.2, 2.3, -0.8);
 monogramSpot.target.position.set(-0.2, 1.4, -2.4);
 scene.add(monogramSpot);
 scene.add(monogramSpot.target);
 
-// 3.6 Right Perfume Wall Alcoves Downward Grazer
-const rightWallSpot = new THREE.SpotLight(0xffebd0, 3.4, 7.5, Math.PI / 3, 0.75, 1.8);
+// 3.7 Wall Display Alcove Precision Gimbal Grazers
+const rightWallSpot = new THREE.SpotLight(0xffe8c8, 2.8, 7.5, Math.PI / 3.2, 0.75, 1.6);
 rightWallSpot.position.set(1.4, 2.45, 0.5);
 rightWallSpot.target.position.set(1.6, 0.8, 0.5);
 scene.add(rightWallSpot);
 scene.add(rightWallSpot.target);
 
-// 3.7 Left Perfume Wall Alcoves Downward Grazer
-const leftWallSpot = new THREE.SpotLight(0xffebd0, 3.4, 7.5, Math.PI / 3, 0.75, 1.8);
+const leftWallSpot = new THREE.SpotLight(0xffe8c8, 2.8, 7.5, Math.PI / 3.2, 0.75, 1.6);
 leftWallSpot.position.set(-1.4, 2.45, 0.5);
 leftWallSpot.target.position.set(-1.6, 0.8, 0.5);
 scene.add(leftWallSpot);
 scene.add(leftWallSpot.target);
 
-// 3.8 Storefront Vitrine Accent
-const storefrontPoint = new THREE.PointLight(0xfffaea, 2.0, 7, 1.6);
-storefrontPoint.position.set(0, 2.0, 3.4);
-scene.add(storefrontPoint);
-
 // ---------------------------------------------------------------------------
-// 4. GLTF Loader & Physically Based Material (PBR) Shaders
+// 4. Photorealistic Physically Based Materials (PBR)
 // ---------------------------------------------------------------------------
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
@@ -146,43 +156,43 @@ function enhanceMeshMaterial(mesh) {
     const matName = (mat.name || '').toLowerCase();
     const meshName = (mesh.name || '').toLowerCase();
 
-    // 1. Gold / Brass PVD Metals
+    // 1. Solid Brushed & Fluted Titanium Gold PVD
     if (matName.includes('gold') || matName.includes('brass') || meshName.includes('brass') || meshName.includes('gold') || matName.includes('m03') || matName.includes('m04')) {
       mat.metalness = 0.98;
-      mat.roughness = 0.15;
-      mat.color = new THREE.Color(0xd4af37);
-      mat.emissive = new THREE.Color(0x1a1204);
-      mat.emissiveIntensity = 0.25;
+      mat.roughness = 0.14;
+      mat.color = new THREE.Color(0xdfba4e); // Rich Champagne Gold
+      mat.emissive = new THREE.Color(0x181203);
+      mat.emissiveIntensity = 0.2;
     } 
-    // 2. Calacatta Gold Marble Flooring & Island Counter
+    // 2. High-Gloss Polished Calacatta Gold Marble (Reflective Floor & Island)
     else if (matName.includes('marble') || matName.includes('calacatta') || matName.includes('floor') || meshName.includes('floor') || matName.includes('m02') || matName.includes('m06')) {
-      mat.roughness = 0.12;
-      mat.metalness = 0.04;
-      mat.color = new THREE.Color(0xfcfaf6);
+      mat.roughness = 0.10; // High specular gloss reflection (Lumen Studio look)
+      mat.metalness = 0.05;
+      mat.color = new THREE.Color(0xfbf8f3);
     } 
-    // 3. Architectural Alabaster Walls & Niches
+    // 3. Architectural Alabaster Walls & Niches (Matte Micro-Cement)
     else if (matName.includes('wall') || matName.includes('plaster') || meshName.includes('wall') || matName.includes('cement')) {
-      mat.color = new THREE.Color(0xf3efe6);
-      mat.roughness = 0.88;
+      mat.color = new THREE.Color(0xefebe2); // Soft warm architectural plaster
+      mat.roughness = 0.90;
       mat.metalness = 0.0;
     } 
-    // 4. Low-Iron Ultra-Clear Vitrine Glass
+    // 4. Low-Iron Ultra-Clear Vitrines & Tinted Architectural Glass
     else if (matName.includes('glass') || matName.includes('vitrine') || matName.includes('window') || meshName.includes('glass')) {
       mat.transparent = true;
-      mat.opacity = 0.22;
+      mat.opacity = 0.26;
       mat.roughness = 0.02;
-      mat.metalness = 0.10;
+      mat.metalness = 0.12;
       mat.color = new THREE.Color(0xf5f8fa);
     } 
-    // 5. Emissive Lighting Strips & Monogram Signage
+    // 5. Warm Glowing LED Linear Lights & Monogram Emblem
     else if (matName.includes('light') || matName.includes('lamp') || matName.includes('emissive') || meshName.includes('text') || meshName.includes('signage')) {
-      mat.emissive = new THREE.Color(0xffdf88);
-      mat.emissiveIntensity = 2.4;
+      mat.emissive = new THREE.Color(0xffe295);
+      mat.emissiveIntensity = 3.2; // Radiant light source
     } 
-    // 6. Smoked Oak & Dark Accent Wood
+    // 6. Smoked Oak Millwork & Dark Timber
     else if (matName.includes('oak') || matName.includes('wood') || matName.includes('timber') || meshName.includes('door')) {
-      mat.roughness = 0.45;
-      mat.metalness = 0.04;
+      mat.roughness = 0.42;
+      mat.metalness = 0.05;
     }
   });
 }
@@ -214,14 +224,14 @@ gltfLoader.load(
     // Initial Camera View: 01 // Front Entrance
     setCameraPreset('front');
     requestRender();
-    console.log('Vel Ra 3D Model loaded with optimized realistic PBR lighting.');
+    console.log('Lumen Studio interior loaded with dramatic lighting and GI bounce.');
   },
   undefined,
   (err) => console.warn('Model loading notice:', err)
 );
 
 // ---------------------------------------------------------------------------
-// 5. Calibrated Camera Presets (Matching User Screenshots Exactly)
+// 5. Calibrated Camera Presets (Matching User Screenshots)
 // ---------------------------------------------------------------------------
 const cameraPresets = {
   'front': {
@@ -410,7 +420,6 @@ controls.addEventListener('change', () => {
   requestRender();
 });
 
-// Pause WebGL rendering when user scrolls away to save 100% GPU / CPU
 if ('IntersectionObserver' in window && container) {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -437,7 +446,6 @@ window.addEventListener('resize', onWindowResize);
 function renderLoop() {
   requestAnimationFrame(renderLoop);
 
-  // Only render when viewport is visible
   if (!isViewportVisible) return;
 
   if (controls.autoRotate || isTransitioning || renderRequested) {
