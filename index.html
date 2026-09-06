@@ -856,6 +856,254 @@
       }
     }
 
+  
+    /* ==========================================================================
+       3D LOCATION & ROTATION STUDIO STYLES
+       ========================================================================== */
+    .studio-toggle-btn {
+      background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%) !important;
+      color: #ffffff !important;
+      border: 1.5px solid #ffffff !important;
+      font-weight: 700 !important;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4) !important;
+    }
+    .studio-toggle-btn:hover {
+      background: linear-gradient(135deg, #f59e0b 0%, #d4af37 100%) !important;
+      transform: translateY(-2px);
+    }
+
+    #studio-drawer {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 420px;
+      max-width: calc(100% - 28px);
+      max-height: calc(100% - 28px);
+      background: rgba(15, 20, 36, 0.94);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1.5px solid rgba(212, 175, 55, 0.6);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      color: #ffffff;
+      z-index: 50;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    #studio-drawer.active {
+      display: flex;
+    }
+
+    .studio-header {
+      padding: 14px 18px;
+      background: rgba(0, 0, 0, 0.35);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .studio-title {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fef08a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .studio-close-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .studio-close-btn:hover {
+      background: rgba(239, 68, 68, 0.8);
+      border-color: #ef4444;
+    }
+
+    .studio-tabs {
+      display: flex;
+      background: rgba(0, 0, 0, 0.25);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 4px;
+      gap: 4px;
+    }
+    .studio-tab-btn {
+      flex: 1;
+      padding: 8px 6px;
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .studio-tab-btn.active {
+      background: rgba(212, 175, 55, 0.25);
+      color: #fef08a;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+    }
+
+    .studio-body {
+      padding: 16px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .studio-body::-webkit-scrollbar { width: 6px; }
+    .studio-body::-webkit-scrollbar-thumb { background: rgba(212, 175, 55, 0.4); border-radius: 3px; }
+
+    .ctrl-group {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 12px;
+    }
+    .ctrl-group-title {
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .slider-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .slider-row:last-child { margin-bottom: 0; }
+    .slider-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      width: 60px;
+      color: #94a3b8;
+    }
+    .slider-input {
+      flex: 1;
+      accent-color: #d4af37;
+      cursor: pointer;
+    }
+    .slider-val {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      width: 52px;
+      text-align: right;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fef08a;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+
+    .quick-snap-row {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+      flex-wrap: wrap;
+    }
+    .snap-btn {
+      flex: 1;
+      min-width: 42px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #e2e8f0;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 4px 6px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .snap-btn:hover {
+      background: rgba(212, 175, 55, 0.3);
+      border-color: #d4af37;
+      color: #ffffff;
+    }
+
+    .telemetry-card {
+      background: rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 10px;
+      padding: 10px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 1.6;
+      color: #94a3b8;
+    }
+    .telemetry-card span { color: #fef08a; font-weight: 600; }
+
+    .studio-select {
+      width: 100%;
+      background: #0f172a;
+      border: 1.5px solid rgba(212, 175, 55, 0.4);
+      color: #ffffff;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+    }
+    .studio-select:focus {
+      border-color: #fef08a;
+    }
+
+    .toast-saved {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(50px);
+      background: rgba(22, 101, 52, 0.95);
+      border: 1.5px solid #4ade80;
+      color: #ffffff;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 10px 24px;
+      border-radius: 30px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      z-index: 60;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .toast-saved.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
   </style>
 </head>
 <body>
@@ -949,9 +1197,9 @@
               <button class="btn-prominent gold" onclick="openActivePassLightbox()">
                 🔍 Open 4K High-Res View
               </button>
-              <a href="#section-3d-twin" class="btn-prominent white">
-                🕹️ Launch 3D Model
-              </a>
+              <button class="btn-prominent white" onclick="flyActivePassIn3D()">
+                🕹️ Inspect in 3D (Pass View)
+              </button>
             </div>
           </div>
 
@@ -1171,18 +1419,210 @@
 
       <div class="glass-card" style="padding: 24px;">
         
-        <!-- Viewport HUD Camera Angle Selector Buttons -->
-        <div style="display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap;">
+                <!-- Viewport HUD Camera Angle Selector & 3D Location Studio Buttons -->
+        <div style="display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; align-items: center;">
           <button id="btn-cam-front" class="cam-preset-btn active">01 // Front Entrance</button>
           <button id="btn-cam-island" class="cam-preset-btn">02 // Central Island</button>
           <button id="btn-cam-pos" class="cam-preset-btn">03 // POS Cashier Desk</button>
           <button id="btn-cam-alcoves" class="cam-preset-btn">04 // Perfume Wall Alcoves</button>
           <button id="btn-cam-top" class="cam-preset-btn">05 // Top-Down Plan</button>
-          <button id="btn-wireframe" class="cam-preset-btn" style="border-color: rgba(212, 175, 55, 0.5);">Toggle Wireframe</button>
+          
+          <button id="btn-toggle-studio" class="cam-preset-btn studio-toggle-btn">
+            📍 Determine Location & Rotation
+          </button>
+          <button id="btn-wireframe" class="cam-preset-btn" style="border-color: rgba(212, 175, 55, 0.5);">Wireframe</button>
         </div>
 
-        <div style="position: relative; width: 100%; height: 600px; border-radius: 18px; overflow: hidden; background: #101524; border: 2px solid rgba(255, 255, 255, 0.95); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);" id="canvas-container">
+        <div style="position: relative; width: 100%; height: 620px; border-radius: 18px; overflow: hidden; background: #101524; border: 2px solid rgba(255, 255, 255, 0.95); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);" id="canvas-container">
           <canvas id="three-canvas" style="width: 100%; height: 100%; display: block;"></canvas>
+
+          <!-- Floating HUD Studio Button inside Canvas -->
+          <div style="position: absolute; top: 14px; left: 14px; z-index: 10; display: flex; gap: 8px;">
+            <button id="btn-hud-calibrate" style="background: rgba(12, 16, 36, 0.85); backdrop-filter: blur(10px); border: 1.5px solid rgba(212, 175, 55, 0.7); color: #fef08a; font-family: var(--font-heading); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 7px 14px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+              📍 Calibrate 3D Location
+            </button>
+          </div>
+
+          <!-- Toast Notification for Saved Locations -->
+          <div id="studio-toast" class="toast-saved">
+            ✓ 3D Location & Rotation Saved Permanently!
+          </div>
+
+          <!-- 3D LOCATION & ROTATION CALIBRATOR DRAWER -->
+          <div id="studio-drawer">
+            <div class="studio-header">
+              <div class="studio-title">
+                <span>📍</span> 3D Location & Rotation Studio
+              </div>
+              <button class="studio-close-btn" id="btn-close-studio" title="Close Studio">✕</button>
+            </div>
+
+            <div class="studio-tabs">
+              <button class="studio-tab-btn active" data-tab="tab-model">🏢 Model Transform</button>
+              <button class="studio-tab-btn" data-tab="tab-camera">📸 Camera Views</button>
+              <button class="studio-tab-btn" data-tab="tab-export">💾 Sync / Export</button>
+            </div>
+
+            <div class="studio-body">
+              
+              <!-- TAB 1: 3D MODEL LOCATION & ROTATION -->
+              <div id="tab-model" class="studio-tab-content">
+                <div style="font-size: 12px; color: #94a3b8; margin-bottom: 12px;">
+                  Set exact 3D model orientation (heading, pitch, elevation, lateral position) and lock it permanently.
+                </div>
+
+                <!-- Model Rotation Controls -->
+                <div class="ctrl-group">
+                  <div class="ctrl-group-title">
+                    <span>Model Rotation (Degrees)</span>
+                    <span id="label-rot-y-deg" style="color: #fef08a;">0°</span>
+                  </div>
+
+                  <div class="slider-row">
+                    <span class="slider-label">Rot Y (Yaw)</span>
+                    <input type="range" id="slider-rot-y" class="slider-input" min="-180" max="180" step="1" value="0" />
+                    <input type="number" id="num-rot-y" class="slider-val" value="0" min="-180" max="180" />
+                  </div>
+
+                  <div class="quick-snap-row">
+                    <button class="snap-btn" onclick="setStudioRotY(-90)">-90°</button>
+                    <button class="snap-btn" onclick="setStudioRotY(0)">0° Front</button>
+                    <button class="snap-btn" onclick="setStudioRotY(90)">+90°</button>
+                    <button class="snap-btn" onclick="setStudioRotY(180)">180°</button>
+                    <button class="snap-btn" onclick="nudgeStudioRotY(-15)">-15°</button>
+                    <button class="snap-btn" onclick="nudgeStudioRotY(15)">+15°</button>
+                  </div>
+
+                  <div class="slider-row" style="margin-top: 10px;">
+                    <span class="slider-label">Rot X (Pitch)</span>
+                    <input type="range" id="slider-rot-x" class="slider-input" min="-90" max="90" step="1" value="0" />
+                    <input type="number" id="num-rot-x" class="slider-val" value="0" min="-90" max="90" />
+                  </div>
+
+                  <div class="slider-row">
+                    <span class="slider-label">Rot Z (Roll)</span>
+                    <input type="range" id="slider-rot-z" class="slider-input" min="-90" max="90" step="1" value="0" />
+                    <input type="number" id="num-rot-z" class="slider-val" value="0" min="-90" max="90" />
+                  </div>
+                </div>
+
+                <!-- Model Position & Elevation Controls -->
+                <div class="ctrl-group" style="margin-top: 12px;">
+                  <div class="ctrl-group-title">
+                    <span>Position & Floor Elevation (Units)</span>
+                  </div>
+
+                  <div class="slider-row">
+                    <span class="slider-label">Elev Y</span>
+                    <input type="range" id="slider-pos-y" class="slider-input" min="-40" max="40" step="0.5" value="0" />
+                    <input type="number" id="num-pos-y" class="slider-val" value="0" step="0.5" />
+                  </div>
+
+                  <div class="slider-row">
+                    <span class="slider-label">Shift X</span>
+                    <input type="range" id="slider-pos-x" class="slider-input" min="-50" max="50" step="0.5" value="0" />
+                    <input type="number" id="num-pos-x" class="slider-val" value="0" step="0.5" />
+                  </div>
+
+                  <div class="slider-row">
+                    <span class="slider-label">Shift Z</span>
+                    <input type="range" id="slider-pos-z" class="slider-input" min="-50" max="50" step="0.5" value="0" />
+                    <input type="number" id="num-pos-z" class="slider-val" value="0" step="0.5" />
+                  </div>
+
+                  <div class="slider-row">
+                    <span class="slider-label">Scale</span>
+                    <input type="range" id="slider-scale" class="slider-input" min="0.4" max="2.0" step="0.05" value="1.0" />
+                    <input type="number" id="num-scale" class="slider-val" value="1.0" step="0.05" />
+                  </div>
+                </div>
+
+                <!-- Save & Lock Buttons -->
+                <div style="display: flex; gap: 8px; margin-top: 14px;">
+                  <button class="btn-prominent gold" style="flex: 1; padding: 10px; font-size: 11px;" id="btn-save-model-loc">
+                    💾 Keep Model Here & Lock
+                  </button>
+                  <button class="btn-prominent white" style="padding: 10px 14px; font-size: 11px;" id="btn-reset-model-loc">
+                    🔄 Reset
+                  </button>
+                </div>
+              </div>
+
+              <!-- TAB 2: CAMERA VIEWPOINTS & PRESETS -->
+              <div id="tab-camera" class="studio-tab-content" style="display: none;">
+                <div style="font-size: 12px; color: #94a3b8; margin-bottom: 12px;">
+                  Orbit/pan anywhere in the 3D model, select a viewpoint, and click <strong>Capture Current View</strong> to lock it.
+                </div>
+
+                <div class="ctrl-group">
+                  <div class="ctrl-group-title">Target Preset / Viewpoint</div>
+                  <select id="select-camera-preset" class="studio-select">
+                    <optgroup label="Standard Camera Presets">
+                      <option value="front">01 // Front Entrance</option>
+                      <option value="island">02 // Central Island</option>
+                      <option value="pos">03 // POS Cashier Desk</option>
+                      <option value="alcoves">04 // Perfume Wall Alcoves</option>
+                      <option value="top">05 // Top-Down Plan</option>
+                    </optgroup>
+                    <optgroup label="Render Pass Viewpoints">
+                      <option value="pass1">Pass 01 // Front Entrance Perspective</option>
+                      <option value="pass2">Pass 02 // Façade & Window Vitrine</option>
+                      <option value="pass3">Pass 03 // Back Wall & Monogram</option>
+                      <option value="pass4">Pass 04 // VIP Consultation Lounge</option>
+                      <option value="pass5">Pass 05 // Fluted Glass Partition</option>
+                      <option value="pass6">Pass 06 // Arched Display Wall</option>
+                      <option value="pass7">Pass 07 // Ceiling Lighting Cove</option>
+                      <option value="pass8">Pass 08 // Calacatta Floor Inlay</option>
+                      <option value="pass9">Pass 09 // Fragrance Island Centerpiece</option>
+                    </optgroup>
+                  </select>
+                </div>
+
+                <!-- Live Camera Telemetry Readout -->
+                <div class="telemetry-card" style="margin-top: 12px;">
+                  <div style="font-weight: 700; color: #ffffff; margin-bottom: 4px;">📡 Live 3D Viewport Telemetry</div>
+                  <div>Camera Pos: <span id="tel-cam-pos">X: 0, Y: 0, Z: 0</span></div>
+                  <div>LookAt Target: <span id="tel-target-pos">X: 0, Y: 0, Z: 0</span></div>
+                  <div>Camera Angles: <span id="tel-angles">Pitch: 0°, Yaw: 0°</span></div>
+                  <div>Distance: <span id="tel-distance">0.0 m</span></div>
+                </div>
+
+                <!-- Camera Action Buttons -->
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 14px;">
+                  <button class="btn-prominent gold" style="width: 100%; padding: 11px; font-size: 11px;" id="btn-capture-cam-view">
+                    📍 CAPTURE & SAVE CURRENT VIEW
+                  </button>
+                  <div style="display: flex; gap: 8px;">
+                    <button class="btn-prominent white" style="flex: 1; padding: 8px; font-size: 11px;" id="btn-fly-cam-test">
+                      ▶ Test Fly To View
+                    </button>
+                    <button class="btn-prominent white" style="flex: 1; padding: 8px; font-size: 11px;" id="btn-reset-single-cam">
+                      🔄 Reset Preset
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- TAB 3: SYNC / EXPORT CONFIG -->
+              <div id="tab-export" class="studio-tab-content" style="display: none;">
+                <div style="font-size: 12px; color: #94a3b8; margin-bottom: 12px;">
+                  Export or copy your full 3D layout, model rotation, and all camera positions as JSON.
+                </div>
+
+                <textarea id="studio-json-export" style="width: 100%; height: 140px; background: #090d16; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 8px; color: #a5f3fc; font-family: var(--font-mono); font-size: 10px; padding: 8px; resize: vertical;" readonly></textarea>
+
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px;">
+                  <button class="btn-prominent gold" style="width: 100%; padding: 10px; font-size: 11px;" id="btn-copy-json-cfg">
+                    📋 Copy Config JSON to Clipboard
+                  </button>
+                  <button class="btn-prominent" style="background: rgba(220, 38, 38, 0.85); color: #fff; width: 100%; padding: 8px; font-size: 11px; border: 1px solid #ef4444;" id="btn-factory-reset">
+                    ⚠️ Factory Reset All 3D Transforms
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
       </div>
 
@@ -2042,6 +2482,17 @@
       });
     };
 
+    
+    window.flyActivePassIn3D = function() {
+      const keys = ['front', 'pass1', 'pass2', 'pass3', 'pass4', 'pass5', 'pass6', 'pass7', 'pass8', 'pass9'];
+      const currentKey = keys[currentPassIndex] || 'front';
+      const sec = document.getElementById('section-3d-twin');
+      if (sec) sec.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        if (window.velra3D) window.velra3D.setCameraPreset(currentKey);
+      }, 500);
+    };
+
     window.openActivePassLightbox = function() {
       const data = renderPassData[currentPassIndex];
       window.openBeastLightbox(data.src, data.title);
@@ -2207,5 +2658,259 @@
       updateActiveRail();
     })();
   </script>
+
+  <!-- 3D STUDIO INTERACTIVE LOGIC -->
+  <script>
+    (function() {
+      const drawer = document.getElementById('studio-drawer');
+      const toast = document.getElementById('studio-toast');
+      const btnToggle = document.getElementById('btn-toggle-studio');
+      const btnHudCalibrate = document.getElementById('btn-hud-calibrate');
+      const btnClose = document.getElementById('btn-close-studio');
+
+      function showToast(msg) {
+        if (toast) {
+          toast.innerHTML = msg || '✓ 3D Location & Rotation Saved!';
+          toast.classList.add('show');
+          setTimeout(() => toast.classList.remove('show'), 2600);
+        }
+      }
+
+      function toggleDrawer() {
+        if (!drawer) return;
+        const isActive = drawer.classList.toggle('active');
+        if (isActive) {
+          syncModelUIFromEngine();
+          refreshExportJSON();
+        }
+      }
+
+      if (btnToggle) btnToggle.addEventListener('click', toggleDrawer);
+      if (btnHudCalibrate) btnHudCalibrate.addEventListener('click', toggleDrawer);
+      if (btnClose) btnClose.addEventListener('click', () => drawer && drawer.classList.remove('active'));
+
+      // Studio Tabs Switching
+      document.querySelectorAll('.studio-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.studio-tab-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const tabId = btn.getAttribute('data-tab');
+          document.querySelectorAll('.studio-tab-content').forEach(c => c.style.display = 'none');
+          const target = document.getElementById(tabId);
+          if (target) target.style.display = 'block';
+
+          if (tabId === 'tab-export') refreshExportJSON();
+        });
+      });
+
+      // Model Controls Elements
+      const sliderRotY = document.getElementById('slider-rot-y');
+      const numRotY = document.getElementById('num-rot-y');
+      const labelRotY = document.getElementById('label-rot-y-deg');
+
+      const sliderRotX = document.getElementById('slider-rot-x');
+      const numRotX = document.getElementById('num-rot-x');
+
+      const sliderRotZ = document.getElementById('slider-rot-z');
+      const numRotZ = document.getElementById('num-rot-z');
+
+      const sliderPosY = document.getElementById('slider-pos-y');
+      const numPosY = document.getElementById('num-pos-y');
+
+      const sliderPosX = document.getElementById('slider-pos-x');
+      const numPosX = document.getElementById('num-pos-x');
+
+      const sliderPosZ = document.getElementById('slider-pos-z');
+      const numPosZ = document.getElementById('num-pos-z');
+
+      const sliderScale = document.getElementById('slider-scale');
+      const numScale = document.getElementById('num-scale');
+
+      function syncModelUIFromEngine() {
+        if (!window.velra3D) return;
+        const tf = window.velra3D.getModelTransform();
+        if (sliderRotY) { sliderRotY.value = tf.rotY; numRotY.value = tf.rotY; if (labelRotY) labelRotY.innerText = tf.rotY + '°'; }
+        if (sliderRotX) { sliderRotX.value = tf.rotX; numRotX.value = tf.rotX; }
+        if (sliderRotZ) { sliderRotZ.value = tf.rotZ; numRotZ.value = tf.rotZ; }
+        if (sliderPosY) { sliderPosY.value = tf.posY; numPosY.value = tf.posY; }
+        if (sliderPosX) { sliderPosX.value = tf.posX; numPosX.value = tf.posX; }
+        if (sliderPosZ) { sliderPosZ.value = tf.posZ; numPosZ.value = tf.posZ; }
+        if (sliderScale) { sliderScale.value = tf.scale || 1.0; numScale.value = tf.scale || 1.0; }
+      }
+
+      function updateModelFromInputs() {
+        if (!window.velra3D) return;
+        const tf = {
+          rotY: parseFloat(sliderRotY.value) || 0,
+          rotX: parseFloat(sliderRotX.value) || 0,
+          rotZ: parseFloat(sliderRotZ.value) || 0,
+          posY: parseFloat(sliderPosY.value) || 0,
+          posX: parseFloat(sliderPosX.value) || 0,
+          posZ: parseFloat(sliderPosZ.value) || 0,
+          scale: parseFloat(sliderScale.value) || 1.0
+        };
+        window.velra3D.setModelTransform(tf);
+        if (labelRotY) labelRotY.innerText = tf.rotY + '°';
+      }
+
+      function bindSliderAndNumber(slider, number) {
+        if (!slider || !number) return;
+        slider.addEventListener('input', () => {
+          number.value = slider.value;
+          updateModelFromInputs();
+        });
+        number.addEventListener('input', () => {
+          slider.value = number.value;
+          updateModelFromInputs();
+        });
+      }
+
+      bindSliderAndNumber(sliderRotY, numRotY);
+      bindSliderAndNumber(sliderRotX, numRotX);
+      bindSliderAndNumber(sliderRotZ, numRotZ);
+      bindSliderAndNumber(sliderPosY, numPosY);
+      bindSliderAndNumber(sliderPosX, numPosX);
+      bindSliderAndNumber(sliderPosZ, numPosZ);
+      bindSliderAndNumber(sliderScale, numScale);
+
+      window.setStudioRotY = function(deg) {
+        if (sliderRotY) {
+          sliderRotY.value = deg;
+          numRotY.value = deg;
+          updateModelFromInputs();
+        }
+      };
+
+      window.nudgeStudioRotY = function(delta) {
+        if (sliderRotY) {
+          let val = (parseFloat(sliderRotY.value) || 0) + delta;
+          if (val > 180) val -= 360;
+          if (val < -180) val += 360;
+          window.setStudioRotY(val);
+        }
+      };
+
+      // Model Save & Reset Buttons
+      const btnSaveModel = document.getElementById('btn-save-model-loc');
+      if (btnSaveModel) {
+        btnSaveModel.addEventListener('click', () => {
+          if (window.velra3D && window.velra3D.saveModelTransform()) {
+            showToast('✓ 3D Model Location & Rotation Locked Permanently!');
+          }
+        });
+      }
+
+      const btnResetModel = document.getElementById('btn-reset-model-loc');
+      if (btnResetModel) {
+        btnResetModel.addEventListener('click', () => {
+          if (window.velra3D) {
+            window.velra3D.resetModelTransform();
+            syncModelUIFromEngine();
+            showToast('🔄 Model Location & Rotation Reset to Center');
+          }
+        });
+      }
+
+      // Camera Telemetry & Viewpoints
+      window.updateStudioTelemetry = function() {
+        if (!drawer || !drawer.classList.contains('active') || !window.velra3D) return;
+        const tel = window.velra3D.getCameraTelemetry();
+        
+        const telPos = document.getElementById('tel-cam-pos');
+        const telTarget = document.getElementById('tel-target-pos');
+        const telAngles = document.getElementById('tel-angles');
+        const telDist = document.getElementById('tel-distance');
+
+        if (telPos) telPos.innerText = `X: ${tel.pos.x}, Y: ${tel.pos.y}, Z: ${tel.pos.z}`;
+        if (telTarget) telTarget.innerText = `X: ${tel.target.x}, Y: ${tel.target.y}, Z: ${tel.target.z}`;
+        if (telAngles) telAngles.innerText = `Pitch: ${tel.rotDeg.x}°, Yaw: ${tel.rotDeg.y}°`;
+        if (telDist) telDist.innerText = `${tel.distance} m`;
+      };
+
+      const selectCamPreset = document.getElementById('select-camera-preset');
+      const btnCaptureCam = document.getElementById('btn-capture-cam-view');
+      const btnFlyCam = document.getElementById('btn-fly-cam-test');
+      const btnResetCam = document.getElementById('btn-reset-single-cam');
+
+      if (btnCaptureCam) {
+        btnCaptureCam.addEventListener('click', () => {
+          const key = selectCamPreset.value;
+          const name = selectCamPreset.options[selectCamPreset.selectedIndex].text;
+          if (window.velra3D && window.velra3D.saveCurrentCameraView(key, name)) {
+            showToast(`📍 Location & Rotation Saved for "${name}"!`);
+          }
+        });
+      }
+
+      if (btnFlyCam) {
+        btnFlyCam.addEventListener('click', () => {
+          const key = selectCamPreset.value;
+          if (window.velra3D) window.velra3D.setCameraPreset(key);
+        });
+      }
+
+      if (btnResetCam) {
+        btnResetCam.addEventListener('click', () => {
+          const key = selectCamPreset.value;
+          if (window.velra3D) {
+            window.velra3D.resetCameraPreset(key);
+            showToast(`🔄 Reset "${selectCamPreset.options[selectCamPreset.selectedIndex].text}" to default`);
+          }
+        });
+      }
+
+      // Export / Sync Tab
+      const exportArea = document.getElementById('studio-json-export');
+      const btnCopyJSON = document.getElementById('btn-copy-json-cfg');
+      const btnFactoryReset = document.getElementById('btn-factory-reset');
+
+      function refreshExportJSON() {
+        if (exportArea && window.velra3D) {
+          exportArea.value = window.velra3D.exportAllConfig();
+        }
+      }
+
+      if (btnCopyJSON) {
+        btnCopyJSON.addEventListener('click', () => {
+          refreshExportJSON();
+          if (exportArea) {
+            navigator.clipboard.writeText(exportArea.value).then(() => {
+              showToast('📋 Configuration JSON Copied to Clipboard!');
+            });
+          }
+        });
+      }
+
+      if (btnFactoryReset) {
+        btnFactoryReset.addEventListener('click', () => {
+          if (confirm('Are you sure you want to reset all 3D model transforms and camera locations to factory defaults?')) {
+            if (window.velra3D) {
+              window.velra3D.resetAllToDefault();
+              syncModelUIFromEngine();
+              showToast('🔄 All 3D Data Reset to Defaults');
+            }
+          }
+        });
+      }
+
+      // Hook when model is loaded
+      window.onVelraModelReady = function() {
+        syncModelUIFromEngine();
+      };
+
+      // Quick 3D View Trigger from Render Passes
+      window.flyToPassIn3D = function(passKey) {
+        const targetSection = document.getElementById('section-3d-twin');
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        setTimeout(() => {
+          if (window.velra3D) window.velra3D.setCameraPreset(passKey || 'pass1');
+        }, 600);
+      };
+    })();
+  </script>
+
 </body>
 </html>
