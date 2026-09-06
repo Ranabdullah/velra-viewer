@@ -860,8 +860,8 @@
     
 
   </style>
-  <script type="module" crossorigin src="/assets/index--Q8_qGLy.js"></script>
-  <link rel="modulepreload" crossorigin href="/assets/three-Cg2u_N8_.js">
+  <script type="module" crossorigin src="/assets/index-DFnZxWEA.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/three-BmAU4IKl.js">
 </head>
 <body>
 
@@ -1176,17 +1176,44 @@
 
       <div class="glass-card" style="padding: 24px;">
         
-        <!-- Viewport HUD Camera Angle Selector Buttons -->
-        <div style="display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; align-items: center;">
-          <button id="btn-cam-front" class="cam-preset-btn active">01 // Front Entrance</button>
-          <button id="btn-cam-island" class="cam-preset-btn">02 // Central Island</button>
-          <button id="btn-cam-pos" class="cam-preset-btn">03 // POS Cashier Desk</button>
-          <button id="btn-cam-alcoves" class="cam-preset-btn">04 // Perfume Wall Alcoves</button>
-          
-          <button id="btn-auto-rotate" class="cam-preset-btn" style="border-color: rgba(212, 175, 55, 0.6); font-weight: 700;">
-            🔄 Auto-Rotate Inside
-          </button>
-          <button id="btn-wireframe" class="cam-preset-btn" style="border-color: rgba(212, 175, 55, 0.4);">Wireframe</button>
+                <!-- Viewport HUD Camera Angle Selector Buttons -->
+        <div style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button id="btn-cam-front" class="cam-preset-btn active">01 // Front Entrance</button>
+            <button id="btn-cam-island" class="cam-preset-btn">02 // Central Island</button>
+            <button id="btn-cam-pos" class="cam-preset-btn">03 // POS Cashier Desk</button>
+            <button id="btn-cam-alcoves" class="cam-preset-btn">04 // Perfume Wall Alcoves</button>
+            
+            <button id="btn-auto-rotate" class="cam-preset-btn" style="border-color: rgba(212, 175, 55, 0.6); font-weight: 700;">
+              🔄 Auto-Rotate Inside
+            </button>
+            <button id="btn-wireframe" class="cam-preset-btn" style="border-color: rgba(212, 175, 55, 0.4);">Wireframe</button>
+          </div>
+        </div>
+
+        <!-- Time of Day Lighting Controller (Lumen Studio Standard) -->
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px; background: rgba(10, 14, 24, 0.92); border: 1.5px solid rgba(212, 175, 55, 0.45); padding: 10px 18px; border-radius: 14px; margin-bottom: 16px; flex-wrap: wrap; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <span style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; color: #fef08a; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 6px;">
+              ☀️ Time of Day:
+            </span>
+            <span id="label-time-of-day" style="color: #ffffff; font-family: var(--font-mono); font-size: 11px; background: rgba(255,255,255,0.1); padding: 3px 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15);">
+              16:30 Golden Hour
+            </span>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px; flex: 1; max-width: 320px; min-width: 180px;">
+            <span style="font-size: 11px; color: #94a3b8; font-family: var(--font-mono);">06:00</span>
+            <input type="range" id="slider-time-of-day" min="6" max="22" step="0.5" value="16.5" style="flex: 1; accent-color: #d4af37; cursor: pointer;" oninput="setTimeOfDay(this.value)" />
+            <span style="font-size: 11px; color: #94a3b8; font-family: var(--font-mono);">22:00</span>
+          </div>
+
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <button class="time-preset-btn" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-family: var(--font-heading); font-size: 10px; font-weight: 600; padding: 5px 10px; border-radius: 8px; cursor: pointer; text-transform: uppercase;" onclick="setTimeOfDay(8)">🌅 Morning</button>
+            <button class="time-preset-btn" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-family: var(--font-heading); font-size: 10px; font-weight: 600; padding: 5px 10px; border-radius: 8px; cursor: pointer; text-transform: uppercase;" onclick="setTimeOfDay(12)">☀️ Midday</button>
+            <button class="time-preset-btn active" style="background: var(--gold-gradient); border: 1px solid #fff; color: #fff; font-family: var(--font-heading); font-size: 10px; font-weight: 700; padding: 5px 10px; border-radius: 8px; cursor: pointer; text-transform: uppercase;" onclick="setTimeOfDay(16.5)">🌅 Golden Hour</button>
+            <button class="time-preset-btn" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2); color: #fff; font-family: var(--font-heading); font-size: 10px; font-weight: 600; padding: 5px 10px; border-radius: 8px; cursor: pointer; text-transform: uppercase;" onclick="setTimeOfDay(21)">🌙 Evening Glow</button>
+          </div>
         </div>
 
         <div style="position: relative; width: 100%; height: 620px; border-radius: 18px; overflow: hidden; background: #0a0e18; border: 2px solid rgba(255, 255, 255, 0.95); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);" id="canvas-container">
