@@ -9,15 +9,12 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js';
 const container = document.getElementById('canvas-container');
 const canvas = document.getElementById('three-canvas');
 
-if (!container || !canvas) {
-  console.warn('Three.js container or canvas missing');
-}
-
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x0e121e);
+// Warm luxury architectural studio background
+scene.background = new THREE.Color(0x101524);
 
 const camera = new THREE.PerspectiveCamera(
-  45,
+  42,
   container ? (container.clientWidth / container.clientHeight) : (window.innerWidth / window.innerHeight),
   0.1,
   2000
@@ -32,42 +29,46 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(container ? container.clientWidth : window.innerWidth, container ? container.clientHeight : window.innerHeight);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.15;
+renderer.toneMappingExposure = 1.35; // Rich bright illumination
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.06;
-controls.maxPolarAngle = Math.PI * 0.49; // Prevent going below floor
+controls.maxPolarAngle = Math.PI * 0.49;
 controls.minDistance = 1;
 controls.maxDistance = 500;
 
 // ---------------------------------------------------------------------------
-// 2. Comprehensive Architectural Lighting Setup
+// 2. Rich Multi-Directional Architectural Illumination (Warm 3000K)
 // ---------------------------------------------------------------------------
-const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
+const ambientLight = new THREE.AmbientLight(0xfffaee, 1.9);
 scene.add(ambientLight);
 
-const hemiLight = new THREE.HemisphereLight(0xfff8ee, 0x1e293b, 1.0);
+const hemiLight = new THREE.HemisphereLight(0xfff6e5, 0x1a243b, 1.4);
 scene.add(hemiLight);
 
-const sunLight = new THREE.DirectionalLight(0xfffaed, 2.2);
-sunLight.position.set(40, 80, 50);
-sunLight.castShadow = true;
-sunLight.shadow.mapSize.set(2048, 2048);
-scene.add(sunLight);
+const mainSun = new THREE.DirectionalLight(0xfff5e0, 2.8);
+mainSun.position.set(35, 75, 45);
+mainSun.castShadow = true;
+mainSun.shadow.mapSize.set(2048, 2048);
+scene.add(mainSun);
 
-const fillLight1 = new THREE.DirectionalLight(0xffecd2, 1.2);
-fillLight1.position.set(-40, 50, -40);
-scene.add(fillLight1);
+const fillLightLeft = new THREE.DirectionalLight(0xffebcf, 1.6);
+fillLightLeft.position.set(-40, 50, -30);
+scene.add(fillLightLeft);
 
-const fillLight2 = new THREE.DirectionalLight(0xffffff, 0.8);
-fillLight2.position.set(0, 40, -60);
-scene.add(fillLight2);
+const fillLightRight = new THREE.DirectionalLight(0xfffaec, 1.4);
+fillLightRight.position.set(40, 45, -30);
+scene.add(fillLightRight);
+
+const bottomBounce = new THREE.DirectionalLight(0xffe8c8, 0.8);
+bottomBounce.position.set(0, -20, 0);
+scene.add(bottomBounce);
 
 // ---------------------------------------------------------------------------
-// 3. GLTF / DRACO Model Loader with Auto-Framing
+// 3. GLTF / DRACO Loader with Auto-Center & Floor Alignment
 // ---------------------------------------------------------------------------
 const dracoLoader = new DRACOLoader();
 dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
@@ -87,26 +88,19 @@ function enhanceMeshMaterial(mesh) {
   mats.forEach(mat => {
     const name = (mat.name || '').toLowerCase();
     
-    // Light strips & Emissives
     if (name.includes('light') || name.includes('lamp') || name.includes('emissive')) {
       mat.emissive = new THREE.Color(0xffe29d);
-      mat.emissiveIntensity = 2.5;
-    }
-    // Gold & Brass metals
-    else if (name.includes('gold') || name.includes('brass') || name.includes('metallic')) {
-      mat.metalness = 0.92;
+      mat.emissiveIntensity = 3.0;
+    } else if (name.includes('gold') || name.includes('brass') || name.includes('metallic')) {
+      mat.metalness = 0.94;
+      mat.roughness = 0.22;
+    } else if (name.includes('marble') || name.includes('calacatta') || name.includes('floor')) {
       mat.roughness = 0.24;
-    }
-    // Marble & Porcelain
-    else if (name.includes('marble') || name.includes('calacatta') || name.includes('floor')) {
-      mat.roughness = 0.28;
-      mat.metalness = 0.05;
-    }
-    // Glass
-    else if (name.includes('glass') || name.includes('vitrine') || name.includes('window')) {
+      mat.metalness = 0.04;
+    } else if (name.includes('glass') || name.includes('vitrine') || name.includes('window')) {
       mat.transparent = true;
-      mat.opacity = 0.35;
-      mat.roughness = 0.1;
+      mat.opacity = 0.38;
+      mat.roughness = 0.08;
       mat.metalness = 0.1;
     }
   });
@@ -123,7 +117,7 @@ gltfLoader.load(
     box.getSize(modelSize);
     maxDim = Math.max(modelSize.x, modelSize.y, modelSize.z);
 
-    // 2. Center model so its base sits at y = 0
+    // 2. Center model and rest base at y = 0
     modelRoot.position.x -= modelCenter.x;
     modelRoot.position.y -= box.min.y;
     modelRoot.position.z -= modelCenter.z;
@@ -138,30 +132,20 @@ gltfLoader.load(
 
     scene.add(modelRoot);
 
-    // 3. Frame camera based on model size
-    const fov = camera.fov * (Math.PI / 180);
-    const cameraDist = Math.abs(maxDim / Math.sin(fov / 2)) * 0.75;
-    
-    camera.position.set(0, modelSize.y * 0.7, cameraDist);
-    controls.target.set(0, modelSize.y * 0.4, 0);
-    controls.maxDistance = maxDim * 4;
-    controls.minDistance = maxDim * 0.05;
-    controls.update();
-
-    console.log('Vel Ra 3D Model Loaded & Framed Successfully!');
+    // 3. Initial Framing
+    setCameraPreset('front');
+    console.log('Vel Ra 3D Model loaded and framed.');
   },
   undefined,
-  (err) => {
-    console.warn('Could not load /assets/model.glb:', err);
-  }
+  (err) => console.warn('Model loading notice:', err)
 );
 
 // ---------------------------------------------------------------------------
-// 4. Smooth Camera Transitions & Presets
+// 4. Smooth Camera Animation & Architectural Presets
 // ---------------------------------------------------------------------------
 let isTransitioning = false;
 
-function flyCamera(targetPos, targetLookAt, duration = 1400) {
+function flyCamera(targetPos, targetLookAt, duration = 1200) {
   if (isTransitioning) return;
   isTransitioning = true;
   controls.enabled = false;
@@ -190,38 +174,55 @@ function flyCamera(targetPos, targetLookAt, duration = 1400) {
   requestAnimationFrame(animate);
 }
 
-// Preset Handlers
-const btnFront = document.getElementById('btn-cam-front');
-const btnIsland = document.getElementById('btn-cam-island');
-const btnPos = document.getElementById('btn-cam-pos');
-const btnTop = document.getElementById('btn-cam-top');
-const btnWireframe = document.getElementById('btn-wireframe');
+function setCameraPreset(preset) {
+  if (!modelRoot) return;
 
-if (btnFront) {
-  btnFront.addEventListener('click', () => {
-    flyCamera(new THREE.Vector3(0, modelSize.y * 0.6, maxDim * 0.85), new THREE.Vector3(0, modelSize.y * 0.35, 0));
-  });
+  // Update active button state
+  document.querySelectorAll('.cam-preset-btn').forEach(b => b.classList.remove('active'));
+  const activeBtn = document.getElementById('btn-cam-' + preset);
+  if (activeBtn) activeBtn.classList.add('active');
+
+  if (preset === 'front') {
+    // 01: Front Façade / Entrance
+    flyCamera(
+      new THREE.Vector3(0, modelSize.y * 0.65, maxDim * 0.90),
+      new THREE.Vector3(0, modelSize.y * 0.35, 0)
+    );
+  } else if (preset === 'island') {
+    // 02: Central Consultation Island
+    flyCamera(
+      new THREE.Vector3(maxDim * 0.18, modelSize.y * 0.42, maxDim * 0.28),
+      new THREE.Vector3(0, modelSize.y * 0.22, 0)
+    );
+  } else if (preset === 'pos') {
+    // 03: Cashier & POS Desk
+    flyCamera(
+      new THREE.Vector3(-maxDim * 0.24, modelSize.y * 0.38, maxDim * 0.20),
+      new THREE.Vector3(-maxDim * 0.08, modelSize.y * 0.18, -maxDim * 0.05)
+    );
+  } else if (preset === 'alcoves') {
+    // 04: Arched Perfume Display Wall
+    flyCamera(
+      new THREE.Vector3(maxDim * 0.26, modelSize.y * 0.40, -maxDim * 0.08),
+      new THREE.Vector3(maxDim * 0.10, modelSize.y * 0.28, -maxDim * 0.12)
+    );
+  } else if (preset === 'top') {
+    // 05: Top-Down Plan View
+    flyCamera(
+      new THREE.Vector3(0, maxDim * 1.35, 0.01),
+      new THREE.Vector3(0, 0, 0)
+    );
+  }
 }
 
-if (btnIsland) {
-  btnIsland.addEventListener('click', () => {
-    flyCamera(new THREE.Vector3(maxDim * 0.25, modelSize.y * 0.45, maxDim * 0.3), new THREE.Vector3(0, modelSize.y * 0.25, 0));
-  });
-}
-
-if (btnPos) {
-  btnPos.addEventListener('click', () => {
-    flyCamera(new THREE.Vector3(-maxDim * 0.28, modelSize.y * 0.4, maxDim * 0.25), new THREE.Vector3(-maxDim * 0.1, modelSize.y * 0.2, 0));
-  });
-}
-
-if (btnTop) {
-  btnTop.addEventListener('click', () => {
-    flyCamera(new THREE.Vector3(0, maxDim * 1.3, 0.01), new THREE.Vector3(0, 0, 0));
-  });
-}
+// Attach preset buttons
+['front', 'island', 'pos', 'alcoves', 'top'].forEach(key => {
+  const btn = document.getElementById('btn-cam-' + key);
+  if (btn) btn.addEventListener('click', () => setCameraPreset(key));
+});
 
 let isWireframe = false;
+const btnWireframe = document.getElementById('btn-wireframe');
 if (btnWireframe) {
   btnWireframe.addEventListener('click', () => {
     isWireframe = !isWireframe;
@@ -233,7 +234,7 @@ if (btnWireframe) {
         }
       });
     }
-    btnWireframe.style.background = isWireframe ? 'rgba(212, 175, 55, 0.6)' : 'rgba(15, 23, 42, 0.75)';
+    btnWireframe.classList.toggle('active', isWireframe);
   });
 }
 

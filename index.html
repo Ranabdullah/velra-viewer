@@ -3,58 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Vel Ra Perfumes Concept Interior | Architectural & Lighting Handover Dossier</title>
+  <title>Vel Ra Perfumes Concept Interior | Capel Street, Dublin 1 | Architectural Handover Dossier</title>
   
-  <!-- Fonts: EB Garamond (Editorial Luxury Serif) + Oswald (Architectural Technical Sans) + Plus Jakarta Sans + JetBrains Mono -->
+  <!-- Fonts: EB Garamond (Luxury Serif) + Oswald (Technical Sans) + Plus Jakarta Sans + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&family=Oswald:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ==========================================================================
-       ARCHITECTURAL STUDIO DESIGN SYSTEM (Senawa Studio & Storey Architecture)
-       ========================================================================== */
     :root {
-      /* Studio Canvas Palette: Warm Linen / Studio White with Light Grayish Tones */
+      /* Palette: Plain Studio White with Light Grayish Tone + Warm Gold */
       --bg-body: #f5f6f8;
-      --bg-surface: #ffffff;
-      --bg-card: rgba(255, 255, 255, 0.85);
+      --bg-card: rgba(255, 255, 255, 0.88);
       --bg-card-hover: rgba(255, 255, 255, 0.98);
-      --bg-floating: rgba(255, 255, 255, 0.92);
-      --bg-subtle: #eeeff3;
+      --bg-floating: rgba(255, 255, 255, 0.94);
+      --bg-dark-panel: #0f1422;
       
-      /* Typography Colors */
       --text-main: #0c1024;
       --text-body: #2d3748;
       --text-muted: #64748b;
       --text-dim: #94a3b8;
       
-      /* Domain Color Architecture */
       --gold-primary: #b8860b;
       --gold-dark: #784c00;
       --gold-light: #fef08a;
       --gold-gradient: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
       
-      --color-materials: #b8860b;
-      --color-spatial: #4f46e5;
-      --color-technical: #0284c7;
-      --color-joinery: #a16207;
-      --color-lighting: #ea580c;
-      --color-signoff: #15803d;
-
-      /* Glassmorphism & Specular Highlights */
+      /* Glassmorphic Borders & Highlights */
       --glass-border: rgba(255, 255, 255, 0.95);
-      --glass-border-subtle: rgba(0, 0, 0, 0.08);
-      --glass-border-gold: rgba(212, 175, 55, 0.5);
+      --glass-border-gold: rgba(212, 175, 55, 0.6);
       --glass-shine: inset 0 1.5px 2px 0 rgba(255, 255, 255, 1);
-      --glass-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.02);
-      --glass-shadow-hover: 0 24px 50px -8px rgba(180, 130, 40, 0.18), 0 0 25px rgba(254, 240, 138, 0.3);
+      --glass-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.03);
+      --glass-shadow-hover: 0 24px 50px -8px rgba(180, 130, 40, 0.2), 0 0 25px rgba(254, 240, 138, 0.35);
       --glass-blur: blur(24px) saturate(180%);
 
-      /* Image Framing & Glow */
-      --img-border: rgba(255, 255, 255, 0.95);
+      /* Image Glows */
       --img-glow: 0 14px 35px -8px rgba(212, 175, 55, 0.22), 0 4px 16px rgba(0, 0, 0, 0.04);
-      --img-glow-hover: 0 22px 50px -6px rgba(212, 175, 55, 0.4), 0 0 25px rgba(254, 240, 138, 0.35);
+      --img-glow-hover: 0 22px 50px -6px rgba(212, 175, 55, 0.42), 0 0 25px rgba(254, 240, 138, 0.4);
 
       /* Typography Scale */
       --font-serif: 'EB Garamond', Georgia, serif;
@@ -68,9 +53,9 @@
     body {
       background-color: var(--bg-body);
       background-image: 
-        radial-gradient(circle at 12% 18%, rgba(212, 175, 55, 0.04) 0%, transparent 40%),
-        radial-gradient(circle at 88% 55%, rgba(212, 175, 55, 0.04) 0%, transparent 45%),
-        radial-gradient(circle at 50% 85%, rgba(254, 240, 138, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.04) 0%, transparent 40%),
+        radial-gradient(circle at 90% 60%, rgba(212, 175, 55, 0.04) 0%, transparent 45%),
+        radial-gradient(circle at 50% 90%, rgba(254, 240, 138, 0.05) 0%, transparent 50%);
       color: var(--text-main);
       font-family: var(--font-sans);
       font-size: 14.5px;
@@ -80,7 +65,7 @@
       position: relative;
     }
 
-    /* Ambient Floating Glow Orbs */
+    /* Ambient Soft Orbs */
     .glass-orb {
       position: fixed;
       border-radius: 50%;
@@ -108,20 +93,12 @@
 
     /* Layout Containers */
     .container { max-width: 1440px; margin: 0 auto; padding: 0 36px; position: relative; z-index: 1; }
-    @media (max-width: 768px) {
-      .container { padding: 0 18px; }
-    }
+    @media (max-width: 768px) { .container { padding: 0 16px; } }
 
-    .section-wrap {
-      padding: 90px 0;
-      border-bottom: 1px solid var(--glass-border-subtle);
-      position: relative;
-    }
-    @media (max-width: 768px) {
-      .section-wrap { padding: 60px 0; }
-    }
+    .section-wrap { padding: 85px 0; border-bottom: 1px solid rgba(0, 0, 0, 0.07); position: relative; }
+    @media (max-width: 768px) { .section-wrap { padding: 55px 0; } }
 
-    /* Header Navigation */
+    /* Navigation Header */
     #handover-nav {
       position: sticky; top: 0; left: 0; width: 100%;
       background: var(--bg-floating);
@@ -133,9 +110,7 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 14px 40px;
     }
-    @media (max-width: 768px) {
-      #handover-nav { padding: 12px 18px; }
-    }
+    @media (max-width: 768px) { #handover-nav { padding: 12px 16px; } }
 
     .brand-box { display: flex; align-items: center; gap: 14px; }
     .brand-logo-text {
@@ -148,82 +123,152 @@
       text-decoration: none;
     }
     .brand-logo-text span { color: var(--gold-primary); }
-    .handover-badge {
+    .location-pill {
       font-family: var(--font-heading);
       font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
+      font-weight: 700;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--gold-dark);
       background: rgba(254, 240, 138, 0.45);
-      border: 1px solid var(--glass-border-gold);
+      border: 1.5px solid var(--glass-border-gold);
       box-shadow: var(--glass-shine);
       padding: 4px 12px;
       border-radius: 16px;
     }
-    @media (max-width: 900px) {
-      .handover-badge { display: none; }
-    }
+    @media (max-width: 900px) { .location-pill { display: none; } }
 
     .nav-menu { display: flex; align-items: center; gap: 8px; list-style: none; }
-    @media (max-width: 1024px) {
-      .nav-menu { display: none; }
-    }
+    @media (max-width: 1080px) { .nav-menu { display: none; } }
     .nav-link {
       color: #1e293b;
       text-decoration: none;
       font-family: var(--font-heading);
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       transition: all 0.25s ease;
-      padding: 6px 14px;
+      padding: 7px 16px;
       border-radius: 16px;
-      background: rgba(255, 255, 255, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.7);
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
     }
     .nav-link:hover {
       color: var(--gold-dark);
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.98);
       border-color: var(--glass-border-gold);
-      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25);
+      transform: translateY(-1px);
     }
 
     .nav-actions { display: flex; align-items: center; gap: 10px; }
-    .btn-pdf {
-      background: rgba(255, 255, 255, 0.85);
-      border: 1.5px solid var(--glass-border);
-      box-shadow: var(--glass-shine);
-      color: #0f172a;
+    
+    /* ==========================================================================
+       PROMINENT LUXURY BUTTONS & TACTILE SELECTORS
+       ========================================================================== */
+    .btn-prominent {
       font-family: var(--font-heading);
-      font-size: 12.5px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      padding: 7px 16px;
-      border-radius: 18px;
+      padding: 9px 20px;
+      border-radius: 16px;
       cursor: pointer;
-      display: flex; align-items: center; gap: 6px;
-    }
-    .btn-sign {
-      background: var(--gold-gradient);
-      border: 1.5px solid rgba(255, 255, 255, 0.9);
-      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35), var(--glass-shine);
-      color: #ffffff !important;
-      font-family: var(--font-heading);
-      font-size: 12.5px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 7px 16px;
-      border-radius: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
       text-decoration: none;
-      display: flex; align-items: center; gap: 6px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08), var(--glass-shine);
+    }
+    .btn-prominent.gold {
+      background: var(--gold-gradient);
+      color: #ffffff !important;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+    }
+    .btn-prominent.gold:hover {
+      background: linear-gradient(135deg, #f59e0b 0%, #d4af37 100%);
+      box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4), var(--glass-shine);
+      transform: translateY(-2px);
+    }
+    .btn-prominent.white {
+      background: #ffffff;
+      color: #0c1024;
+      border: 2px solid rgba(0, 0, 0, 0.08);
+    }
+    .btn-prominent.white:hover {
+      border-color: var(--glass-border-gold);
+      color: var(--gold-dark);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      transform: translateY(-2px);
     }
 
-    /* Section Headers */
-    .section-header { margin-bottom: 36px; text-align: left; }
+    /* Tab Buttons (Prominent High-Contrast Buttons) */
+    .tab-btn-prominent {
+      font-family: var(--font-heading);
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 10px 22px;
+      border-radius: 14px;
+      cursor: pointer;
+      background: #ffffff;
+      color: #334155;
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tab-btn-prominent:hover {
+      border-color: var(--glass-border-gold);
+      color: var(--gold-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(212, 175, 55, 0.2);
+    }
+    .tab-btn-prominent.active {
+      background: linear-gradient(135deg, #0c1024 0%, #1e293b 100%);
+      color: #ffffff;
+      border-color: var(--gold-primary);
+      box-shadow: 0 6px 20px rgba(12, 16, 36, 0.3), 0 0 15px rgba(212, 175, 55, 0.35);
+      transform: translateY(-2px);
+    }
+
+    /* 3D Viewport HUD Camera Buttons */
+    .cam-preset-btn {
+      font-family: var(--font-heading);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      background: rgba(15, 23, 42, 0.85);
+      color: #e2e8f0;
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      transition: all 0.2s ease;
+    }
+    .cam-preset-btn:hover {
+      background: rgba(212, 175, 55, 0.85);
+      color: #0c1024;
+      border-color: #ffffff;
+      transform: translateY(-1px);
+    }
+    .cam-preset-btn.active {
+      background: var(--gold-gradient);
+      color: #ffffff;
+      border-color: #ffffff;
+      box-shadow: 0 0 16px rgba(212, 175, 55, 0.6);
+    }
+
+    /* Step Badges */
     .step-badge {
       font-family: var(--font-heading);
       font-size: 11.5px;
@@ -255,9 +300,7 @@
       margin-bottom: 8px;
       line-height: 1.25;
     }
-    @media (max-width: 768px) {
-      .section-heading { font-size: 28px; }
-    }
+    @media (max-width: 768px) { .section-heading { font-size: 28px; } }
     .section-desc {
       color: var(--text-muted);
       font-size: 15px;
@@ -265,7 +308,6 @@
       line-height: 1.65;
     }
 
-    /* In-Context Interactive Helper Hint */
     .interaction-helper {
       display: inline-flex;
       align-items: center;
@@ -283,10 +325,9 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
       color: #334155;
       margin-top: 10px;
-      margin-bottom: 4px;
     }
 
-    /* Glassmorphic Cards & Editorial Panels */
+    /* Glass Cards */
     .glass-card {
       background: var(--bg-card);
       backdrop-filter: var(--glass-blur);
@@ -299,16 +340,160 @@
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       position: relative;
     }
-    @media (max-width: 768px) {
-      .glass-card { padding: 20px; border-radius: 18px; }
+    @media (max-width: 768px) { .glass-card { padding: 20px; border-radius: 18px; } }
+
+    /* ==========================================================================
+       TOP RENDER PASS SHOWCASE & DESCRIPTION BOX (Senawa / Storey Standard)
+       ========================================================================== */
+    .pass-showcase-container {
+      display: grid;
+      grid-template-columns: 1.45fr 1fr;
+      gap: 28px;
+      align-items: stretch;
+      margin-bottom: 24px;
     }
-    .glass-card:hover {
-      background: var(--bg-card-hover);
-      box-shadow: var(--glass-shadow-hover);
+    @media (max-width: 1024px) {
+      .pass-showcase-container { grid-template-columns: 1fr; }
+    }
+
+    .pass-hero-frame {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 2px solid #ffffff;
+      box-shadow: var(--img-glow);
+      cursor: pointer;
+      background: #0f1422;
+      min-height: 440px;
+    }
+    .pass-hero-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+    }
+    .pass-hero-frame:hover img {
+      transform: scale(1.025);
+    }
+
+    .pass-hero-tag {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: rgba(12, 16, 36, 0.82);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 10px;
+      z-index: 2;
+    }
+    .pass-hero-tag span { color: #fef08a; }
+
+    .pass-desc-box {
+      background: #ffffff;
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: var(--glass-shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .pass-desc-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
+    .pass-desc-body {
+      font-size: 15px;
+      color: var(--text-body);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .pass-spec-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 24px;
+      font-size: 13.5px;
+      color: #475569;
+    }
+    .pass-spec-list li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pass-spec-list li strong { color: var(--text-main); }
+
+    /* Pass Thumbnails Selector Row */
+    .pass-thumb-strip {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+    @media (max-width: 1024px) {
+      .pass-thumb-strip { grid-template-columns: repeat(5, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .pass-thumb-strip { grid-template-columns: repeat(3, 1fr); }
+    }
+    .pass-thumb-card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 2px solid rgba(0, 0, 0, 0.08);
+      background: #ffffff;
+      cursor: pointer;
+      aspect-ratio: 16 / 10;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .pass-thumb-card:hover {
+      border-color: var(--gold-primary);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(212, 175, 55, 0.25);
+    }
+    .pass-thumb-card.active {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 0 2px var(--gold-primary), 0 6px 20px rgba(212, 175, 55, 0.35);
+      transform: translateY(-2px);
+    }
+    .pass-thumb-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .pass-thumb-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(12, 16, 36, 0.85);
+      color: #ffffff;
+      font-family: var(--font-heading);
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 3px 2px;
     }
 
     /* ==========================================================================
-       EDITORIAL ARCHITECTURAL IMAGE FRAMING (Senawa / Storey Style)
+       ARCHITECTURAL IMAGE CARDS (Senawa / Storey Style)
        ========================================================================== */
     .arch-image-card {
       background: #ffffff;
@@ -327,23 +512,14 @@
       box-shadow: var(--img-glow-hover);
       border-color: var(--glass-border-gold);
     }
-
     .arch-img-frame {
       position: relative;
       width: 100%;
       overflow: hidden;
       background: #f1f3f7;
     }
-    .arch-img-frame.ratio-hero { height: 540px; }
     .arch-img-frame.ratio-16-9 { aspect-ratio: 16 / 9; }
     .arch-img-frame.ratio-4-3 { aspect-ratio: 4 / 3; }
-    .arch-img-frame.ratio-3-2 { aspect-ratio: 3 / 2; }
-    .arch-img-frame.ratio-1-1 { aspect-ratio: 1 / 1; }
-
-    @media (max-width: 768px) {
-      .arch-img-frame.ratio-hero { height: 260px; }
-    }
-
     .arch-img-frame img {
       width: 100%;
       height: 100%;
@@ -354,15 +530,12 @@
     .arch-image-card:hover .arch-img-frame img {
       transform: scale(1.035);
     }
-
-    /* Inset Monospace Architectural Tag (Top-Left of Image) */
     .arch-tag-overlay {
       position: absolute;
       top: 14px;
       left: 14px;
-      background: rgba(12, 16, 36, 0.75);
+      background: rgba(12, 16, 36, 0.78);
       backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255, 255, 255, 0.2);
       color: #ffffff;
       font-family: var(--font-mono);
@@ -373,13 +546,8 @@
       padding: 5px 12px;
       border-radius: 8px;
       z-index: 2;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
     .arch-tag-overlay span { color: #fef08a; }
-
-    /* Zoom Indicator Overlay (Top-Right) */
     .arch-zoom-hint {
       position: absolute;
       top: 14px;
@@ -396,17 +564,8 @@
       justify-content: center;
       font-size: 13px;
       z-index: 2;
-      opacity: 0.85;
-      transition: all 0.2s ease;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     }
-    .arch-image-card:hover .arch-zoom-hint {
-      opacity: 1;
-      transform: scale(1.1);
-      background: #ffffff;
-    }
-
-    /* Architectural Caption Block Below Image */
     .arch-caption-block {
       padding: 16px 20px;
       background: #ffffff;
@@ -443,25 +602,19 @@
       border: 1px solid rgba(212, 175, 55, 0.4);
     }
 
-    /* ==========================================================================
-       ARCHITECTURAL PROJECT METADATA GRID (Storey Architecture Style)
-       ========================================================================== */
+    /* Storey Architecture Project Meta Matrix */
     .project-meta-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 16px;
       margin: 28px 0;
-      background: rgba(255, 255, 255, 0.65);
+      background: rgba(255, 255, 255, 0.7);
       border: 1px solid rgba(0, 0, 0, 0.06);
       border-radius: 16px;
       padding: 18px 24px;
     }
-    @media (max-width: 900px) {
-      .project-meta-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 550px) {
-      .project-meta-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 900px) { .project-meta-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 550px) { .project-meta-grid { grid-template-columns: 1fr; } }
     .meta-cell { display: flex; flex-direction: column; gap: 3px; }
     .meta-label {
       font-family: var(--font-heading);
@@ -478,256 +631,35 @@
       color: var(--text-main);
     }
 
-    /* ==========================================================================
-       VISUAL ONBOARDING GUIDE (4-Step Review)
-       ========================================================================== */
-    .quick-guide-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-top: 24px;
-    }
-    @media (max-width: 1024px) {
-      .quick-guide-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 640px) {
-      .quick-guide-grid { grid-template-columns: 1fr; }
-    }
-    .guide-step-card {
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: var(--glass-blur);
-      border: 1.5px solid rgba(255, 255, 255, 0.95);
-      border-radius: 18px;
-      padding: 20px;
-      box-shadow: var(--glass-shine), var(--glass-shadow);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      overflow: hidden;
-    }
-    .guide-step-card:hover {
-      transform: translateY(-4px);
-      background: rgba(255, 255, 255, 0.98);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08), var(--glass-shine);
-    }
-    .guide-step-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 4px;
-      background: var(--card-accent, var(--gold-primary));
-    }
-    .guide-step-card.step-1 { --card-accent: #b8860b; }
-    .guide-step-card.step-2 { --card-accent: #6366f1; }
-    .guide-step-card.step-3 { --card-accent: #0284c7; }
-    .guide-step-card.step-4 { --card-accent: #16a34a; }
-
-    .guide-step-num {
-      font-family: var(--font-heading);
-      font-size: 11.5px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--card-accent, #b8860b);
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .guide-step-title {
-      font-family: var(--font-serif);
-      font-size: 19px;
-      font-weight: 700;
-      color: #0c1024;
-      line-height: 1.3;
-      margin-bottom: 6px;
-    }
-    .guide-step-desc {
-      font-size: 13px;
-      color: #475569;
-      line-height: 1.5;
-    }
-    .guide-step-action {
-      margin-top: auto;
-      padding-top: 12px;
-      font-family: var(--font-heading);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--card-accent, #b8860b);
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    /* ==========================================================================
-       DIRECTIONAL NEXT-STEP BANNERS
-       ========================================================================== */
-    .next-step-banner {
-      margin-top: 40px;
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: var(--glass-blur);
-      border: 1.5px solid var(--glass-border);
-      border-radius: 20px;
-      padding: 22px 30px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-      box-shadow: var(--glass-shine), 0 8px 24px rgba(0, 0, 0, 0.03);
-      transition: all 0.3s ease;
-    }
-    .next-step-banner:hover {
-      border-color: var(--banner-accent, var(--glass-border-gold));
-      box-shadow: var(--glass-shine), 0 12px 32px rgba(0, 0, 0, 0.06);
-    }
-    .next-step-info { display: flex; align-items: center; gap: 16px; }
-    .next-step-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      background: var(--icon-bg, rgba(254, 240, 138, 0.4));
-      color: var(--icon-color, #784c00);
-      border: 1px solid var(--icon-border, var(--glass-border-gold));
-    }
-    .next-step-text-wrap h5 {
-      font-family: var(--font-heading);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #64748b;
-      margin-bottom: 2px;
-    }
-    .next-step-text-wrap h4 {
-      font-family: var(--font-serif);
-      font-size: 20px;
-      font-weight: 700;
-      color: #0c1024;
-    }
-    .btn-next-step {
-      font-family: var(--font-heading);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 10px 24px;
-      border-radius: 16px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: #ffffff !important;
-      background: var(--btn-gradient, var(--gold-gradient));
-      border: 1.5px solid rgba(255, 255, 255, 0.9);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1), var(--glass-shine);
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .btn-next-step:hover {
-      transform: translateX(4px);
-      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.18), var(--glass-shine);
-    }
-
-    /* ==========================================================================
-       FLOATING STICKY JOURNEY RAIL
-       ========================================================================== */
-    #journey-rail {
-      position: fixed;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 90;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      background: rgba(255, 255, 255, 0.75);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      padding: 12px 8px;
-      border-radius: 30px;
-      border: 1.5px solid rgba(255, 255, 255, 0.95);
-      box-shadow: var(--glass-shine), 0 12px 35px rgba(0, 0, 0, 0.08);
-      transition: all 0.3s ease;
-    }
-    @media (max-width: 1200px) {
-      #journey-rail { display: none; }
-    }
-    .rail-dot {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      font-family: var(--font-heading);
-      font-size: 11px;
-      font-weight: 700;
-      color: #64748b;
-      background: rgba(255, 255, 255, 0.85);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      position: relative;
-      transition: all 0.25s ease;
-    }
-    .rail-dot:hover {
-      transform: scale(1.15);
-      color: #0c1024;
+    /* Contained Blueprint Display Box */
+    .blueprint-contained-frame {
       background: #ffffff;
+      border: 2px solid rgba(0, 0, 0, 0.08);
+      border-radius: 18px;
+      overflow: hidden;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    .rail-dot.active {
-      color: #ffffff;
-      background: var(--active-bg, #b8860b);
-      border-color: rgba(255, 255, 255, 1);
-      box-shadow: 0 0 16px var(--active-glow, rgba(184, 134, 11, 0.6));
-      transform: scale(1.2);
-    }
-    .rail-dot.dot-01.active { --active-bg: #b8860b; --active-glow: rgba(184, 134, 11, 0.6); }
-    .rail-dot.dot-02.active { --active-bg: #4f46e5; --active-glow: rgba(79, 70, 229, 0.6); }
-    .rail-dot.dot-03.active { --active-bg: #0284c7; --active-glow: rgba(2, 132, 199, 0.6); }
-    .rail-dot.dot-04.active { --active-bg: #a16207; --active-glow: rgba(161, 98, 7, 0.6); }
-    .rail-dot.dot-05.active { --active-bg: #ea580c; --active-glow: rgba(234, 88, 12, 0.6); }
-    .rail-dot.dot-06.active { --active-bg: #15803d; --active-glow: rgba(21, 128, 61, 0.6); }
-
-    .rail-tooltip {
-      position: absolute;
-      right: 46px;
-      background: #0c1024;
-      color: #ffffff;
-      padding: 5px 12px;
+    .blueprint-contained-img {
+      max-height: 560px;
+      width: auto;
+      max-width: 100%;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto;
       border-radius: 10px;
-      font-family: var(--font-heading);
-      font-size: 11px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      white-space: nowrap;
-      pointer-events: none;
-      opacity: 0;
-      transform: translateX(10px);
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      cursor: zoom-in;
+      transition: transform 0.3s ease;
     }
-    .rail-dot:hover .rail-tooltip {
-      opacity: 1;
-      transform: translateX(0);
+    .blueprint-contained-img:hover {
+      transform: scale(1.01);
     }
 
-    /* ==========================================================================
-       SCHEDULE TABLES & MATRICES
-       ========================================================================== */
-    .schedule-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13.5px;
-    }
+    /* Schedule Tables */
+    .schedule-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
     .schedule-table th {
       font-family: var(--font-heading);
       font-size: 12px;
@@ -740,133 +672,190 @@
       text-align: left;
       border-bottom: 1.5px solid var(--glass-border-gold);
     }
-    .schedule-table td {
-      padding: 12px 16px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-      color: var(--text-body);
-    }
-    .schedule-table tr:hover td {
-      background: rgba(255, 255, 255, 0.7);
-    }
+    .schedule-table td { padding: 12px 16px; border-bottom: 1px solid rgba(0, 0, 0, 0.06); color: var(--text-body); }
+    .schedule-table tr:hover td { background: rgba(255, 255, 255, 0.7); }
 
-    /* ==========================================================================
-       BEAST-MODE LIGHTBOX MODAL
-       ========================================================================== */
-    #beast-lightbox {
-      position: fixed;
-      inset: 0;
-      z-index: 99999;
-      background: rgba(10, 14, 28, 0.9);
-      backdrop-filter: blur(28px) saturate(180%);
-      -webkit-backdrop-filter: blur(28px) saturate(180%);
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px;
-      opacity: 0;
-      transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      user-select: none;
-    }
-    #beast-lightbox.active {
-      display: flex;
-      opacity: 1;
-    }
-    .lightbox-topbar {
-      width: 100%;
-      max-width: 1400px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: #ffffff;
-      padding: 8px 16px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 18px;
-      backdrop-filter: blur(16px);
-      z-index: 10;
-    }
-    .lightbox-title {
-      font-family: var(--font-serif);
-      font-size: 20px;
-      font-weight: 600;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .lightbox-controls { display: flex; align-items: center; gap: 8px; }
-    .lb-btn {
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: #ffffff;
-      font-family: var(--font-heading);
-      font-size: 13px;
-      font-weight: 600;
-      padding: 7px 14px;
-      border-radius: 12px;
-      cursor: pointer;
-      display: flex; align-items: center; gap: 6px;
-      transition: all 0.2s ease;
-    }
-    .lb-btn:hover {
-      background: rgba(212, 175, 55, 0.4);
-      border-color: rgba(254, 240, 138, 0.8);
-      transform: translateY(-1px);
-    }
-    .lb-btn-close {
-      background: rgba(239, 68, 68, 0.6);
-      border-color: rgba(239, 68, 68, 0.9);
-      padding: 7px 16px;
-      font-weight: 700;
-    }
-    .lb-btn-close:hover { background: rgba(239, 68, 68, 0.9); }
-
-    .lightbox-stage {
-      flex: 1;
-      width: 100%;
-      max-width: 1400px;
-      height: 75vh;
-      overflow: hidden;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: grab;
+    /* Next Step Banners */
+    .next-step-banner {
+      margin-top: 40px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: var(--glass-blur);
+      border: 1.5px solid var(--glass-border);
       border-radius: 20px;
-      margin: 12px 0;
+      padding: 22px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      box-shadow: var(--glass-shine), 0 8px 24px rgba(0, 0, 0, 0.03);
+    }
+
+    /* Floating Journey Rail */
+    #journey-rail {
+      position: fixed; right: 20px; top: 50%; transform: translateY(-50%); z-index: 90;
+      display: flex; flex-direction: column; gap: 10px;
+      background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(20px);
+      padding: 12px 8px; border-radius: 30px; border: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: var(--glass-shine), 0 12px 35px rgba(0, 0, 0, 0.08);
+    }
+    @media (max-width: 1200px) { #journey-rail { display: none; } }
+    .rail-dot {
+      width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      text-decoration: none; font-family: var(--font-heading); font-size: 11px; font-weight: 700;
+      color: #64748b; background: rgba(255, 255, 255, 0.85); border: 1px solid rgba(0, 0, 0, 0.08);
+      position: relative; transition: all 0.25s ease;
+    }
+    .rail-dot:hover { transform: scale(1.15); color: #0c1024; background: #ffffff; }
+    .rail-dot.active {
+      color: #ffffff; background: #b8860b; border-color: #ffffff;
+      box-shadow: 0 0 16px rgba(184, 134, 11, 0.6); transform: scale(1.2);
+    }
+    .rail-tooltip {
+      position: absolute; right: 46px; background: #0c1024; color: #ffffff;
+      padding: 5px 12px; border-radius: 10px; font-family: var(--font-heading); font-size: 11px;
+      letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; opacity: 0;
+      transform: translateX(10px); transition: all 0.2s ease; pointer-events: none;
+    }
+    .rail-dot:hover .rail-tooltip { opacity: 1; transform: translateX(0); }
+
+    /* Lightbox Modal */
+    #beast-lightbox {
+      position: fixed; inset: 0; z-index: 99999; background: rgba(10, 14, 28, 0.92);
+      backdrop-filter: blur(28px); display: none; flex-direction: column; align-items: center;
+      justify-content: space-between; padding: 20px; opacity: 0; transition: opacity 0.3s ease; user-select: none;
+    }
+    #beast-lightbox.active { display: flex; opacity: 1; }
+    .lightbox-topbar {
+      width: 100%; max-width: 1400px; display: flex; align-items: center; justify-content: space-between;
+      color: #ffffff; padding: 8px 16px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 18px; backdrop-filter: blur(16px);
+    }
+    .lightbox-stage {
+      flex: 1; width: 100%; max-width: 1400px; height: 75vh; overflow: hidden; position: relative;
+      display: flex; align-items: center; justify-content: center; cursor: grab; margin: 12px 0;
     }
     .lightbox-stage.dragging { cursor: grabbing; }
     #lightbox-stage-img {
-      max-width: 90%;
-      max-height: 90%;
-      object-fit: contain;
-      transform-origin: center center;
-      transition: transform 0.08s ease-out;
-      border-radius: 12px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(212, 175, 55, 0.3);
-      pointer-events: none;
+      max-width: 90%; max-height: 90%; object-fit: contain; transform-origin: center center;
+      transition: transform 0.08s ease-out; border-radius: 12px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(212, 175, 55, 0.3); pointer-events: none;
     }
     .lightbox-bottombar {
-      width: 100%;
-      max-width: 1400px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 20px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      border-radius: 18px;
-      backdrop-filter: blur(16px);
-      color: #cbd5e1;
-      font-size: 13px;
-      z-index: 10;
+      width: 100%; max-width: 1400px; display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 20px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 18px; color: #cbd5e1; font-size: 13px;
     }
-    .lb-zoom-level {
-      font-family: var(--font-mono);
-      font-weight: 700;
-      color: #fef08a;
+  
+    /* ==========================================================================
+       PRINT & PDF EXPORT STYLESHEET (@media print)
+       ========================================================================== */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 12mm 12mm 15mm 12mm;
+      }
+
+      body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        font-size: 11pt !important;
+        line-height: 1.45 !important;
+      }
+
+      .glass-orb,
+      #handover-nav,
+      .sticky-journey-rail,
+      #beast-lightbox,
+      .btn-prominent,
+      .blueprint-view-tabs,
+      .camera-presets-bar,
+      .btn-enlarge-pass,
+      .audio-player-container,
+      .toast-notification {
+        display: none !important;
+      }
+
+      .section-wrap {
+        padding: 24px 0 !important;
+        border-bottom: 1.5px solid #cbd5e1 !important;
+        page-break-inside: avoid !important;
+      }
+
+      .hero-section {
+        padding: 20px 0 !important;
+        page-break-after: avoid !important;
+      }
+
+      .hero-title {
+        font-size: 28pt !important;
+        color: #784c00 !important;
+      }
+
+      .glass-card,
+      .pass-hero-card,
+      .pass-meta-box,
+      .material-spec-card,
+      .feature-detail-card,
+      .lighting-fixture-card {
+        background: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        page-break-inside: avoid !important;
+        margin-bottom: 16px !important;
+      }
+
+      .blueprint-contained-frame,
+      .blueprint-img {
+        max-height: 480px !important;
+        object-fit: contain !important;
+        box-shadow: none !important;
+        border: 1px solid #94a3b8 !important;
+      }
+
+      .print-page-break {
+        page-break-before: always !important;
+      }
+
+      .dimension-table {
+        border-collapse: collapse !important;
+        width: 100% !important;
+      }
+
+      .dimension-table th,
+      .dimension-table td {
+        border: 1px solid #cbd5e1 !important;
+        padding: 6px 10px !important;
+        color: #0f172a !important;
+      }
+
+      .dimension-table th {
+        background-color: #f1f5f9 !important;
+        font-weight: bold !important;
+      }
+
+      /* Print Header & Footer on each page */
+      .print-header-dossier {
+        display: block !important;
+        border-bottom: 2px solid #b8860b;
+        padding-bottom: 6px;
+        margin-bottom: 18px;
+        font-family: 'Oswald', sans-serif;
+        font-size: 9pt;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: #64748b;
+      }
+
+      .print-header-dossier span {
+        float: right;
+        color: #b8860b;
+        font-weight: 700;
+      }
     }
+
   </style>
 </head>
 <body>
@@ -876,184 +865,179 @@
   <div class="glass-orb orb-2"></div>
   <div class="glass-orb orb-3"></div>
 
-  <!-- FLOATING RIGHT-HAND ARCHITECTURAL JOURNEY PROGRESS RAIL -->
+  <!-- FLOATING RIGHT-HAND JOURNEY RAIL -->
   <nav id="journey-rail" aria-label="Dossier Navigation Tracker">
-    <a href="#section-overview" class="rail-dot dot-00 active" data-section="section-overview">
-      <span>00</span>
-      <span class="rail-tooltip">00. Overview</span>
-    </a>
-    <a href="#section-materials" class="rail-dot dot-01" data-section="section-materials">
-      <span>01</span>
-      <span class="rail-tooltip">01. Materials Board</span>
-    </a>
-    <a href="#section-3d-twin" class="rail-dot dot-02" data-section="section-3d-twin">
-      <span>02</span>
-      <span class="rail-tooltip">02. 3D Digital Twin</span>
-    </a>
-    <a href="#section-cad-plan" class="rail-dot dot-03" data-section="section-cad-plan">
-      <span>03</span>
-      <span class="rail-tooltip">03. CAD Blueprints & Dimensions</span>
-    </a>
-    <a href="#section-features" class="rail-dot dot-04" data-section="section-features">
-      <span>04</span>
-      <span class="rail-tooltip">04. Joinery Passes</span>
-    </a>
-    <a href="#section-lighting-showcase" class="rail-dot dot-05" data-section="section-lighting-showcase">
-      <span>05</span>
-      <span class="rail-tooltip">05. Retail Lighting</span>
-    </a>
-    <a href="#section-signoff" class="rail-dot dot-06" data-section="section-signoff">
-      <span>06</span>
-      <span class="rail-tooltip">06. Client Sign-Off</span>
-    </a>
+    <a href="#section-overview" class="rail-dot dot-00 active"><span>00</span><span class="rail-tooltip">00. Storefront & Passes</span></a>
+    <a href="#section-materials" class="rail-dot dot-01"><span>01</span><span class="rail-tooltip">01. Materials Board</span></a>
+    <a href="#section-3d-twin" class="rail-dot dot-02"><span>02</span><span class="rail-tooltip">02. 3D Digital Twin</span></a>
+    <a href="#section-cad-plan" class="rail-dot dot-03"><span>03</span><span class="rail-tooltip">03. CAD Floor Plan</span></a>
+    <a href="#section-features" class="rail-dot dot-04"><span>04</span><span class="rail-tooltip">04. Joinery & Cuts</span></a>
+    <a href="#section-lighting-showcase" class="rail-dot dot-05"><span>05</span><span class="rail-tooltip">05. Retail Lighting</span></a>
+    <a href="#section-signoff" class="rail-dot dot-06"><span>06</span><span class="rail-tooltip">06. Client Sign-Off</span></a>
   </nav>
 
   <!-- Navigation Header -->
   <nav id="handover-nav">
     <div class="brand-box">
       <a href="#section-overview" class="brand-logo-text">Vel Ra <span>Perfumes</span></a>
-      <span class="handover-badge">CONCEPT INTERIOR HANDOVER</span>
+      <span class="location-pill">📍 CAPEL STREET, NORTH CITY, DUBLIN 1</span>
     </div>
     <ul class="nav-menu">
-      <li><a href="#section-overview" class="nav-link">Overview</a></li>
+      <li><a href="#section-overview" class="nav-link">Top Passes</a></li>
       <li><a href="#section-materials" class="nav-link">Materials</a></li>
       <li><a href="#section-3d-twin" class="nav-link">3D Twin</a></li>
-      <li><a href="#section-cad-plan" class="nav-link">Blueprints & CAD</a></li>
-      <li><a href="#section-features" class="nav-link">Joinery & Renders</a></li>
+      <li><a href="#section-cad-plan" class="nav-link">CAD Blueprints</a></li>
+      <li><a href="#section-features" class="nav-link">Joinery & Cuts</a></li>
       <li><a href="#section-lighting-showcase" class="nav-link">Lighting</a></li>
       <li><a href="#section-signoff" class="nav-link">Sign-Off</a></li>
     </ul>
     <div class="nav-actions">
-      <button class="btn-pdf" onclick="window.print()">
+      <button class="btn-prominent white" onclick="window.print()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><path d="M6 14h12v8H6z"></path></svg>
         PDF Print
       </button>
-      <a href="#section-signoff" class="btn-sign">
+      <a href="#section-signoff" class="btn-prominent gold">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
         Sign-Off
       </a>
     </div>
   </nav>
 
-  <!-- SECTION 0: STOREFRONT HERO & ARCHITECTURAL DOSSIER OVERVIEW (NO DIMENSIONS) -->
+  <!-- SECTION 0: STOREFRONT HERO & MASTER RENDER PASS SHOWCASE (NO DIMENSIONS) -->
   <section id="section-overview" class="section-wrap" style="padding-top: 30px; padding-bottom: 50px;">
     <div class="container">
       
-      <!-- Architectural Hero Showcase (Senawa & Storey Style) -->
-      <div class="glass-card" style="padding: 24px; margin-bottom: 30px;">
-        <div class="arch-image-card" onclick="openBeastLightbox('/renders/hero_facade_top.jpg', 'VEL RA PERFUMES - Boutique Storefront Façade & Architectural Concept Exterior')">
-          <div class="arch-img-frame ratio-hero">
-            <div class="arch-tag-overlay">00 // <span>STOREFRONT FAÇADE</span></div>
-            <div class="arch-zoom-hint">🔍</div>
-            <img src="/renders/hero_facade_top.jpg" alt="Vel Ra Perfumes Boutique Storefront Façade">
-          </div>
-          <div class="arch-caption-block">
-            <div class="arch-caption-title">Vel Ra Perfumes Concept Interior</div>
-            <div class="arch-caption-meta">
-              <span>DUBLIN RETAIL QUARTER • CONCEPT FLAGSHIP</span>
-              <span class="arch-caption-tag">STAGE 04 TECHNICAL DOSSIER</span>
-            </div>
-          </div>
-        </div>
+      <!-- Top Architectural Showcase with Dynamic Description Box -->
+      <div class="glass-card" style="padding: 28px; margin-bottom: 30px;">
         
-        <!-- Architectural Overview Statement -->
-        <div style="text-align: center; max-width: 960px; margin: 32px auto 0;">
-          <h1 style="font-family: var(--font-serif); font-size: 44px; font-weight: 700; color: #0c1024; letter-spacing: 0.02em; margin-bottom: 12px; line-height: 1.2;">
-            Vel Ra Perfumes Concept Interior
-          </h1>
-          <p style="font-family: var(--font-sans); font-size: 16.5px; color: #334155; line-height: 1.75; margin-bottom: 24px;">
-            A bespoke spatial sensory boutique interior combining book-matched Italian Calacatta Gold marble, Titanium Gold PVD micro-detailing, traditional Islamic architectural mashrabiya geometry, and continuous 3000K dotless perimeter halo illumination.
-          </p>
+        <div class="section-header" style="margin-bottom: 20px;">
+          <div class="step-badge gold">STAGE 04 ARCHITECTURAL DOSSIER // CAPEL STREET, DUBLIN 1</div>
+          <h1 class="section-heading" style="font-size: 42px;">Vel Ra Perfumes Concept Interior</h1>
+          <p class="section-desc">Interactive photographic handover dossier detailing the bespoke flagship fragrance boutique situated on Capel Street, North City, Dublin 1, Ireland.</p>
+        </div>
 
-          <!-- Storey Architecture Style Project Meta Matrix -->
-          <div class="project-meta-grid">
-            <div class="meta-cell">
-              <span class="meta-label">TYPOLOGY //</span>
-              <span class="meta-value">Luxury Perfumery Flagship</span>
-            </div>
-            <div class="meta-cell">
-              <span class="meta-label">LOCATION //</span>
-              <span class="meta-value">Dublin Retail Quarter, IE</span>
-            </div>
-            <div class="meta-cell">
-              <span class="meta-label">PRIMARY MATERIALS //</span>
-              <span class="meta-value">Calacatta Marble & PVD Brass</span>
-            </div>
-            <div class="meta-cell">
-              <span class="meta-label">HANDOVER STAGE //</span>
-              <span class="meta-value" style="color: #b8860b;">Stage 04 Technical Approval</span>
-            </div>
+        <!-- Main Featured Pass Viewport & Live Description Box -->
+        <div class="pass-showcase-container">
+          
+          <!-- Large Featured Viewport -->
+          <div class="pass-hero-frame" id="pass-main-frame" onclick="openActivePassLightbox()">
+            <div class="pass-hero-tag" id="pass-hero-tag">FEATURED // <span>STOREFRONT FAÇADE</span></div>
+            <div class="arch-zoom-hint">🔍</div>
+            <img id="pass-main-img" src="/renders/hero_facade_top.jpg" alt="Vel Ra Storefront Façade on Capel Street">
           </div>
 
-          <!-- Quick Navigation Jump Buttons -->
-          <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
-            <a href="#section-materials" class="nav-link" style="padding: 10px 22px; font-weight: 600; background: rgba(255, 255, 255, 0.95); border-color: var(--glass-border-gold); color: #784c00;">
-              01 // Materials Palette
-            </a>
-            <a href="#section-3d-twin" class="nav-link" style="padding: 10px 22px; font-weight: 600; background: rgba(255, 255, 255, 0.95); border-color: rgba(99, 102, 241, 0.5); color: #4338ca;">
-              02 // 3D Digital Twin
-            </a>
-            <a href="#section-cad-plan" class="nav-link" style="padding: 10px 22px; font-weight: 600; background: rgba(255, 255, 255, 0.95); border-color: rgba(2, 132, 199, 0.5); color: #0369a1;">
-              03 // CAD Blueprints & Dimensions
-            </a>
-          </div>
-
-          <!-- Visual Onboarding Quick Guide -->
-          <div style="margin-top: 36px; text-align: left;">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
-              <div style="font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: #0c1024;">
-                Architectural Handover Flow — How to Navigate this Dossier
+          <!-- Description & Technical Details Box -->
+          <div class="pass-desc-box">
+            <div>
+              <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--gold-dark); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px;" id="pass-meta-subtitle">
+                VIEW 00 • EXTERIOR ELEVATION
               </div>
-              <span class="step-badge gold" style="margin-bottom: 0;">4-STEP GUIDED REVIEW</span>
+              <h3 class="pass-desc-title" id="pass-meta-title">Storefront Façade & Architectural Demise Entrance</h3>
+              <p class="pass-desc-body" id="pass-meta-desc">
+                Full-width glazed exterior entrance on Capel Street featuring book-matched Calacatta Gold marble pillars, 3D backlit Titanium Gold brand monogram, low-iron display vitrines, and high-CRI 3000K warm perimeter halo illumination.
+              </p>
+              
+              <ul class="pass-spec-list" id="pass-spec-list">
+                <li><span>🏛️</span> <strong>Location:</strong> Capel Street, North City, Dublin 1, Ireland</li>
+                <li><span>✨</span> <strong>Primary Finish:</strong> Calacatta Gold Marble & PVD Brass</li>
+                <li><span>💡</span> <strong>Lighting:</strong> 3000K Continuous COB Halo Ribbon (CRI 98)</li>
+                <li><span>📋</span> <strong>Handover Status:</strong> Stage 04 Concept & Fabrication Ready</li>
+              </ul>
             </div>
-            <p style="font-size: 13.5px; color: #64748b; margin-bottom: 16px;">
-              Follow the color-coded architectural journey below to review materials, explore the 3D twin, inspect verified CAD dimensions, and sign off the handover:
-            </p>
 
-            <div class="quick-guide-grid">
-              <a href="#section-materials" class="guide-step-card step-1">
-                <div class="guide-step-num">Step 01 • Palette</div>
-                <div class="guide-step-title">Materials Board</div>
-                <div class="guide-step-desc">Inspect Calacatta marble, Titanium Gold PVD, fluted brass, and tactile finishes.</div>
-                <div class="guide-step-action">Review Finishes ➔</div>
-              </a>
-
-              <a href="#section-3d-twin" class="guide-step-card step-2">
-                <div class="guide-step-num">Step 02 • Spatial</div>
-                <div class="guide-step-title">3D Digital Twin</div>
-                <div class="guide-step-desc">Orbit, pan, and zoom inside the real-time 3D boutique interior with lighting toggles.</div>
-                <div class="guide-step-action">Launch 3D Twin ➔</div>
-              </a>
-
-              <a href="#section-cad-plan" class="guide-step-card step-3">
-                <div class="guide-step-num">Step 03 • Technical</div>
-                <div class="guide-step-title">CAD & Dimensions</div>
-                <div class="guide-step-desc">Switch 5 blueprint drawing sets and inspect every laser-measured millimeter.</div>
-                <div class="guide-step-action">Inspect Plans ➔</div>
-              </a>
-
-              <a href="#section-signoff" class="guide-step-card step-4">
-                <div class="guide-step-num">Step 04 • Handover</div>
-                <div class="guide-step-title">Client Sign-Off</div>
-                <div class="guide-step-desc">Complete the verification checklist and record final contractor sign-off.</div>
-                <div class="guide-step-action">Approve Handover ➔</div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto;">
+              <button class="btn-prominent gold" onclick="openActivePassLightbox()">
+                🔍 Open 4K High-Res View
+              </button>
+              <a href="#section-3d-twin" class="btn-prominent white">
+                🕹️ Launch 3D Model
               </a>
             </div>
           </div>
 
         </div>
+
+        <!-- Interactive Thumbnail Selector Row (All Passes) -->
+        <div style="margin-top: 14px;">
+          <div style="font-family: var(--font-heading); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #64748b; margin-bottom: 10px;">
+            Select Architectural Render Pass View:
+          </div>
+          <div class="pass-thumb-strip">
+            <div class="pass-thumb-card active" onclick="selectPass(0)">
+              <img src="/renders/hero_facade_top.jpg" alt="Façade">
+              <div class="pass-thumb-label">Façade</div>
+            </div>
+            <div class="pass-thumb-card" onclick="selectPass(1)">
+              <img src="/renders/pass1.png" alt="Pass 01">
+              <div class="pass-thumb-label">Pass 01</div>
+            </div>
+            <div class="pass-thumb-card" onclick="selectPass(2)">
+              <img src="/renders/pass2.png" alt="Pass 02">
+              <div class="pass-thumb-label">Pass 02</div>
+            </div>
+            <div class="pass-thumb-card" onclick="selectPass(3)">
+              <img src="/renders/pass3.png" alt="Pass 03">
+              <div class="pass-thumb-label">Pass 03</div>
+            </div>
+            <div class="pass-thumb-card" onclick="selectPass(4)">
+              <img src="/renders/pass4.png" alt="Pass 04">
+              <div class="pass-thumb-label">Pass 04</div>
+            </div>
+            <div class="pass-thumb-card" onclick="selectPass(5)">
+              <img src="/renders/pass5.png" alt="Pass 05">
+              <div class="pass-thumb-label">Pass 05</div>
+            </div>
+            <div class="pass-thumb-card" onclick="selectPass(6)">
+              <img src="/renders/pass6.png" alt="Pass 06">
+              <div class="pass-thumb-label">Pass 06</div>
+            </div>
+            <div class="pass-thumb-card" onclick="selectPass(7)">
+              <img src="/renders/pass7.png" alt="Pass 07">
+              <div class="pass-thumb-label">Pass 07</div>
+            </div>
+            <div class="pass-thumb-card" onclick="selectPass(8)">
+              <img src="/renders/pass8.png" alt="Pass 08">
+              <div class="pass-thumb-label">Pass 08</div>
+            </div>
+            <div class="pass-thumb-card" onclick="selectPass(9)">
+              <img src="/renders/pass9.png" alt="Pass 09">
+              <div class="pass-thumb-label">Pass 09</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Storey Architecture Style Project Meta Matrix -->
+        <div class="project-meta-grid">
+          <div class="meta-cell">
+            <span class="meta-label">LOCATION //</span>
+            <span class="meta-value">Capel Street, North City, Dublin 1, IE</span>
+          </div>
+          <div class="meta-cell">
+            <span class="meta-label">TYPOLOGY //</span>
+            <span class="meta-value">Luxury Perfumery Flagship</span>
+          </div>
+          <div class="meta-cell">
+            <span class="meta-label">PRIMARY MATERIALS //</span>
+            <span class="meta-value">Calacatta Marble & PVD Brass</span>
+          </div>
+          <div class="meta-cell">
+            <span class="meta-label">HANDOVER STAGE //</span>
+            <span class="meta-value" style="color: #b8860b;">Stage 04 Technical Handover</span>
+          </div>
+        </div>
+
       </div>
 
     </div>
   </section>
 
-  <!-- SECTION 01: MATERIALS BOARD (NO DIMENSIONS) -->
+  <!-- SECTION 01: MASTER MATERIALS BOARD (NO DIMENSIONS) -->
   <section id="section-materials" class="section-wrap">
     <div class="container">
       <div class="section-header">
         <div class="step-badge gold">STEP 01 OF 06 // MATERIALS & FINISHES PALETTE</div>
         <h2 class="section-heading">Master Materials & Finishes Board</h2>
-        <p class="section-desc">Comprehensive visual specification of all primary finishes, textures, and bespoke surface treatments selected for the boutique interior.</p>
+        <p class="section-desc">Comprehensive visual specification of all primary finishes, textures, and bespoke surface treatments selected for the Capel Street boutique interior.</p>
         <div class="interaction-helper">🔍 Click any material swatch to inspect in high-resolution 4K Lightbox</div>
       </div>
 
@@ -1159,15 +1143,15 @@
       </div>
 
       <!-- Directional Next Step Action Banner -->
-      <div class="next-step-banner" style="--banner-accent: #6366f1;">
-        <div class="next-step-info">
-          <div class="next-step-icon" style="--icon-bg: rgba(224, 231, 255, 0.7); --icon-color: #4338ca; --icon-border: rgba(99, 102, 241, 0.5);">🕹️</div>
-          <div class="next-step-text-wrap">
-            <h5>NEXT IN ARCHITECTURAL JOURNEY • STEP 02</h5>
-            <h4>Experience the 3D Digital Twin & Interactive Space</h4>
+      <div class="next-step-banner">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div style="font-size: 28px;">🕹️</div>
+          <div>
+            <h5 style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #64748b;">NEXT IN ARCHITECTURAL JOURNEY • STEP 02</h5>
+            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #0c1024;">Experience the 3D Digital Twin & Interactive Space</h4>
           </div>
         </div>
-        <a href="#section-3d-twin" class="btn-next-step" style="--btn-gradient: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);">
+        <a href="#section-3d-twin" class="btn-prominent gold">
           Launch 3D Twin ➔
         </a>
       </div>
@@ -1181,35 +1165,37 @@
       <div class="section-header">
         <div class="step-badge indigo">STEP 02 OF 06 // REAL-TIME 3D DIGITAL TWIN</div>
         <h2 class="section-heading">Interactive 3D Architectural Twin</h2>
-        <p class="section-desc">Fully interactive WebGL viewport rendering the full interior model. Orbit, pan, and inspect the spatial volumes in real time.</p>
-        <div class="interaction-helper" style="color: #4338ca; border-color: rgba(99, 102, 241, 0.4); background: rgba(224, 231, 255, 0.7);">🕹️ Drag to rotate 360° | Scroll wheel / pinch to zoom | Click quick camera angles below</div>
+        <p class="section-desc">Fully interactive WebGL viewport rendered with warm 3000K ambient illumination and calibrated architectural cameras. Orbit, pan, and inspect the Capel Street boutique interior.</p>
+        <div class="interaction-helper" style="color: #4338ca; border-color: rgba(99, 102, 241, 0.4); background: rgba(224, 231, 255, 0.75);">🕹️ Drag to rotate 360° | Scroll wheel / pinch to zoom | Click prominent camera buttons below</div>
       </div>
 
-      <div class="glass-card" style="padding: 20px;">
-        <div style="position: relative; width: 100%; height: 600px; border-radius: 16px; overflow: hidden; background: #0f172a;" id="canvas-container">
+      <div class="glass-card" style="padding: 24px;">
+        
+        <!-- Viewport HUD Camera Angle Selector Buttons -->
+        <div style="display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap;">
+          <button id="btn-cam-front" class="cam-preset-btn active">01 // Front Entrance</button>
+          <button id="btn-cam-island" class="cam-preset-btn">02 // Central Island</button>
+          <button id="btn-cam-pos" class="cam-preset-btn">03 // POS Cashier Desk</button>
+          <button id="btn-cam-alcoves" class="cam-preset-btn">04 // Perfume Wall Alcoves</button>
+          <button id="btn-cam-top" class="cam-preset-btn">05 // Top-Down Plan</button>
+          <button id="btn-wireframe" class="cam-preset-btn" style="border-color: rgba(212, 175, 55, 0.5);">Toggle Wireframe</button>
+        </div>
+
+        <div style="position: relative; width: 100%; height: 600px; border-radius: 18px; overflow: hidden; background: #101524; border: 2px solid rgba(255, 255, 255, 0.95); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);" id="canvas-container">
           <canvas id="three-canvas" style="width: 100%; height: 100%; display: block;"></canvas>
-          
-          <!-- Viewport HUD Overlay Controls -->
-          <div style="position: absolute; bottom: 20px; left: 20px; z-index: 10; display: flex; gap: 8px; flex-wrap: wrap;">
-            <button id="btn-cam-front" class="lb-btn" style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px);">01 // Front Façade</button>
-            <button id="btn-cam-island" class="lb-btn" style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px);">02 // Central Island</button>
-            <button id="btn-cam-pos" class="lb-btn" style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px);">03 // POS Desk</button>
-            <button id="btn-cam-top" class="lb-btn" style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px);">04 // Top-Down Plan</button>
-            <button id="btn-wireframe" class="lb-btn" style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(12px);">Toggle Wireframe</button>
-          </div>
         </div>
       </div>
 
       <!-- Directional Next Step Action Banner -->
-      <div class="next-step-banner" style="--banner-accent: #0284c7;">
-        <div class="next-step-info">
-          <div class="next-step-icon" style="--icon-bg: rgba(224, 242, 254, 0.7); --icon-color: #0369a1; --icon-border: rgba(2, 132, 199, 0.5);">📐</div>
-          <div class="next-step-text-wrap">
-            <h5>NEXT IN ARCHITECTURAL JOURNEY • STEP 03</h5>
-            <h4>Inspect Certified CAD Blueprints & Dimension Matrix</h4>
+      <div class="next-step-banner">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div style="font-size: 28px;">📐</div>
+          <div>
+            <h5 style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #64748b;">NEXT IN ARCHITECTURAL JOURNEY • STEP 03</h5>
+            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #0c1024;">Inspect Certified CAD Blueprints & Dimension Matrix</h4>
           </div>
         </div>
-        <a href="#section-cad-plan" class="btn-next-step" style="--btn-gradient: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);">
+        <a href="#section-cad-plan" class="btn-prominent gold">
           Inspect CAD Blueprints ➔
         </a>
       </div>
@@ -1217,137 +1203,91 @@
     </div>
   </section>
 
-  <!-- SECTION 03: ARCHITECTURAL BLUEPRINTS & CERTIFIED DIMENSIONS (FULL DIMENSIONS) -->
+  <!-- SECTION 03: ARCHITECTURAL BLUEPRINTS & CERTIFIED DIMENSIONS -->
   <section id="section-cad-plan" class="section-wrap">
     <div class="container">
       <div class="section-header">
         <div class="step-badge blue">STEP 03 OF 06 // CAD BLUEPRINTS & CERTIFIED DIMENSIONS</div>
         <h2 class="section-heading">Architectural CAD Blueprints & Technical Drawings</h2>
-        <p class="section-desc">Certified millimeter and centimeter spatial drawings detailing the structural demise line, display vitrines, central consultation island, and circulation clearances.</p>
+        <p class="section-desc">Certified millimeter and centimeter spatial drawings detailing the Capel Street structural demise boundary, window vitrines, central consultation island, and circulation clearances.</p>
         <div class="interaction-helper" style="color: #0369a1; border-color: rgba(2, 132, 199, 0.4); background: rgba(224, 242, 254, 0.75);">📐 Click tabs below to switch drawing sheets | Click any plan to open in full-screen zoom</div>
       </div>
 
-      <!-- 5-Tab Blueprint Switcher (Storey Architecture Standard) -->
-      <div class="glass-card" style="padding: 24px; margin-bottom: 30px;">
-        <div style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap;">
-          <button class="blueprint-tab-btn active lb-btn" data-view="master" style="background: rgba(255, 255, 255, 0.95); color: #075985; border-color: var(--glass-border-gold);">
-            [ DWG-01 ] Master Drawing Sheet Set
+      <!-- Prominent 5-Tab Blueprint Switcher Buttons -->
+      <div class="glass-card" style="padding: 28px; margin-bottom: 30px;">
+        
+        <div style="display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap;">
+          <button class="tab-btn-prominent active blueprint-tab-btn" data-view="main-plan">
+            [ DWG-01 ] 2D Architectural Floor Plan
           </button>
-          <button class="blueprint-tab-btn lb-btn" data-view="cad" style="background: rgba(255, 255, 255, 0.6); color: #334155; border-color: var(--glass-border);">
-            [ DWG-02 ] 2D Architectural CAD Plan
+          <button class="tab-btn-prominent blueprint-tab-btn" data-view="3d-plan">
+            [ DWG-02 ] 3D Top-Down Spatial Layout
           </button>
-          <button class="blueprint-tab-btn lb-btn" data-view="3d" style="background: rgba(255, 255, 255, 0.6); color: #334155; border-color: var(--glass-border);">
-            [ DWG-03 ] 3D Top-Down Spatial Layout
+          <button class="tab-btn-prominent blueprint-tab-btn" data-view="elevation-plan">
+            [ DWG-03 ] Interior Elevation & Joinery
           </button>
-          <button class="blueprint-tab-btn lb-btn" data-view="interior" style="background: rgba(255, 255, 255, 0.6); color: #334155; border-color: var(--glass-border);">
-            [ DWG-04 ] Interior Elevation Drawing
-          </button>
-          <button class="blueprint-tab-btn lb-btn" data-view="vector" style="background: rgba(255, 255, 255, 0.6); color: #334155; border-color: var(--glass-border);">
-            [ DWG-05 ] Vector SVG Precision Plan
+          <button class="tab-btn-prominent blueprint-tab-btn" data-view="vector-cad">
+            [ DWG-04 ] Scalable Vector CAD Plan
           </button>
         </div>
 
-        <!-- View 1: Master Sheet -->
-        <div id="view-master" class="blueprint-view-panel" style="display: block;">
-          <div class="arch-image-card" onclick="openBeastLightbox('/assets/blueprint_master_sheet.jpg', 'DWG-01: Master Drawing Sheet Set (Complete Architectural Plan & Section Details)')">
-            <div class="arch-img-frame ratio-16-9">
-              <div class="arch-tag-overlay">DWG-01 // <span>MASTER DRAWING SET</span></div>
-              <div class="arch-zoom-hint">🔍</div>
-              <img src="/assets/blueprint_master_sheet.jpg" alt="Master Blueprint Drawing Sheet">
-            </div>
-            <div class="arch-caption-block">
-              <div class="arch-caption-title">DWG-01: Master Drawing Sheet Set (Full Plan & Section Set)</div>
-              <div class="arch-caption-meta">
-                <span>SCALE 1:50 @ A1 • CERTIFIED CAD DATA</span>
-                <span class="arch-caption-tag">MASTER ARCHITECTURAL DRAWING</span>
-              </div>
-            </div>
+        <!-- View 1: Main 2D Floor Plan (New Uploaded Blueprint) -->
+        <div id="view-main-plan" class="blueprint-view-panel" style="display: block;">
+          <div class="blueprint-contained-frame">
+            <img src="/assets/blueprint_floorplan_main.png" alt="Architectural Floor Plan with Dimensions" class="blueprint-contained-img" onclick="openBeastLightbox('/assets/blueprint_floorplan_main.png', 'DWG-01: Architectural Floor Plan - All Dimensions in Centimetres (Capel Street, Dublin 1)')">
+          </div>
+          <div style="margin-top: 14px; text-align: center;">
+            <div style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #0c1024;">DWG-01: Certified 2D Architectural Floor Plan (Scale 1:50)</div>
+            <div style="font-family: var(--font-heading); font-size: 12px; color: #64748b; text-transform: uppercase;">Capel Street, Dublin 1 • Demise 590 cm × 797 cm • Central Island 543×230 cm</div>
           </div>
         </div>
 
-        <!-- View 2: 2D CAD Plan -->
-        <div id="view-cad" class="blueprint-view-panel" style="display: none;">
-          <div class="arch-image-card" onclick="openBeastLightbox('/assets/blueprint_cad_plan.png', 'DWG-02: 2D CAD Architectural Floor Plan (Laser-Measured Demise Boundary)')">
-            <div class="arch-img-frame ratio-16-9">
-              <div class="arch-tag-overlay">DWG-02 // <span>2D CAD FLOOR PLAN</span></div>
-              <div class="arch-zoom-hint">🔍</div>
-              <img src="/assets/blueprint_cad_plan.png" alt="2D CAD Floor Plan Blueprint">
-            </div>
-            <div class="arch-caption-block">
-              <div class="arch-caption-title">DWG-02: 2D CAD Floor Plan Drawing with Laser Dimensions</div>
-              <div class="arch-caption-meta">
-                <span>DEMISE BOUNDARY: 590 cm × 797 cm</span>
-                <span class="arch-caption-tag">STRUCTURAL CAD</span>
-              </div>
-            </div>
+        <!-- View 2: 3D Top-Down Plan -->
+        <div id="view-3d-plan" class="blueprint-view-panel" style="display: none;">
+          <div class="blueprint-contained-frame">
+            <img src="/assets/blueprint_3d_topdown.png" alt="3D Top-Down Spatial Layout" class="blueprint-contained-img" onclick="openBeastLightbox('/assets/blueprint_3d_topdown.png', 'DWG-02: 3D Top-Down Spatial Layout & Circulation Plan')">
+          </div>
+          <div style="margin-top: 14px; text-align: center;">
+            <div style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #0c1024;">DWG-02: 3D Top-Down Spatial Fit-Out Plan</div>
+            <div style="font-family: var(--font-heading); font-size: 12px; color: #64748b; text-transform: uppercase;">Minimum 120 cm clear aisle circulation verified</div>
           </div>
         </div>
 
-        <!-- View 3: 3D Topdown -->
-        <div id="view-3d" class="blueprint-view-panel" style="display: none;">
-          <div class="arch-image-card" onclick="openBeastLightbox('/assets/blueprint_3d_topdown.png', 'DWG-03: 3D Top-Down Spatial Layout & Furniture Fit-Out Plan')">
-            <div class="arch-img-frame ratio-16-9">
-              <div class="arch-tag-overlay">DWG-03 // <span>3D TOP-DOWN FIT-OUT</span></div>
-              <div class="arch-zoom-hint">🔍</div>
-              <img src="/assets/blueprint_3d_topdown.png" alt="3D Top-Down Blueprint Layout">
-            </div>
-            <div class="arch-caption-block">
-              <div class="arch-caption-title">DWG-03: 3D Top-Down Spatial Layout & Circulation Plan</div>
-              <div class="arch-caption-meta">
-                <span>MINIMUM 120 cm AISLE CLEARANCE VERIFIED</span>
-                <span class="arch-caption-tag">SPATIAL CAD</span>
-              </div>
-            </div>
+        <!-- View 3: Interior Elevation -->
+        <div id="view-elevation-plan" class="blueprint-view-panel" style="display: none;">
+          <div class="blueprint-contained-frame">
+            <img src="/assets/interior_drawing.png" alt="Interior Elevation Drawing" class="blueprint-contained-img" onclick="openBeastLightbox('/assets/interior_drawing.png', 'DWG-03: Interior Elevation & Joinery Detail Drawing Set')">
+          </div>
+          <div style="margin-top: 14px; text-align: center;">
+            <div style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #0c1024;">DWG-03: Interior Elevation & Joinery Detail Drawing Set</div>
+            <div style="font-family: var(--font-heading); font-size: 12px; color: #64748b; text-transform: uppercase;">Section A-A: 40 cm shelf intervals • Standardized bottle clearance</div>
           </div>
         </div>
 
-        <!-- View 4: Interior Drawing -->
-        <div id="view-interior" class="blueprint-view-panel" style="display: none;">
-          <div class="arch-image-card" onclick="openBeastLightbox('/assets/interior_drawing.png', 'DWG-04: Interior Elevation & Joinery Detail Drawing Set')">
-            <div class="arch-img-frame ratio-16-9">
-              <div class="arch-tag-overlay">DWG-04 // <span>INTERIOR ELEVATION</span></div>
-              <div class="arch-zoom-hint">🔍</div>
-              <img src="/assets/interior_drawing.png" alt="Interior Elevation Drawing">
-            </div>
-            <div class="arch-caption-block">
-              <div class="arch-caption-title">DWG-04: Interior Elevation & Joinery Detail Drawing Set</div>
-              <div class="arch-caption-meta">
-                <span>SECTION A-A: 40 cm SHELF INTERVALS</span>
-                <span class="arch-caption-tag">JOINERY ELEVATION</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- View 5: Vector SVG -->
-        <div id="view-vector" class="blueprint-view-panel" style="display: none;">
-          <div style="background: #0f172a; padding: 24px; border-radius: 16px; border: 1.5px solid rgba(255, 255, 255, 0.1);">
-            <div style="font-family: var(--font-mono); font-size: 12px; color: #38bdf8; margin-bottom: 12px;">DWG-05 // SCALABLE VECTOR ARCHITECTURAL CAD PLAN (SCALE 1:50)</div>
-            <svg viewBox="0 0 900 650" width="100%" height="480" style="background: #090d16; border-radius: 12px; border: 1px solid rgba(56, 189, 248, 0.2);">
+        <!-- View 4: Vector CAD -->
+        <div id="view-vector-cad" class="blueprint-view-panel" style="display: none;">
+          <div style="background: #090d16; padding: 24px; border-radius: 16px; border: 1.5px solid rgba(56, 189, 248, 0.2);">
+            <svg viewBox="0 0 900 650" width="100%" height="480" style="display: block;">
               <defs>
                 <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
                   <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(56, 189, 248, 0.08)" stroke-width="1"/>
                 </pattern>
               </defs>
               <rect width="100%" height="100%" fill="url(#grid)" />
-              
-              <!-- Outer Demise Boundary -->
               <rect x="100" y="80" width="700" height="480" fill="none" stroke="#38bdf8" stroke-width="3"/>
               
-              <!-- Dimensions Dimension lines -->
-              <line x1="100" y1="50" x2="800" y2="50" stroke="#fef08a" stroke-width="2" marker-start="url(#dot)" marker-end="url(#dot)"/>
+              <line x1="100" y1="50" x2="800" y2="50" stroke="#fef08a" stroke-width="2"/>
               <text x="450" y="42" fill="#fef08a" font-family="'JetBrains Mono', monospace" font-size="14" text-anchor="middle" font-weight="700">STOREFRONT WIDTH: 590 cm (5900 mm)</text>
 
               <line x1="830" y1="80" x2="830" y2="560" stroke="#fef08a" stroke-width="2"/>
               <text x="845" y="320" fill="#fef08a" font-family="'JetBrains Mono', monospace" font-size="14" text-anchor="middle" font-weight="700" transform="rotate(90, 845, 320)">DEPTH: 797 cm (7970 mm)</text>
 
-              <!-- Left Side 543 cm Wall + 47 cm Column Jog -->
               <line x1="60" y1="80" x2="60" y2="460" stroke="#38bdf8" stroke-width="1.5"/>
               <text x="45" y="270" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="12" text-anchor="middle" transform="rotate(-90, 45, 270)">LEFT WALL: 543 cm</text>
               <line x1="60" y1="460" x2="60" y2="560" stroke="#f59e0b" stroke-width="1.5"/>
               <text x="45" y="510" fill="#f59e0b" font-family="'JetBrains Mono', monospace" font-size="12" text-anchor="middle" transform="rotate(-90, 45, 510)">JOG: 47 cm</text>
 
-              <!-- Central Consultation Island (230 x 90 cm) -->
+              <!-- Central Consultation Island -->
               <rect x="335" y="275" width="230" height="90" rx="8" fill="rgba(212, 175, 55, 0.25)" stroke="#d4af37" stroke-width="2.5"/>
               <text x="450" y="315" fill="#ffffff" font-family="'EB Garamond', serif" font-size="16" text-anchor="middle" font-weight="700">CENTRAL ISLAND</text>
               <text x="450" y="335" fill="#fef08a" font-family="'JetBrains Mono', monospace" font-size="12" text-anchor="middle">230 cm × 90 cm (H: 95 cm)</text>
@@ -1356,19 +1296,20 @@
               <rect x="620" y="160" width="130" height="70" rx="6" fill="rgba(56, 189, 248, 0.2)" stroke="#38bdf8" stroke-width="2"/>
               <text x="685" y="200" fill="#38bdf8" font-family="'JetBrains Mono', monospace" font-size="12" text-anchor="middle">POS COUNTER</text>
 
-              <!-- Doors D1 and D -->
+              <!-- Doors -->
               <text x="180" y="105" fill="#4ade80" font-family="'JetBrains Mono', monospace" font-size="12">DOOR D1: 90×210 cm</text>
-              <text x="710" y="540" fill="#4ade80" font-family="'JetBrains Mono', monospace" font-size="12">DOOR D: 80×210 cm</text>
+              <text x="710" y="540" fill="#4ade80" font-family="'JetBrains Mono', monospace" font-size="12">WC DOOR: 67×67 cm</text>
             </svg>
           </div>
         </div>
+
       </div>
 
       <!-- Certified Dimension Matrix Schedule -->
       <div class="glass-card" style="padding: 28px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
           <div style="font-family: var(--font-serif); font-size: 24px; font-weight: 700; color: #0c1024;">
-            Certified Spatial Dimension Matrix
+            Certified Spatial Dimension Matrix — Capel Street Demise
           </div>
           <span class="step-badge blue" style="margin-bottom: 0;">LASER TOLERANCE ±2 mm</span>
         </div>
@@ -1377,18 +1318,18 @@
           <table class="schedule-table">
             <thead>
               <tr>
-                <th>Element Ref</th>
+                <th>Ref</th>
                 <th>Architectural Component</th>
                 <th>Metric (cm)</th>
                 <th>CAD Metric (mm)</th>
                 <th>Contractor Tolerance</th>
-                <th>Verification Status</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><strong>DIM-01</strong></td>
-                <td>Storefront Primary Façade Glazing Width</td>
+                <td>Storefront Primary Façade Glazing Width (Capel St)</td>
                 <td><strong style="color: #075985;">590 cm</strong></td>
                 <td>5,900 mm</td>
                 <td>± 2.0 mm</td>
@@ -1396,7 +1337,7 @@
               </tr>
               <tr>
                 <td><strong>DIM-02</strong></td>
-                <td>Left Boundary Wall Length</td>
+                <td>Left Demise Boundary Wall Length</td>
                 <td><strong style="color: #075985;">543 cm</strong></td>
                 <td>5,430 mm</td>
                 <td>± 3.0 mm</td>
@@ -1412,7 +1353,7 @@
               </tr>
               <tr>
                 <td><strong>DIM-04</strong></td>
-                <td>Right Demise Boundary Wall Length</td>
+                <td>Right Boundary Wall Length</td>
                 <td><strong style="color: #075985;">730 cm</strong></td>
                 <td>7,300 mm</td>
                 <td>± 3.0 mm</td>
@@ -1420,7 +1361,7 @@
               </tr>
               <tr>
                 <td><strong>DIM-05</strong></td>
-                <td>Overall Boutique Depth (Front to Back Wall)</td>
+                <td>Overall Boutique Depth (Front to Rear Wall)</td>
                 <td><strong style="color: #075985;">797 cm</strong></td>
                 <td>7,970 mm</td>
                 <td>± 4.0 mm</td>
@@ -1428,9 +1369,9 @@
               </tr>
               <tr>
                 <td><strong>DIM-06</strong></td>
-                <td>Rear Demise Demarcation Offset</td>
-                <td><strong style="color: #075985;">67 cm</strong></td>
-                <td>670 mm</td>
+                <td>Rear WC Restroom Enclosure</td>
+                <td><strong style="color: #075985;">67 cm × 67 cm</strong></td>
+                <td>670 × 670 mm</td>
                 <td>± 2.0 mm</td>
                 <td><span class="step-badge emerald" style="padding: 2px 8px; font-size: 10px; margin: 0;">VERIFIED</span></td>
               </tr>
@@ -1440,31 +1381,23 @@
                 <td><strong style="color: #b8860b;">230 cm × 90 cm × 95 cm</strong></td>
                 <td>2,300 × 900 × 950 mm</td>
                 <td>± 1.0 mm</td>
-                <td><span class="step-badge gold" style="padding: 2px 8px; font-size: 10px; margin: 0;">JOINERY FABRICATION READY</span></td>
+                <td><span class="step-badge gold" style="padding: 2px 8px; font-size: 10px; margin: 0;">JOINERY READY</span></td>
               </tr>
               <tr>
                 <td><strong>DIM-08</strong></td>
-                <td>Front Entrance Glazed Pivot Door (Door D1)</td>
+                <td>Entrance Glazed Pivot Door (Door D1)</td>
                 <td><strong style="color: #075985;">90 cm × 210 cm</strong></td>
                 <td>900 × 2,100 mm</td>
                 <td>± 1.5 mm</td>
-                <td><span class="step-badge emerald" style="padding: 2px 8px; font-size: 10px; margin: 0;">IRISH DDA ACCESSIBLE</span></td>
+                <td><span class="step-badge emerald" style="padding: 2px 8px; font-size: 10px; margin: 0;">IRISH DDA COMPLIANT</span></td>
               </tr>
               <tr>
                 <td><strong>DIM-09</strong></td>
-                <td>Service & Restroom Concealed Pivot Door (Door D)</td>
-                <td><strong style="color: #075985;">80 cm × 210 cm</strong></td>
-                <td>800 × 2,100 mm</td>
-                <td>± 1.5 mm</td>
-                <td><span class="step-badge emerald" style="padding: 2px 8px; font-size: 10px; margin: 0;">VERIFIED FLUSH FRAME</span></td>
-              </tr>
-              <tr>
-                <td><strong>DIM-10</strong></td>
-                <td>Arched Showcase Alcoves Vertical Shelf Spacing (Section A-A)</td>
+                <td>Arched Display Shelves Vertical Interval (Section A-A)</td>
                 <td><strong style="color: #b8860b;">40 cm clear interval</strong></td>
                 <td>400 mm clear interval</td>
                 <td>± 1.0 mm</td>
-                <td><span class="step-badge gold" style="padding: 2px 8px; font-size: 10px; margin: 0;">STANDARDIZED BOTTLE CLEARANCE</span></td>
+                <td><span class="step-badge gold" style="padding: 2px 8px; font-size: 10px; margin: 0;">STANDARDIZED</span></td>
               </tr>
             </tbody>
           </table>
@@ -1472,15 +1405,15 @@
       </div>
 
       <!-- Directional Next Step Action Banner -->
-      <div class="next-step-banner" style="--banner-accent: #a16207;">
-        <div class="next-step-info">
-          <div class="next-step-icon" style="--icon-bg: rgba(254, 243, 199, 0.7); --icon-color: #854d0e; --icon-border: rgba(202, 138, 4, 0.5);">🏛️</div>
-          <div class="next-step-text-wrap">
-            <h5>NEXT IN ARCHITECTURAL JOURNEY • STEP 04</h5>
-            <h4>Review Bespoke Joinery Millwork & 4K Render Passes</h4>
+      <div class="next-step-banner">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div style="font-size: 28px;">🏛️</div>
+          <div>
+            <h5 style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #64748b;">NEXT IN ARCHITECTURAL JOURNEY • STEP 04</h5>
+            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #0c1024;">Review Bespoke Joinery Millwork & 4K Render Passes</h4>
           </div>
         </div>
-        <a href="#section-features" class="btn-next-step" style="--btn-gradient: linear-gradient(135deg, #d97706 0%, #b45309 100%);">
+        <a href="#section-features" class="btn-prominent gold">
           Review Joinery Passes ➔
         </a>
       </div>
@@ -1625,10 +1558,10 @@
 
       </div>
 
-      <!-- Custom Workshop Detail Crops Matrix (Floating Glass, Gold Signage, Pivot Door, Flush Frame) -->
+      <!-- Workshop Precision Detail Cuts Matrix -->
       <div class="glass-card" style="padding: 24px;">
         <div style="font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: #0c1024; margin-bottom: 16px;">
-          Workshop Precision Detail Cuts & Signage Elements
+          Workshop Precision Detail Cuts & Custom Monograms
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
@@ -1677,15 +1610,15 @@
       </div>
 
       <!-- Directional Next Step Action Banner -->
-      <div class="next-step-banner" style="--banner-accent: #ea580c;">
-        <div class="next-step-info">
-          <div class="next-step-icon" style="--icon-bg: rgba(255, 237, 213, 0.7); --icon-color: #c2410c; --icon-border: rgba(234, 88, 12, 0.5);">💡</div>
-          <div class="next-step-text-wrap">
-            <h5>NEXT IN ARCHITECTURAL JOURNEY • STEP 05</h5>
-            <h4>Verify Irish Retail Lighting Fixtures & Photometrics</h4>
+      <div class="next-step-banner">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div style="font-size: 28px;">💡</div>
+          <div>
+            <h5 style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #64748b;">NEXT IN ARCHITECTURAL JOURNEY • STEP 05</h5>
+            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #0c1024;">Verify Irish Retail Lighting Fixtures & Photometrics</h4>
           </div>
         </div>
-        <a href="#section-lighting-showcase" class="btn-next-step" style="--btn-gradient: linear-gradient(135deg, #f97316 0%, #ea580c 100%);">
+        <a href="#section-lighting-showcase" class="btn-prominent gold">
           Verify Lighting Specs ➔
         </a>
       </div>
@@ -1769,46 +1702,126 @@
       </div>
 
       <!-- Directional Next Step Action Banner -->
-      <div class="next-step-banner" style="--banner-accent: #15803d;">
-        <div class="next-step-info">
-          <div class="next-step-icon" style="--icon-bg: rgba(220, 252, 231, 0.7); --icon-color: #15803d; --icon-border: rgba(22, 163, 74, 0.5);">✅</div>
-          <div class="next-step-text-wrap">
-            <h5>FINAL STEP IN ARCHITECTURAL JOURNEY • STEP 06</h5>
-            <h4>Complete Handover Verification & Client Sign-Off</h4>
+      <div class="next-step-banner">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div style="font-size: 28px;">✅</div>
+          <div>
+            <h5 style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #64748b;">FINAL STEP IN ARCHITECTURAL JOURNEY • STEP 06</h5>
+            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #0c1024;">Complete Handover Verification & Client Sign-Off</h4>
           </div>
         </div>
-        <a href="#section-signoff" class="btn-next-step" style="--btn-gradient: linear-gradient(135deg, #16a34a 0%, #15803d 100%);">
+        <a href="#section-signoff" class="btn-prominent gold">
           Authorize Sign-Off ➔
         </a>
       </div>
 
-    </div>
-  </section>
+    
+        <!-- MASTER DETAIL & SPECIFICATION GALLERY -->
+        <div style="margin-top: 50px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
+            <div>
+              <span class="badge-gold">ALL SPECIFICATION DETAILS</span>
+              <h3 style="font-family: var(--font-serif); font-size: 24px; color: var(--gold-dark); margin-top: 6px;">Curated Architectural Details & Luminaire Assets</h3>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); background: #ffffff; padding: 6px 14px; border-radius: 12px; border: 1.5px solid var(--glass-border);">18 Certified Assets Indexed</span>
+          </div>
 
-  <!-- SECTION 06: CLIENT VERIFICATION & FINAL HANDOVER SIGN-OFF -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 18px;">
+            
+            <div class="glass-card" style="padding: 12px; cursor: pointer; transition: all 0.25s ease;" onclick="openBeastLightbox('/assets/gold_niche.png', 'Custom 24K Brushed Gold Display Niches')">
+              <img src="/assets/gold_niche.png" alt="Gold Display Niche" style="width: 100%; height: 140px; object-fit: cover; border-radius: 10px; border: 1px solid rgba(212, 175, 55, 0.3);" />
+              <div style="margin-top: 10px;">
+                <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; color: var(--gold-primary); letter-spacing: 0.08em;">JOINERY DETAIL</div>
+                <div style="font-weight: 600; font-size: 13px; color: var(--text-main); margin-top: 2px;">Brushed Gold Display Niche</div>
+              </div>
+            </div>
+
+            <div class="glass-card" style="padding: 12px; cursor: pointer; transition: all 0.25s ease;" onclick="openBeastLightbox('/assets/marble_inlay.jpg', 'Floor Transition & Marble Inlay Detail')">
+              <img src="/assets/marble_inlay.jpg" alt="Marble Inlay" style="width: 100%; height: 140px; object-fit: cover; border-radius: 10px; border: 1px solid rgba(212, 175, 55, 0.3);" />
+              <div style="margin-top: 10px;">
+                <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; color: var(--gold-primary); letter-spacing: 0.08em;">FLOORING DETAIL</div>
+                <div style="font-weight: 600; font-size: 13px; color: var(--text-main); margin-top: 2px;">Calacatta & Brass Floor Inlay</div>
+              </div>
+            </div>
+
+            <div class="glass-card" style="padding: 12px; cursor: pointer; transition: all 0.25s ease;" onclick="openBeastLightbox('/assets/window_vitrine.png', 'High-Street Façade Window Vitrine')">
+              <img src="/assets/window_vitrine.png" alt="Window Vitrine" style="width: 100%; height: 140px; object-fit: cover; border-radius: 10px; border: 1px solid rgba(212, 175, 55, 0.3);" />
+              <div style="margin-top: 10px;">
+                <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; color: var(--gold-primary); letter-spacing: 0.08em;">FAÇADE DETAIL</div>
+                <div style="font-weight: 600; font-size: 13px; color: var(--text-main); margin-top: 2px;">Capel Street Window Vitrine</div>
+              </div>
+            </div>
+
+            <div class="glass-card" style="padding: 12px; cursor: pointer; transition: all 0.25s ease;" onclick="openBeastLightbox('/assets/backwall_monogram.png', 'Bespoke Backwall Velvet & Monogram Inset')">
+              <img src="/assets/backwall_monogram.png" alt="Backwall Monogram" style="width: 100%; height: 140px; object-fit: cover; border-radius: 10px; border: 1px solid rgba(212, 175, 55, 0.3);" />
+              <div style="margin-top: 10px;">
+                <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; color: var(--gold-primary); letter-spacing: 0.08em;">BRANDING DETAIL</div>
+                <div style="font-weight: 600; font-size: 13px; color: var(--text-main); margin-top: 2px;">Backwall Monogram Inset</div>
+              </div>
+            </div>
+
+            <div class="glass-card" style="padding: 12px; cursor: pointer; transition: all 0.25s ease;" onclick="openBeastLightbox('/assets/floating_glass.webp', 'Floating Glass Product Display Plinth')">
+              <img src="/assets/floating_glass.webp" alt="Floating Glass" style="width: 100%; height: 140px; object-fit: cover; border-radius: 10px; border: 1px solid rgba(212, 175, 55, 0.3);" />
+              <div style="margin-top: 10px;">
+                <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; color: var(--gold-primary); letter-spacing: 0.08em;">VITRINE DETAIL</div>
+                <div style="font-weight: 600; font-size: 13px; color: var(--text-main); margin-top: 2px;">Optiwhite Floating Glass</div>
+              </div>
+            </div>
+
+            <div class="glass-card" style="padding: 12px; cursor: pointer; transition: all 0.25s ease;" onclick="openBeastLightbox('/assets/indirect_perimeter_cove_ribbon.jpg', 'Indirect Perimeter Cove Ribbon Lighting')">
+              <img src="/assets/indirect_perimeter_cove_ribbon.jpg" alt="Perimeter Cove Ribbon" style="width: 100%; height: 140px; object-fit: cover; border-radius: 10px; border: 1px solid rgba(212, 175, 55, 0.3);" />
+              <div style="margin-top: 10px;">
+                <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; color: var(--gold-primary); letter-spacing: 0.08em;">LIGHTING DETAIL</div>
+                <div style="font-weight: 600; font-size: 13px; color: var(--text-main); margin-top: 2px;">Perimeter Cove LED Ribbon</div>
+              </div>
+            </div>
+
+            <div class="glass-card" style="padding: 12px; cursor: pointer; transition: all 0.25s ease;" onclick="openBeastLightbox('/assets/dotless_cob_micro_extrusion.jpg', 'Dotless COB Linear Micro-Extrusion')">
+              <img src="/assets/dotless_cob_micro_extrusion.jpg" alt="Dotless COB Micro-Extrusion" style="width: 100%; height: 140px; object-fit: cover; border-radius: 10px; border: 1px solid rgba(212, 175, 55, 0.3);" />
+              <div style="margin-top: 10px;">
+                <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; color: var(--gold-primary); letter-spacing: 0.08em;">LIGHTING DETAIL</div>
+                <div style="font-weight: 600; font-size: 13px; color: var(--text-main); margin-top: 2px;">Shelf Micro-Extrusion</div>
+              </div>
+            </div>
+
+            <div class="glass-card" style="padding: 12px; cursor: pointer; transition: all 0.25s ease;" onclick="openBeastLightbox('/assets/logo.png', 'VEL RA Official Brand Identity Emblem')">
+              <img src="/assets/logo.png" alt="VEL RA Logo" style="width: 100%; height: 140px; object-fit: contain; background: #0c1024; padding: 12px; border-radius: 10px; border: 1px solid rgba(212, 175, 55, 0.3);" />
+              <div style="margin-top: 10px;">
+                <div style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; color: var(--gold-primary); letter-spacing: 0.08em;">BRAND IDENTITY</div>
+                <div style="font-weight: 600; font-size: 13px; color: var(--text-main); margin-top: 2px;">Official Brand Monogram</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 06: CLIENT VERIFICATION & FINAL HANDOVER SIGN-OFF -->
   <section id="section-signoff" class="section-wrap" style="border-bottom: none;">
     <div class="container">
       <div class="section-header">
         <div class="step-badge emerald">STEP 06 OF 06 // FINAL CLIENT VERIFICATION & SIGN-OFF</div>
         <h2 class="section-heading">Digital Handover Review & Client Sign-Off</h2>
-        <p class="section-desc">Confirm architectural concept approval and authorize contractor on-site laser dimension verification.</p>
+        <p class="section-desc">Confirm architectural concept approval for the boutique on Capel Street, North City, Dublin 1, and authorize contractor on-site laser dimension verification.</p>
         <div class="interaction-helper" style="color: #15803d; border-color: rgba(22, 163, 74, 0.4); background: rgba(220, 252, 231, 0.85);">✅ Review verification checklist items and click Confirm to record Stage 04 handover approval</div>
       </div>
 
       <div class="glass-card" style="padding: 36px;">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 10px;">
-          <div style="font-family: var(--font-serif); font-size: 26px; font-weight: 700; color: #0c1024;">Concept Verification Checklist</div>
+          <div style="font-family: var(--font-serif); font-size: 26px; font-weight: 700; color: #0c1024;">Concept Verification Checklist — Capel Street, Dublin 1</div>
           <span class="step-badge gold" style="margin-bottom: 0;">STAGE 04 SIGN-OFF</span>
         </div>
 
         <ul style="list-style: none; display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px;">
           <li style="display: flex; align-items: flex-start; gap: 12px; font-size: 14.5px; color: #334155;">
             <input type="checkbox" id="check-1" class="signoff-checkbox" style="margin-top: 4px; accent-color: #b8860b; width: 18px; height: 18px; cursor: pointer;">
-            <label for="check-1" style="cursor: pointer;"><strong>590 cm Storefront & 797 cm Depth:</strong> Spatial footprint and 47 cm column jog verified against site lease demise boundary.</label>
+            <label for="check-1" style="cursor: pointer;"><strong>590 cm Storefront & 797 cm Depth:</strong> Spatial footprint and 47 cm column jog on Capel Street verified against site demise boundary.</label>
           </li>
           <li style="display: flex; align-items: flex-start; gap: 12px; font-size: 14.5px; color: #334155;">
             <input type="checkbox" id="check-2" class="signoff-checkbox" style="margin-top: 4px; accent-color: #b8860b; width: 18px; height: 18px; cursor: pointer;">
-            <label for="check-2" style="cursor: pointer;"><strong>Materials & Finishes:</strong> Book-matched Calacatta Gold marble, Titanium Gold PVD stainless steel, and fluted ivory millwork approved.</label>
+            <label for="check-2" style="cursor: pointer;"><strong>Materials & Finishes:</strong> Book-matched Calacatta Gold marble, Titanium Gold PVD stainless steel, and fluted brass millwork approved.</label>
           </li>
           <li style="display: flex; align-items: flex-start; gap: 12px; font-size: 14.5px; color: #334155;">
             <input type="checkbox" id="check-3" class="signoff-checkbox" style="margin-top: 4px; accent-color: #b8860b; width: 18px; height: 18px; cursor: pointer;">
@@ -1826,9 +1839,9 @@
 
         <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1.5px solid var(--glass-border); padding-top: 24px; flex-wrap: wrap; gap: 14px;">
           <div style="font-size: 13.5px; color: #64748b;">
-            Project: <strong style="color: #0c1024;">Vel Ra Perfumes Concept Interior</strong> | Status: <span id="approval-status" style="color: #784c00; font-weight: 700;">Awaiting Client Sign-Off</span>
+            Project: <strong style="color: #0c1024;">Vel Ra Perfumes</strong> | Location: <strong style="color: #0c1024;">Capel Street, Dublin 1</strong> | Status: <span id="approval-status" style="color: #784c00; font-weight: 700;">Awaiting Client Sign-Off</span>
           </div>
-          <button id="btn-confirm-sign" class="btn-sign" style="padding: 10px 28px; font-size: 13.5px; cursor: pointer;">Confirm & Record Approval</button>
+          <button id="btn-confirm-sign" class="btn-prominent gold" style="padding: 12px 32px; font-size: 14px;">Confirm & Record Approval</button>
         </div>
       </div>
     </div>
@@ -1842,25 +1855,11 @@
         <span id="lb-caption-title">Image Master View</span>
       </div>
       <div class="lightbox-controls">
-        <button class="lb-btn" id="lb-btn-zoom-in" title="Zoom In (+)">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-          Zoom +
-        </button>
-        <button class="lb-btn" id="lb-btn-zoom-out" title="Zoom Out (-)">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
-          Zoom -
-        </button>
-        <button class="lb-btn" id="lb-btn-reset" title="Reset Zoom (100%)">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
-          Reset
-        </button>
-        <button class="lb-btn" id="lb-btn-rotate" title="Rotate (90°)">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-          Rotate
-        </button>
-        <button class="lb-btn lb-btn-close" id="lb-btn-close" title="Close (ESC)">
-          ✕ Close
-        </button>
+        <button class="cam-preset-btn" id="lb-btn-zoom-in" title="Zoom In (+)">Zoom +</button>
+        <button class="cam-preset-btn" id="lb-btn-zoom-out" title="Zoom Out (-)">Zoom -</button>
+        <button class="cam-preset-btn" id="lb-btn-reset" title="Reset (100%)">Reset</button>
+        <button class="cam-preset-btn" id="lb-btn-rotate" title="Rotate (90°)">Rotate</button>
+        <button class="cam-preset-btn" id="lb-btn-close" style="background: rgba(239, 68, 68, 0.85); color: #fff; font-weight: 700;">✕ Close</button>
       </div>
     </div>
 
@@ -1880,7 +1879,175 @@
   <script type="module" src="/src/main.js"></script>
 
   <script>
-    // BEAST-MODE LIGHTBOX CONTROLS WITH PAN, ZOOM & TOUCH SUPPORT
+    // 1. RENDER PASS SHOWCASE DATA (Top Hero Interactive Switcher)
+    const renderPassData = [
+      {
+        tag: 'VIEW 00 // STOREFRONT FAÇADE',
+        title: 'Storefront Façade & Architectural Entrance (Capel Street)',
+        src: '/renders/hero_facade_top.jpg',
+        subtitle: 'VIEW 00 • EXTERIOR ELEVATION',
+        desc: 'Full-width glazed exterior entrance on Capel Street, North City, Dublin 1. Features 590 cm primary frontage, backlit 3D Titanium Gold brand monogram, low-iron architectural display vitrines, and high-CRI 3000K continuous perimeter halo illumination.',
+        specs: [
+          { icon: '🏛️', label: 'Location', val: 'Capel Street, North City, Dublin 1, Ireland' },
+          { icon: '✨', label: 'Primary Finish', val: 'Calacatta Gold Marble & PVD Brass' },
+          { icon: '💡', label: 'Lighting', val: '3000K Continuous COB Halo Ribbon (CRI 98)' },
+          { icon: '📋', label: 'Demise Span', val: '590 cm Width × 797 cm Overall Depth' }
+        ]
+      },
+      {
+        tag: 'PASS 01 // STOREFRONT ILLUMINATION',
+        title: 'Nighttime Storefront & Architectural Glazing (Pass 01)',
+        src: '/renders/pass1.png',
+        subtitle: 'PASS 01 • NIGHT ILLUMINATION',
+        desc: 'Exterior nighttime architectural render showing the warm 3000K ambient illumination spilling onto Capel Street, highlighting the book-matched marble portals and illuminated fragrance display vitrines.',
+        specs: [
+          { icon: '🏛️', label: 'Frontage', val: '590 cm Glazed Demise Boundary' },
+          { icon: '💡', label: 'CCT', val: '3000K Warm White • UGR < 13' },
+          { icon: '✨', label: 'Signage', val: 'Backlit Titanium Gold 3D Monogram' },
+          { icon: '📋', label: 'Access', val: '90×210 cm Low-Iron Pivot Entrance' }
+        ]
+      },
+      {
+        tag: 'PASS 02 // BOUTIQUE PANORAMA',
+        title: 'Interior Perspective from Main Entrance (Pass 02)',
+        src: '/renders/pass2.png',
+        subtitle: 'PASS 02 • INTERIOR PERSPECTIVE',
+        desc: 'Panoramic interior view welcoming clients from Capel Street into the sensory sanctuary. Features symmetrical 120 cm circulation aisles around the central marble island flanked by arched fragrance alcoves.',
+        specs: [
+          { icon: '🏛️', label: 'Circulation', val: '120 cm Clear Walking Aisles' },
+          { icon: '✨', label: 'Centerpiece', val: '230×90 cm Monolithic Island' },
+          { icon: '💡', label: 'Cove Lighting', val: 'Concealed Perimeter Ceiling Ribbon' },
+          { icon: '📋', label: 'Floor Finish', val: 'Book-Matched Calacatta Gold Tile' }
+        ]
+      },
+      {
+        tag: 'PASS 03 // ARCHED DISPLAY WALL',
+        title: 'Left Wall Arched Perfume Display Alcoves (Pass 03)',
+        src: '/renders/pass3.png',
+        subtitle: 'PASS 03 • WALL DISPLAY JOINERY',
+        desc: 'Custom continuous wall-mounted display units featuring hand-trowelled alabaster micro-cement archways, low-iron floating glass shelves, and 3000K continuous perimeter halo channels.',
+        specs: [
+          { icon: '🏛️', label: 'Shelf Spacing', val: '40 cm Standardized Bottle Interval' },
+          { icon: '✨', label: 'Glass', val: '10 mm Toughened Low-Iron Glass' },
+          { icon: '💡', label: 'Halo LED', val: '24V Dotless COB Strip (CRI 98)' },
+          { icon: '📋', label: 'Wall Finish', val: 'Warm Alabaster Micro-Cement' }
+        ]
+      },
+      {
+        tag: 'PASS 04 // CONCEALED PIVOT DOOR',
+        title: 'Service Corridor & WC Concealed Pivot Door (Pass 04)',
+        src: '/renders/pass4.png',
+        subtitle: 'PASS 04 • CONCEALED JOINERY',
+        desc: 'Flush-mounted 80×210 cm concealed pivot door providing private access to the restroom and staff service area, crowned by an illuminated geometric mashrabiya brass header plate.',
+        specs: [
+          { icon: '🚪', label: 'Door Ref', val: 'Door D (80 cm × 210 cm)' },
+          { icon: '✨', label: 'Hardware', val: 'Concealed Hydraulic Pivot Hinge' },
+          { icon: '💡', label: 'Header Plate', val: 'Backlit Geometric Mashrabiya Brass' },
+          { icon: '📋', label: 'Acoustics', val: 'Drop-Down Perimeter Acoustic Seal' }
+        ]
+      },
+      {
+        tag: 'PASS 05 // DISPLAY VITRINE DETAIL',
+        title: 'Arched Showcase Alcoves & Bottle Pedestals (Pass 05)',
+        src: '/renders/pass5.png',
+        subtitle: 'PASS 05 • VITRINE ARCHITECTURE',
+        desc: 'Close-up architectural detail of the arched wall alcoves, spotlighting individual fragrance flacons on polished marble pedestals with anti-glare micro-downlights.',
+        specs: [
+          { icon: '✨', label: 'Backplate', val: '3D Geometric Gold Relief Monogram' },
+          { icon: '💡', label: 'Accent Spot', val: '15° Narrow-Beam Micro-Vitrine Spot' },
+          { icon: '🏛️', label: 'Pedestal', val: 'Solid Calacatta Marble Cylinder' },
+          { icon: '📋', label: 'Shelf Clearance', val: '40 cm Clear Interval' }
+        ]
+      },
+      {
+        tag: 'PASS 06 // CASHIER POS DESK',
+        title: 'Cashier & Luxury Packaging POS Desk (Pass 06)',
+        src: '/renders/pass6.png',
+        subtitle: 'PASS 06 • POS JOINERY',
+        desc: 'Ergonomic transaction and gift-wrapping counter with integrated sub-counter cable management, soft-close velvet packaging drawers, and brushed Titanium Gold trims.',
+        specs: [
+          { icon: '🏛️', label: 'Countertop', val: 'Solid Book-Matched Calacatta Marble' },
+          { icon: '✨', label: 'Base Cladding', val: 'Reeded Fluted Architectural Brass' },
+          { icon: '💡', label: 'Sub-Counter', val: 'Integrated Power & DALI-2 Driver Tray' },
+          { icon: '📋', label: 'Ergonomics', val: 'Standing 95 cm Working Height' }
+        ]
+      },
+      {
+        tag: 'PASS 07 // REAR FOCAL ELEVATION',
+        title: 'Rear Accent Wall & Fluted Timber Paneling (Pass 07)',
+        src: '/renders/pass7.png',
+        subtitle: 'PASS 07 • REAR ELEVATION',
+        desc: 'Symmetrical rear focal wall featuring vertical fluted smoked oak timber paneling and large 3D backlit gold brand insignia, anchoring the visual axis from the Capel Street entrance.',
+        specs: [
+          { icon: '🏛️', label: 'Wall Length', val: '543 cm Rear Demise Boundary' },
+          { icon: '✨', label: 'Millwork', val: 'Fluted Smoked Oak Timber Veneer' },
+          { icon: '💡', label: 'Insignia', val: '3D Backlit Titanium Gold Monogram' },
+          { icon: '📋', label: 'Acoustic', val: 'Slotted Sound Absorption Sub-layer' }
+        ]
+      },
+      {
+        tag: 'PASS 08 // MARBLE FLOOR INLAY',
+        title: 'Calacatta Gold Flooring & Laser Brass Inlay (Pass 08)',
+        src: '/renders/pass8.png',
+        subtitle: 'PASS 08 • FLOORING DETAIL',
+        desc: 'High-definition study of the Italian Calacatta Gold polished marble flooring tiles, featuring 1.5 mm color-matched epoxy joints and brushed brass boundary inlay bands.',
+        specs: [
+          { icon: '🏛️', label: 'Tile Dimension', val: '120 cm × 60 cm Book-Matched Slabs' },
+          { icon: '✨', label: 'Inlay Band', val: '10 mm Solid Brushed Brass Flat Bar' },
+          { icon: '💡', label: 'Reflectivity', val: 'High-Gloss Polished Finish (R9 Slip)' },
+          { icon: '📋', label: 'Subfloor', val: 'Acoustic Decoupling Membrane' }
+        ]
+      },
+      {
+        tag: 'PASS 09 // CONSULTATION ISLAND',
+        title: 'Central Fragrance Consultation Island Counter (Pass 09)',
+        src: '/renders/pass9.png',
+        subtitle: 'PASS 09 • MASTER JOINERY PIECE',
+        desc: 'Monolithic 230×90×95 cm centerpiece with reverse shark-nose chamfered marble countertop, fluted brass pedestal cladding, and integrated tester vitrines for bespoke scent discovery.',
+        specs: [
+          { icon: '🏛️', label: 'Dimensions', val: '230 cm Length × 90 cm Width × 95 cm Height' },
+          { icon: '✨', label: 'Top Profile', val: 'Reverse Shark-Nose Chamfered Edge' },
+          { icon: '💡', label: 'Base Finish', val: 'Reeded Fluted Brass with Toe-Kick LED' },
+          { icon: '📋', label: 'Capacity', val: 'Dual-Sided Client Scent Consultation' }
+        ]
+      }
+    ];
+
+    let currentPassIndex = 0;
+
+    window.selectPass = function(idx) {
+      currentPassIndex = idx;
+      const data = renderPassData[idx];
+      
+      // Update main frame image with smooth fade
+      const mainImg = document.getElementById('pass-main-img');
+      mainImg.style.opacity = '0';
+      setTimeout(() => {
+        mainImg.src = data.src;
+        mainImg.alt = data.title;
+        mainImg.style.opacity = '1';
+      }, 150);
+
+      document.getElementById('pass-hero-tag').innerHTML = data.tag.replace('//', '// <span>') + '</span>';
+      document.getElementById('pass-meta-subtitle').innerText = data.subtitle;
+      document.getElementById('pass-meta-title').innerText = data.title;
+      document.getElementById('pass-meta-desc').innerText = data.desc;
+
+      const specList = document.getElementById('pass-spec-list');
+      specList.innerHTML = data.specs.map(s => `<li><span>${s.icon}</span> <strong>${s.label}:</strong> ${s.val}</li>`).join('');
+
+      // Update thumbnail active states
+      document.querySelectorAll('.pass-thumb-card').forEach((card, i) => {
+        card.classList.toggle('active', i === idx);
+      });
+    };
+
+    window.openActivePassLightbox = function() {
+      const data = renderPassData[currentPassIndex];
+      window.openBeastLightbox(data.src, data.title);
+    };
+
+    // 2. BEAST-MODE FULLSCREEN LIGHTBOX CONTROLS
     (function() {
       const modal = document.getElementById('beast-lightbox');
       const img = document.getElementById('lightbox-stage-img');
@@ -1920,12 +2087,12 @@
       }
 
       document.getElementById('lb-btn-close').addEventListener('click', closeLightbox);
-      document.getElementById('lb-btn-zoom-in').addEventListener('click', () => { scale = Math.min(scale + 0.3, 5); updateTransform(); });
-      document.getElementById('lb-btn-zoom-out').addEventListener('click', () => { scale = Math.max(scale - 0.3, 0.4); updateTransform(); });
+      document.getElementById('lb-btn-zoom-in').addEventListener('click', () => { scale = Math.min(scale + 0.35, 5); updateTransform(); });
+      document.getElementById('lb-btn-zoom-out').addEventListener('click', () => { scale = Math.max(scale - 0.35, 0.4); updateTransform(); });
       document.getElementById('lb-btn-reset').addEventListener('click', () => { scale = 1; posX = 0; posY = 0; rotation = 0; updateTransform(); });
       document.getElementById('lb-btn-rotate').addEventListener('click', () => { rotation = (rotation + 90) % 360; updateTransform(); });
 
-      // Drag & Pan handlers (Mouse)
+      // Drag & Pan handlers
       function startDrag(clientX, clientY) {
         isDragging = true;
         stage.classList.add('dragging');
@@ -1950,28 +2117,21 @@
         startDrag(e.clientX, e.clientY);
       });
 
-      window.addEventListener('mousemove', (e) => {
-        moveDrag(e.clientX, e.clientY);
-      });
-
+      window.addEventListener('mousemove', (e) => { moveDrag(e.clientX, e.clientY); });
       window.addEventListener('mouseup', endDrag);
 
-      // Touch handlers (Mobile / Tablet)
+      // Touch Gestures
       stage.addEventListener('touchstart', (e) => {
-        if (e.touches.length === 1) {
-          startDrag(e.touches[0].clientX, e.touches[0].clientY);
-        }
+        if (e.touches.length === 1) startDrag(e.touches[0].clientX, e.touches[0].clientY);
       }, { passive: true });
 
       window.addEventListener('touchmove', (e) => {
-        if (isDragging && e.touches.length === 1) {
-          moveDrag(e.touches[0].clientX, e.touches[0].clientY);
-        }
+        if (isDragging && e.touches.length === 1) moveDrag(e.touches[0].clientX, e.touches[0].clientY);
       }, { passive: true });
 
       window.addEventListener('touchend', endDrag);
 
-      // Mouse Wheel Zoom
+      // Wheel Zoom
       stage.addEventListener('wheel', (e) => {
         e.preventDefault();
         const delta = e.deltaY > 0 ? -0.18 : 0.18;
@@ -1979,36 +2139,22 @@
         updateTransform();
       }, { passive: false });
 
-      // Keyboard ESC key to close
+      // ESC Key & Backdrop close
       window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
-          closeLightbox();
-        }
+        if (e.key === 'Escape' && modal.classList.contains('active')) closeLightbox();
       });
 
-      // Close on clicking backdrop
       modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-          closeLightbox();
-        }
+        if (e.target === modal) closeLightbox();
       });
 
-      // Backward compatibility alias
       window.openLightbox = window.openBeastLightbox;
 
-      // Blueprint Switcher
+      // Blueprint Tabs Switcher (Prominent Buttons)
       document.querySelectorAll('.blueprint-tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-          document.querySelectorAll('.blueprint-tab-btn').forEach(b => {
-            b.classList.remove('active');
-            b.style.background = 'rgba(255, 255, 255, 0.6)';
-            b.style.color = '#334155';
-            b.style.borderColor = 'var(--glass-border)';
-          });
+          document.querySelectorAll('.blueprint-tab-btn').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
-          btn.style.background = 'rgba(255, 255, 255, 0.95)';
-          btn.style.color = '#075985';
-          btn.style.borderColor = 'var(--glass-border-gold)';
 
           const viewId = 'view-' + btn.getAttribute('data-view');
           document.querySelectorAll('.blueprint-view-panel').forEach(p => p.style.display = 'none');
@@ -2017,7 +2163,7 @@
         });
       });
 
-      // Sign-Off Button Handler
+      // Sign-off Button
       const signBtn = document.getElementById('btn-confirm-sign');
       if (signBtn) {
         signBtn.addEventListener('click', () => {
@@ -2029,11 +2175,11 @@
           }
           signBtn.innerText = '✓ Handover Approved';
           signBtn.style.background = '#15803d';
-          alert('Vel Ra Perfumes Concept Interior approval confirmed and recorded successfully.');
+          alert('Vel Ra Perfumes (Capel Street, Dublin 1) approval confirmed and recorded successfully.');
         });
       }
 
-      // Sticky Journey Rail Active Tracker on Scroll
+      // Sticky Journey Rail Tracker
       const sections = [
         { id: 'section-overview', dot: '.dot-00' },
         { id: 'section-materials', dot: '.dot-01' },
