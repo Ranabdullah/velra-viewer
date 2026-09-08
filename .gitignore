@@ -4,3 +4,5 @@ node_modules/
 *.blend1
 *.tmp
 .vite/
+*model_new.glb
+*model_old_backup.glb

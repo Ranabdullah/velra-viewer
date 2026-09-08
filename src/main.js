@@ -157,7 +157,9 @@ const floorBounce = new THREE.PointLight(0xffdda0, 1.0, 5.5, 2.0);
 floorBounce.position.set(0.6, 0.25, 0.8);
 scene.add(floorBounce);
 
-// 3.4 Central Island Spot (Physically Radiating Downward with Soft Decay)
+// 3.4 Multi-Source Interior Architectural Lighting
+
+// Central Island Spot
 const islandLight = new THREE.SpotLight(0xffeed8, 2.8, 6.5, Math.PI / 4.8, 0.82, 2.0);
 islandLight.position.set(0, 2.45, 0.15);
 islandLight.target.position.set(0, 0.85, 0.15);
@@ -168,17 +170,89 @@ islandLight.shadow.normalBias = 0.02;
 scene.add(islandLight);
 scene.add(islandLight.target);
 
-// 3.5 Backwall Monogram Accent Spot
+// Right Wall Perfume Alcoves Wash Spot
+const rightShelfLight = new THREE.SpotLight(0xffecd0, 2.2, 5.8, Math.PI / 3.8, 0.75, 2.0);
+rightShelfLight.position.set(-1.4, 2.45, -0.4);
+rightShelfLight.target.position.set(-2.4, 1.2, -0.4);
+scene.add(rightShelfLight);
+scene.add(rightShelfLight.target);
+
+// Left Wall Perfume Shelves Wash Spot
+const leftShelfLight = new THREE.SpotLight(0xffecd0, 2.2, 5.8, Math.PI / 3.8, 0.75, 2.0);
+leftShelfLight.position.set(1.4, 2.45, -0.4);
+leftShelfLight.target.position.set(2.4, 1.2, -0.4);
+scene.add(leftShelfLight);
+scene.add(leftShelfLight.target);
+
+// Cashier & Packaging Desk Spot
+const cashierLight = new THREE.SpotLight(0xfff0dc, 2.4, 4.5, Math.PI / 4.2, 0.70, 2.0);
+cashierLight.position.set(0.6, 2.45, -1.3);
+cashierLight.target.position.set(0.6, 0.9, -1.3);
+scene.add(cashierLight);
+scene.add(cashierLight.target);
+
+// Rear Storage Room Interior Light
+const storageLight = new THREE.PointLight(0xffe5ba, 2.0, 5.0, 2.0);
+storageLight.position.set(0.0, 2.2, -3.2);
+scene.add(storageLight);
+
+// Storage Corridor & Pivot Door Focused Downlight
+const storageDoorLight = new THREE.SpotLight(0xfff0dc, 2.6, 5.5, Math.PI / 3.2, 0.75, 2.0);
+storageDoorLight.position.set(1.65, 2.45, -1.8);
+storageDoorLight.target.position.set(2.15, 1.15, -3.15);
+scene.add(storageDoorLight);
+scene.add(storageDoorLight.target);
+
+// Backwall Monogram Accent Spot
 const monogramLight = new THREE.SpotLight(0xffe4aa, 2.2, 4.8, Math.PI / 4.0, 0.75, 2.0);
 monogramLight.position.set(-0.2, 2.4, -0.2);
 monogramLight.target.position.set(-0.2, 1.6, -1.8);
 scene.add(monogramLight);
 scene.add(monogramLight.target);
 
-// 3.6 Ceiling Cove LED Strip Fill
-const coveLight = new THREE.PointLight(0xffe2b4, 1.2, 5.5, 2.0);
+// Ceiling Cove LED Strip Fill
+const coveLight = new THREE.PointLight(0xffe2b4, 1.4, 6.0, 2.0);
 coveLight.position.set(0, 2.3, 0);
 scene.add(coveLight);
+
+// ---------------------------------------------------------------------------
+// 3.7 Visible Architectural Ceiling Luminaire Fixtures
+// ---------------------------------------------------------------------------
+const fixtureGroup = new THREE.Group();
+scene.add(fixtureGroup);
+
+const fixturePositions = [
+  { x: -0.4, y: 2.50, z: 0.15, label: 'Island Spot L' },
+  { x:  0.4, y: 2.50, z: 0.15, label: 'Island Spot R' },
+  { x: -1.6, y: 2.50, z: -0.4, label: 'Right Alcove Spot' },
+  { x: -1.6, y: 2.50, z:  1.2, label: 'Right Front Spot' },
+  { x:  1.6, y: 2.50, z: -0.4, label: 'Left Alcove Spot' },
+  { x:  1.6, y: 2.50, z:  1.2, label: 'Left Front Spot' },
+  { x:  0.6, y: 2.50, z: -1.3, label: 'Cashier Downlight' },
+  { x:  0.0, y: 2.35, z: -3.2, label: 'Storage Downlight' }
+];
+
+const bezelGeo = new THREE.CylinderGeometry(0.09, 0.09, 0.025, 20);
+const bezelMat = new THREE.MeshStandardMaterial({ color: 0x241d14, metalness: 0.85, roughness: 0.35 });
+
+const lensGeo = new THREE.CircleGeometry(0.075, 20);
+lensGeo.rotateX(Math.PI / 2);
+const lensMat = new THREE.MeshBasicMaterial({ color: 0xffedd0 });
+
+fixturePositions.forEach(pos => {
+  const fixture = new THREE.Group();
+  
+  const bezel = new THREE.Mesh(bezelGeo, bezelMat);
+  bezel.position.y = 0.01;
+  fixture.add(bezel);
+  
+  const lens = new THREE.Mesh(lensGeo, lensMat);
+  lens.position.y = -0.005;
+  fixture.add(lens);
+  
+  fixture.position.set(pos.x, pos.y, pos.z);
+  fixtureGroup.add(fixture);
+});
 
 // ---------------------------------------------------------------------------
 // 4. Smooth Time-of-Day System (0–24 Parameter with Physical Interpolation)
@@ -383,6 +457,15 @@ scene.add(modelGroup);
 
 let modelRoot = null;
 let currentPresetKey = 'front';
+const roofMeshes = [];
+
+// Load High-Res Engineered Hardwood Texture
+const textureLoader = new THREE.TextureLoader();
+const woodFloorTexture = textureLoader.load('/materials/mat_wooden_floor.jpg');
+woodFloorTexture.wrapS = THREE.RepeatWrapping;
+woodFloorTexture.wrapT = THREE.RepeatWrapping;
+woodFloorTexture.repeat.set(4.0, 6.0);
+woodFloorTexture.colorSpace = THREE.SRGBColorSpace;
 
 function enhanceMeshMaterial(mesh) {
   if (!mesh.material) return;
@@ -416,35 +499,65 @@ function enhanceMeshMaterial(mesh) {
       mat.emissive = new THREE.Color(0x000000);
       mat.emissiveIntensity = 0.0;
     } 
-    // 4. CALACATTA MARBLE & FLOORS (Natural stone hone - ZERO GLOW)
-    else if (matName.includes('marble') || matName.includes('calacatta') || matName.includes('floor') || meshName.includes('floor') || matName.includes('m02') || matName.includes('m06')) {
-      mat.roughness = 0.38;
+    // 4. ENGINEERED HARDWOOD TIMBER FLOOR (Applies high-res wooden floor texture)
+    else if (matName.includes('wooden parquets') || matName.includes('wood') || meshName.includes('floor')) {
+      mat.map = woodFloorTexture;
+      mat.color = new THREE.Color(0xffffff); // Pure white base so natural wood grain texture details show crisply
+      mat.roughness = 0.55;
+      mat.metalness = 0.01;
+      mat.emissive = new THREE.Color(0x000000);
+      mat.emissiveIntensity = 0.0;
+      mat.needsUpdate = true;
+    }
+    else if (matName.includes('marble') || matName.includes('calacatta') || matName.includes('m02') || matName.includes('m06')) {
+      mat.roughness = 0.35;
       mat.metalness = 0.0;
       mat.color = new THREE.Color(0xf6f3ea);
       mat.emissive = new THREE.Color(0x000000);
       mat.emissiveIntensity = 0.0;
-    } 
-    // 5. WALLS, PLASTER, CEILING, MOLDINGS (100% Completely MATTE - Zero Gloss)
-    else if (matName.includes('wall') || matName.includes('plaster') || meshName.includes('wall') || matName.includes('cement') || meshName.includes('ceiling') || matName.includes('ceiling') || matName.includes('facade')) {
-      mat.color = new THREE.Color(0xede8de);
-      mat.roughness = 0.99;
+    }
+    // 5. JOINED WALL SHELVES & CENTER STORAGE WALL
+    else if (meshName.includes('shelf') || meshName.includes('shelves') || meshName.includes('center wall') || meshName.includes('main_unit') || meshName.includes('main_counter')) {
+      const isGold = matName.includes('gold') || matName.includes('metal') || matName.includes('brass');
+      mat.roughness = isGold ? 0.28 : 0.85;
+      mat.metalness = isGold ? 0.90 : 0.0;
+      mat.color = isGold ? new THREE.Color(0xd4af37) : new THREE.Color(0xf4f1ea);
+      mat.emissive = new THREE.Color(0x000000);
+      mat.emissiveIntensity = 0.0;
+    }
+    // 6. WALLS, PLASTER, CEILING, MOLDINGS (Warm Architectural Alabaster - 100% Matte)
+    else if (matName.includes('wall') || matName.includes('plaster') || meshName.includes('wall') || matName.includes('cement') || meshName.includes('ceiling') || matName.includes('facade') || meshName.includes('center wall') || matName.includes('white plastic') || meshName.includes('plane.005') || meshName.includes('cube.002')) {
+      mat.color = new THREE.Color(0xf6f2ea); // Clean architectural warm alabaster
+      mat.roughness = 0.95;
       mat.metalness = 0.0;
       mat.emissive = new THREE.Color(0x000000);
       mat.emissiveIntensity = 0.0;
+    }
+    // 6b. CONCEALED PIVOT DOOR & TIMBER HARDWARE
+    else if (matName.includes('door') || meshName.includes('door') || matName.includes('frame') || meshName.includes('frame') || matName.includes('furni')) {
+      const isMetal = matName.includes('metal') || meshName.includes('handle');
+      mat.color = isMetal ? new THREE.Color(0xd4af37) : new THREE.Color(0xf2ede4);
+      mat.roughness = isMetal ? 0.28 : 0.68;
+      mat.metalness = isMetal ? 0.90 : 0.0;
+      mat.emissive = new THREE.Color(0x000000);
+      mat.emissiveIntensity = 0.0;
     } 
-    // 6. VITRINE & WINDOW GLASS
+    // 7. VITRINE & WINDOW GLASS (Ultra-clear, lets sunlight & ambient light illuminate interior properly)
     else if (matName.includes('glass') || matName.includes('vitrine') || matName.includes('window') || meshName.includes('glass')) {
+      mesh.castShadow = false;
+      mesh.receiveShadow = false;
       mat.transparent = true;
-      mat.opacity = 0.18;
-      mat.roughness = 0.04;
-      mat.metalness = 0.0;
+      mat.opacity = 0.10; // High clarity architectural glazing
+      mat.depthWrite = false; // Does not block interior shading
+      mat.roughness = 0.02;
+      mat.metalness = 0.05;
       mat.color = new THREE.Color(0xffffff);
       mat.emissive = new THREE.Color(0x000000);
       mat.emissiveIntensity = 0.0;
     } 
-    // 7. TIMBER / WOOD
-    else if (matName.includes('oak') || matName.includes('wood') || matName.includes('timber') || meshName.includes('door')) {
-      mat.roughness = 0.85;
+    // 8. TIMBER / DOORS
+    else if (matName.includes('oak') || matName.includes('timber') || meshName.includes('door')) {
+      mat.roughness = 0.82;
       mat.metalness = 0.0;
       mat.emissive = new THREE.Color(0x000000);
       mat.emissiveIntensity = 0.0;
@@ -475,8 +588,23 @@ gltfLoader.load(
 
     modelRoot.traverse((child) => {
       if (child.isMesh) {
-        child.castShadow = true;
-        child.receiveShadow = true;
+        const cName = (child.name || '').toLowerCase();
+        
+        // Collect roof / ceiling meshes for interior vs exterior visibility
+        if (cName.includes('ceiling')) {
+          roofMeshes.push(child);
+        }
+
+        // Window & vitrine glass should not cast shadows so sunlight properly falls inside
+        const mName = child.material ? (Array.isArray(child.material) ? child.material.map(m=>m.name||'').join(' ') : (child.material.name||'')).toLowerCase() : '';
+        if (cName.includes('glass') || cName.includes('window') || mName.includes('glass') || mName.includes('window')) {
+          child.castShadow = false;
+          child.receiveShadow = false;
+        } else {
+          child.castShadow = true;
+          child.receiveShadow = true;
+        }
+
         enhanceMeshMaterial(child);
       }
     });
@@ -536,6 +664,13 @@ const cameraPresets = {
     target: new THREE.Vector3(1.55, 1.15, -0.48),
     maxDist: 4.5,
     minDist: 0.5
+  },
+  'storage': {
+    name: '05 // Storage Access Door',
+    pos: new THREE.Vector3(1.65, 1.45, -1.20),
+    target: new THREE.Vector3(2.15, 1.20, -3.15),
+    maxDist: 4.5,
+    minDist: 0.3
   }
 };
 
@@ -585,6 +720,13 @@ function setCameraPreset(presetKey) {
   const activeBtn = document.getElementById('btn-cam-' + presetKey);
   if (activeBtn) activeBtn.classList.add('active');
 
+  // For interior add roof, for exterior no roof
+  if (presetKey === 'front') {
+    roofMeshes.forEach(m => m.visible = false);
+  } else {
+    roofMeshes.forEach(m => m.visible = true);
+  }
+
   // Set Control Limits
   controls.maxDistance = data.maxDist || 14;
   controls.minDistance = data.minDist || 0.4;
@@ -596,7 +738,7 @@ function setCameraPreset(presetKey) {
 // ---------------------------------------------------------------------------
 // 8. User Controls: Presets, Auto-Rotate Inside & Wireframe
 // ---------------------------------------------------------------------------
-['front', 'island', 'pos', 'alcoves'].forEach(key => {
+['front', 'island', 'pos', 'alcoves', 'storage'].forEach(key => {
   const btn = document.getElementById('btn-cam-' + key);
   if (btn) btn.addEventListener('click', () => setCameraPreset(key));
 });
@@ -643,13 +785,13 @@ if (btnWireframe) {
 // 9. Camera Wall Boundary & Interior Collision Clamping
 // ---------------------------------------------------------------------------
 function clampCameraInsideWalls() {
-  if (currentPresetKey === 'front') return;
+  if (currentPresetKey === 'front' || currentPresetKey === 'storage') return;
 
-  const minX = -2.05;
-  const maxX = 2.05;
+  const minX = -2.25;
+  const maxX = 2.35;
   const minY = 0.55;
-  const maxY = 2.55;
-  const minZ = -2.60;
+  const maxY = 2.65;
+  const minZ = -3.60;
   const maxZ = 3.80;
 
   camera.position.x = Math.max(minX, Math.min(maxX, camera.position.x));
@@ -748,3 +890,202 @@ function renderLoop() {
 }
 
 renderLoop();
+
+
+// ---------------------------------------------------------------------------
+// 10. Interactive Architectural Component Inspector & Raycasting
+// ---------------------------------------------------------------------------
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+// Architectural Component Catalog (Human-Readable Names & Handover Specs)
+const architecturalCatalog = [
+  {
+    id: 'island',
+    name: 'Central Fragrance Consultation Island Counter',
+    category: 'PRIMARY CENTERPIECE JOINERY',
+    finish: 'Book-Matched Calacatta Gold Marble & Reeded Brass Pedestal',
+    specs: '230 cm (L) × 90 cm (W) × 95 cm (H)',
+    desc: 'Monolithic discovery island featuring reverse shark-nose chamfered marble edges, fluted brass pedestal cladding, and dual-sided client fragrance consultation bays.',
+    keywords: ['counter_1', 'counter_groves', 'island', 'cube.020', 'cube.040', 'cube.041', 'cube.042', 'cube.043', 'cube.044', 'cube.064']
+  },
+  {
+    id: 'alcoves_right',
+    name: 'Right Wall Arched Perfume Display Alcoves',
+    category: 'PERIMETER VITRINE JOINERY',
+    finish: 'Roman-Arch Plaster Framing & 10mm Floating Low-Iron Glass',
+    specs: '40 cm Standardized Clear Vertical Shelf Intervals',
+    desc: 'Bespoke continuous display units along the right boutique wall with integrated 3000K continuous perimeter halo ribbon and individual bottle pedestals.',
+    keywords: ['shelves_2', 'small_shelf_1', 'small_shelf_6']
+  },
+  {
+    id: 'alcoves_left',
+    name: 'Left Wall Fragrance Wall Showcase Bays',
+    category: 'PERIMETER VITRINE JOINERY',
+    finish: 'Warm Alabaster Satin Framing with Gold Niche Inlays',
+    specs: '40 cm Clear Clearance per Shelf Bay',
+    desc: 'Continuous wall-mounted fragrance vitrines featuring floating low-iron glass shelves, 3D gold monogram relief inlays, and anti-glare micro-downlights.',
+    keywords: ['shelves_9', 'shelves_10', 'shelves_11', 'small_shelf_7', 'small_shelf_8', 'small_shelf_9']
+  },
+  {
+    id: 'cashier',
+    name: 'Cashier Transaction & Gift-Wrapping POS Desk',
+    category: 'TRANSACTION JOINERY',
+    finish: 'Calacatta Marble Top & Reeded Fluted Brass Cladding',
+    specs: '95 cm Ergonomic Standing Height • Recessed Cable Tray',
+    desc: 'Dedicated checkout counter featuring velvet-lined packaging drawers, integrated DALI-2 LED driver tray, and brushed gold perimeter trims.',
+    keywords: ['main_counter', 'display 1']
+  },
+  {
+    id: 'storage_door',
+    name: 'Concealed Pivot Door to Rear Storage Room',
+    category: 'SPECIALIST ARCHITECTURAL HARDWARE',
+    finish: 'Flush Wall Plaster with Backlit Mashrabiya Header',
+    specs: '80 cm Width × 210 cm Height (Door D)',
+    desc: 'Concealed hydraulic pivot door providing flush, private staff access directly into the rear 155 cm × 543 cm inventory storage room.',
+    keywords: ['door', 'frame', 'furni', 'modern door']
+  },
+  {
+    id: 'storage_room',
+    name: 'Rear Back-of-House Storage & Inventory Room',
+    category: 'BACK-OF-HOUSE DEMISE',
+    finish: 'Internal Dividing Partition & Full-Height Inventory Shelving',
+    specs: '155 cm (Depth) × 543 cm (Width) • Laser Verified',
+    desc: 'Dedicated back-of-house storage facility for fragrance inventory, gift packaging boxes, and operational staff supplies.',
+    keywords: ['center wall', 'plane.005', 'board']
+  },
+  {
+    id: 'floor',
+    name: 'Engineered Hardwood Timber Parquet Flooring',
+    category: 'PRIMARY FLOORING FINISH',
+    finish: 'Warm Natural Oak Hardwood Planks',
+    specs: '590 cm × 797 cm Full Boutique Coverage',
+    desc: 'Architectural-grade natural oak timber floor with acoustic decoupling underlayment and precision brushed brass perimeter boundary inlay bands.',
+    keywords: ['floor', 'wooden parquets', 'parquets']
+  },
+  {
+    id: 'vitrine_window',
+    name: 'Capel Street Glazed Storefront Display Vitrine',
+    category: 'EXTERIOR ARCHITECTURAL DEMISE',
+    finish: 'Ultra-Clear Low-Iron Glass & Book-Matched Marble Pilasters',
+    specs: '590 cm Primary Frontage Boundary',
+    desc: 'Full-height street-facing architectural showcase welcoming pedestrians into the boutique with transparent display vitrines and campaign posters.',
+    keywords: ['display', 'balcony_door', 'balcony door 130x210', 'window_glass']
+  },
+  {
+    id: 'signage',
+    name: 'VEL RA 3D Backlit Titanium Gold Monogram',
+    category: 'BRAND IDENTITY & SIGNAGE',
+    finish: 'Waterjet Titanium Gold with 3000K Perimeter Halo Glow',
+    specs: 'Rear Focal Wall Demise Axis',
+    desc: 'Signature brand identity insignia mounted on the rear vertical smoked oak feature wall, anchoring the sightline from Capel Street entrance.',
+    keywords: ['logo', 'text', 'vel ra', 'perfumes', 'svgmat']
+  },
+  {
+    id: 'bottles',
+    name: 'Vel Ra Luxury Fragrance Flacons & Tester Bottles',
+    category: 'MERCHANDISE PRESENTATION',
+    finish: 'Heavyweight Crystalline Glass & Brushed Brass Caps',
+    specs: 'Bespoke 50ml & 100ml Eau de Parfum Flacons',
+    desc: 'Handcrafted perfume flacons presented on marble pedestals and floating glass shelves across the boutique sensory alcoves.',
+    keywords: ['bottle', 'perfume', 'drop', 'stopper', 'atomizer', 'cap', 'water', 'liquid']
+  }
+];
+
+function getComponentForMesh(mesh) {
+  if (!mesh) return null;
+  const mName = (mesh.name || '').toLowerCase();
+  const matName = mesh.material ? (Array.isArray(mesh.material) ? mesh.material.map(m => (m.name||'').toLowerCase()).join(' ') : (mesh.material.name||'').toLowerCase()) : '';
+  const searchStr = `${mName} ${matName}`;
+
+  for (const comp of architecturalCatalog) {
+    for (const kw of comp.keywords) {
+      if (searchStr.includes(kw)) {
+        return comp;
+      }
+    }
+  }
+  return null;
+}
+
+function showInspectorHUD(comp) {
+  if (!comp) return;
+  const hud = document.getElementById('inspector-hud');
+  if (!hud) return;
+
+  document.getElementById('inspector-badge').innerText = comp.category;
+  document.getElementById('inspector-name').innerText = comp.name;
+  document.getElementById('inspector-category').innerText = comp.finish;
+  document.getElementById('inspector-desc').innerText = comp.desc;
+  document.getElementById('inspector-specs').innerHTML = `
+    <div><strong>📐 Dimensions:</strong> ${comp.specs}</div>
+    <div><strong>✨ Specification:</strong> ${comp.finish}</div>
+  `;
+  hud.style.display = 'block';
+}
+
+window.closeInspectorHUD = function() {
+  const hud = document.getElementById('inspector-hud');
+  if (hud) hud.style.display = 'none';
+};
+
+window.inspectComponentById = function(id) {
+  const comp = architecturalCatalog.find(c => c.id === id);
+  if (!comp) return;
+  showInspectorHUD(comp);
+  
+  // Focus camera towards that component
+  if (id === 'island') setCameraPreset('island');
+  else if (id === 'cashier') setCameraPreset('pos');
+  else if (id === 'alcoves_right' || id === 'alcoves_left') setCameraPreset('alcoves');
+  else if (id === 'storage_door' || id === 'storage_room') {
+    setCameraPreset('storage');
+  } else if (id === 'floor') {
+    flyCamera(new THREE.Vector3(0, 2.2, 1.5), new THREE.Vector3(0, 0, 0));
+  } else if (id === 'vitrine_window') {
+    setCameraPreset('front');
+  }
+};
+
+// Canvas Raycasting on Click
+if (container) {
+  container.addEventListener('pointerdown', (event) => {
+    const rect = renderer.domElement.getBoundingClientRect();
+    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects(modelGroup.children, true);
+
+    if (intersects.length > 0) {
+      // Find first valid mesh
+      for (const hit of intersects) {
+        if (hit.object && hit.object.isMesh) {
+          const comp = getComponentForMesh(hit.object);
+          if (comp) {
+            showInspectorHUD(comp);
+            break;
+          }
+        }
+      }
+    }
+  });
+
+  // Hover cursor change
+  container.addEventListener('pointermove', (event) => {
+    const rect = renderer.domElement.getBoundingClientRect();
+    mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+    const intersects = raycaster.intersectObjects(modelGroup.children, true);
+    let hitFound = false;
+    for (const hit of intersects) {
+      if (hit.object && hit.object.isMesh && getComponentForMesh(hit.object)) {
+        hitFound = true;
+        break;
+      }
+    }
+    container.style.cursor = hitFound ? 'pointer' : 'default';
+  });
+}
