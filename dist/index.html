@@ -1370,8 +1370,149 @@
       }
     }
 
+
+    /* ==========================================================================
+       OPTIMIZED 3D VIEWPORT HEIGHT & INTEGRATED NAVIGATION INSTRUCTIONS
+       ========================================================================== */
+    #canvas-container {
+      height: 480px !important;
+      border-radius: 18px !important;
+      overflow: hidden !important;
+      position: relative !important;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22) !important;
+    }
+
+    @media (max-width: 768px) {
+      #canvas-container {
+        height: 380px !important;
+      }
+    }
+
+    /* Unified 3D Viewport Controls Dock */
+    .viewport-control-dock {
+      background: rgba(11, 16, 32, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1.5px solid rgba(212, 175, 55, 0.35);
+      border-radius: 16px;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+    .control-dock-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .control-dock-scroll {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 2px;
+    }
+    .control-dock-scroll::-webkit-scrollbar { display: none; }
+
+    /* Interactive 3D Movement & Navigation Guide Card */
+    .viewer-instructions-card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1.5px solid rgba(99, 102, 241, 0.3);
+      padding: 18px 20px;
+      margin-top: 14px;
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.06);
+    }
+    .instructions-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    .instructions-badge {
+      font-family: var(--font-heading);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #3730a3;
+      background: #e0e7ff;
+      padding: 4px 12px;
+      border-radius: 12px;
+      border: 1px solid #c7d2fe;
+    }
+    .instructions-sub {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #64748b;
+    }
+    .instructions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    @media (max-width: 768px) {
+      .instructions-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+    }
+    .instructions-column {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 14px 16px;
+      border: 1px solid #e2e8f0;
+    }
+    .column-title {
+      font-family: var(--font-heading);
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .control-steps {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .control-steps li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: #334155;
+    }
+    .control-steps kbd {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: #1e293b;
+      white-space: nowrap;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+
 </style>
-  <script type="module" crossorigin src="/assets/index-sqWMKHTQ.js"></script>
+  <script type="module" crossorigin src="/assets/index-CDZH89oP.js"></script>
   <link rel="modulepreload" crossorigin href="/assets/three-tfJI-Rbm.js">
 </head>
 <body>
@@ -1713,82 +1854,87 @@
       <div class="section-header theme-step-2">
         <div class="step-badge indigo">STEP 02 OF 06 // REAL-TIME 3D DIGITAL TWIN</div>
         <h2 class="section-heading">Interactive 3D Architectural Twin</h2>
-        <p class="section-desc">Fully interactive WebGL viewport rendered with photorealistic 3000K retail illumination and calibrated architectural cameras. Orbit, pan, and inspect the Capel Street boutique interior.</p>
-        <div class="interaction-helper" style="color: #4338ca; border-color: rgba(99, 102, 241, 0.4); background: rgba(224, 231, 255, 0.75);">🕹️ Drag to rotate 360° | Scroll wheel / pinch to zoom | Click prominent camera buttons below</div>
+        <p class="section-desc">Real-time WebGL spatial twin of the Capel Street boutique interior. Inspect bespoke joinery assemblies, toggle sunlight time-of-day, and navigate with calibrated architectural camera presets.</p>
+        <div class="interaction-helper">🕹️ Click or touch any element inside the boutique to inspect specifications &amp; joinery details</div>
       </div>
 
-      <div class="glass-card" style="padding: 24px;">
-        
-                <!-- Viewport HUD Camera Angle Selector & Adaptive Quality Buttons -->
-        <div style="display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between;">
-          <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
-            <button id="btn-cam-front" class="cam-preset-btn active">01 // Front Entrance</button>
-            <button id="btn-cam-island" class="cam-preset-btn">02 // Central Island</button>
-            <button id="btn-cam-pos" class="cam-preset-btn">03 // POS Cashier Desk</button>
-            <button id="btn-cam-alcoves" class="cam-preset-btn">04 // Perfume Wall Alcoves</button>
-            <button id="btn-cam-storage" class="cam-preset-btn" onclick="setCameraPreset('storage')">05 // Storage Access</button>
-            
-            <button id="btn-auto-rotate" class="cam-preset-btn" style="border-color: rgba(212, 175, 55, 0.6); font-weight: 700;">
-              🔄 Auto-Rotate Inside
-            </button>
-            <button id="btn-wireframe" class="cam-preset-btn" style="border-color: rgba(212, 175, 55, 0.4);">Wireframe</button>
+      <div class="glass-card" style="padding: 20px;">
+
+        <!-- 3D VIEWPORT CONTROL DOCK (Always Visible, Compact & Accessible) -->
+        <div class="viewport-control-dock">
+          <!-- Row 1: Camera Preset Jump Buttons & View Modes -->
+          <div class="control-dock-row">
+            <div class="control-dock-scroll">
+              <span style="font-family: var(--font-heading); font-size: 10px; font-weight: 800; color: #fef08a; text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; margin-right: 4px;">
+                🎥 Cameras:
+              </span>
+              <button id="btn-cam-front" class="cam-preset-btn active">01 // Front Entrance</button>
+              <button id="btn-cam-island" class="cam-preset-btn">02 // Central Island</button>
+              <button id="btn-cam-pos" class="cam-preset-btn">03 // POS Cashier</button>
+              <button id="btn-cam-alcoves" class="cam-preset-btn">04 // Wall Alcoves</button>
+              <button id="btn-cam-storage" class="cam-preset-btn" onclick="setCameraPreset('storage')">05 // Storage Access</button>
+            </div>
+
+            <div style="display: flex; gap: 6px; align-items: center; flex-shrink: 0;">
+              <button id="btn-auto-rotate" class="cam-preset-btn" style="border-color: rgba(212, 175, 55, 0.6); font-weight: 700;">
+                🔄 Auto-Rotate
+              </button>
+              <button id="btn-wireframe" class="cam-preset-btn" style="border-color: rgba(212, 175, 55, 0.4);">
+                📐 Wireframe
+              </button>
+            </div>
           </div>
 
-          <!-- Adaptive Quality Tier Selector -->
-          <div style="display: flex; gap: 4px; align-items: center; background: rgba(15, 23, 42, 0.85); padding: 4px 8px; border-radius: 12px; border: 1.5px solid rgba(255, 255, 255, 0.18);">
-            <span style="font-family: var(--font-heading); font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin-right: 4px;">Tier:</span>
-            <button id="btn-quality-high" class="quality-btn active" onclick="setQualityTier('high')">⚡ High PBR</button>
-            <button id="btn-quality-medium" class="quality-btn" onclick="setQualityTier('medium')">⚖️ Balanced</button>
-            <button id="btn-quality-low" class="quality-btn" onclick="setQualityTier('low')">🍃 Eco</button>
+          <!-- Row 2: Quick Component Inspection Buttons -->
+          <div class="control-dock-row">
+            <div class="control-dock-scroll">
+              <span style="font-family: var(--font-heading); font-size: 10px; font-weight: 800; color: #67e8f9; text-transform: uppercase; letter-spacing: 0.1em; white-space: nowrap; margin-right: 4px;">
+                🔍 Inspect Item:
+              </span>
+              <button onclick="inspectComponentById('island')" class="time-preset-btn" style="font-size: 10.5px; padding: 4px 8px;">🏛️ Island Counter</button>
+              <button onclick="inspectComponentById('alcoves_right')" class="time-preset-btn" style="font-size: 10.5px; padding: 4px 8px;">✨ Right Alcoves</button>
+              <button onclick="inspectComponentById('alcoves_left')" class="time-preset-btn" style="font-size: 10.5px; padding: 4px 8px;">✨ Left Shelves</button>
+              <button onclick="inspectComponentById('cashier')" class="time-preset-btn" style="font-size: 10.5px; padding: 4px 8px;">💼 Cashier POS</button>
+              <button onclick="inspectComponentById('storage_door')" class="time-preset-btn" style="font-size: 10.5px; padding: 4px 8px;">🚪 Storage Access</button>
+              <button onclick="inspectComponentById('floor')" class="time-preset-btn" style="font-size: 10.5px; padding: 4px 8px;">🪵 Timber Floor</button>
+              <button onclick="inspectComponentById('signage')" class="time-preset-btn" style="font-size: 10.5px; padding: 4px 8px;">👑 Gold Monogram</button>
+            </div>
+
+            <div style="display: flex; gap: 4px; align-items: center; flex-shrink: 0;">
+              <span style="font-family: var(--font-heading); font-size: 10px; font-weight: 700; color: #94a3b8; text-transform: uppercase;">Quality:</span>
+              <button class="quality-btn" data-quality="medium" onclick="setQualityTier('medium')" style="font-size: 9.5px; padding: 3px 6px;">Eco</button>
+              <button class="quality-btn active" data-quality="high" onclick="setQualityTier('high')" style="font-size: 9.5px; padding: 3px 6px;">High</button>
+              <button class="quality-btn" data-quality="ultra" onclick="setQualityTier('ultra')" style="font-size: 9.5px; padding: 3px 6px;">Ultra</button>
+            </div>
+          </div>
+
+          <!-- Row 3: Sunlight & Time-of-Day Slider -->
+          <div class="control-dock-row" style="background: rgba(0,0,0,0.25); padding: 6px 10px; border-radius: 10px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span style="font-size: 14px;">☀️</span>
+              <span id="current-time-label" style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: #fef08a; min-width: 130px;">
+                16:30 Afternoon Sun
+              </span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; flex: 1; max-width: 280px; min-width: 140px;">
+              <span style="font-size: 10px; color: #94a3b8; font-family: var(--font-mono);">00:00</span>
+              <input type="range" id="slider-time-of-day" min="0" max="24" step="0.25" value="16.5" style="flex: 1; accent-color: #d4af37; cursor: pointer;" oninput="setTimeOfDay(this.value, false)" />
+              <span style="font-size: 10px; color: #94a3b8; font-family: var(--font-mono);">24:00</span>
+            </div>
+            <div class="control-dock-scroll" style="margin-left: auto;">
+              <button class="time-preset-btn" data-time="9" onclick="setTimeOfDay(9, true)" style="font-size: 10px; padding: 3px 8px;">☀️ Morning</button>
+              <button class="time-preset-btn" data-time="12" onclick="setTimeOfDay(12, true)" style="font-size: 10px; padding: 3px 8px;">🌤️ Midday</button>
+              <button class="time-preset-btn active" data-time="16.5" onclick="setTimeOfDay(16.5, true)" style="font-size: 10px; padding: 3px 8px;">🌇 Golden Hour</button>
+              <button class="time-preset-btn" data-time="20" onclick="setTimeOfDay(20, true)" style="font-size: 10px; padding: 3px 8px;">🌙 Evening</button>
+            </div>
           </div>
         </div>
 
-        <!-- Time of Day Lighting Controller (0–24 Scale with Smooth Physical Interpolation) -->
-        <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px; background: rgba(10, 14, 24, 0.92); border: 1.5px solid rgba(212, 175, 55, 0.45); padding: 10px 18px; border-radius: 14px; margin-bottom: 16px; flex-wrap: wrap; box-shadow: 0 8px 24px rgba(0,0,0,0.25);">
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; color: #fef08a; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 6px;">
-              ☀️ Time of Day:
-            </span>
-            <span id="label-time-of-day" style="color: #ffffff; font-family: var(--font-mono); font-size: 11px; background: rgba(255,255,255,0.1); padding: 3px 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.15);">
-              16:30 Golden Hour
-            </span>
-          </div>
+        <!-- 3D WebGL Canvas Container (Compact 480px Desktop / 380px Mobile) -->
+        <div style="position: relative; width: 100%; height: 480px; border-radius: 18px; overflow: hidden; background: #0a0e18; border: 2px solid rgba(255, 255, 255, 0.95); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);" id="canvas-container">
 
-          <div style="display: flex; align-items: center; gap: 12px; flex: 1; max-width: 320px; min-width: 180px;">
-            <span style="font-size: 11px; color: #94a3b8; font-family: var(--font-mono);">00:00</span>
-            <input type="range" id="slider-time-of-day" min="0" max="24" step="0.25" value="16.5" style="flex: 1; accent-color: #d4af37; cursor: pointer;" oninput="setTimeOfDay(this.value, false)" />
-            <span style="font-size: 11px; color: #94a3b8; font-family: var(--font-mono);">24:00</span>
-          </div>
-
-          <!-- Suggested Visual Presets -->
-          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-            <button class="time-preset-btn" data-time="6" onclick="setTimeOfDay(6, true)">🌅 06:00 Sunrise</button>
-            <button class="time-preset-btn" data-time="9" onclick="setTimeOfDay(9, true)">☀️ 09:00 Morning</button>
-            <button class="time-preset-btn" data-time="12" onclick="setTimeOfDay(12, true)">🌤️ 12:00 Midday</button>
-            <button class="time-preset-btn" data-time="15" onclick="setTimeOfDay(15, true)">🌇 15:00 Afternoon</button>
-            <button class="time-preset-btn active" data-time="18" onclick="setTimeOfDay(18, true)">🌅 18:00 Sunset</button>
-            <button class="time-preset-btn" data-time="20" onclick="setTimeOfDay(20, true)">🌙 20:00 Evening</button>
-          </div>
-        </div>
-
-                <!-- Quick Architectural Component Inspector Bar (Direct Inspection & Camera Focus) -->
-        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(212, 175, 55, 0.3); padding: 8px 14px; border-radius: 12px;">
-          <span style="font-family: var(--font-heading); font-size: 10.5px; font-weight: 700; color: #fef08a; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; gap: 6px;">
-            🔍 Click 3D Model or Inspect:
-          </span>
-          <button onclick="inspectComponentById('island')" class="time-preset-btn" style="font-size: 11px; padding: 4px 10px;">🏛️ Island Counter</button>
-          <button onclick="inspectComponentById('alcoves_right')" class="time-preset-btn" style="font-size: 11px; padding: 4px 10px;">✨ Right Alcoves</button>
-          <button onclick="inspectComponentById('alcoves_left')" class="time-preset-btn" style="font-size: 11px; padding: 4px 10px;">✨ Left Shelves</button>
-          <button onclick="inspectComponentById('cashier')" class="time-preset-btn" style="font-size: 11px; padding: 4px 10px;">💼 Cashier POS</button>
-          <button onclick="inspectComponentById('storage_door')" class="time-preset-btn" style="font-size: 11px; padding: 4px 10px;">🚪 Storage Access</button>
-          <button onclick="inspectComponentById('floor')" class="time-preset-btn" style="font-size: 11px; padding: 4px 10px;">🪵 Timber Floor</button>
-          <button onclick="inspectComponentById('signage')" class="time-preset-btn" style="font-size: 11px; padding: 4px 10px;">👑 Gold Monogram</button>
-        </div>
-
-        <div style="position: relative; width: 100%; height: 620px; border-radius: 18px; overflow: hidden; background: #0a0e18; border: 2px solid rgba(255, 255, 255, 0.95); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);" id="canvas-container">
-          
           <!-- Interactive Architectural Component Inspector HUD Overlay -->
-          <div id="inspector-hud" style="position: absolute; bottom: 18px; left: 18px; max-width: 360px; background: rgba(12, 16, 32, 0.92); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1.5px solid rgba(212, 175, 55, 0.55); border-radius: 14px; padding: 16px; box-shadow: 0 16px 40px rgba(0,0,0,0.5); z-index: 25; color: #fff; pointer-events: auto; display: none; transition: all 0.3s ease;">
+          <div id="inspector-hud" style="position: absolute; bottom: 18px; left: 18px; max-width: 360px; background: rgba(12, 16, 32, 0.94); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1.5px solid rgba(212, 175, 55, 0.55); border-radius: 14px; padding: 16px; box-shadow: 0 16px 40px rgba(0,0,0,0.5); z-index: 25; color: #fff; pointer-events: auto; display: none; transition: all 0.3s ease;">
             <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 6px;">
               <span id="inspector-badge" style="font-family: var(--font-heading); font-size: 9.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; background: rgba(212, 175, 55, 0.25); color: #fef08a; padding: 3px 8px; border-radius: 6px; border: 1px solid rgba(212, 175, 55, 0.4);">
                 PRIMARY JOINERY
@@ -1812,7 +1958,6 @@
           <!-- Luxury 3D Digital Twin Loading Screen Overlay -->
           <div id="viewer-loading-screen" style="position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(15, 23, 42, 0.96) 0%, rgba(6, 8, 14, 0.98) 100%); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); z-index: 50; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;">
             <div style="text-align: center; max-width: 380px; padding: 0 20px; width: 100%;">
-              <!-- Pulsing Gold Ring & Monogram -->
               <div style="position: relative; width: 72px; height: 72px; margin: 0 auto 20px;">
                 <div style="position: absolute; inset: 0; border: 2.5px solid rgba(212, 175, 55, 0.25); border-top-color: #d4af37; border-radius: 50%; animation: spinLoader 1.3s cubic-bezier(0.65, 0, 0.35, 1) infinite;"></div>
                 <div style="position: absolute; inset: 6px; border: 1.5px dashed rgba(254, 240, 138, 0.4); border-radius: 50%; animation: spinLoaderReverse 3.5s linear infinite;"></div>
@@ -1829,7 +1974,6 @@
                 Loading Capel Street Boutique Model...
               </div>
 
-              <!-- Sleek Progress Bar -->
               <div style="width: 100%; height: 6px; background: rgba(255, 255, 255, 0.1); border-radius: 4px; overflow: hidden; margin-bottom: 10px; border: 1px solid rgba(255, 255, 255, 0.08);">
                 <div id="viewer-loading-bar" style="width: 15%; height: 100%; background: linear-gradient(90deg, #b8860b 0%, #d4af37 50%, #fef08a 100%); transition: width 0.3s ease; box-shadow: 0 0 10px rgba(212, 175, 55, 0.6);"></div>
               </div>
@@ -1842,6 +1986,77 @@
 
           <canvas id="three-canvas" style="width: 100%; height: 100%; display: block;"></canvas>
         </div>
+
+        <!-- 3D INTERIOR NAVIGATION & MOVEMENT INSTRUCTIONS GUIDE (Both PC & Phone) -->
+        <div class="viewer-instructions-card">
+          <div class="instructions-header">
+            <span class="instructions-badge">🕹️ HOW TO NAVIGATE THE 3D INTERIOR</span>
+            <span class="instructions-sub">Interactive Architectural Spatial Controls</span>
+          </div>
+
+          <div class="instructions-grid">
+            <!-- PC / Laptop Controls Column -->
+            <div class="instructions-column">
+              <div class="column-title">
+                <span style="font-size: 18px;">💻</span>
+                <span>PC &amp; Laptop Controls</span>
+              </div>
+              <ul class="control-steps">
+                <li>
+                  <kbd>Left Click + Drag</kbd>
+                  <span><strong>Orbit / Look 360°</strong> — Turn camera to view walls, displays &amp; finishes</span>
+                </li>
+                <li>
+                  <kbd>Right Click + Drag</kbd>
+                  <span><strong>Pan &amp; Move</strong> — Slide horizontally &amp; vertically through the interior</span>
+                </li>
+                <li>
+                  <kbd>Scroll Wheel</kbd>
+                  <span><strong>Smooth Zoom</strong> — Zoom in to inspect fine details &amp; marble veining</span>
+                </li>
+                <li>
+                  <kbd>Click Any Object</kbd>
+                  <span><strong>Inspect Joinery</strong> — Open specifications card for any counter, shelf, or door</span>
+                </li>
+                <li>
+                  <kbd>01–05 Buttons</kbd>
+                  <span><strong>Instant Walkthrough</strong> — Jump directly to Front Entrance, Island, POS, or Storage</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Phone / Mobile Controls Column -->
+            <div class="instructions-column">
+              <div class="column-title">
+                <span style="font-size: 18px;">📱</span>
+                <span>Phone &amp; Mobile Controls</span>
+              </div>
+              <ul class="control-steps">
+                <li>
+                  <kbd>👆 1-Finger Drag</kbd>
+                  <span><strong>Look Around 360°</strong> — Swipe to rotate view in any direction</span>
+                </li>
+                <li>
+                  <kbd>✌️ 2-Finger Pinch</kbd>
+                  <span><strong>Pinch to Zoom</strong> — Zoom in &amp; out smoothly with two fingers</span>
+                </li>
+                <li>
+                  <kbd>✌️ 2-Finger Drag</kbd>
+                  <span><strong>Two-Finger Pan</strong> — Move the camera position across the room</span>
+                </li>
+                <li>
+                  <kbd>👆 Tap Any Object</kbd>
+                  <span><strong>Tap to Inspect</strong> — Pop up material specifications card instantly</span>
+                </li>
+                <li>
+                  <kbd>🔘 Camera Pills</kbd>
+                  <span><strong>1-Tap Flythrough</strong> — Tap any pill above the canvas to glide to that room angle</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <!-- Directional Next Step Action Banner -->
@@ -1850,10 +2065,10 @@
           <div style="font-size: 28px;">📐</div>
           <div>
             <h5 style="font-family: var(--font-heading); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #64748b;">NEXT IN ARCHITECTURAL JOURNEY • STEP 03</h5>
-            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #0c1024;">Inspect Certified CAD Blueprints & Dimension Matrix</h4>
+            <h4 style="font-family: var(--font-serif); font-size: 20px; font-weight: 700; color: #0c1024;">Inspect Certified CAD Blueprints &amp; Dimension Matrix</h4>
           </div>
         </div>
-        <a href="#section-cad-plan" class="btn-prominent gold">
+        <a href="#section-cad-plan" class="btn-prominent blue">
           Inspect CAD Blueprints ➔
         </a>
       </div>

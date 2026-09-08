@@ -639,37 +639,37 @@ gltfLoader.load(
 const cameraPresets = {
   'front': {
     name: '01 // Front Entrance',
-    pos: new THREE.Vector3(-0.15, 2.20, 8.50),
-    target: new THREE.Vector3(-0.15, 1.70, 0.0),
-    maxDist: 14.0,
-    minDist: 1.0
+    pos: new THREE.Vector3(0.15, 1.65, 4.70),
+    target: new THREE.Vector3(0.25, 1.20, 0.50),
+    maxDist: 7.0,
+    minDist: 0.5
   },
   'island': {
     name: '02 // Central Island',
-    pos: new THREE.Vector3(1.46, 1.55, 2.27),
-    target: new THREE.Vector3(0, 0.9, 0),
-    maxDist: 4.2,
-    minDist: 0.5
+    pos: new THREE.Vector3(1.75, 1.50, 1.80),
+    target: new THREE.Vector3(0.30, 0.90, 0.50),
+    maxDist: 5.0,
+    minDist: 0.4
   },
   'pos': {
     name: '03 // POS Cashier Desk',
-    pos: new THREE.Vector3(1.57, 1.73, -1.32),
-    target: new THREE.Vector3(-0.92, 1.33, -1.34),
-    maxDist: 4.0,
-    minDist: 0.5
+    pos: new THREE.Vector3(-0.75, 1.50, 1.60),
+    target: new THREE.Vector3(0.65, 0.90, 0.25),
+    maxDist: 4.5,
+    minDist: 0.4
   },
   'alcoves': {
     name: '04 // Perfume Wall Alcoves',
-    pos: new THREE.Vector3(-1.32, 1.4, 1.72),
-    target: new THREE.Vector3(1.55, 1.15, -0.48),
-    maxDist: 4.5,
-    minDist: 0.5
+    pos: new THREE.Vector3(-0.60, 1.45, 1.80),
+    target: new THREE.Vector3(2.50, 1.30, 1.20),
+    maxDist: 5.5,
+    minDist: 0.4
   },
   'storage': {
     name: '05 // Storage Access Door',
-    pos: new THREE.Vector3(1.65, 1.45, -1.20),
-    target: new THREE.Vector3(2.15, 1.20, -3.15),
-    maxDist: 4.5,
+    pos: new THREE.Vector3(0.20, 1.45, 1.80),
+    target: new THREE.Vector3(0.52, 1.30, 0.00),
+    maxDist: 5.0,
     minDist: 0.3
   }
 };
@@ -785,14 +785,12 @@ if (btnWireframe) {
 // 9. Camera Wall Boundary & Interior Collision Clamping
 // ---------------------------------------------------------------------------
 function clampCameraInsideWalls() {
-  if (currentPresetKey === 'front' || currentPresetKey === 'storage') return;
-
-  const minX = -2.25;
-  const maxX = 2.35;
-  const minY = 0.55;
-  const maxY = 2.65;
-  const minZ = -3.60;
-  const maxZ = 3.80;
+  const minX = -3.20;
+  const maxX = 3.60;
+  const minY = 0.40;
+  const maxY = 2.80;
+  const minZ = -1.80;
+  const maxZ = 5.50;
 
   camera.position.x = Math.max(minX, Math.min(maxX, camera.position.x));
   camera.position.y = Math.max(minY, Math.min(maxY, camera.position.y));
