@@ -2664,9 +2664,9 @@
 
         <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1.5px solid var(--glass-border); padding-top: 24px; flex-wrap: wrap; gap: 14px;">
           <div style="font-size: 13.5px; color: #64748b;">
-            Project: <strong style="color: #0c1024;">Vel Ra Perfumes</strong> | Location: <strong style="color: #0c1024;">Capel Street, Dublin 1</strong> | Status: <span id="approval-status" style="color: #784c00; font-weight: 700;">Awaiting Client Sign-Off</span>
+            Project: <strong style="color: #0c1024;">Vel Ra Perfumes</strong> | Location: <strong style="color: #0c1024;">Capel Street, Dublin 1</strong> | Status: <span id="approval-status" style="color: #784c00; font-weight: 700;">No local review saved</span>
           </div>
-          <button id="btn-confirm-sign" class="btn-prominent gold" style="padding: 12px 32px; font-size: 14px;">Confirm & Record Approval</button>
+          <label for="sign-name">Your name <input id="sign-name" maxlength="120" autocomplete="name" style="min-height:44px;padding:10px;border:1px solid #cbd5e1;border-radius:8px;max-width:100%"></label><button id="btn-confirm-sign" class="btn-prominent gold" style="padding: 12px 32px; font-size: 14px;">Save Local Review</button>
         </div>
       </div>
     </div>
@@ -2701,7 +2701,7 @@
   </div>
 
   <!-- Scripts -->
-  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/main.js"></script><script type="module" src="/src/review.js"></script>
 
   <script>
     // 1. RENDER PASS SHOWCASE DATA (Top Hero Interactive Switcher)
@@ -2985,22 +2985,6 @@
           if (target) target.style.display = 'block';
         });
       });
-
-      // Sign-off Button
-      const signBtn = document.getElementById('btn-confirm-sign');
-      if (signBtn) {
-        signBtn.addEventListener('click', () => {
-          document.querySelectorAll('.signoff-checkbox').forEach(cb => cb.checked = true);
-          const status = document.getElementById('approval-status');
-          if (status) {
-            status.innerText = 'APPROVED & RECORDED (' + new Date().toLocaleDateString('en-IE', { day: 'numeric', month: 'short', year: 'numeric' }) + ')';
-            status.style.color = '#15803d';
-          }
-          signBtn.innerText = '✓ Handover Approved';
-          signBtn.style.background = '#15803d';
-          alert('Vel Ra Perfumes (Capel Street, Dublin 1) approval confirmed and recorded successfully.');
-        });
-      }
 
       // Sticky Journey Rail Tracker
       const sections = [

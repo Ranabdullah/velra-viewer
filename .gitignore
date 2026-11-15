@@ -6,3 +6,9 @@ node_modules/
 .vite/
 *model_new.glb
 *model_old_backup.glb
+
+dist/
+.wrangler/
+.env*
+.dev.vars*
+test-results/

@@ -576,6 +576,7 @@ gltfLoader.load(
   '/assets/model.glb',
   (gltf) => {
     modelRoot = gltf.scene;
+    if (container) container.dataset.modelState = 'ready';
     
     // Calculate Bounding Box and Center
     const box = new THREE.Box3().setFromObject(modelRoot);
@@ -629,7 +630,10 @@ gltfLoader.load(
   },
   (err) => {
     console.warn('Model loading notice:', err);
-    hideLoadingScreen();
+    if (container) container.dataset.modelState = 'error';
+    updateLoadingProgress(0, 'The 3D model could not load. Reload to retry, or continue to the drawings and gallery below.');
+    const screen = document.getElementById('viewer-loading-screen');
+    if (screen) { screen.setAttribute('role', 'status'); screen.style.pointerEvents = 'none'; }
   }
 );
 
