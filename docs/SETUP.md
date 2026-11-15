@@ -60,6 +60,6 @@ npm run build
 npm run preview
 ```
 
-Check model loading, drag/pinch, top-down view, tabs, gallery arrows, review validation and print preview on PC and phone. WebGL requires a supported GPU/browser; on older phones reduce model/texture sizes. The gallery and dossier remain useful when 3D is unavailable.
+Check model loading, drag/pinch, camera presets, tabs, gallery arrows, review validation and print preview on PC and phone. WebGL requires a supported GPU/browser; on older phones reduce model/texture sizes. The gallery and dossier remain useful when 3D is unavailable.
 
 Local review preferences stay in the current browser and URL. They are not encrypted cloud backups or signed approval records. Keep source and licensed asset backups outside the browser. To update Workers, rebuild and run `npx wrangler deploy`; Git-connected Pages rebuilds on pushes.

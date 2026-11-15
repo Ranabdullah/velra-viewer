@@ -12,7 +12,7 @@ A luxury perfume boutique concept presented as an interactive 3D showroom, visua
 
 ### 3D viewer
 
-Three.js model with walkthrough, top-down view, wireframe and lighting/quality controls. Mouse: drag to orbit, wheel to zoom. Touch: drag to orbit, pinch to zoom.
+Three.js model with camera presets, wireframe and lighting/quality controls. Mouse: drag to orbit, wheel to zoom. Touch: drag to orbit, pinch to zoom.
 
 ### Design dossier
 
